@@ -8,9 +8,11 @@
 %\usepackage{multimedia}
 \usepackage[nolist]{acronym}
 
+\usepackage{stackengine}
+
 \title{Shape from X}
-%\subtitle{X $\in \{$ Motion, Shading, Texture $\}$}
-\subtitle{Schwerpunkte: Shape from Motion, \\ Shape from Shading, Shape from Texture}
+\subtitle{X $\in \{$ Motion, Shading, Texture $\}$}
+%\subtitle{Schwerpunkte: Shape from Motion, \\ Shape from Shading, Shape from Texture}
 \author{Dennis Wagner, \\ Johannes Spangenberg, \\ Leroy Kramer}
 %\date{\today}
 \date{04.12.2014}
@@ -37,22 +39,34 @@
 \end{frame} 
 
 
-\section{Motivation} 
+\section{Einleitung} 
 \begin{frame}
 	\frametitle{Shape from X}
-	\framesubtitle{Motivation}
+	\framesubtitle{Einleitung}
 	
 	\begin{itemize}
-		\item Einfache und billige Beschaffung von dreidimensionalen Strukturen.
+		\item 3D Objekt aus einem oder mehreren Bildern rekonstruieren
+		\item verschiedene Verfahren
+		\begin{itemize}
+			\item Motion
+			\item Shading
+			\item Texture
+			\item Zoom
+			\item Focus
+			\item Stereo
+			\item ...
+		\end{itemize}
+		\item Günstige Quelle von dreidimensionalen Strukturen.
 		\begin{itemize}
 			\item Computervisualisierung (Spiele, \dots)
 		\end{itemize}
+		
 	\end{itemize}
 \end{frame}
 
 % ---------------------------------------------------------------------------- %
 
-\section{Shape-from-Motion}
+\section{Shape from Motion}
 \begin{frame}
 	\frametitle{Shape from Motion}
 	\framesubtitle{Einleitung}
@@ -160,31 +174,44 @@
 \section{Shape from Texture}
 \frame{
 	\frametitle{Shape from Texture}
-	\includegraphics[width=300px, height = 69px]{includes/sft_texture}\\
+	\framesubtitle{Einleitung}
+	\begin{figure}
+	\stackunder{\includegraphics[width=99px, height = 80px]{includes/sft_texture_2}}{Fig. 1}
+	\stackunder{\includegraphics[width=105px, height = 80px]{includes/sft_texture_1}}{Fig. 2}
+	\end{figure}
 
-	Rekonstruktion eines 3D Objektes mit texturierter Oberfläche aus einem Bild\\
-	Textur besteht aus sich wiederholenden Texturelementen (Texel)\\
-	Unterscheidung zwischen globalen und lokalen Verfahren
+	\begin{itemize}
+		\item Objekt mit texturierter Oberfläche rekonstruieren
+		\item Textur besteht aus sich wiederholenden Texturelementen (Texel)
+		\item Unterscheidung zwischen globalen und lokalen Verfahren
+	\end{itemize}
 }
 
 \frame{
 	\frametitle{Shape from Texture}
-	\includegraphics[width=230px, height = 120px]{includes/sft_slant-tilt}\\
+	\framesubtitle{Einleitung}
+	\begin{figure}
+	\stackunder{\includegraphics[width=230px, height = 120px]{includes/sft_slant-tilt}}{Fig. 3}
+	\end{figure}
+	\begin{itemize}
+		\item slant $\rho$: Winkel zwischen $z_s$ und $z_i$\\
+		\item tilt $\tau$: Winkel zwischen Projektion von $z_s$ auf Bildebene und $x_i$\\
+		\item Normale: $z_s = \begin{pmatrix}
+			\sin \rho \cos \tau\\
+			\sin \rho \sin \tau\\
+			\cos \rho
+			\end{pmatrix}$
+	\end{itemize}
+	}
+
+\frame{
+	\frametitle{Shape from Texture}
+	\framesubtitle{Ergebnis}
 	
-	slant $\rho$: Winkel zwischen $z_s$ und $z_i$\\
-	tilt $\tau$: Winkel zwischen Projektion von $z_s$ auf Bildebene und $x_i$\\
-	Normale: $n = \begin{pmatrix}
-	\sin \rho \cos \tau\\
-	\sin \rho \sin \tau\\
-	\cos \rho
-	\end{pmatrix}$
-}
-
-\frame{
-	\frametitle{Shape from Texture}
-	\includegraphics[width=300px, height = 96px]{includes/sft_result}\\
-	\vspace{1em}
-	\includegraphics[width=300px, height = 81px]{includes/sft_result2}\\
+	\begin{figure}
+	\stackunder{\includegraphics[width=300px, height = 96px]{includes/sft_result}}{Fig. 4}
+	\stackunder{\includegraphics[width=300px, height = 81px]{includes/sft_result2}}{Fig. 5}
+	\end{figure}
 }
 
 % ---------------------------------------------------------------------------- %
@@ -205,6 +232,27 @@
 		\item \href{http://www.di.ens.fr/pmvs/}{http://www.di.ens.fr/pmvs/}
 		\item \href{http://www.igp.ethz.ch/photogrammetry/education/lehrveranstaltungen/PCV_HS12/content_folder/PCV-HS2012-slides-multiview.pdf}{http://www.igp.ethz.ch/photogrammetry/education/lehrveranstaltungen/PCV\_HS12/content\_folder/PCV-HS2012-slides-multiview.pdf}
 		\item \href{http://mi.eng.cam.ac.uk/~cipolla/publications/contributionToEditedBook/2008-SFM-chapters.pdf}{http://mi.eng.cam.ac.uk/$\sim$cipolla/publications/contributionToEditedBook/2008-SFM-chapters.pdf}
+	\end{itemize}
+	\end{tiny}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Quellenverzeichnis}
+	\framesubtitle{Shape from Texture}
+	
+	\begin{tiny}
+	\begin{itemize}
+	\item \href{http://homepages.inf.ed.ac.uk/rbf/CVonline/LOCAL_COPIES/AV0506/s0565925.pdf}{http://homepages.inf.ed.ac.uk/rbf/CVonline/LOCAL\_COPIES/AV0506/s0565925.pdf}
+	\item \href{https://www.eecs.berkeley.edu/Research/Projects/CS/vision/papers/forsyth-iccv01.pdf}{ttps://www.eecs.berkeley.edu/Research/Projects/CS/vision/papers/forsyth-iccv01.pdf}
+	\item \href{http://classes.soe.ucsc.edu/cmpe264/Spring04/Lec18.pdf}{http://classes.soe.ucsc.edu/cmpe264/Spring04/Lec18.pdf}
+	\item \href{http://www.bmva.org/bmvc/2005/papers/34/paper.pdf}{http://www.bmva.org/bmvc/2005/papers/34/paper.pdf}
+	\end{itemize}
+	\begin{itemize}
+	\item Fig.1: \href{http://upload.wikimedia.org/wikipedia/commons/2/2c/Acinonyx_jubatus_-Southern_Namibia-8.jpg}{http://upload.wikimedia.org/wikipedia/commons/2/2c/Acinonyx\_jubatus\_-Southern\_Namibia-8.jpg}
+	\item Fig.2, Fig.4: \href{http://www.bmva.org/bmvc/2005/papers/34/paper.pdf}{http://www.bmva.org/bmvc/2005/papers/34/paper.pdf}
+	\item Fig.3: \href{http://homepages.inf.ed.ac.uk/rbf/CVonline/LOCAL_COPIES/AV0506/s0565925.pdf}{http://homepages.inf.ed.ac.uk/rbf/CVonline/LOCAL\_COPIES/AV0506/s0565925.pdf}
+	\item Fig.5: \href{https://www.eecs.berkeley.edu/Research/Projects/CS/vision/papers/forsyth-iccv01.pdf}{https://www.eecs.berkeley.edu/Research/Projects/CS/vision/papers/forsyth-iccv01.pdf}
 	\end{itemize}
 	\end{tiny}
 \end{frame}
