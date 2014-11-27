@@ -2,84 +2,215 @@
 
 \documentclass{beamer}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Präambel:  Hier werden Einstellungen getroffen, die global das ganze Dokument  %
-%            betreffen, sowie zusätzliche Packete bzw. Klassen angefordert.      %
-%            Im einführenden Beispiel werden keine weiteren Packete geladen.     %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% Einbindung weiterer Packete für...
-% ... 
 \usepackage[ngerman]{babel}
-% ... eine deutsche Sprachanpassung
-\usepackage[latin1]{inputenc}
-\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
 
-% \title{} Titel des Vortrages
-% Anmerkung: Ohne Einbindung der Klasse "inputenc" verwendet Latex für Umlaute den Befehl der Form \"{<a|e|i|o|u>}
-\title{Shape from X}
-\subtitle{X $\in \{$ Motion, Shading, Texture $\}$}
-% \author{} Name der Referenten / der Referentin
-\author{Dennis Wagner\\Johannes Spangenberg\\Leroy Kramer} 
-% \date definiert das Datum, das auf der Titelseite erscheinen soll \date{18. Mai 2009}
-% \today fügt das zum Zeitpunkt des LaTeX-Laufs aktuelle Datum ein.
-\date{04.12.2014} 
+%\usepackage{multimedia}
+\usepackage[nolist]{acronym}
 
-% Mit \setbeamertemplate{footline}[<options>] lässt sich das Aussehen der Fußzeile ändern.
-% <options> = frame number fügt die Folienzahl ein
+\title{Shape-from-X}
+%\subtitle{X $\in \{$ Motion, Shading, Texture $\}$}
+\subtitle{Schwerpunkte: Shape-from-Motion, \\ Shape-from-Shading, Shape-from-Texture}
+\author{Dennis Wagner, \\ Johannes Spangenberg, \\ Leroy Kramer}
+%\date{\today}
+\date{04.12.2014}
+
+% add page number
 \setbeamertemplate{footline}[frame number]
 
-% \begin definiert den Beginn einer neuen Umgebung. 
-% (hier: document, nach der Präambel der Hauptteil eines Latex-Dokuments) 
+
 \begin{document}
-% Mit \begin{frame} <Inhalt der Folie> \end{frame} oder \frame{ <Inhalt der Folie> } erzeugt man eine neue Folie.
-% \titlepage erzeugt aus den in der Präambel definierten Informationen eine Titelseite. 
+
+
+\begin{acronym}[SIFT]
+	\acro{SIFT}{Scale-invariant feature transform}
+	\acro{KLT}{Kanadeâ€“Lucasâ€“Tomasi}
+\end{acronym}
+
+
 \frame{\titlepage} 
 
-% \tableofcontents genieriert aus den \section und \subsection-Befehlen ein Inhaltsverzeichnis
+
 \begin{frame}
-    \frametitle{Gliederung}\tableofcontents
+	\frametitle{Gliederung}
+	\tableofcontents
 \end{frame} 
 
 
-% \section{Name} generiert einen neuen Abschnitt
 \section{Motivation} 
-\frame{
-    % \frametitle{} Titel der Folie
-    \frametitle{Shape from X} 
-    \framesubtitle{Motivation}
-}
+\begin{frame}
+	% \frametitle{} Titel der Folie
+	\frametitle{Shape from X}
+	\framesubtitle{Motivation}
+\end{frame}
 
+% ---------------------------------------------------------------------------- %
+
+\section{Shape-from-Motion}
+\begin{frame}
+	\frametitle{Shape-from-Motion}
+	\framesubtitle{Einleitung}
+
+	\begin{description}
+		\item[Eingabe:] Reihe von Bildern einer Szene aus verschiedenen Perspektiven
+		\item[Ausgabe:] Dreidimensionale Rekonstruktion der Szene
+	\end{description}
+
+	\begin{block}{Verarbeitungsschritte}
+		\begin{itemize}
+			\item \emph{Gemeinsame Bildausschnitte} in den Bildern suchen.
+			\item \emph{Dreidimensionale Orientierung der Aufnahmen und Merkmale} zueinander berechnen.
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+
+\subsection{AufspÃ¼ren gemeinsamer Punkte}
+\begin{frame}
+	\frametitle{Shape-from-Motion}
+	\framesubtitle{AufspÃ¼ren gemeinsamer Punkte}
+	
+	Das vergleichen aller mÃ¶glichen Bildausschnitte zu komplex. \pause \\
+	$\Rightarrow$ Aufteilen in zwei Schritte.
+	
+	\begin{itemize}
+		\item ''Interessante'' Merkmale finden.
+			\begin{itemize}
+				\item<3-> z.\,B. markante Punkte, Linien oder Regionen
+				\item<3-> Verfahren: \emph{Harris corner detector}, \\
+				\acf{SIFT}, \dots
+			\end{itemize}
+		\item Korrelationen zwischen den Merkmalen auf je zwei Bildern finden.
+			\begin{itemize}
+				\item<4-> z.\,B. $n$ Merkmale zweier Bilder Ã¼bereinander legen und Ã¼berprÃ¼fen, ob andere Merkmale auch Ã¼berein stimmen.
+				\item<4-> \ac{SIFT} und andere Verfahren benutzen bereits invariante Beschreibungen bezÃ¼glich Position, Rotation und Skalierung.
+				\item<4-> Verfahren wie \ac{KLT} nutzen es aus, wenn sich die Kamera zwischen zwei Aufnahmen kaum bewegt.
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Shape-from-Motion}
+	\framesubtitle{AufspÃ¼ren gemeinsamer Punkte}
+	
+	\begin{center}
+		\includegraphics[width=\linewidth]{includes/sift}\\
+		Quelle: http://www.cs.ubc.ca/$\sim$lowe/keypoints/
+	\end{center}
+\end{frame}
+
+
+\subsection{Orientierung berechnen}
+\begin{frame}
+	\frametitle{Shape-from-Motion}
+	\framesubtitle{Orientierung berechnen}
+	
+	\vspace{1em}
+	Die Orientierungsberechnung benutzt das Model der Lockkamera (engl. \textit{pinhole camera}) und die Epipolargeometrie.
+	
+	\begin{center}
+		\includegraphics[width=217pt]{includes/Epipolargeometrie3}\\
+		Quelle: http://de.wikipedia.org/wiki/Epipolargeometrie
+	\end{center}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Shape-from-Motion}
+	\framesubtitle{Orientierung berechnen}
+	
+	\begin{itemize}
+		\item Lineares Gleichungssystem aufbauen und lÃ¶sen.
+		\item Relative Orientierungen von allen Kamerapaaren kombinieren.
+	\end{itemize}
+\end{frame}
+
+
+\subsection{Erweiterungen}
+\begin{frame}
+	\frametitle{Shape-from-Motion}
+	\framesubtitle{Erweiterungen}
+	
+	\begin{itemize}
+		\item Bundle adjustment (Fehler minimieren)
+		\item Dense Matching (Punktwolke verdichten)
+		\item OberflÃ¤che konstruieren
+	\end{itemize}
+\end{frame}
+
+% ---------------------------------------------------------------------------- %
 
 \section{Shape from Texture}
 \frame{
-    \frametitle{Shape from Texture}
-    \includegraphics[width=300px, height = 69px]{sft_texture.png}\\
-    
-    Rekonstruktion eines 3D Objektes mit texturierter Oberfläche aus einem Bild\\
-    Textur besteht aus sich wiederholenden Texturelementen (Texel)\\
-    Unterscheidung zwischen globalen und lokalen Verfahren
-    
+	\frametitle{Shape from Texture}
+	\includegraphics[width=300px, height = 69px]{includes/sft_texture}\\
+
+	Rekonstruktion eines 3D Objektes mit texturierter OberflÃ¤che aus einem Bild\\
+	Textur besteht aus sich wiederholenden Texturelementen (Texel)\\
+	Unterscheidung zwischen globalen und lokalen Verfahren
 }
 
 \frame{
-    \frametitle{Shape from Texture}
-    \includegraphics[width=230px, height = 120px]{sft_slant-tilt.png}\\
-    
-    slant $\rho$: Winkel zwischen $z_s$ und $z_i$\\
-    tilt $\tau$: Winkel zwischen Projektion von $z_s$ auf Bildebene und $x_i$\\
-    Normale: $n = \begin{pmatrix}
-    \sin \rho \cos \tau\\
-    \sin \rho \sin \tau\\
-    \cos \rho
-    \end{pmatrix}$
+	\frametitle{Shape from Texture}
+	\includegraphics[width=230px, height = 120px]{includes/sft_slant-tilt}\\
+	
+	slant $\rho$: Winkel zwischen $z_s$ und $z_i$\\
+	tilt $\tau$: Winkel zwischen Projektion von $z_s$ auf Bildebene und $x_i$\\
+	Normale: $n = \begin{pmatrix}
+	\sin \rho \cos \tau\\
+	\sin \rho \sin \tau\\
+	\cos \rho
+	\end{pmatrix}$
 }
 
 \frame{
-    \frametitle{Shape from Texture}
-    \includegraphics[width=300px, height = 96px]{sft_result.png}\\
-    \vspace{1em}
-    \includegraphics[width=300px, height = 81px]{sft_result2.png}\\
+	\frametitle{Shape from Texture}
+	\includegraphics[width=300px, height = 96px]{includes/sft_result}\\
+	\vspace{1em}
+	\includegraphics[width=300px, height = 81px]{includes/sft_result2}\\
 }
+
+% ---------------------------------------------------------------------------- %
+
+\section{Quellenverzeichnis}
+\begin{frame}
+	\frametitle{Quellenverzeichnis}
+	
+	\begin{tiny}
+	\begin{itemize}
+		\item http://tu-dresden.de/die\_tu\_dresden/fakultaeten/fakultaet\_forst\_geo\_und\_hydrowissenschaften/fachrichtung\_geowissenschaften/ipf/photogrammetrie/elearning/software\_sfm
+		\item http://de.wikipedia.org/wiki/Bildregistrierung
+		\item http://de.wikipedia.org/wiki/Epipolargeometrie
+		\item http://en.wikipedia.org/wiki/Scale-invariant\_feature\_transform
+		\item http://www.cs.cornell.edu/$\sim$snavely/bundler/
+		\item https://github.com/snavely/bundler\_sfm/blob/master/RunBundler.sh
+		\item http://www.di.ens.fr/pmvs/
+		\item http://www.igp.ethz.ch/photogrammetry/education/lehrveranstaltungen/PCV\_HS12/content\_folder/PCV-HS2012-slides-multiview.pdf
+		\item http://mi.eng.cam.ac.uk/$\sim$cipolla/publications/contributionToEditedBook/2008-SFM-chapters.pdf
+%		\item http://www.cs.umd.edu/~mount/ANN/
+%		\item http://users.ics.forth.gr/~lourakis/sba/
+%		\item https://github.com/TheFrenchLeaf/Bundler/blob/master/src/keys2a.cpp
+%		\item https://github.com/TheFrenchLeaf/Bundler/blob/master/src/KeyMatchFull.cpp
+	\end{itemize}
+	\end{tiny}
+\end{frame}
+
+
+%http://tu-dresden.de/die_tu_dresden/fakultaeten/fakultaet_forst_geo_und_hydrowissenschaften/fachrichtung_geowissenschaften/ipf/photogrammetrie/elearning/software_sfm
+%http://de.wikipedia.org/wiki/Bildregistrierung
+%http://de.wikipedia.org/wiki/Epipolargeometrie
+%http://en.wikipedia.org/wiki/Scale-invariant_feature_transform
+%http://www.cs.cornell.edu/~snavely/bundler/
+%https://github.com/snavely/bundler_sfm/blob/master/RunBundler.sh
+%http://www.di.ens.fr/pmvs/
+%http://www.igp.ethz.ch/photogrammetry/education/lehrveranstaltungen/PCV_HS12/content_folder/PCV-HS2012-slides-multiview.pdf
+%http://mi.eng.cam.ac.uk/~cipolla/publications/contributionToEditedBook/2008-SFM-chapters.pdf
+
+%http://www.cs.umd.edu/~mount/ANN/
+%http://users.ics.forth.gr/~lourakis/sba/
+%https://github.com/TheFrenchLeaf/Bundler/blob/master/src/keys2a.cpp
+%https://github.com/TheFrenchLeaf/Bundler/blob/master/src/KeyMatchFull.cpp
+
 
 \end{document}
