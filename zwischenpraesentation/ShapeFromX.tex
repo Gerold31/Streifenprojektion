@@ -90,7 +90,7 @@
 	\frametitle{Shape from Motion}
 	\framesubtitle{Aufspüren gemeinsamer Punkte}
 	
-	Das vergleichen aller möglichen Bildausschnitte zu komplex. \pause \\
+	Vergleichen aller möglichen Bildausschnitte zu komplex \pause \\
 	$\Rightarrow$ Aufteilen in zwei Schritte.
 	
 	\begin{itemize}
@@ -102,7 +102,7 @@
 			\end{itemize}
 		\item Korrelationen zwischen den Merkmalen auf je zwei Bildern finden.
 			\begin{itemize}
-				\item<4-> z.\,B. $n$ Merkmale zweier Bilder übereinander legen und überprüfen, ob andere Merkmale auch überein stimmen.
+				\item<4-> z.\,B. $n$ Merkmale zweier Bilder übereinander legen und überprüfen, ob andere Merkmale auch übereinstimmen.
 				\item<4-> \ac{SIFT} und andere Verfahren benutzen bereits invariante Beschreibungen bezüglich Position, Rotation und Skalierung.
 				\item<4-> Verfahren wie \ac{KLT} nutzen es aus, wenn sich die Kamera zwischen zwei Aufnahmen kaum bewegt.
 			\end{itemize}
@@ -127,7 +127,7 @@
 	\framesubtitle{Orientierung berechnen}
 	
 	\vspace{1em}
-	Die Orientierungsberechnung benutzt das Model der Lockkamera (engl. \textit{pinhole camera}) und die Epipolargeometrie.
+	Die Orientierungsberechnung benutzt das Model der Lochkamera (engl. \textit{pinhole camera}) und die Epipolargeometrie.
 	
 	\begin{center}
 		\includegraphics[width=217pt]{includes/Epipolargeometrie3}\\
@@ -189,7 +189,7 @@
 
 \frame{
 	\frametitle{Shape from Texture}
-	\framesubtitle{Einleitung}
+	\framesubtitle{Normale berechnen}
 	\begin{figure}
 	\stackunder{\includegraphics[width=230px, height = 120px]{includes/sft_slant-tilt}}{Fig. 3}
 	\end{figure}
@@ -202,7 +202,7 @@
 			\cos \rho
 			\end{pmatrix}$
 	\end{itemize}
-	}
+}
 
 \frame{
 	\frametitle{Shape from Texture}
