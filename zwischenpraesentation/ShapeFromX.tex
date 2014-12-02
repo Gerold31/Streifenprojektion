@@ -9,6 +9,7 @@
 \usepackage[nolist]{acronym}
 
 \usepackage{stackengine}
+\usepackage{array}
 
 \title{Shape from X}
 \subtitle{X $\in \{$ Motion, Shading, Texture $\}$}
@@ -48,9 +49,9 @@
 		\item 3D Objekt aus einem oder mehreren Bildern rekonstruieren
 		\item verschiedene Verfahren
 		\begin{itemize}
-			\item Motion
-			\item Shading
-			\item Texture
+			\item \textbf{Motion}
+			\item \textbf{Shading}
+			\item \textbf{Texture}
 			\item Zoom
 			\item Focus
 			\item Stereo
@@ -67,6 +68,11 @@
 % ---------------------------------------------------------------------------- %
 
 \section{Shape from Motion}
+
+\begin{frame}	
+	\center	\huge Shape from Motion
+\end{frame}
+
 \begin{frame}
 	\frametitle{Shape from Motion}
 	\framesubtitle{Einleitung}
@@ -162,6 +168,64 @@
 % ---------------------------------------------------------------------------- %
 
 \section{Shape from Shading}
+
+\begin{frame}	
+	\center	\huge Shape from Shading
+\end{frame}
+
+\subsection{Ansätze}
+\begin{frame}
+	\frametitle{Shape from Shading}
+	\framesubtitle{Ansätze}
+	
+	
+	\begin{tabular}{lcccc}
+		\begin{tabular}{l} Original \end{tabular} &
+		\begin{tabular}{c} \includegraphics[width=0.15\linewidth]{includes/vergleich/vorlage/vorlage_vase_001}  \end{tabular} & 
+		\begin{tabular}{c} \includegraphics[width=0.15\linewidth]{includes/vergleich/vorlage/vorlage_mozart_001}  \end{tabular} &
+		\begin{tabular}{c} \includegraphics[width=0.15\linewidth]{includes/vergleich/vorlage/vorlage_vase_101}  \end{tabular} & 
+		\begin{tabular}{c} \includegraphics[width=0.15\linewidth]{includes/vergleich/vorlage/vorlage_mozart_101}  \end{tabular} \\
+		\begin{tabular}{l} Minimierung \\ (Lee \& Kuo) \end{tabular}  &
+		\begin{tabular}{c} \includegraphics[width=0.15\linewidth]{includes/vergleich/lee_kuo/lee_kuo_vase_001}  \end{tabular} & 
+		\begin{tabular}{c} \includegraphics[width=0.15\linewidth]{includes/vergleich/lee_kuo/lee_kuo_mozart_001}  \end{tabular} &
+		\begin{tabular}{c} \includegraphics[width=0.15\linewidth]{includes/vergleich/lee_kuo/lee_kuo_vase_101}  \end{tabular} & 
+		\begin{tabular}{c} \includegraphics[width=0.15\linewidth]{includes/vergleich/lee_kuo/lee_kuo_mozart_101}  \end{tabular} \\
+		\begin{tabular}{l} Ausbreitung \\ (Bichsel \& Pentland) \end{tabular} &
+		\begin{tabular}{c} \includegraphics[width=0.15\linewidth]{includes/vergleich/bichsel_pentland/bichsel_pentland_vase_001}  \end{tabular} &
+		\begin{tabular}{c} \includegraphics[width=0.15\linewidth]{includes/vergleich/bichsel_pentland/bichsel_pentland_mozart_001}  \end{tabular} &
+		\begin{tabular}{c} \includegraphics[width=0.15\linewidth]{includes/vergleich/bichsel_pentland/bichsel_pentland_vase_101}  \end{tabular} &
+		\begin{tabular}{c} \includegraphics[width=0.15\linewidth]{includes/vergleich/bichsel_pentland/bichsel_pentland_mozart_101}  \end{tabular} \\
+		\begin{tabular}{l} Lokal \\ (Lee \& Rosenfeld) \end{tabular} &
+		\begin{tabular}{c} \includegraphics[width=0.15\linewidth]{includes/vergleich/lee_rosenfeld/lee_rosenfeld_vase_001}  \end{tabular} &
+		\begin{tabular}{c} \includegraphics[width=0.15\linewidth]{includes/vergleich/lee_rosenfeld/lee_rosenfeld_mozart_001}  \end{tabular} &
+		\begin{tabular}{c} \includegraphics[width=0.15\linewidth]{includes/vergleich/lee_rosenfeld/lee_rosenfeld_vase_101}  \end{tabular} &
+		\begin{tabular}{c} \includegraphics[width=0.15\linewidth]{includes/vergleich/lee_rosenfeld/lee_rosenfeld_mozart_101}  \end{tabular} 
+	\end{tabular}\end{frame}
+
+\begin{frame}
+	\frametitle{Shape from Shading}
+	\framesubtitle{Ansätze}
+	
+	\begin{tabular}{lccc}
+		\begin{tabular}{l} Original \end{tabular} &
+		\begin{tabular}{c} \includegraphics[width=0.15\linewidth]{includes/vergleich/vorlage/vorlage_lenna}  \end{tabular} & 
+		\begin{tabular}{c} \includegraphics[width=0.15\linewidth]{includes/vergleich/vorlage/vorlage_pepper}  \end{tabular} &
+		\begin{tabular}{c} \includegraphics[width=0.15\linewidth]{includes/vergleich/vorlage/vorlage_vase}  \end{tabular} \\
+		\begin{tabular}{l} Minimierung \\ (Lee \& Kuo) \end{tabular}  &
+		\begin{tabular}{c} \includegraphics[width=0.15\linewidth]{includes/vergleich/lee_kuo/lee_kuo_lenna}  \end{tabular} & 
+		\begin{tabular}{c} \includegraphics[width=0.15\linewidth]{includes/vergleich/lee_kuo/lee_kuo_pepper}  \end{tabular} &
+		\begin{tabular}{c} \includegraphics[width=0.15\linewidth]{includes/vergleich/lee_kuo/lee_kuo_vase}  \end{tabular} \\
+		\begin{tabular}{l} Ausbreitung \\ (Bichsel \& Pentland) \end{tabular} &
+		\begin{tabular}{c} \includegraphics[width=0.15\linewidth]{includes/vergleich/bichsel_pentland/bichsel_pentland_lenna}  \end{tabular} & 
+		\begin{tabular}{c} \includegraphics[width=0.15\linewidth]{includes/vergleich/bichsel_pentland/bichsel_pentland_pepper}  \end{tabular} &
+		\begin{tabular}{c} \includegraphics[width=0.15\linewidth]{includes/vergleich/bichsel_pentland/bichsel_pentland_vase}  \end{tabular} \\
+		\begin{tabular}{l} Lokal \\ (Lee \& Rosenfeld) \end{tabular} &
+		\begin{tabular}{c} \includegraphics[width=0.15\linewidth]{includes/vergleich/lee_rosenfeld/lee_rosenfeld_lenna}  \end{tabular} &
+		\begin{tabular}{c} \includegraphics[width=0.15\linewidth]{includes/vergleich/lee_rosenfeld/lee_rosenfeld_pepper}  \end{tabular} &
+		\begin{tabular}{c} \includegraphics[width=0.15\linewidth]{includes/vergleich/lee_rosenfeld/lee_rosenfeld_vase}  \end{tabular} 
+	\end{tabular}
+\end{frame}
+
 \subsection{Probleme}
 \begin{frame}
 	\frametitle{Shape from Shading}
@@ -170,43 +234,14 @@
 	\includegraphics[width=\linewidth]{includes/shading_problem}
 \end{frame}
 
-\subsection{Ansätze}
-\begin{frame}
-	\frametitle{Shape from Shading}
-	\framesubtitle{Ansätze}
-	
-	\begin{itemize}
-		\item Minimierung
-		\item Ausbreitung
-		\item Lokal
-		\item \dots
-	\end{itemize}
-\end{frame}
-
-\subsection{Vergleich}
-\begin{frame}
-	\frametitle{Shape from Shading}
-	\framesubtitle{Vergleich}
-	
-	\begin{tabular}{lcccc}
-		Original &
-		\includegraphics[width=0.15\linewidth]{includes/vergleich/vorlage/vorlage_vase_001} & \includegraphics[width=0.15\linewidth]{includes/vergleich/vorlage/vorlage_mozart_001} &
-		\includegraphics[width=0.15\linewidth]{includes/vergleich/vorlage/vorlage_vase_101} & \includegraphics[width=0.15\linewidth]{includes/vergleich/vorlage/vorlage_mozart_101} \\
-		Lee \& Kuo &
-		\includegraphics[width=0.15\linewidth]{includes/vergleich/lee_kuo/lee_kuo_vase_001} & \includegraphics[width=0.15\linewidth]{includes/vergleich/lee_kuo/lee_kuo_mozart_001} &
-		\includegraphics[width=0.15\linewidth]{includes/vergleich/lee_kuo/lee_kuo_vase_101} & \includegraphics[width=0.15\linewidth]{includes/vergleich/lee_kuo/lee_kuo_mozart_101} \\
-		Bichsel \& Pentland &
-		\includegraphics[width=0.15\linewidth]{includes/vergleich/bichsel_pentland/bichsel_pentland_vase_001} & \includegraphics[width=0.15\linewidth]{includes/vergleich/bichsel_pentland/bichsel_pentland_mozart_001} &
-		\includegraphics[width=0.15\linewidth]{includes/vergleich/bichsel_pentland/bichsel_pentland_vase_101} & \includegraphics[width=0.15\linewidth]{includes/vergleich/bichsel_pentland/bichsel_pentland_mozart_101} \\
-		Lee \& Rosenfeld &
-		\includegraphics[width=0.15\linewidth]{includes/vergleich/lee_rosenfeld/lee_rosenfeld_vase_001} & \includegraphics[width=0.15\linewidth]{includes/vergleich/lee_rosenfeld/lee_rosenfeld_mozart_001} &
-		\includegraphics[width=0.15\linewidth]{includes/vergleich/lee_rosenfeld/lee_rosenfeld_vase_101} & \includegraphics[width=0.15\linewidth]{includes/vergleich/lee_rosenfeld/lee_rosenfeld_mozart_101}
-	\end{tabular}
-\end{frame}
-
 % ---------------------------------------------------------------------------- %
 
 \section{Shape from Texture}
+
+\begin{frame}
+	\center \huge Shape from Texture
+\end{frame}
+
 \frame{
 	\frametitle{Shape from Texture}
 	\framesubtitle{Einleitung}
@@ -249,6 +284,12 @@
 	\end{figure}
 }
 
+
+
+\begin{frame}	
+	\frametitle{Shape from X}
+	\center \LARGE Vielen Dank für eure Aufmerksamkeit!
+\end{frame}
 % ---------------------------------------------------------------------------- %
 
 \section{Quellenverzeichnis}
