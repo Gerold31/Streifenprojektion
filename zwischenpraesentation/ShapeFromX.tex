@@ -162,11 +162,46 @@
 % ---------------------------------------------------------------------------- %
 
 \section{Shape from Shading}
-\subsection{MISSING}
+\subsection{Probleme}
 \begin{frame}
 	\frametitle{Shape from Shading}
+	\framesubtitle{Probleme}
 	
-	Missing content will be added soon.
+	\includegraphics[width=\linewidth]{includes/shading_problem}
+\end{frame}
+
+\subsection{Ansätze}
+\begin{frame}
+	\frametitle{Shape from Shading}
+	\framesubtitle{Ansätze}
+	
+	\begin{itemize}
+		\item Minimierung
+		\item Ausbreitung
+		\item Lokal
+		\item \dots
+	\end{itemize}
+\end{frame}
+
+\subsection{Vergleich}
+\begin{frame}
+	\frametitle{Shape from Shading}
+	\framesubtitle{Vergleich}
+	
+	\begin{tabular}{lcccc}
+		Original &
+		\includegraphics[width=0.15\linewidth]{includes/vergleich/vorlage/vorlage_vase_001} & \includegraphics[width=0.15\linewidth]{includes/vergleich/vorlage/vorlage_mozart_001} &
+		\includegraphics[width=0.15\linewidth]{includes/vergleich/vorlage/vorlage_vase_101} & \includegraphics[width=0.15\linewidth]{includes/vergleich/vorlage/vorlage_mozart_101} \\
+		Lee \& Kuo &
+		\includegraphics[width=0.15\linewidth]{includes/vergleich/lee_kuo/lee_kuo_vase_001} & \includegraphics[width=0.15\linewidth]{includes/vergleich/lee_kuo/lee_kuo_mozart_001} &
+		\includegraphics[width=0.15\linewidth]{includes/vergleich/lee_kuo/lee_kuo_vase_101} & \includegraphics[width=0.15\linewidth]{includes/vergleich/lee_kuo/lee_kuo_mozart_101} \\
+		Bichsel \& Pentland &
+		\includegraphics[width=0.15\linewidth]{includes/vergleich/bichsel_pentland/bichsel_pentland_vase_001} & \includegraphics[width=0.15\linewidth]{includes/vergleich/bichsel_pentland/bichsel_pentland_mozart_001} &
+		\includegraphics[width=0.15\linewidth]{includes/vergleich/bichsel_pentland/bichsel_pentland_vase_101} & \includegraphics[width=0.15\linewidth]{includes/vergleich/bichsel_pentland/bichsel_pentland_mozart_101} \\
+		Lee \& Rosenfeld &
+		\includegraphics[width=0.15\linewidth]{includes/vergleich/lee_rosenfeld/lee_rosenfeld_vase_001} & \includegraphics[width=0.15\linewidth]{includes/vergleich/lee_rosenfeld/lee_rosenfeld_mozart_001} &
+		\includegraphics[width=0.15\linewidth]{includes/vergleich/lee_rosenfeld/lee_rosenfeld_vase_101} & \includegraphics[width=0.15\linewidth]{includes/vergleich/lee_rosenfeld/lee_rosenfeld_mozart_101}
+	\end{tabular}
 \end{frame}
 
 % ---------------------------------------------------------------------------- %
@@ -249,6 +284,19 @@
 
 \begin{frame}
 	\frametitle{Quellenverzeichnis}
+	\framesubtitle{Shape from Shading}
+	
+	\begin{tiny}
+		\begin{itemize}
+			\item \href{https://www.inf.tu-dresden.de/content/institutes/ki/is/SS09_ProsemVotraege/proseminar_sfs.pdf}{https://www.inf.tu-dresden.de/content/institutes/ki/is/SS09\_ProsemVotraege/proseminar\_sfs.pdf (Shading Probleme)}
+			\item \href{http://www.wisdom.weizmann.ac.il/~vision/courses/2010_2/papers/ZTCS99.pdf}{http://www.wisdom.weizmann.ac.il/~vision/courses/2010\_2/papers/ZTCS99.pdf (Vergleich)}
+		\end{itemize}
+	\end{tiny}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Quellenverzeichnis}
 	\framesubtitle{Shape from Texture}
 	
 	\begin{tiny}
@@ -265,6 +313,26 @@
 	\item Fig.5: \href{https://www.eecs.berkeley.edu/Research/Projects/CS/vision/papers/forsyth-iccv01.pdf}{https://www.eecs.berkeley.edu/Research/Projects/CS/vision/papers/forsyth-iccv01.pdf}
 	\end{itemize}
 	\end{tiny}
+\end{frame}
+
+% ---------------------------------------------------------------------------- %
+
+\begin{frame}
+	\frametitle{Shape from Shading}
+	\framesubtitle{Beispiel}
+	
+	\begin{tabular}{ccc}
+		\includegraphics[width=0.3\linewidth]{includes/bhk_original} &
+		\includegraphics[width=0.3\linewidth]{includes/bhk_lee_rosenfeld} &
+		\includegraphics[width=0.3\linewidth]{includes/bhk_binsel_pentland} \\
+		Original &
+		Lee \& Rosenfeld &
+		Bichsel \& Pentland
+	\end{tabular}
+	
+	\vspace{3em}
+	\tiny
+	\href{http://ipcv-lab.eie.ucr.ac.cr/sites/ipcv-lab.eie.ucr.ac.cr/files/publications/ICASSP2006poster.pdf}{http://ipcv-lab.eie.ucr.ac.cr/sites/ipcv-lab.eie.ucr.ac.cr/files/publications/ICASSP2006poster.pdf}
 \end{frame}
 
 

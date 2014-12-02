@@ -1,0 +1,8 @@
+shading_problem:
+https://www.inf.tu-dresden.de/content/institutes/ki/is/SS09_ProsemVotraege/proseminar_sfs.pdf
+
+vergleich
+http://www.wisdom.weizmann.ac.il/~vision/courses/2010_2/papers/ZTCS99.pdf
+
+bhk
+http://ipcv-lab.eie.ucr.ac.cr/sites/ipcv-lab.eie.ucr.ac.cr/files/publications/ICASSP2006poster.pdf
