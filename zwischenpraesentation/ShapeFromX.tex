@@ -11,6 +11,12 @@
 \usepackage{stackengine}
 \usepackage{array}
 
+\usepackage{enumitem}
+
+\setitemize{label=\usebeamerfont*{itemize item}%
+  \usebeamercolor[fg]{itemize item}
+  \usebeamertemplate{itemize item}}
+
 \title{Shape from X}
 \subtitle{X $\in \{$ Motion, Shading, Texture $\}$}
 %\subtitle{Schwerpunkte: Shape from Motion, \\ Shape from Shading, Shape from Texture}
@@ -20,8 +26,6 @@
 
 % add page number
 \setbeamertemplate{footline}[frame number]
-
-\usepackage{enumitem}
 
 \begin{document}
 
