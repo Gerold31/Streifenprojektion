@@ -22,10 +22,11 @@
 *.a
 *.lib
 
-# Executables
+# Executables and build results
 *.exe
 *.out
 *.app
+/*-build/
 
 # CMake Results
 CMakeCache.txt
@@ -43,3 +44,6 @@ Makefile
 *.snm
 *.synctex.gz
 *.toc
+
+# Ignore specific files
+/zwischenpraesentation/ShapeFromX.pdf
