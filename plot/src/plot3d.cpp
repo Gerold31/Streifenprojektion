@@ -14,10 +14,9 @@
 
 void Plot3D::addPoint(float x, float y, float z, float r, float g, float b)
 {
+	m.lock();
 	points.emplace_back(x, y, z, r, g, b);
-	if (pointCloud != nullptr) {
-		pointCloud->addPoint(x, y, z, r, g, b);
-	}
+	m.unlock();
 }
 
 void Plot3D::show()
@@ -43,7 +42,12 @@ void Plot3D::show()
 	// Initialize OpenGL
 	glEnable(GL_DEPTH_TEST);
 
-	pointCloud = new PointCloud(points);
+	{
+		m.lock();
+		pointCloud = new PointCloud(points);
+		points.clear();
+		m.unlock();
+	}
 
 	// Init view position and perspective
 	//glm::vec3 viewPos = {4.0f, 1.0f, 2.0f};
@@ -109,6 +113,16 @@ void Plot3D::show()
 		view = glm::rotate(view, (float) rotation[0], glm::vec3{0.0f, 1.0f, 0.0f});
 		view = glm::rotate(view, (float) rotation[1], glm::vec3{1.0f, 0.0f, 0.0f});
 		view = glm::rotate(view, (float) rotation[2], glm::vec3{0.0f, 0.0f, 1.0f});
+
+		// add new points
+		{
+			m.lock();
+			for (Point p : points) {
+				pointCloud->addPoint(p.x, p.y, p.z, p.r, p.g, p.b);
+			}
+			points.clear();
+			m.unlock();
+		}
 
 		// render
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);

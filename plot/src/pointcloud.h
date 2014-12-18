@@ -27,6 +27,7 @@ private:
 	GLint uniView, uniProj;
 	GLuint vao;
 	GLuint vbo;
+	bool shouldUpload;
 };
 
 #endif // POINTCLOUD_H

@@ -1,6 +1,7 @@
 #ifndef PLOT3D_H
 #define PLOT3D_H
 
+#include <mutex>
 #include <vector>
 
 #include <glm/glm.hpp>
@@ -16,6 +17,7 @@ public:
 private:
 	PointCloud *pointCloud = nullptr;
 	std::vector<Point> points;
+	mutable std::mutex m;
 };
 
 #endif // PLOT3D_H

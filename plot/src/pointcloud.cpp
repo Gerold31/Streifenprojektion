@@ -71,12 +71,19 @@ PointCloud::~PointCloud()
 void PointCloud::addPoint(float x, float y, float z, float r, float g, float b)
 {
 	points.emplace_back(x, y, z, r, g, b);
+	shouldUpload = true;
 }
 
 void PointCloud::draw(const glm::mat4 &view)
 {
 	shaderProgram.use();
 	glBindVertexArray(vao);
+
+	// upload
+	if (shouldUpload) {
+		uploadData();
+		shouldUpload = false;
+	}
 
 	// Set up uniforms
 	glUniformMatrix4fv(uniView, 1, GL_FALSE, glm::value_ptr(view));
