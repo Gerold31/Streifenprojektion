@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 		} else if (strcmp(argv[i], "--readin") == 0) {
 			readThread = new thread([&]() {
 				float xyzrgb[6];
-				for (;;) {
+				while (cin.good()) {
 					for (int i = 0; i < 6; ++i) {
 						cin >> xyzrgb[i];
 					}
