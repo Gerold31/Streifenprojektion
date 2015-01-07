@@ -31,8 +31,8 @@ using std::string;
 
 
 const regex COMMAND_COMMENT{"\\s*|#.*|//.*"};
-const regex COMMAND_BACKGROUND{"^b\\s*(.*)$"};
-const regex COMMAND_DEVICECONF{"c\\s*([\\d\\.]*)\\s*([\\d\\.]*)\\s*([\\d*\\.]).*"};
+const regex COMMAND_BACKGROUND{"^b\\s+(.*)$"};
+const regex COMMAND_DEVICECONF{"c\\s+(-?[\\d\\.]+)\\s+(-?[\\d\\.]+)\\s+(-?[\\d\\.]+)(\\s.*)?"};
 const regex COMMAND_IMAGE{"^(.*)$"};
 
 const char WINDOW_DEBUG_LINE[] = "Debug: Line";
