@@ -1,5 +1,8 @@
 #include <configuration.h>
 
+#include <cstdlib>
+#include <cstring>
+#include <fstream>
 #include <iostream>
 #include <istream>
 #include <memory>
@@ -9,21 +12,167 @@
 #include <linedetector.h>
 #include <reconstructor.h>
 
+using std::cerr;
 using std::cin;
+using std::endl;
+using std::exit;
+using std::ifstream;
 using std::istream;
 using std::make_shared;
 using std::shared_ptr;
 
 
-bool Configuration::debugCloud = true;
-bool Configuration::debugLine = true;
+static int argc = 0;
+static int argi = 0;
+static char const* const* argv = nullptr;
+static const char* nextParam = nullptr;
+static const char* option = nullptr;
+static char optionPlace[3] = "- ";
+
+bool Configuration::debugCloud = false;
+bool Configuration::debugLine = false;
 shared_ptr<LineDetector> Configuration::lineDetection{make_shared<DefaultLineDetector>()};
 shared_ptr<Reconstructor> Configuration::reconstructor{make_shared<DefaultReconstructor>()};
 shared_ptr<istream> Configuration::inputStream{&cin, [](istream* p){}};
 
-void Configuration::init(int argc, char *argv[])
+void Configuration::init(int argc, char* argv[])
 {
-	for (int i = 0; i < argc; ++i) {
-		// TODO
+	::argc = argc;
+	::argv = argv;
+
+	int argumentCount = 0;
+	bool no_option = false;
+	for (argi = 1; argi < argc; ++argi) {
+		const char *arg = argv[argi];
+
+		if (equal(arg, "--"))
+		{
+			no_option = true;
+		}
+		else if (no_option || arg[0] != '-')
+		{
+			// handle argument
+			if (++argumentCount == 1) {
+				shared_ptr<ifstream> in = make_shared<ifstream>(arg);
+				if (!in->is_open()) {
+					cerr << "Unable to open file: " << arg << endl;
+					exit(EXIT_FAILURE);
+				}
+				inputStream = in;
+			} else {
+				cerr << "Too many arguments." << endl << endl;
+				helpAndExit();
+			}
+		}
+		else
+		{
+			if (arg[1] != '-') {
+				for (int j = 1; arg[j] != '\0'; ++j) {
+					char op = arg[j];
+					optionPlace[1] = op;
+					option = optionPlace;
+
+					if (arg[j + 1] == '\0') {
+						nextParam == nullptr;
+						handleOption(op);
+					} else {
+						nextParam = &arg[j + 1];
+						handleOption(op);
+						if (nextParam == nullptr) {
+							break;
+						}
+					}
+				}
+			} else {
+				option = arg;
+				if (equal(arg, "--help")) {
+					handleOption('h');
+				} else {
+					handleOption('-');
+				}
+			}
+		}
 	}
+}
+
+bool Configuration::equal(const char *str, const char *op)
+{
+	return std::strcmp(str, op) == 0;
+}
+
+const char* Configuration::getParam()
+{
+	if (nextParam != nullptr) {
+		const char* param = nextParam;
+		nextParam = nullptr;
+		return param;
+	} else if (++argi < argc) {
+		return argv[argi];
+	} else {
+		cerr << "Missing parameter for option: " << option << endl << endl;
+		helpAndExit();
+	}
+}
+
+void Configuration::handleOption(const char op)
+{
+	switch (op) {
+	case 'h':
+	{
+		helpAndExit(EXIT_SUCCESS);
+	}
+	case 'l':
+	{
+		debugLine = true;
+		break;
+	}
+	case 'L':
+	{
+		const char* linkd = getParam();
+		if (equal(linkd, "default")) {
+			lineDetection = make_shared<DefaultLineDetector>();
+		} else {
+			cerr << "Unknown link detector: " << linkd << endl << endl;
+			helpAndExit();
+		}
+		break;
+	}
+	case 'R':
+	{
+		const char* rec = getParam();
+		if (equal(rec, "default")) {
+			reconstructor = make_shared<DefaultReconstructor>();
+		} else {
+			cerr << "Unknown reconstructor: " << rec << endl << endl;
+			helpAndExit();
+		}
+		break;
+	}
+	default:
+		cerr << "Invalid option: " << option << endl << endl;
+		helpAndExit();
+	}
+}
+
+bool Configuration::helpAndExit(int exitCode)
+{
+	cerr << "Usage: " << argv[0] << " [options...] [file]" << endl;
+	cerr << endl;
+	cerr << "file: File with commands to execute." << endl;
+	cerr << "      Program will use stdin by default." << endl;
+	cerr << endl;
+	cerr << "options:" << endl;
+	cerr << "      -l" << endl;
+	cerr << "          Show reconstructed lines." << endl;
+	cerr << endl;
+	cerr << "      -L <line-detector>" << endl;
+	cerr << "          Set the line detector to use." << endl;
+	cerr << endl;
+	cerr << "      -R <reconstructor>" << endl;
+	cerr << "          Set the reconstructor to use." << endl;
+	cerr << endl;
+	cerr << "      -h, --help" << endl;
+	cerr << "          Show this information." << endl;
+	cerr << endl;
+	std::exit(exitCode);
 }

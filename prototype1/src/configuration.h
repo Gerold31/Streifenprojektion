@@ -22,6 +22,11 @@ private:
 	Configuration() = delete;
 	Configuration(const Configuration&) = delete;
 	Configuration& operator=(const Configuration&) = delete;
+
+	static bool equal(const char *str, const char *op);
+	static const char* getParam();
+	static void handleOption(const char op);
+	static bool helpAndExit(int exitCode  = EXIT_FAILURE);
 };
 
 #endif // CONFIGURATION_H
