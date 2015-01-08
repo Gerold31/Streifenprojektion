@@ -15,6 +15,7 @@ public:
 
 	static bool debugCloud;
 	static bool debugLine;
+	static bool verbose;
 	static std::shared_ptr<LineDetector> lineDetection;
 	static std::shared_ptr<Reconstructor> reconstructor;
 	static std::shared_ptr<std::istream> inputStream;

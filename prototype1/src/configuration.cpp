@@ -31,6 +31,7 @@ static char optionPlace[3] = "- ";
 
 bool Configuration::debugCloud = false;
 bool Configuration::debugLine = false;
+bool Configuration::verbose = false;
 shared_ptr<LineDetector> Configuration::lineDetection{make_shared<DefaultLineDetector>()};
 shared_ptr<Reconstructor> Configuration::reconstructor{make_shared<DefaultReconstructor>()};
 shared_ptr<istream> Configuration::inputStream{&cin, [](istream* p){}};
@@ -148,6 +149,11 @@ void Configuration::handleOption(const char op)
 		}
 		break;
 	}
+	case 'v':
+	{
+		verbose = true;
+		break;
+	}
 	default:
 		cerr << "Invalid option: " << option << endl << endl;
 		helpAndExit();
@@ -170,6 +176,9 @@ bool Configuration::helpAndExit(int exitCode)
 	cerr << endl;
 	cerr << "      -R <reconstructor>" << endl;
 	cerr << "          Set the reconstructor to use." << endl;
+	cerr << endl;
+	cerr << "      -v" << endl;
+	cerr << "          Print some more messages about current state." << endl;
 	cerr << endl;
 	cerr << "      -h, --help" << endl;
 	cerr << "          Show this information." << endl;
