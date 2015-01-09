@@ -4,6 +4,7 @@
 
 #include <opencv2/core/core.hpp>
 
+#include "configuration.h"
 
 PointCloud::PointCloud()
 {
@@ -27,5 +28,11 @@ void PointCloud::addPoint(cv::Vec3d pos, cv::Vec2i imgPos)
 	p.imgPos = imgPos;
 	points.push_back(p);
 
-	std::cout << pos[0] << " " << pos[1] << " " << pos[2] << " 1 0 0\n";
+	cv::Mat &img = Configuration::lineDetection->getBackground();
+
+	float r = img.data[img.step[0]*imgPos[1] + img.step[1]*imgPos[0] + 2]/255.;
+	float g = img.data[img.step[0]*imgPos[1] + img.step[1]*imgPos[0] + 1]/255.;
+	float b = img.data[img.step[0]*imgPos[1] + img.step[1]*imgPos[0] + 0]/255.;
+
+	std::cout << pos[0] << " " << pos[1] << " " << pos[2] << " " << r << " " << g << " " << b << "\n";
 }

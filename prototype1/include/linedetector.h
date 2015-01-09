@@ -16,6 +16,7 @@ public:
 
 	virtual void setBackground(const cv::Mat& background) = 0;
 	virtual void processImage(const cv::Mat& img, Line& line) = 0;
+    virtual cv::Mat &getBackground() = 0;
 };
 
 #endif // LINEDETECTOR_H
