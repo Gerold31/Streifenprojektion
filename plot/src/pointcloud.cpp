@@ -1,5 +1,7 @@
 #include <pointcloud.h>
 
+#define GLM_FORCE_RADIANS
+
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -27,17 +29,32 @@ const char fragmentSource[] = GLSL(
 			}
 );
 
+const char fragmentSourceEX[] = GLSL(
+			in vec3 Color;
+			out vec4 outColor;
+			void main() {
+				float z = gl_FragCoord[3];
+				outColor = vec4(z, z, z, 1.0);
+			}
+);
+
 
 PointCloud::PointCloud(const std::vector<Point> &points) :
+	Drawable(),
 	vertexShader{GL_VERTEX_SHADER, vertexSource},
 	fragmentShader{GL_FRAGMENT_SHADER, fragmentSource},
+	fragmentShaderEX{GL_FRAGMENT_SHADER, fragmentSourceEX},
 	points{points}
 {
-	// Create Shader Program
+	// Create Shader Programs
 	shaderProgram.attachShader(vertexShader);
 	shaderProgram.attachShader(fragmentShader);
 	shaderProgram.bindFragDataLocation(0, "outColor");
 	shaderProgram.link();
+	shaderProgramEX.attachShader(vertexShader);
+	shaderProgramEX.attachShader(fragmentShaderEX);
+	shaderProgramEX.bindFragDataLocation(0, "outColor");
+	shaderProgramEX.link();
 
 	// Create Vertex Array Object
 	glGenVertexArrays(1, &vao);
@@ -74,9 +91,19 @@ void PointCloud::addPoint(float x, float y, float z, float r, float g, float b)
 	shouldUpload = true;
 }
 
+void PointCloud::setOptions(int options)
+{
+	this->options = options;
+}
+
 void PointCloud::draw(const glm::mat4 &view)
 {
-	shaderProgram.use();
+	if (options & COLOR_DISTANCE) {
+		shaderProgramEX.use();
+	} else {
+		shaderProgram.use();
+	}
+
 	glBindVertexArray(vao);
 
 	// upload
