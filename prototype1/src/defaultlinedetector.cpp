@@ -28,9 +28,9 @@ void DefaultLineDetector::processImage(const Mat &img, Line &line)
 	int countBlack = 0, countWhite = 0;
 	bool pass = false;
 
-	for (int j = 0; j < dif.cols; j++)
-	{
-		for (int i = 0; i < dif.rows; i++)
+    for (int i = 0; i < dif.rows; i++)
+    {
+        for (int j = 0; j < dif.cols; j++)
 		{
 			if (dif.data[dif.step[0]*i + dif.step[1]*j] == 0)
 			{
@@ -45,7 +45,7 @@ void DefaultLineDetector::processImage(const Mat &img, Line &line)
 			}
 		}
 		if (countBlack < dif.rows) {
-			line.addSample(j, countBlack);
+            line.addSample(countBlack, i);
 			// TODO line.addSample(j, countBlack + countWhite/2);
 		}
 
@@ -62,9 +62,9 @@ Mat DefaultLineDetector::diff(const Mat& back, const Mat& img) const
 	//cv::namedWindow("difference");
 	//cv::imshow("difference", dif);
 
-	for (int i = 0; i < dif.rows; i++)
-	{
-		for (int j = 0; j < dif.cols; j++)
+    for (int i = 0; i < dif.rows; i++)
+    {
+        for (int j = 0; j < dif.cols; j++)
 		{
 			if (dif.data[dif.step[0]*i + dif.step[1]*j + 0] < 75
 					&& dif.data[dif.step[0]*i + dif.step[1]*j + 1] < 75

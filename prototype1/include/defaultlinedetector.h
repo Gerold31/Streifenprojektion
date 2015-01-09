@@ -14,6 +14,7 @@ public:
 
 	virtual void setBackground(const cv::Mat& background);
 	virtual void processImage(const cv::Mat& img, Line& line);
+    virtual cv::Mat& getBackground() {return background;}
 private:
 	cv::Mat diff(const cv::Mat& back, const cv::Mat& img) const;
 

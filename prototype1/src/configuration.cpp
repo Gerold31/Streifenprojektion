@@ -6,6 +6,7 @@
 #include <iostream>
 #include <istream>
 #include <memory>
+#include <cerrno>
 
 #include <defaultlinedetector.h>
 #include <defaultreconstructor.h>
@@ -31,10 +32,14 @@ static char optionPlace[3] = "- ";
 
 bool Configuration::debugCloud = false;
 bool Configuration::debugLine = false;
+bool Configuration::debugCamera = false;
 bool Configuration::verbose = false;
 shared_ptr<LineDetector> Configuration::lineDetection{make_shared<DefaultLineDetector>()};
 shared_ptr<Reconstructor> Configuration::reconstructor{make_shared<DefaultReconstructor>()};
-shared_ptr<istream> Configuration::inputStream{&cin, [](istream* p){}};
+shared_ptr<istream> Configuration::inputStream{&cin, [](istream*){}};
+int Configuration::captureDevice = -1;
+DeviceConfiguration Configuration::deviceConfiguration = DeviceConfiguration();
+const char *Configuration::savePrefix = nullptr;
 
 void Configuration::init(int argc, char* argv[])
 {
@@ -74,7 +79,7 @@ void Configuration::init(int argc, char* argv[])
 					option = optionPlace;
 
 					if (arg[j + 1] == '\0') {
-						nextParam == nullptr;
+						nextParam = nullptr;
 						handleOption(op);
 					} else {
 						nextParam = &arg[j + 1];
@@ -113,6 +118,7 @@ const char* Configuration::getParam()
 		cerr << "Missing parameter for option: " << option << endl << endl;
 		helpAndExit();
 	}
+	return nullptr;
 }
 
 void Configuration::handleOption(const char op)
@@ -154,6 +160,40 @@ void Configuration::handleOption(const char op)
 		verbose = true;
 		break;
 	}
+	case 'c':
+	{
+		errno = 0;
+		captureDevice = strtol(getParam(), nullptr, 10);
+		if(errno)
+		{
+			cerr << errno << ": " << strerror(errno) << endl;
+			helpAndExit();
+		}
+		break;
+	}
+	case 'C':
+	{
+		debugCamera = true;
+		break;
+	}
+	case 'd':
+	{
+		errno = 0;
+		deviceConfiguration.fov = strtod(getParam(), nullptr) * M_PI/180;
+		deviceConfiguration.projectorOffset = strtod(getParam(), nullptr);
+		if(errno)
+		{
+			cerr << strerror(errno) << endl;
+			helpAndExit();
+		}
+		Configuration::reconstructor->setDeviceConfiguration(deviceConfiguration);
+		break;
+	}
+	case 's':
+	{
+		savePrefix = getParam();
+		break;
+	}
 	default:
 		cerr << "Invalid option: " << option << endl << endl;
 		helpAndExit();
@@ -179,6 +219,18 @@ bool Configuration::helpAndExit(int exitCode)
 	cerr << endl;
 	cerr << "      -v" << endl;
 	cerr << "          Print some more messages about current state." << endl;
+	cerr << endl;
+	cerr << "      -c <device>" << endl;
+	cerr << "          Capture images using <device>." << endl;
+	cerr << endl;
+	cerr << "      -C" << endl;
+	cerr << "          Show captured images." << endl;
+	cerr << endl;
+	cerr << "      -s <prefix>" << endl;
+	cerr << "          Save captured images." << endl;
+	cerr << endl;
+	cerr << "      -d <fov> <offset>" << endl;
+	cerr << "          Configure device." << endl;
 	cerr << endl;
 	cerr << "      -h, --help" << endl;
 	cerr << "          Show this information." << endl;

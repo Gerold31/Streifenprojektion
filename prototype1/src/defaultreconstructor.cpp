@@ -65,7 +65,7 @@ void DefaultReconstructor::processLine(const Line &line, PointCloud &cloud)
 				 << a << endl;
 		}
 
-		cv::Vec3d pos{rpH, rpV, fw};
+		cv::Vec3d pos{-rpH, rpV, fw};
 		pos = pos * (h / fw);
 		cloud.addPoint(pos, sample.pos);
 	}

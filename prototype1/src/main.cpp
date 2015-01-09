@@ -11,6 +11,12 @@
 #include <configuration.h>
 #include <line.h>
 #include <pointcloud.h>
+#include "camera.h"
+#include "servo.h"
+#include "laser.h"
+
+#define MIN_ANGLE (-50)
+#define MAX_ANGLE (20)
 
 using cv::imread;
 using cv::imshow;
@@ -37,6 +43,8 @@ const regex COMMAND_IMAGE{"^(.*)$"};
 
 const char WINDOW_DEBUG_LINE[] = "Debug: Line";
 const char WINDOW_DEBUG_CLOUD[] = "Debug: Point Cloud";
+const char WINDOW_DEBUG_CAMERA[] = "Debug: Camera";
+
 
 int main(int argc, char *argv[])
 {
@@ -48,9 +56,81 @@ int main(int argc, char *argv[])
 	if (Configuration::debugCloud) {
 		namedWindow(WINDOW_DEBUG_CLOUD);
 	}
+	if (Configuration::debugCamera) {
+		namedWindow(WINDOW_DEBUG_CAMERA);
+	}
 
 	std::istream& in = *Configuration::inputStream;
 	PointCloud pointCloud;
+
+	if(Configuration::captureDevice != -1)
+	{
+		Servo::getSingleton()->setAngle(MIN_ANGLE-5);
+		Laser::getSingleton()->toggle(false);
+
+		cv::Mat *img;
+		cv::Mat &background = *Camera::getSingleton()->capture(Configuration::captureDevice);
+
+		Configuration::lineDetection->setBackground(background);
+
+		if(Configuration::savePrefix != nullptr)
+		{
+			char filename[64];
+			sprintf(filename, "%sref.png", Configuration::savePrefix);
+			cv::imwrite(filename, background);
+		}
+		if(Configuration::debugCamera)
+		{
+			cv::imshow(WINDOW_DEBUG_CAMERA, background);
+		}
+
+		//std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+		cv::waitKey(1000);
+
+		Laser::getSingleton()->toggle(true);
+		for(int a=MIN_ANGLE; a<=MAX_ANGLE; a++)
+		{
+			Configuration::deviceConfiguration.projectorAngle = a * M_PI/180;
+			Configuration::reconstructor->setDeviceConfiguration(Configuration::deviceConfiguration);
+			Servo::getSingleton()->setAngle(a);
+			//std::this_thread::sleep_for(std::chrono::milliseconds(100));
+			cv::waitKey(100);
+
+			img = Camera::getSingleton()->capture(Configuration::captureDevice);
+
+			if(Configuration::savePrefix != nullptr)
+			{
+				char filename[64];
+				sprintf(filename, "%s%d.png", Configuration::savePrefix, a);
+				cv::imwrite(filename, *img);
+			}
+
+			if(Configuration::debugCamera)
+			{
+				cv::imshow(WINDOW_DEBUG_CAMERA, *img);
+			}
+
+			Line line{img->cols, img->rows};
+			Configuration::lineDetection->processImage(*img, line);
+			if (Configuration::debugLine) {
+				Mat demo{Size{img->cols, img->rows}, CV_8UC3, Scalar::all(0)};
+				for (const Line::Sample& sample : line.getSamples()) {
+					demo.data[demo.step[0]*sample.pos[1] + demo.step[1]*sample.pos[0] + 2] = 255;
+					demo.data[demo.step[0]*sample.pos[1] + demo.step[1]*sample.pos[0] + 1] = 255;
+					demo.data[demo.step[0]*sample.pos[1] + demo.step[1]*sample.pos[0] + 0] = 255;
+				}
+				imshow(WINDOW_DEBUG_LINE, demo);
+			}
+			Configuration::reconstructor->processLine(line, pointCloud);
+
+			//std::this_thread::sleep_for(std::chrono::milliseconds(400));
+			cv::waitKey(400);
+
+			delete img;
+		}
+		Laser::getSingleton()->toggle(false);
+	}
+
 	while (in.good()) {
 		string str;
 		getline(in, str);

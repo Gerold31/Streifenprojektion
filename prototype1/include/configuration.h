@@ -15,10 +15,15 @@ public:
 
 	static bool debugCloud;
 	static bool debugLine;
+	static bool debugCamera;
 	static bool verbose;
 	static std::shared_ptr<LineDetector> lineDetection;
 	static std::shared_ptr<Reconstructor> reconstructor;
 	static std::shared_ptr<std::istream> inputStream;
+	static int captureDevice;
+	static DeviceConfiguration deviceConfiguration;
+	static const char *savePrefix;
+
 private:
 	Configuration() = delete;
 	Configuration(const Configuration&) = delete;
