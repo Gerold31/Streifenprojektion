@@ -24,6 +24,7 @@ using cv::Mat;
 using cv::namedWindow;
 using cv::Scalar;
 using cv::Size;
+using cv::Vec2i;
 using cv::waitKey;
 using std::atof;
 using std::cerr;
@@ -36,6 +37,8 @@ using std::shared_ptr;
 using std::smatch;
 using std::string;
 
+static void updateHeightmap(const Reconstruction& reconstruction, int sizeX, int sizeY);
+
 
 const regex COMMAND_COMMENT{"\\s*|#.*|//.*"};
 const regex COMMAND_BACKGROUND{"^b\\s+(.*)$"};
@@ -45,13 +48,14 @@ const regex COMMAND_IMAGE{"^(.*)$"};
 const char WINDOW_DEBUG_LINE[] = "Debug: Line";
 const char WINDOW_DEBUG_CLOUD[] = "Debug: Point Cloud";
 const char WINDOW_DEBUG_CAMERA[] = "Debug: Camera";
+const char WINDOW_DEBUG_HEIGHTMAP[] = "Debug: Heightmap";
 
 
 int main(int argc, char *argv[])
 {
 	Configuration::init(argc, argv);
 
-	if (Configuration::debugLine) {
+	if (Configuration::debugLightbar) {
 		namedWindow(WINDOW_DEBUG_LINE);
 	}
 	if (Configuration::debugCloud) {
@@ -59,6 +63,9 @@ int main(int argc, char *argv[])
 	}
 	if (Configuration::debugCamera) {
 		namedWindow(WINDOW_DEBUG_CAMERA);
+	}
+	if (Configuration::debugHeightmap) {
+		namedWindow(WINDOW_DEBUG_HEIGHTMAP);
 	}
 
 	Reconstruction reconstruction;
@@ -114,7 +121,7 @@ int main(int argc, char *argv[])
 
 			Line line{img->cols, img->rows};
 			Configuration::lineDetection->processImage(*img, line);
-			if (Configuration::debugLine) {
+			if (Configuration::debugLightbar) {
 				Mat demo{Size{img->cols, img->rows}, CV_8UC3, Scalar::all(0)};
 				for (const Line::Sample& sample : line.getSamples()) {
 					demo.data[demo.step[0]*sample.pos[1] + demo.step[1]*sample.pos[0] + 2] = 255;
@@ -167,7 +174,7 @@ int main(int argc, char *argv[])
 					return EXIT_FAILURE;
 				}
 				Configuration::lineDetection->processImage(img, line);
-				if (Configuration::debugLine) {
+				if (Configuration::debugLightbar) {
 					Mat demo{Size{img.cols, img.rows}, CV_8UC3, Scalar::all(0)};
 					for (const Line::Sample& sample : line.getSamples()) {
 						demo.data[demo.step[0]*sample.pos[1] + demo.step[1]*sample.pos[0] + 2] = 255;
@@ -178,6 +185,9 @@ int main(int argc, char *argv[])
 					waitKey();
 				}
 				Configuration::reconstructor->processLine(line, reconstruction);
+				if (Configuration::debugHeightmap) {
+					updateHeightmap(reconstruction, img.cols, img.rows);
+				}
 			}
 		}
 
@@ -188,4 +198,32 @@ int main(int argc, char *argv[])
 	}
 
 	return EXIT_SUCCESS;
+}
+
+void updateHeightmap(const Reconstruction& reconstruction, int sizeX, int sizeY)
+{
+	if (!Configuration::debugHeightmap || reconstruction.getPoints().empty())
+		return;
+
+	double first = reconstruction.getPoints()[0].pos[2];
+	double min = first, max = first;
+	for (const Reconstruction::Point p : reconstruction.getPoints()) {
+		if (p.pos[2] < min) {
+			min = p.pos[2];
+		}
+		if (p.pos[2] > max) {
+			max = p.pos[2];
+		}
+	}
+
+	Mat demo{Size{sizeX, sizeY}, CV_8UC3, Scalar{255, 127, 127}};
+	for (const Reconstruction::Point p : reconstruction.getPoints()) {
+		Vec2i pos = p.imgPos;
+		uchar value = (uchar) (255 * (max - p.pos[2]) / (max - min));
+		demo.data[demo.step[0]*pos[1] + demo.step[1]*pos[0] + 2] = value;
+		demo.data[demo.step[0]*pos[1] + demo.step[1]*pos[0] + 1] = value;
+		demo.data[demo.step[0]*pos[1] + demo.step[1]*pos[0] + 0] = value;
+	}
+
+	imshow(WINDOW_DEBUG_HEIGHTMAP, demo);
 }

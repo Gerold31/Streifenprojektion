@@ -14,8 +14,9 @@ public:
 	static void init(int argc, char *argv[]);
 
 	static bool debugCloud;
-	static bool debugLine;
+	static bool debugLightbar;
 	static bool debugCamera;
+	static bool debugHeightmap;
 	static bool verbose;
 	static std::shared_ptr<LightBarDetector> lineDetection;
 	static std::shared_ptr<Reconstructor> reconstructor;

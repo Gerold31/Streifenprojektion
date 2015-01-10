@@ -31,8 +31,9 @@ static const char* option = nullptr;
 static char optionPlace[3] = "- ";
 
 bool Configuration::debugCloud = false;
-bool Configuration::debugLine = false;
+bool Configuration::debugLightbar = false;
 bool Configuration::debugCamera = false;
+bool Configuration::debugHeightmap = false;
 bool Configuration::verbose = false;
 shared_ptr<LightBarDetector> Configuration::lineDetection{make_shared<DiffLightBarDetector>()};
 shared_ptr<Reconstructor> Configuration::reconstructor{make_shared<DefaultReconstructor>()};
@@ -128,9 +129,14 @@ void Configuration::handleOption(const char op)
 	{
 		helpAndExit(EXIT_SUCCESS);
 	}
+	case 'H':
+	{
+		debugHeightmap = true;
+		break;
+	}
 	case 'l':
 	{
-		debugLine = true;
+		debugLightbar = true;
 		break;
 	}
 	case 'L':
@@ -210,6 +216,9 @@ bool Configuration::helpAndExit(int exitCode)
 	cerr << "options:" << endl;
 	cerr << "      -l" << endl;
 	cerr << "          Show reconstructed lines." << endl;
+	cerr << endl;
+	cerr << "      -H" << endl;
+	cerr << "          Show heightmap of result." << endl;
 	cerr << endl;
 	cerr << "      -L <line-detector>" << endl;
 	cerr << "          Set the line detector to use." << endl;

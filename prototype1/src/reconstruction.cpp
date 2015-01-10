@@ -10,16 +10,16 @@ using std::cout;
 
 Reconstruction::Reconstruction()
 {
-
 }
 
 Reconstruction::~Reconstruction()
 {
-
 }
 
 void Reconstruction::addPoint(cv::Vec3d pos, cv::Vec2i imgPos)
 {
+	points.push_back(Point{pos, imgPos});
+
 	float r = img.data[img.step[0]*imgPos[1] + img.step[1]*imgPos[0] + 2]/255.;
 	float g = img.data[img.step[0]*imgPos[1] + img.step[1]*imgPos[0] + 1]/255.;
 	float b = img.data[img.step[0]*imgPos[1] + img.step[1]*imgPos[0] + 0]/255.;
@@ -31,4 +31,9 @@ void Reconstruction::addPoint(cv::Vec3d pos, cv::Vec2i imgPos)
 void Reconstruction::setSource(cv::Mat sourceImg)
 {
 	img = sourceImg;
+}
+
+const std::vector<Reconstruction::Point> &Reconstruction::getPoints() const
+{
+	return points;
 }

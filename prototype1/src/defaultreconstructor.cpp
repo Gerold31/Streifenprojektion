@@ -44,15 +44,15 @@ void DefaultReconstructor::processLine(const Line &line, Reconstruction &cloud)
 
 	double c = dconf.projectorOffset;
 	double alpha = M_PI_2 + dconf.projectorAngle;
-	double fw = 1.0 / tan(dconf.fov / 2.0);
+	double fl = 1.0 / tan(dconf.fov / 2.0);
 
-	cerr << "Focal length is " << fw << endl;
+	cerr << "Focal length is " << fl << endl;
 
 	for (const Line::Sample& sample : line.getSamples()) {
 		double rpH = (2.0 * ((double) sample.pos[0] / line.getResolution()[0]) - 1.0 + (1.0 / (2*line.getResolution()[0])))*((double) line.getResolution()[0]/line.getResolution()[1]);
 		double rpV = -(2.0 * ((double) sample.pos[1] / line.getResolution()[1]) - 1.0 + (1.0 / (2*line.getResolution()[1])));
 
-		double beta = M_PI_2 + atan(rpH / fw);
+		double beta = M_PI_2 + atan(rpH / fl);
 		double a = c * sin(alpha) / sin(M_PI - alpha - beta);
 		double h = sin(beta) * a;
 
@@ -67,8 +67,8 @@ void DefaultReconstructor::processLine(const Line &line, Reconstruction &cloud)
 
 		// TODO workaround to fix mirrored result
 		// TODO cv::Vec3d pos{rpH, rpV, fw}; should be right
-		cv::Vec3d pos{-rpH, rpV, fw};
-		pos = pos * (h / fw);
+		cv::Vec3d pos{-rpH, rpV, fl};
+		pos = pos * (h / fl);
 		cloud.addPoint(pos, sample.pos);
 	}
 }
