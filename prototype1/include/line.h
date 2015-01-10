@@ -12,12 +12,13 @@ public:
 	struct Sample
 	{
 		cv::Vec2i pos;
+		int thickness;
 	};
 
 	Line(int resolutionX, int resolutionY);
 
-	void addSample(const cv::Vec2i& pos);
-	void addSample(int posX, int posY);
+	void addSample(const cv::Vec2i& pos, int thickness = 0);
+	void addSample(int posX, int posY, int thickness = 0);
 
 	std::vector<Sample>& getSamples();
 	const std::vector<Sample>& getSamples() const;
@@ -34,16 +35,17 @@ inline Line::Line(int resolutionX, int resolutionY) :
 {
 }
 
-inline void Line::addSample(const cv::Vec2i &pos)
+inline void Line::addSample(const cv::Vec2i &pos, int thickness)
 {
 	Line::Sample sample;
 	sample.pos = pos;
+	sample.thickness = thickness;
 	samples.push_back(sample);
 }
 
-inline void Line::addSample(int posX, int posY)
+inline void Line::addSample(int posX, int posY, int thickness)
 {
-	addSample(cv::Vec2i{posX, posY});
+	addSample(cv::Vec2i{posX, posY}, thickness);
 }
 
 inline std::vector<Line::Sample>& Line::getSamples()

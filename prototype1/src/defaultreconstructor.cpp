@@ -28,7 +28,7 @@ void DefaultReconstructor::setDeviceConfiguration(const DeviceConfiguration &con
 	this->dconf = conf;
 }
 
-void DefaultReconstructor::processLine(const Line &line, PointCloud &cloud)
+void DefaultReconstructor::processLine(const Line &line, Reconstruction &cloud)
 {
 	//    Object point        |   image plane
 	//         C              |     |  2      (rpH/V are image coordinates
@@ -65,6 +65,8 @@ void DefaultReconstructor::processLine(const Line &line, PointCloud &cloud)
 				 << a << endl;
 		}
 
+		// TODO workaround to fix mirrored result
+		// TODO cv::Vec3d pos{rpH, rpV, fw}; should be right
 		cv::Vec3d pos{-rpH, rpV, fw};
 		pos = pos * (h / fw);
 		cloud.addPoint(pos, sample.pos);

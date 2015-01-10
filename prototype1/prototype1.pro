@@ -23,29 +23,29 @@ QMAKE_CXXFLAGS += -std=c++14
 SOURCES += \ 
     src/camera.cpp \
     src/configuration.cpp \
-    src/defaultlinedetector.cpp \
     src/defaultreconstructor.cpp \
     src/deviceconfiguration.cpp \
     src/laser.cpp \
     src/line.cpp \
-    src/linedetector.cpp \
     src/main.cpp \
-    src/pointcloud.cpp \
     src/reconstructor.cpp \
     src/serial.cpp \
-    src/servo.cpp
+    src/servo.cpp \
+    src/lightbardetector.cpp \
+    src/difflightbardetector.cpp \
+    src/reconstruction.cpp
 
 HEADERS += \ 
     include/camera.h \
     include/configuration.h \
-    include/defaultlinedetector.h \
     include/defaultreconstructor.h \
     include/deviceconfiguration.h \
     include/laser.h \
     include/line.h \
-    include/linedetector.h \
-    include/pointcloud.h \
     include/reconstructor.h \
     include/serial.h \
     include/servo.h \
-    include/singleton.h
+    include/singleton.h \
+    include/lightbardetector.h \
+    include/difflightbardetector.h \
+    include/reconstruction.h

@@ -12,7 +12,7 @@ public:
 	virtual ~DefaultReconstructor();
 
 	virtual void setDeviceConfiguration(const DeviceConfiguration& conf);
-	virtual void processLine(const Line& line, PointCloud& cloud);
+	virtual void processLine(const Line& line, Reconstruction& cloud);
 private:
 	DeviceConfiguration dconf;
 };

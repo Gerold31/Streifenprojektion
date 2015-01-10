@@ -4,7 +4,7 @@
 #include <istream>
 #include <memory>
 
-#include <linedetector.h>
+#include <lightbardetector.h>
 #include <reconstructor.h>
 
 
@@ -17,7 +17,7 @@ public:
 	static bool debugLine;
 	static bool debugCamera;
 	static bool verbose;
-	static std::shared_ptr<LineDetector> lineDetection;
+	static std::shared_ptr<LightBarDetector> lineDetection;
 	static std::shared_ptr<Reconstructor> reconstructor;
 	static std::shared_ptr<std::istream> inputStream;
 	static int captureDevice;

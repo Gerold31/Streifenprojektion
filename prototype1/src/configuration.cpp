@@ -8,9 +8,9 @@
 #include <memory>
 #include <cerrno>
 
-#include <defaultlinedetector.h>
+#include <difflightbardetector.h>
 #include <defaultreconstructor.h>
-#include <linedetector.h>
+#include <lightbardetector.h>
 #include <reconstructor.h>
 
 using std::cerr;
@@ -34,11 +34,11 @@ bool Configuration::debugCloud = false;
 bool Configuration::debugLine = false;
 bool Configuration::debugCamera = false;
 bool Configuration::verbose = false;
-shared_ptr<LineDetector> Configuration::lineDetection{make_shared<DefaultLineDetector>()};
+shared_ptr<LightBarDetector> Configuration::lineDetection{make_shared<DiffLightBarDetector>()};
 shared_ptr<Reconstructor> Configuration::reconstructor{make_shared<DefaultReconstructor>()};
 shared_ptr<istream> Configuration::inputStream{&cin, [](istream*){}};
 int Configuration::captureDevice = -1;
-DeviceConfiguration Configuration::deviceConfiguration = DeviceConfiguration();
+DeviceConfiguration Configuration::deviceConfiguration{0.0, 0.0, 0.0};
 const char *Configuration::savePrefix = nullptr;
 
 void Configuration::init(int argc, char* argv[])
@@ -137,7 +137,7 @@ void Configuration::handleOption(const char op)
 	{
 		const char* linkd = getParam();
 		if (equal(linkd, "default")) {
-			lineDetection = make_shared<DefaultLineDetector>();
+			lineDetection = make_shared<DiffLightBarDetector>();
 		} else {
 			cerr << "Unknown link detector: " << linkd << endl << endl;
 			helpAndExit();
