@@ -32,7 +32,7 @@ void DiffLightBarDetector::processImage(const cv::Mat& img, Line& line)
 			}
 		}
 
-		if(countBlack < dif.rows) {
+		if(countBlack < dif.cols) {
 			line.addSample(countBlack, i, countWhite);
 		}
 
