@@ -174,6 +174,10 @@ int main(int argc, char *argv[])
 					return EXIT_FAILURE;
 				}
 				Configuration::lineDetection->processImage(img, line);
+				Configuration::reconstructor->processLine(line, reconstruction);
+				if (Configuration::debugHeightmap) {
+					updateHeightmap(reconstruction, img.cols, img.rows);
+				}
 				if (Configuration::debugLightbar) {
 					Mat demo{Size{img.cols, img.rows}, CV_8UC3, Scalar::all(0)};
 					for (const Line::Sample& sample : line.getSamples()) {
@@ -183,10 +187,6 @@ int main(int argc, char *argv[])
 					}
 					imshow(WINDOW_DEBUG_LINE, demo);
 					waitKey();
-				}
-				Configuration::reconstructor->processLine(line, reconstruction);
-				if (Configuration::debugHeightmap) {
-					updateHeightmap(reconstruction, img.cols, img.rows);
 				}
 			}
 		}

@@ -6,6 +6,7 @@
 
 using cv::Mat;
 using std::cout;
+using std::endl;
 
 
 Reconstruction::Reconstruction()
@@ -25,7 +26,7 @@ void Reconstruction::addPoint(cv::Vec3d pos, cv::Vec2i imgPos)
 	float b = img.data[img.step[0]*imgPos[1] + img.step[1]*imgPos[0] + 0]/255.;
 
 	cout << pos[0] << " " << pos[1] << " " << pos[2] << " "
-		 << r << " " << g << " " << b << "\n";
+		 << r << " " << g << " " << b << endl;
 }
 
 void Reconstruction::setSource(cv::Mat sourceImg)

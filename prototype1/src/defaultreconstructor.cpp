@@ -46,7 +46,9 @@ void DefaultReconstructor::processLine(const Line &line, Reconstruction &cloud)
 	double alpha = M_PI_2 + dconf.projectorAngle;
 	double fl = 1.0 / tan(dconf.fov / 2.0);
 
-	cerr << "Focal length is " << fl << endl;
+	if (Configuration::verbose) {
+		cerr << "Focal length is " << fl << endl;
+	}
 
 	for (const Line::Sample& sample : line.getSamples()) {
 		double rpH = (2.0 * ((double) sample.pos[0] / line.getResolution()[0]) - 1.0 + (1.0 / (2*line.getResolution()[0])))*((double) line.getResolution()[0]/line.getResolution()[1]);
