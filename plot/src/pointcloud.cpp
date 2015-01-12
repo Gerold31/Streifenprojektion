@@ -124,6 +124,6 @@ void PointCloud::uploadData()
 {
 	const size_t vertexCount = points.size();
 	glBindVertexArray(vao);
-	//glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * vertexCount, points.data(), GL_STATIC_DRAW);
 }
