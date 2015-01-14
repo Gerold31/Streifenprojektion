@@ -69,7 +69,7 @@ void DefaultReconstructor::processLine(const Line &line, Reconstruction &cloud)
 
 		// TODO workaround to fix mirrored result
 		// TODO cv::Vec3d pos{rpH, rpV, fw}; should be right
-		cv::Vec3d pos{-rpH, rpV, fl};
+		cv::Vec3d pos{rpH, rpV, -fl};
 		pos = pos * (h / fl);
 		cloud.addPoint(pos, sample.pos);
 	}

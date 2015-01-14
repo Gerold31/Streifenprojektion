@@ -102,8 +102,8 @@ void LaserFigure::uploadData()
 {
 	float vertecies[] = {
 		0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.5f, 0.5f,
-		0.0f, 1.0f, 1.0f, 0.0f, 1.0f, 0.5f, 0.5f,
-		0.0f, -1.0f, 1.0f, 0.0f, 1.0f, 0.5f, 0.5f
+		0.0f, 1.0f, -1.0f, 0.0f, 1.0f, 0.5f, 0.5f,
+		0.0f, -1.0f, -1.0f, 0.0f, 1.0f, 0.5f, 0.5f
 	};
 	glBindVertexArray(vao);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);

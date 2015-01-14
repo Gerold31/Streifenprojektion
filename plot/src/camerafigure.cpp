@@ -110,25 +110,25 @@ void CameraFigure::uploadData()
 {
 	float vertecies[] = {
 		0.0f, 0.0f, 0.0f, 0.5f, 1.0f, 0.5f,
-		ratio*size*1.0f, size*1.0f, size*focalLength, 0.5f, 1.0f, 0.5f,
+		ratio*size*1.0f, size*1.0f, -size*focalLength, 0.5f, 1.0f, 0.5f,
 		0.0f, 0.0f, 0.0f, 0.5f, 1.0f, 0.5f,
-		ratio*size*1.0f, size*-1.0f, size*focalLength, 0.5f, 1.0f, 0.5f,
+		ratio*size*1.0f, size*-1.0f, -size*focalLength, 0.5f, 1.0f, 0.5f,
 		0.0f, 0.0f, 0.0f, 0.5f, 1.0f, 0.5f,
-		ratio*size*-1.0f, size*1.0f, size*focalLength, 0.5f, 1.0f, 0.5f,
+		ratio*size*-1.0f, size*1.0f, -size*focalLength, 0.5f, 1.0f, 0.5f,
 		0.0f, 0.0f, 0.0f, 0.5f, 1.0f, 0.5f,
-		ratio*size*-1.0f, size*-1.0f, size*focalLength, 0.5f, 1.0f, 0.5f,
+		ratio*size*-1.0f, size*-1.0f, -size*focalLength, 0.5f, 1.0f, 0.5f,
 
-		ratio*size*1.0f, size*1.0f, size*focalLength, 0.5f, 1.0f, 0.5f,
-		ratio*size*1.0f, size*-1.0f, size*focalLength, 0.5f, 1.0f, 0.5f,
+		ratio*size*1.0f, size*1.0f, -size*focalLength, 0.5f, 1.0f, 0.5f,
+		ratio*size*1.0f, size*-1.0f, -size*focalLength, 0.5f, 1.0f, 0.5f,
 
-		ratio*size*1.0f, size*-1.0f, size*focalLength, 0.5f, 1.0f, 0.5f,
-		ratio*size*-1.0f, size*-1.0f, size*focalLength, 0.5f, 1.0f, 0.5f,
+		ratio*size*1.0f, size*-1.0f, -size*focalLength, 0.5f, 1.0f, 0.5f,
+		ratio*size*-1.0f, size*-1.0f, -size*focalLength, 0.5f, 1.0f, 0.5f,
 
-		ratio*size*-1.0f, size*-1.0f, size*focalLength, 0.5f, 1.0f, 0.5f,
-		ratio*size*-1.0f, size*1.0f, size*focalLength, 0.5f, 1.0f, 0.5f,
+		ratio*size*-1.0f, size*-1.0f, -size*focalLength, 0.5f, 1.0f, 0.5f,
+		ratio*size*-1.0f, size*1.0f, -size*focalLength, 0.5f, 1.0f, 0.5f,
 
-		ratio*size*-1.0f, size*1.0f, size*focalLength, 0.5f, 1.0f, 0.5f,
-		ratio*size*1.0f, size*1.0f, size*focalLength, 0.5f, 1.0f, 0.5f
+		ratio*size*-1.0f, size*1.0f, -size*focalLength, 0.5f, 1.0f, 0.5f,
+		ratio*size*1.0f, size*1.0f, -size*focalLength, 0.5f, 1.0f, 0.5f
 	};
 	glBindVertexArray(vao);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
