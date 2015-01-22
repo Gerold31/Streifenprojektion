@@ -51,13 +51,6 @@ const char WINDOW_DEBUG_CAMERA[] = "Debug: Camera";
 const char WINDOW_DEBUG_HEIGHTMAP[] = "Debug: Heightmap";
 
 
-#ifndef MAINLESS
-int main(int argc, char *argv[])
-{
-	main_app(argc, argv);
-}
-#endif // MAINLESS
-
 int main_app(int argc, char *argv[])
 {
 	Configuration::init(argc, argv);
@@ -234,3 +227,10 @@ void updateHeightmap(const Reconstruction& reconstruction, int sizeX, int sizeY)
 
 	imshow(WINDOW_DEBUG_HEIGHTMAP, demo);
 }
+
+#ifndef MAINLESS
+int main(int argc, char *argv[])
+{
+	main_app(argc, argv);
+}
+#endif // MAINLESS

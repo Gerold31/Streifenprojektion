@@ -39,7 +39,7 @@ shared_ptr<LightBarDetector> Configuration::lineDetection{make_shared<DiffLightB
 shared_ptr<Reconstructor> Configuration::reconstructor{make_shared<DefaultReconstructor>()};
 shared_ptr<istream> Configuration::inputStream{&cin, [](istream*){}};
 int Configuration::captureDevice = -1;
-DeviceConfiguration Configuration::deviceConfiguration{0.0, 0.0, 0.0};
+DeviceConfiguration Configuration::deviceConfiguration{0.0, {0.0, 0.0, 0.0}, 0.0, 0.0};
 const char *Configuration::savePrefix = nullptr;
 
 void Configuration::init(int argc, char* argv[])
