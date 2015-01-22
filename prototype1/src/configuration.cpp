@@ -186,7 +186,7 @@ void Configuration::handleOption(const char op)
 	{
 		errno = 0;
 		deviceConfiguration.fov = strtod(getParam(), nullptr) * M_PI/180;
-		deviceConfiguration.projectorOffset = strtod(getParam(), nullptr);
+		deviceConfiguration.projectorPos = {strtod(getParam(), nullptr), 0, 0};
 		if(errno)
 		{
 			cerr << strerror(errno) << endl;

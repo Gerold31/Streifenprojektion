@@ -28,49 +28,57 @@ void DefaultReconstructor::setDeviceConfiguration(const DeviceConfiguration &con
 	this->dconf = conf;
 }
 
-void DefaultReconstructor::processLine(const Line &line, Reconstruction &cloud)
+void DefaultReconstructor::processLine(const Line &line, Reconstruction &reconstruction)
 {
 	//    Object point        |   image plane
 	//         C              |     |  2      (rpH/V are image coordinates
-	//         /\             |    <-------->  as float from -1.0 to 1.0)
-	//        /  \            |   :\        /
-	//     b /    \ a         |   : \      /
-	//      /      \          | fw:  \fov°/
-	//     /        \         |   :   \  /
-	//    /__________\        |   :    \/
-	//   A      c     B       |      Camera
-	//   |            \/      |
-	// Laser        Camera    |
+	//         /\      :      |    <-------->  as floating point.
+	//        /  \     :      |   :\        /  rpV is between -1 and 1.)
+	//     b /    \ a  :h     |   : \      /
+	//      /      \   :      | fl:  \fov°/
+	//     /        \  :      |   :   \  /
+	//    /__________\ :      |   :    \/
+	//    A      c    B       |      Camera
+	//   \/           |       |
+	// Camera       Laser     |
 
-	double c = dconf.projectorOffset;
-	double alpha = M_PI_2 + dconf.projectorAngle;
+	// Prepare interim results
+	double fH = cos(dconf.projectorSkew);
+	double fV = -sin(dconf.projectorSkew);
+
+	// Get sample independent values (c, beta, fl)
+	double c = fH*dconf.projectorPos[0] + fV*dconf.projectorPos[1] + tan(dconf.projectorPitch)*dconf.projectorPos[2];
+	double beta = M_PI_2 + dconf.projectorPitch;
 	double fl = 1.0 / tan(dconf.fov / 2.0);
 
+	// Print some information
 	if (Configuration::verbose) {
 		cerr << "Focal length is " << fl << endl;
 	}
 
+	// Run through all samples
 	for (const Line::Sample& sample : line.getSamples()) {
-		double rpH = (2.0 * ((double) sample.pos[0] / line.getResolution()[0]) - 1.0 + (1.0 / (2*line.getResolution()[0])))*((double) line.getResolution()[0]/line.getResolution()[1]);
-		double rpV = -(2.0 * ((double) sample.pos[1] / line.getResolution()[1]) - 1.0 + (1.0 / (2*line.getResolution()[1])));
+		// Get normalized image coordinates
+		double rpH = ((double) (2 * sample.pos[0]) / (line.getResolution()[0]-1) - 1.)*((double) line.getResolution()[0]/line.getResolution()[1]);
+		double rpV = -((double) (2 * sample.pos[1]) / (line.getResolution()[1]-1) - 1.);
 
-		double beta = M_PI_2 + atan(rpH / fl);
-		double a = c * sin(alpha) / sin(M_PI - alpha - beta);
-		double h = sin(beta) * a;
+		// Get sample dependent values (alpha)
+		double alpha = M_PI_2 - atan((fH * rpH + fV * rpV) / fl);
+
+		// Triangulate
+		double a = c * sin(beta) / sin(M_PI - beta - alpha);
+		double h = sin(alpha) * a;
 
 		if (Configuration::verbose) {
-			cerr << "Triangulate point from image: (" << sample.pos[0] << ", "
-				 << sample.pos[1] << "), relative: (" << rpH << ", " << rpV
-				 << ")" << endl;
-			cerr << "distance: " << h << ", beta: " << beta*180/M_PI
-				 << ", alpha: " << alpha*180/M_PI << ", c: " << c << ", a: "
-				 << a << endl;
+			cerr << "Triangulate point: " << sample.pos[0] << ", "
+				 << sample.pos[1] << " (" << rpH << ", " << rpV << ")" << endl;
+			cerr << "alpha: " << alpha * 180 / M_PI
+				 << ", beta: " << beta * 180 / M_PI
+				 << ", c: " << c << " -> h: " << h << endl;
 		}
 
-		// TODO workaround to fix mirrored result
-		// TODO cv::Vec3d pos{rpH, rpV, fw}; should be right
 		cv::Vec3d pos{rpH, rpV, -fl};
 		pos = pos * (h / fl);
-		cloud.addPoint(pos, sample.pos);
+		reconstruction.addPoint(pos, sample.pos);
 	}
 }

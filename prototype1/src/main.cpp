@@ -51,7 +51,14 @@ const char WINDOW_DEBUG_CAMERA[] = "Debug: Camera";
 const char WINDOW_DEBUG_HEIGHTMAP[] = "Debug: Heightmap";
 
 
+#ifndef MAINLESS
 int main(int argc, char *argv[])
+{
+	main_app(argc, argv);
+}
+#endif // MAINLESS
+
+int main_app(int argc, char *argv[])
 {
 	Configuration::init(argc, argv);
 
@@ -99,7 +106,7 @@ int main(int argc, char *argv[])
 		Laser::getSingleton()->toggle(true);
 		for(int a=MIN_ANGLE; a<=MAX_ANGLE; a++)
 		{
-			Configuration::deviceConfiguration.projectorAngle = a * M_PI/180;
+			Configuration::deviceConfiguration.projectorPitch = a * M_PI/180;
 			Configuration::reconstructor->setDeviceConfiguration(Configuration::deviceConfiguration);
 			Servo::getSingleton()->setAngle(a);
 			//std::this_thread::sleep_for(std::chrono::milliseconds(100));
@@ -162,9 +169,9 @@ int main(int argc, char *argv[])
 				reconstruction.setSource(background);
 			} else if (regex_match(str, match, COMMAND_DEVICECONF)) {
 				DeviceConfiguration dconf;
-				dconf.projectorOffset = atof(match[1].str().c_str());
+				dconf.projectorPos = {atof(match[1].str().c_str()), 0., 0.};
 				dconf.fov = atof(match[2].str().c_str());
-				dconf.projectorAngle = atof(match[3].str().c_str());
+				dconf.projectorPitch = atof(match[3].str().c_str());
 				Configuration::reconstructor->setDeviceConfiguration(dconf);
 			} else if (regex_match(str, match, COMMAND_IMAGE)) {
 				Mat img = imread(match[1], CV_LOAD_IMAGE_COLOR);
