@@ -131,6 +131,33 @@ void DefaultReconstructorTest::testCase1_data()
 			<< fov << pitch << posX << posY << posZ << skew
 			<< lineSizeX << lineSizeY << sampleX << sampleY
 			<< resultX << resultY << resultZ;
+
+	pitch = atan(cos(-M_PI_4) * tan(M_PI_4));
+	posX = -1.0;
+	posY = 0.0;
+	posZ = 0.0;
+	skew = -M_PI_4;
+	sampleX = 1;
+	sampleY = 1;
+	resultX = 0.0;
+	resultY = 0.0;
+	resultZ = -1.0;
+
+	QTest::newRow("Center (45° horizontal pitch, -45° skew)")
+			<< fov << pitch << posX << posY << posZ << skew
+			<< lineSizeX << lineSizeY << sampleX << sampleY
+			<< resultX << resultY << resultZ;
+
+	sampleX = 0.0;
+	sampleY = 0.0;
+	resultX = -1.0;
+	resultY = 1.0;
+	resultZ = -1.0;
+
+	QTest::newRow("Top Left (45° horizontal pitch, -45° skew)")
+			<< fov << pitch << posX << posY << posZ << skew
+			<< lineSizeX << lineSizeY << sampleX << sampleY
+			<< resultX << resultY << resultZ;
 }
 
 void DefaultReconstructorTest::testCase1()
