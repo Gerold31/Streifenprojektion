@@ -28,7 +28,7 @@ void generateMesh(Mat img)
         for(int y = 0; y < img.rows; ++y)
         {
             uchar p = img.at<uchar>(y, x);
-            if(p == 0)
+            if(p != 0)
             {
                 if(!line)
                 {
@@ -113,12 +113,14 @@ void CannyThreshold(int, void*)
 
 int main(int argc, char** argv )
 {
+    namedWindow(win, CV_WINDOW_AUTOSIZE );
+
+    /*
     int deviceId = atoi(argv[1]);
     VideoCapture cap(deviceId);
 
     dst.create( src.size(), src.type() );
 
-    namedWindow(win, CV_WINDOW_AUTOSIZE );
 
     createTrackbar( "Min Threshold:", win, &lowThreshold, max_lowThreshold, CannyThreshold );
 
@@ -143,6 +145,21 @@ int main(int argc, char** argv )
         CannyThreshold(0, 0);
         //imshow(win, src_gray);
     }
+    */
+    ref = imread(argv[1]);
+    src = imread(argv[2]);
+
+    src = max(src, ref) - min(src, ref);
+
+    cv::cvtColor(src, src_gray, CV_BGR2GRAY);
+
+    src_gray = src_gray > 64;
+
+    generateMesh(src_gray);
+
+    imshow(win, src_gray);
+
+    while(waitKey(10) < 0);
 
     return 0;
 }
