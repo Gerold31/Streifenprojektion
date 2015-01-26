@@ -8,72 +8,57 @@
 
 #include <iostream>
 #include <fstream>
+#include <thread>
+#include <chrono>
 
 int main(int argc, char **argv)
 {
-    if(argc != 2)
-        return 1;
-
-
     QCoreApplication a(argc, argv);
 
-    foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts()) {
-        qDebug() << "Name        : " << info.portName();
-        qDebug() << "Description : " << info.description();
-        qDebug() << "Manufacturer: " << info.manufacturer();
+    QSerialPort serial;
 
-        // Example use QSerialPort
-        QSerialPort serial;
-        serial.setPort(info);
-        if (serial.open(QIODevice::ReadWrite)) // Hang of the program
+    foreach(const QSerialPortInfo &info, QSerialPortInfo::availablePorts())
+    {
+        if(info.description() == "Spark Core with WiFi")
         {
-            int pos;
-            //while(std::cin >> pos)
-            while(1)
-            {
-                serial.write("l1", 2);
-                if(!serial.waitForBytesWritten(500))
-                    std::cout << "timeout" << std::endl;
-                for(pos = 0; pos < 90; pos++)
-                {
-                    serial.write("m", 1);
-                    int p = 90 + pos; //+(pos > 90 ? 180-pos : pos);
-                    std::cout << p << std::endl;
-                    serial.write(QByteArray(1, (unsigned char)p));
-                    if(!serial.waitForBytesWritten(500))
-                        std::cout << "timeout" << std::endl;
-                    if(serial.bytesAvailable())
-                        std::cout << serial.readAll().toStdString() << std::endl;
-
-                    QThread::msleep(250);
-                }
-                serial.write("l0", 2);
-                serial.write("mZ", 2);
-                if(!serial.waitForBytesWritten(500))
-                    std::cout << "timeout" << std::endl;
-                QThread::msleep(1000);
-            }
+            serial.setPort(info);
+            serial.open(QIODevice::ReadWrite);
+            break;
         }
     }
 
-    /*
-    QSerialPort serialPort;
-
-    serialPort.setPortName(argv[1]);
-    serialPort.setBaudRate(QSerialPort::Baud19200);
-    if(!serialPort.open(QSerialPort::ReadWrite))
+    if(serial.isOpen())
     {
-        std::cout << serialPort.errorString().toStdString() << std::endl;
+        char cmd;
+        int val;
+        while(std::cin >> cmd && std::cin >> val)
+        {
+            std::cout << "cmd: " << cmd << ", val: " << val << std::endl;
+            switch(cmd)
+            {
+            case 'm':
+                serial.write("m", 1);
+                serial.write(QByteArray(1, (unsigned char)val));
+                break;
+            case 'l':
+                serial.write("l");
+                serial.write(QByteArray(1, val == 0 ? '0' : '1'));
+                break;
+            case 's':
+                while(1)
+                {
+                    serial.write("l1");
+                    serial.flush();
+                    std::this_thread::sleep_for(std::chrono::milliseconds(500/val));
+                    serial.write("l0");
+                    serial.flush();
+                    std::this_thread::sleep_for(std::chrono::milliseconds(500/val));
+                }
+            }
+            serial.flush();
+        }
     }
 
-    int pos;
-    while(std::cin >> pos)
-    {
-        std::cout << serialPort.write(QByteArray(1, (unsigned char)pos)) << std::endl;
-        if(serialPort.bytesAvailable())
-            std::cout << serialPort.readAll().toStdString() << std::endl;
-    }
-    */
 
     return 0;
 }

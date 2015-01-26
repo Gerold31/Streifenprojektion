@@ -8,6 +8,8 @@ QT       += core serialport
 
 QT       -= gui
 
+QMAKE_CXXFLAGS += -std=c++11
+
 TARGET = servoctl-host
 CONFIG   += console
 CONFIG   -= app_bundle
