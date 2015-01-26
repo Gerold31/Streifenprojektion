@@ -68,6 +68,8 @@ int main_app(int argc, char *argv[])
 		namedWindow(WINDOW_DEBUG_HEIGHTMAP);
 	}
 
+	std::cout << "Cam: " << 1/std::tan(Configuration::deviceConfiguration.fov/2.) << " " << 4. /3 << std::endl;
+
 	Reconstruction reconstruction;
 
 	// Live reconstruction
@@ -99,7 +101,8 @@ int main_app(int argc, char *argv[])
 		Laser::getSingleton()->toggle(true);
 		for(int a=MIN_ANGLE; a<=MAX_ANGLE; a++)
 		{
-			Configuration::deviceConfiguration.projectorPitch = a * M_PI/180;
+			Configuration::deviceConfiguration.projectorPitch = -a * M_PI/180;
+			//std::cout << "Laser: " << Configuration::deviceConfiguration.projectorPos << " " << a * M_PI/180 << std::endl;
 			Configuration::reconstructor->setDeviceConfiguration(Configuration::deviceConfiguration);
 			Servo::getSingleton()->setAngle(a);
 			//std::this_thread::sleep_for(std::chrono::milliseconds(100));
@@ -131,6 +134,10 @@ int main_app(int argc, char *argv[])
 				imshow(WINDOW_DEBUG_LINE, demo);
 			}
 			Configuration::reconstructor->processLine(line, reconstruction);
+
+			if (Configuration::debugHeightmap) {
+				updateHeightmap(reconstruction, img->cols, img->rows);
+			}
 
 			//std::this_thread::sleep_for(std::chrono::milliseconds(400));
 			cv::waitKey(400);
