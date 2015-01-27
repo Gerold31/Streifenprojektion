@@ -165,6 +165,7 @@ int main_app(int argc, char *argv[])
 				dconf.projectorPos = {atof(match[1].str().c_str()), 0., 0.};
 				dconf.fov = atof(match[2].str().c_str());
 				dconf.projectorPitch = atof(match[3].str().c_str());
+				dconf.projectorSkew = 0.0;
 				Configuration::reconstructor->setDeviceConfiguration(dconf);
 			} else if (regex_match(str, match, COMMAND_IMAGE)) {
 				Mat img = imread(match[1], CV_LOAD_IMAGE_COLOR);

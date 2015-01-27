@@ -19,7 +19,7 @@ public:
 	~Reconstruction();
 
 	void addPoint(cv::Vec3d pos, cv::Vec2i imgPos);
-	void setSource(cv::Mat sourceImg);
+	void setSource(const cv::Mat &sourceImg);
 	const std::vector<Point>& getPoints() const;
 private:
 	std::vector<Point> points;
