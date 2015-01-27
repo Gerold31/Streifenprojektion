@@ -186,7 +186,8 @@ void Configuration::handleOption(const char op)
 	{
 		errno = 0;
 		deviceConfiguration.fov = strtod(getParam(), nullptr) * M_PI/180;
-		deviceConfiguration.projectorPos = {strtod(getParam(), nullptr), 0, 0};
+		deviceConfiguration.projectorSkew = strtod(getParam(), nullptr) * M_PI/180;
+		deviceConfiguration.projectorPos = {strtod(getParam(), nullptr), strtod(getParam(), nullptr), strtod(getParam(), nullptr)};
 		if(errno)
 		{
 			cerr << strerror(errno) << endl;
@@ -238,7 +239,7 @@ bool Configuration::helpAndExit(int exitCode)
 	cerr << "      -s <prefix>" << endl;
 	cerr << "          Save captured images." << endl;
 	cerr << endl;
-	cerr << "      -d <fov> <offset>" << endl;
+	cerr << "      -d <fov> <skew> <offset>" << endl;
 	cerr << "          Configure device." << endl;
 	cerr << endl;
 	cerr << "      -h, --help" << endl;
