@@ -1,30 +1,34 @@
-#include "difflightbardetector.h"
-
-#include <opencv/cv.h>
-#include <opencv/highgui.h>
-
-using cv::Mat;
-
+//opencv
+#include <opencv\cv.h>
+#include <opencv\highgui.h>
+//costum
+#include "DiffLightBarDetector.h"
 
 void DiffLightBarDetector::setBackground(const cv::Mat& background)
 {
 	this->back = background;
 }
 
-void DiffLightBarDetector::processImage(const cv::Mat& img, Line& line)
+void DiffLightBarDetector::findLightBar(const cv::Mat& img, Line& line)
 {
-	cv::Mat dif = difference(img);
+	cv::Mat image = difference(img);
+
 	int countBlack = 0, countWhite = 0;
 	bool pass = false;
 
-	for(int i = 0; i < dif.rows; i++)
+	for(int i = 0; i < image.rows; i++)
 	{
-		for(int j = 0; j < dif.cols; j++)
+		for(int j = 0; j < image.cols; j++)
 		{
-			if(dif.data[dif.step[0]*i + dif.step[1]* j + 0] == 0)
+			if(image.data[image.step[0]*i + image.step[1]* j + 0] == 0)
 			{
 				if(pass)
-					break;
+				{
+					line.addSample(countBlack, i, countWhite);
+					countBlack += countWhite;
+					countWhite = 0;
+					pass = false;
+				}
 				countBlack++;
 			} else {
 				countWhite++;
@@ -32,9 +36,8 @@ void DiffLightBarDetector::processImage(const cv::Mat& img, Line& line)
 			}
 		}
 
-		if(countBlack < dif.cols) {
+		if(countWhite)
 			line.addSample(countBlack, i, countWhite);
-		}
 
 		countBlack = 0;
 		countWhite = 0;
@@ -53,19 +56,19 @@ cv::Mat DiffLightBarDetector::difference(const cv::Mat& img) const
 	{
 		for(int j = 0; j < dif.cols; j++)
 		{
-			if(dif.data[dif.step[0]*i + dif.step[1]* j + 0] < 75
-				&& dif.data[dif.step[0]*i + dif.step[1]* j + 1] < 75
+			if(dif.data[dif.step[0]*i + dif.step[1]* j + 0] < 75 
+				&& dif.data[dif.step[0]*i + dif.step[1]* j + 1] < 75 
 				&& dif.data[dif.step[0]*i + dif.step[1]* j + 2] < 75)
 			{
-				dif.data[dif.step[0]*i + dif.step[1]* j + 0] = 0;
-				dif.data[dif.step[0]*i + dif.step[1]* j + 1] = 0;
-				dif.data[dif.step[0]*i + dif.step[1]* j + 2] = 0;
+				dif.data[dif.step[0]*i + dif.step[1]* j + 0] = 0; //B
+				dif.data[dif.step[0]*i + dif.step[1]* j + 1] = 0; //G
+				dif.data[dif.step[0]*i + dif.step[1]* j + 2] = 0; //R
 			}
 			else
 			{
-				dif.data[dif.step[0]*i + dif.step[1]* j + 0] = 255;
-				dif.data[dif.step[0]*i + dif.step[1]* j + 1] = 255;
-				dif.data[dif.step[0]*i + dif.step[1]* j + 2] = 255;
+				dif.data[dif.step[0]*i + dif.step[1]* j + 0] = 255; //B
+				dif.data[dif.step[0]*i + dif.step[1]* j + 1] = 255; //G
+				dif.data[dif.step[0]*i + dif.step[1]* j + 2] = 255; //R
 			}
 		}
 	}
