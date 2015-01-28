@@ -1,21 +1,26 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include "singleton.h"
-
 #include "opencv2/opencv.hpp"
+#include <thread>
+#include <mutex>
 
-class Camera : public Singleton<Camera>
+class Camera
 {
 public:
-	cv::Mat *capture(int device);
-
-private:
+	Camera(int device);
 	~Camera();
 
-	std::map<int, cv::VideoCapture *> mDevices;
+	cv::Mat capture();
 
-	friend class Singleton;
+private:
+	cv::VideoCapture *mDevice;
+	std::thread mThread;
+	std::mutex mMutex, mNextAccess;
+	cv::Mat mImg;
+	int mImgID;
+
+	void readImg();
 };
 
 #endif // CAMERA_H

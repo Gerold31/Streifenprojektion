@@ -15,8 +15,8 @@
 #include "reconstruction.h"
 #include "servo.h"
 
-#define MIN_ANGLE (-50)
-#define MAX_ANGLE (20)
+#define MIN_ANGLE (-40)
+#define MAX_ANGLE (30)
 
 using cv::imread;
 using cv::imshow;
@@ -75,11 +75,12 @@ int main_app(int argc, char *argv[])
 	// Live reconstruction
 	if(Configuration::captureDevice != -1)
 	{
+		Camera c(Configuration::captureDevice);
 		Servo::getSingleton()->setAngle(MIN_ANGLE-5);
 		Laser::getSingleton()->toggle(false);
 
-		cv::Mat *img;
-		cv::Mat &background = *Camera::getSingleton()->capture(Configuration::captureDevice);
+		cv::Mat background;
+		c.capture().copyTo(background);
 
 		Configuration::lineDetection->setBackground(background);
 		reconstruction.setSource(background);
@@ -96,7 +97,7 @@ int main_app(int argc, char *argv[])
 		}
 
 		//std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-		cv::waitKey(1000);
+		cv::waitKey(500);
 
 		Laser::getSingleton()->toggle(true);
 		for(int a=MIN_ANGLE; a<=MAX_ANGLE; a++)
@@ -106,26 +107,26 @@ int main_app(int argc, char *argv[])
 			Configuration::reconstructor->setDeviceConfiguration(Configuration::deviceConfiguration);
 			Servo::getSingleton()->setAngle(a);
 			//std::this_thread::sleep_for(std::chrono::milliseconds(100));
-			cv::waitKey(100);
+			cv::waitKey(300);
 
-			img = Camera::getSingleton()->capture(Configuration::captureDevice);
+			cv::Mat img = c.capture();
 
 			if(Configuration::savePrefix != nullptr)
 			{
 				char filename[64];
 				sprintf(filename, "%s%d.png", Configuration::savePrefix, a);
-				cv::imwrite(filename, *img);
+				cv::imwrite(filename, img);
 			}
 
 			if(Configuration::debugCamera)
 			{
-				cv::imshow(WINDOW_DEBUG_CAMERA, *img);
+				cv::imshow(WINDOW_DEBUG_CAMERA, img);
 			}
 
-			Line line{img->cols, img->rows};
-			Configuration::lineDetection->processImage(*img, line);
+			Line line{img.cols, img.rows};
+			Configuration::lineDetection->processImage(img, line);
 			if (Configuration::debugLightbar) {
-				Mat demo{Size{img->cols, img->rows}, CV_8UC3, Scalar::all(0)};
+				Mat demo{Size{img.cols, img.rows}, CV_8UC3, Scalar::all(0)};
 				for (const Line::Sample& sample : line.getSamples()) {
 					demo.data[demo.step[0]*sample.pos[1] + demo.step[1]*sample.pos[0] + 2] = 255;
 					demo.data[demo.step[0]*sample.pos[1] + demo.step[1]*sample.pos[0] + 1] = 255;
@@ -136,13 +137,11 @@ int main_app(int argc, char *argv[])
 			Configuration::reconstructor->processLine(line, reconstruction);
 
 			if (Configuration::debugHeightmap) {
-				updateHeightmap(reconstruction, img->cols, img->rows);
+				updateHeightmap(reconstruction, img.cols, img.rows);
 			}
 
 			//std::this_thread::sleep_for(std::chrono::milliseconds(400));
-			cv::waitKey(400);
-
-			delete img;
+			cv::waitKey(1);
 		}
 		Laser::getSingleton()->toggle(false);
 	}
