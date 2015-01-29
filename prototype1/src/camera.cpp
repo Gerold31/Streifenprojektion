@@ -1,26 +1,44 @@
 #include "camera.h"
 
-Camera::~Camera()
+Camera::Camera(int device)
 {
-	for(auto i=mDevices.begin(); i!=mDevices.end(); ++i)
-	{
-		delete (*i).second;
-	}
+	mDevice = new cv::VideoCapture(device);
+	mThread = std::thread(&Camera::readImg, this);
+	mImgID = 0;
 }
 
-cv::Mat *Camera::capture(int device)
+Camera::~Camera()
 {
-	if(!mDevices.count(device))
+	delete mDevice;
+}
+
+cv::Mat Camera::capture()
+{
+	int id = mImgID;
+	cv::Mat r;
+	while(id != mImgID)
 	{
-		mDevices[device] = new cv::VideoCapture(device);
+		printf(" \b");
 	}
-	if(mDevices[device]->isOpened())
+
+	mNextAccess.lock();
+	mMutex.lock();
+	mNextAccess.unlock();
+	r = mImg;
+	mMutex.unlock();
+	return r;
+}
+
+void Camera::readImg()
+{
+	while(1)
 	{
-		cv::Mat *m = new cv::Mat;
-		//*mDevices[device] >> *m;
-		mDevices[device]->grab();
-		mDevices[device]->retrieve(*m);
-		return m;
+		mNextAccess.lock();
+		mMutex.lock();
+		mNextAccess.unlock();
+		mDevice->grab();
+		mDevice->retrieve(mImg);
+		mImgID++;
+		mMutex.unlock();
 	}
-	return nullptr;
 }
