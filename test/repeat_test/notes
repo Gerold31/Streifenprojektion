@@ -1,0 +1,9 @@
+fov: 48.5 grad
+
+laser: 0 grad
+laser off: -9.5 3 0 (cm)
+
+cube entfernung: 300mm
+cube hoehe 56mm
+
+entfernung wand: ~1150mm
