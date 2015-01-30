@@ -1,15 +1,15 @@
 //opencv
-#include <opencv\cv.h>
-#include <opencv\highgui.h>
+#include <opencv/cv.h>
+#include <opencv/highgui.h>
 //costum
-#include "DiffLightBarDetector.h"
+#include "difflightbardetector.h"
 
 void DiffLightBarDetector::setBackground(const cv::Mat& background)
 {
 	this->back = background;
 }
 
-void DiffLightBarDetector::findLightBar(const cv::Mat& img, Line& line)
+void DiffLightBarDetector::processImage(const cv::Mat& img, Line& line)
 {
 	cv::Mat image = difference(img);
 
