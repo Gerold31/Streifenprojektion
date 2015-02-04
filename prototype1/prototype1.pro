@@ -33,7 +33,8 @@ SOURCES += \
     src/servo.cpp \
     src/lightbardetector.cpp \
     src/difflightbardetector.cpp \
-    src/reconstruction.cpp
+    src/reconstruction.cpp \
+    src/freelightbardetector.cpp
 
 HEADERS += \ 
     include/camera.h \
@@ -48,4 +49,5 @@ HEADERS += \
     include/singleton.h \
     include/lightbardetector.h \
     include/difflightbardetector.h \
-    include/reconstruction.h
+    include/reconstruction.h \
+    include/freelightbardetector.h
