@@ -10,6 +10,7 @@
 
 #include <difflightbardetector.h>
 #include <defaultreconstructor.h>
+#include <freelightbardetector.h>
 #include <lightbardetector.h>
 #include <reconstructor.h>
 
@@ -142,10 +143,12 @@ void Configuration::handleOption(const char op)
 	case 'L':
 	{
 		const char* linkd = getParam();
-		if (equal(linkd, "default")) {
+		if (equal(linkd, "default") || equal(linkd, "diff")) {
 			lineDetection = make_shared<DiffLightBarDetector>();
+		} else if (equal(linkd, "free")) {
+			lineDetection = make_shared<FreeLightBarDetector>();
 		} else {
-			cerr << "Unknown link detector: " << linkd << endl << endl;
+			cerr << "Unknown line detector: " << linkd << endl << endl;
 			helpAndExit();
 		}
 		break;
@@ -223,9 +226,11 @@ bool Configuration::helpAndExit(int exitCode)
 	cerr << endl;
 	cerr << "      -L <line-detector>" << endl;
 	cerr << "          Set the line detector to use." << endl;
+	cerr << "          Possible values: default, diff, free" << endl;
 	cerr << endl;
 	cerr << "      -R <reconstructor>" << endl;
 	cerr << "          Set the reconstructor to use." << endl;
+	cerr << "          Possible values: default" << endl;
 	cerr << endl;
 	cerr << "      -v" << endl;
 	cerr << "          Print some more messages about current state." << endl;

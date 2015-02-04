@@ -1,10 +1,10 @@
 //opencv
-#include <opencv\cv.h>
-#include <opencv\highgui.h>
+#include <opencv/cv.h>
+#include <opencv/highgui.h>
 //costum
 #include "freelightbardetector.h"
 
-void FreeLightBarDetector::findLightBar(const cv::Mat &img, Line &line)
+void FreeLightBarDetector::processImage(const cv::Mat &img, Line &line)
 {
 	cv::Mat image = filter(img);
 

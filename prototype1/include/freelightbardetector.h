@@ -10,7 +10,7 @@ public:
 	FreeLightBarDetector() {}
 	virtual ~FreeLightBarDetector() {}
 
-	virtual void findLightBar(const cv::Mat &img, Line &line);
+	virtual void processImage(const cv::Mat &img, Line &line);
 private:
 	cv::Mat filter(const cv::Mat &img);
 };
