@@ -141,10 +141,13 @@
 		\small
 		\begin{column}{.65\linewidth}
 			\begin{itemize}
-				\item \textbf{Schritt 1:} Bestimmte die normalisierten Bildkoordinaten.
-				\item \textbf{Schritt 2:} Berechne $\alpha$, $\beta$, $c$ und $f$ aus der Gerätekonfiguration.
-				\item \textbf{Schritt 3:} Berechne $h$ (über $\gamma$).
+				\item \textbf{Schritt 1:} Berechne die normalisierten Bildkoordinaten $(u,v)$.
+				\item \textbf{Schritt 2:} Bestimme $\alpha$, $\beta$, $c$ und $f$ aus der Gerätekonfiguration und den Bildkoordinaten.
+				\item \textbf{Schritt 3:} Berechne $h$:
+				\[h = \frac{c * \sin(\alpha) * \sin(\beta)}{\sin(180^\circ - \beta - \alpha)}\]
 				\item \textbf{Schritt 4:} Bestimme Koordinaten innerhalb der Szene.
+				\[\begin{pmatrix}x\\y\\z\end{pmatrix} = \frac{h}{f} *
+				\begin{pmatrix}u\\v\\-f\end{pmatrix}\]
 			\end{itemize}
 		\end{column}
 		\begin{column}{.35\linewidth}
