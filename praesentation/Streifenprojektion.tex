@@ -145,7 +145,7 @@
 				\item \textbf{Schritt 2:} Bestimme $\alpha$, $\beta$, $c$ und $f$ aus der Gerätekonfiguration und den Bildkoordinaten.
 				\item \textbf{Schritt 3:} Berechne $h$:
 				\[h = \frac{c * \sin(\alpha) * \sin(\beta)}{\sin(180^\circ - \beta - \alpha)}\]
-				\item \textbf{Schritt 4:} Bestimme Koordinaten innerhalb der Szene.
+				\item \textbf{Schritt 4:} Bestimme Koordinaten innerhalb der Szene:
 				\[\begin{pmatrix}x\\y\\z\end{pmatrix} = \frac{h}{f} *
 				\begin{pmatrix}u\\v\\-f\end{pmatrix}\]
 			\end{itemize}
@@ -408,7 +408,7 @@
 	\begin{itemize}
 		\item Fehler durch bessere Kalibrierung und/oder besseres Setup minimieren
 		\item Linienerkennung (ohne Referenzbild) robuster gestalten
-		\item Objekt statt Kamera bewegen
+		\item Objekt statt Laser bewegen
 	\end{itemize}
 
 \end{frame}
