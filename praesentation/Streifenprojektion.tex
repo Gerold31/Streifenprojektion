@@ -1,38 +1,63 @@
 % Compiler: LaTeX => PDF
 
-\documentclass{beamer}
+\documentclass[xcolor=dvipsnames]{beamer}
+
+\mode<presentation>
+{
+	\usetheme{BerlinHUB}
+	%\setbeamercovered{transparent}
+}
 
 \usepackage[ngerman]{babel}
 \usepackage[utf8]{inputenc}
 
+\usepackage{helvet}
+\usepackage[T1]{fontenc}
+
 %\usepackage{multimedia}
-\usepackage{graphicx}
-\usepackage[nolist]{acronym}
+%\usepackage{graphicx}
+%\usepackage[nolist]{acronym}
 
-\usepackage{stackengine}
-\usepackage{array}
+%\usepackage{stackengine}
+%\usepackage{array}
 
-\usepackage{enumitem}
+%\usepackage{enumitem}
 
-\setitemize{label=\usebeamerfont*{itemize item}%
-  \usebeamercolor[fg]{itemize item}
-  \usebeamertemplate{itemize item}}
+%\setitemize{label=\usebeamerfont*{itemize item}%
+%  \usebeamercolor[fg]{itemize item}
+%  \usebeamertemplate{itemize item}}
 
-\title{Streifenprojektion}
-%\subtitle{X $\in \{$ Motion, Shading, Texture $\}$}
-%\subtitle{Schwerpunkte: Shape from Motion, \\ Shape from Shading, Shape from Texture}
-\author{Dennis Wagner, \\ Johannes Spangenberg, \\ Leroy Kramer}
-%\date{\today}
+\title[Streifenlichtprojektion]
+{Streifenlichtprojektion und optische Analyse zur Oberflächeninspektion}
+
+\author[D. Wagner, J. Spangenberg, L. Kramer]
+{
+	Dennis~Wagner
+	\and
+	Johannes~Spangenberg
+	\and
+	Leroy~Kramer
+}
+
+\institute[]
+{
+	Humboldt-Universität zu Berlin\\  
+	Institut für Informatik\\
+	Lehrstuhl Signalverarbeitung und Mustererkennung
+}
+
 \date{12.02.2014}
+\subject{Informatik}
 
-% add page number
-\setbeamertemplate{footline}[frame number]
+% add logo of university
+\pgfdeclareimage[height=0.75cm]{university-logo}{husiegel_bw_klein}
+\logo{\pgfuseimage{university-logo}}
+
 
 \begin{document}
-
-
-\frame{\titlepage} 
-
+\begin{frame}
+	\titlepage
+\end{frame}
 
 \begin{frame}
 	\frametitle{Gliederung}
@@ -40,7 +65,7 @@
 \end{frame} 
 
 
-\section{1 \hspace{5px} Unsere Aufgabe} 
+\section{Unsere Aufgabe} 
 \begin{frame}
 	\frametitle{Streifenprojektion}
 	\framesubtitle{Unsere Aufgabe}
@@ -50,7 +75,7 @@
 \end{frame}
 
 
-\subsection{1.1 \hspace{5px} Motivation} 
+\subsection{Motivation} 
 \begin{frame}
 	\frametitle{Streifenprojektion}
 	\framesubtitle{Motivation}
@@ -63,8 +88,8 @@
 
 % ---------------------------------------------------------------------------- %
 
-\section{2 \hspace{5px} Umsetzung} 
-%\subsection{1.1 \hspace{5px} Hardware}
+\section{Umsetzung} 
+%\subsection{Hardware}
 \begin{frame}
 	\frametitle{Streifenprojektion}
 	\framesubtitle{Umsetzung}
@@ -74,7 +99,7 @@
 \end{frame}
 
 
-%\subsection{1.1 \hspace{5px} Software}
+%\subsection{Software}
 \begin{frame}
 	\frametitle{Streifenprojektion}
 	\framesubtitle{Umsetzung}
@@ -125,7 +150,7 @@
 \end{frame}
 
 
-\section{3 \hspace{5px} Probleme}
+\section{Probleme}
 \begin{frame}
 	\frametitle{Streifenprojektion}
 	\framesubtitle{Probleme}
@@ -137,7 +162,7 @@
 
 \end{frame}
 
-\subsection{3.1 \hspace{5px} bei der Hardware}
+\subsection{bei der Hardware}
 \begin{frame}
 	\frametitle{Streifenprojektion}
 	\framesubtitle{Probleme bei der Hardware}
@@ -165,7 +190,7 @@
 
 \end{frame}
 
-\subsection{3.2 \hspace{5px} bei der Linienerkennung}
+\subsection{bei der Linienerkennung}
 \begin{frame}
 	\frametitle{Streifenprojektion}
 	\framesubtitle{Probleme bei der Linienerkennung}
@@ -177,9 +202,9 @@
 
 \end{frame}
 
-\section{4 \hspace{5px} Ergebnisse}
+\section{Ergebnisse}
 
-\subsection{4.1 \hspace{5px} Wiederholte Messungen}
+\subsection{Wiederholte Messungen}
 \begin{frame}
 	\frametitle{Streifenprojektion}
 	\framesubtitle{Ergebnisse: Wiederholte Messungen}
@@ -228,7 +253,7 @@
 \end{frame}
 
 
-\subsection{4.2 \hspace{5px} Verschiedene Farben}
+\subsection{Verschiedene Farben}
 \begin{frame}
 	\frametitle{Streifenprojektion}
 	\framesubtitle{Ergebnisse: Verschiedene Farben}
@@ -275,7 +300,7 @@
 \end{frame}
 
 
-\subsection{4.3 \hspace{5px} Verschiedene Entfernungen}
+\subsection{Verschiedene Entfernungen}
 \begin{frame}
 	\frametitle{Streifenprojektion}
 	\framesubtitle{Ergebnisse: Verschiedene Entfernungen}
@@ -319,7 +344,7 @@
 \end{frame}
 
 
-\section{5 \hspace{5px} Ausblick}
+\section{Ausblick}
 
 \begin{frame}
 	\frametitle{Streifenprojektion}
@@ -333,7 +358,7 @@
 \end{frame}
 
 
-\section{6 \hspace{5px} Live-Demo} 
+\section{Live-Demo} 
 \begin{frame}
 	\frametitle{Streifenprojektion}
 	\framesubtitle{Live-Demo}
@@ -341,7 +366,7 @@
 \end{frame}
 
 
-\section{7 \hspace{5px} Quellen} 
+\section{Quellen} 
 \begin{frame}
 	\frametitle{Streifenprojektion}
 	\framesubtitle{Quellen}
