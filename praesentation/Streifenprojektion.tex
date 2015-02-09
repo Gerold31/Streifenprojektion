@@ -23,6 +23,9 @@
 
 %\usepackage{enumitem}
 
+\def\frametitlesec{\frametitle{\arabic{section}.\hspace{0.5ex}\insertsection}}
+\def\framesubtitles#1{\framesubtitle{\hspace{3.5ex}#1}}
+
 %\setitemize{label=\usebeamerfont*{itemize item}%
 %  \usebeamercolor[fg]{itemize item}
 %  \usebeamertemplate{itemize item}}
@@ -72,7 +75,7 @@
 
 \section{Motivation} 
 \begin{frame}
-	\frametitle{Motivation}
+	\frametitlesec
 
 	\begin{itemize}
 		\item Günstige Messmethode
@@ -94,7 +97,7 @@
 
 \section{Unsere Aufgabe} 
 \begin{frame}
-	\frametitle{Unsere Aufgabe}
+	\frametitlesec
 
 	\vfill\includegraphics[width=\linewidth]{includes/setup}\vfill
 
@@ -105,8 +108,8 @@
 \section{Umsetzung} 
 %\subsection{Hardware}
 \begin{frame}
-	\frametitle{Umsetzung}
-	\framesubtitle{Hardware}
+	\frametitlesec
+	\framesubtitles{Hardware}
 
 	\includegraphics[width=0.9\linewidth]{includes/hardware.jpg}
 
@@ -115,8 +118,8 @@
 
 %\subsection{Ablauf}
 \begin{frame}
-	\frametitle{Umsetzung}
-	\framesubtitle{Ablauf}
+	\frametitlesec
+	\framesubtitles{Ablauf}
 
 	\includegraphics[width=\linewidth]{includes/blockbild.png}
 
@@ -125,8 +128,8 @@
 
 %\subsection{Linienerkennung}
 \begin{frame}
-	\frametitle{Umsetzung}
-	\framesubtitle{Linienerkennung}
+	\frametitlesec
+	\framesubtitles{Linienerkennung}
 
 	Einfache Linienerkennung durch Differenzbildung:
 	\vfill
@@ -147,8 +150,8 @@
 
 
 \begin{frame}
-	\frametitle{Umsetzung}
-	\framesubtitle{Linienerkennung}
+	\frametitlesec
+	\framesubtitles{Linienerkennung}
 
 	Linienerkennung durch kanalweise Mittelwertbildung und logische Verknüpfung:\vfill
 	\begin{columns}
@@ -162,8 +165,8 @@
 
 %\subsection{Rekonstruktion}
 \begin{frame}
-	\frametitle{Umsetzung}
-	\framesubtitle{Rekonstruktion}
+	\frametitlesec
+	\framesubtitles{Rekonstruktion}
 
 	\begin{columns}
 		\small
@@ -189,7 +192,7 @@
 
 
 \begin{frame}
-	\frametitle{Umsetzung}
+	\frametitlesec
 
 	\hfill
 	\only<1>{\includegraphics[width=0.9\linewidth]{includes/cap.png}}
@@ -207,8 +210,8 @@
 \section{Probleme}
 %\subsection{Organisatorisches}
 \begin{frame}
-	\frametitle{Probleme}
-	\framesubtitle{Organsiatorisches}
+	\frametitlesec
+	\framesubtitles{Organsiatorisches}
 
 	\begin{itemize}
 		\item Viel Zeit bei der Planung verloren
@@ -223,8 +226,8 @@
 
 %\subsection{Hardware}
 \begin{frame}
-	\frametitle{Probleme}
-	\framesubtitle{Hardware}
+	\frametitlesec
+	\framesubtitles{Hardware}
 
 	\begin{itemize}
 		\item Aufbau der Hardware
@@ -243,8 +246,8 @@
 
 
 \begin{frame}
-	\frametitle{Probleme}
-	\framesubtitle{Hardware}
+	\frametitlesec
+	\framesubtitles{Hardware}
 
 	\includegraphics[width=\linewidth]{includes/krumm.png}
 
@@ -253,8 +256,8 @@
 
 %\subsection{Linienerkennung}
 \begin{frame}
-	\frametitle{Probleme}
-	\framesubtitle{Linienerkennung}
+	\frametitlesec
+	\framesubtitles{Linienerkennung}
 
 	\begin{itemize}
 		\item Hintergrundfarbe
@@ -268,8 +271,8 @@
 \section{Ergebnisse}
 %\subsection{Wiederholte Messungen}
 \begin{frame}
-	\frametitle{Ergebnisse}
-	\framesubtitle{Wiederholte Messungen}
+	\frametitlesec
+	\framesubtitles{Wiederholte Messungen}
 
 	\textbf{Wiederholte Messungen}
 
@@ -294,8 +297,8 @@
 \end{frame}
 	
 \begin{frame}
-	\frametitle{Ergebnisse}
-	\framesubtitle{Wiederholte Messungen}
+	\frametitlesec
+	\framesubtitles{Wiederholte Messungen}
 		\textbf{Entfernung}\\
 	
 		Linienerkennung mit Differenzbild
@@ -316,8 +319,8 @@
 \end{frame}
 	
 \begin{frame}
-	\frametitle{Ergebnisse}
-	\framesubtitle{Wiederholte Messungen}
+	\frametitlesec
+	\framesubtitles{Wiederholte Messungen}
 		\textbf{Entfernung}\\
 	
 		Linienerkennung ohne Differenzbild
@@ -338,8 +341,8 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Ergebnisse}
-	\framesubtitle{Wiederholte Messungen}
+	\frametitlesec
+	\framesubtitles{Wiederholte Messungen}
 		\textbf{Höhe}\\
 		
 		Linienerkennung mit Differenzbild
@@ -362,8 +365,8 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Ergebnisse}
-	\framesubtitle{Wiederholte Messungen}
+	\frametitlesec
+	\framesubtitles{Wiederholte Messungen}
 		\textbf{Höhe}\\
 		
 		Linienerkennung ohne Differenzbild
@@ -387,8 +390,8 @@
 
 %\subsection{Verschiedene Farben}
 \begin{frame}
-	\frametitle{Ergebnisse}
-	\framesubtitle{Verschiedene Farben}
+	\frametitlesec
+	\framesubtitles{Verschiedene Farben}
 
 	\textbf{Verschiedene Farben}
 
@@ -413,8 +416,8 @@
 \end{frame}
 	
 \begin{frame}
-	\frametitle{Ergebnisse}
-	\framesubtitle{Verschiedene Farben}
+	\frametitlesec
+	\framesubtitles{Verschiedene Farben}
 		\textbf{Entfernung}\\
 		
 		Linienerkennung mit Differenzbild
@@ -430,8 +433,8 @@ Gelb &-1.3 & 21629.5 & 318.3 & 6.1 & 379.5\\
 \end{frame}
 
 \begin{frame}
-	\frametitle{Ergebnisse}
-	\framesubtitle{Verschiedene Farben}
+	\frametitlesec
+	\framesubtitles{Verschiedene Farben}
 		\textbf{Entfernung}\\
 		
 		Linienerkennung ohne Differenzbild
@@ -448,8 +451,8 @@ Gelb & -1.3 & 327.1 & 276.5 & -7.8 & 77.8\\
 
 
 \begin{frame}
-	\frametitle{Ergebnisse}
-	\framesubtitle{Verschiedene Farben}
+	\frametitlesec
+	\framesubtitles{Verschiedene Farben}
 		\textbf{Höhe}\\
 		
 		Linienerkennung mit Differenzbild
@@ -467,8 +470,8 @@ Gelb &     27.2 & 49.2 & 35.8 & -36.1 & 8.8\\
 \end{frame}
 
 \begin{frame}
-	\frametitle{Ergebnisse}
-	\framesubtitle{Verschiedene Farben}
+	\frametitlesec
+	\framesubtitles{Verschiedene Farben}
 		\textbf{Höhe}\\
 		
 		Linienerkennung ohne Differenzbild
@@ -488,8 +491,8 @@ Gelb &      53.2 & 54.8 & 54.1 & -3.4 & 0.6\\
 
 %\subsection{Verschiedene Entfernungen}
 \begin{frame}
-	\frametitle{Ergebnisse}
-	\framesubtitle{Verschiedene Entfernungen}
+	\frametitlesec
+	\framesubtitles{Verschiedene Entfernungen}
 	
 	\textbf{Verschiedene Entfernungen}
 
@@ -513,8 +516,8 @@ Gelb &      53.2 & 54.8 & 54.1 & -3.4 & 0.6\\
 \end{frame}
 
 \begin{frame}
-	\frametitle{Ergebnisse}
-	\framesubtitle{Verschiedene Entfernungen}
+	\frametitlesec
+	\framesubtitles{Verschiedene Entfernungen}
 		\textbf{Entfernung}\\
 		
 		Linienerkennung mit Differenzbild
@@ -531,8 +534,8 @@ Gelb &      53.2 & 54.8 & 54.1 & -3.4 & 0.6\\
 \end{frame}
 
 \begin{frame}
-	\frametitle{Ergebnisse}
-	\framesubtitle{Verschiedene Entfernungen}
+	\frametitlesec
+	\framesubtitles{Verschiedene Entfernungen}
 		\textbf{Entfernung}\\
 		
 		Linienerkennung ohne Differenzbild
@@ -549,8 +552,8 @@ Gelb &      53.2 & 54.8 & 54.1 & -3.4 & 0.6\\
 
 
 \begin{frame}
-	\frametitle{Ergebnisse}
-	\framesubtitle{Verschiedene Entfernungen}
+	\frametitlesec
+	\framesubtitles{Verschiedene Entfernungen}
 		\textbf{Höhe}\\
 		
 		Linienerkennung mit Differenzbild
@@ -567,8 +570,8 @@ Gelb &      53.2 & 54.8 & 54.1 & -3.4 & 0.6\\
 
 
 \begin{frame}
-	\frametitle{Ergebnisse}
-	\framesubtitle{Verschiedene Entfernungen}
+	\frametitlesec
+	\framesubtitles{Verschiedene Entfernungen}
 		\textbf{Höhe}\\
 		
 		Linienerkennung ohne Differenzbild
@@ -586,7 +589,7 @@ Gelb &      53.2 & 54.8 & 54.1 & -3.4 & 0.6\\
 
 \section{Zusammenfassung und Ausblick}
 \begin{frame}
-	\frametitle{Zusammenfassung}
+	\frametitlesec
 
 	\begin{itemize}
 		\item Grobe Vermessung funktioniert
@@ -597,7 +600,7 @@ Gelb &      53.2 & 54.8 & 54.1 & -3.4 & 0.6\\
 
 
 \begin{frame}
-	\frametitle{Ausblick}
+	\frametitlesec
 
 	\begin{itemize}
 		\item Fehler durch bessere Kalibrierung und/oder besseres Setup minimieren
