@@ -189,12 +189,12 @@
 		\small
 		\begin{column}{.61\linewidth}
 			\begin{itemize}
-				\item \textbf{Schritt 1:} Berechne die normalisierten Bildkoordinaten $(u,v)$.
-				\item \textbf{Schritt 2:} Bestimme $\alpha$, $\beta$, $c$ und $f$ aus der Gerätekonfiguration und den Bildkoordinaten.
-				\item \textbf{Schritt 3:} Berechne $h$:
-				\[h = \frac{c * \sin(\alpha) * \sin(\beta)}{\sin(180^\circ - \beta - \alpha)}\]
-				\item \textbf{Schritt 4:} Bestimme Koordinaten innerhalb der Szene:
-				\[\begin{pmatrix}x\\y\\z\end{pmatrix} = \frac{h}{f} *
+				\item \textbf{Eingabe:} Normalisierte Bildkoordinaten $(u,v)$ eines Punktes der Laserlinie
+				\item \textbf{Schritt 1:} Bestimme $\alpha$, $\beta$, $c$ und $f$
+				\item \textbf{Schritt 2:} Berechne $h$:
+				\[h = \frac{c \cdot \sin(\alpha) \cdot \sin(\beta)}{\sin(180^\circ - \beta - \alpha)}\]
+				\item \textbf{Schritt 3:} Bestimme Koordinaten innerhalb der Szene:
+				\[\begin{pmatrix}x\\y\\z\end{pmatrix} = \frac{h}{f} \cdot
 				\begin{pmatrix}u\\v\\-f\end{pmatrix}\]
 			\end{itemize}
 		\end{column}
