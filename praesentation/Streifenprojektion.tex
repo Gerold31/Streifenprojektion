@@ -93,20 +93,23 @@
 	\end{itemize}
 
 \end{frame}
+ 
+%\begin{frame}
+%	\frametitle{Unsere Aufgabe}
 
-
-\section{Unsere Aufgabe} 
-\begin{frame}
-	\frametitlesec
-
-	\vfill\includegraphics[width=\linewidth]{includes/setup}\vfill
-
-\end{frame}
+%\end{frame}
 
 % ---------------------------------------------------------------------------- %
 
 \section{Umsetzung} 
 %\subsection{Hardware}
+\begin{frame}
+	\frametitlesec
+
+	\vfill\includegraphics[width=0.9\linewidth]{includes/setup}\vfill
+
+\end{frame}
+
 \begin{frame}
 	\frametitlesec
 	\framesubtitles{Hardware}
@@ -130,20 +133,20 @@
 \begin{frame}
 	\frametitlesec
 	\framesubtitles{Linienerkennung}
-
+	\textbf{Variante 1}\\
 	Einfache Linienerkennung durch Differenzbildung:
 	\vfill
 	\begin{columns}
-		\column{.32\linewidth}{\includegraphics[width=\linewidth]{includes/line_line}}
-		\column{.02\linewidth}{$-$}
-		\column{.32\linewidth}{\includegraphics[width=\linewidth]{includes/line_ref}}
-		\column{.02\linewidth}{$=$}
-		\column{.32\linewidth}{\includegraphics[width=\linewidth]{includes/line_diff}}
+		\visible<1-4>{\column{.32\linewidth}{\includegraphics[width=\linewidth]{includes/line_line}}}
+		\visible<2-4>{\column{.02\linewidth}{$-$}}
+		\visible<2-4>{\column{.32\linewidth}{\includegraphics[width=\linewidth]{includes/line_ref}}}
+		\visible<3-4>{\column{.02\linewidth}{$=$}}
+		\visible<3-4>{\column{.32\linewidth}{\includegraphics[width=\linewidth]{includes/line_diff}}}
 	\end{columns}
 	\vfill
 	\begin{columns}
 %		\column{.02\linewidth}{$\Rightarrow$}
-		\column{.41\linewidth}{\includegraphics[width=\linewidth]{includes/line_diff_filtered}}
+		\visible<4>{\column{.41\linewidth}{\includegraphics[width=\linewidth]{includes/line_diff_filtered}}}
 	\end{columns}
 
 \end{frame}
@@ -152,12 +155,12 @@
 \begin{frame}
 	\frametitlesec
 	\framesubtitles{Linienerkennung}
-
+	\textbf{Variante 1}\\
 	Linienerkennung durch kanalweise Mittelwertbildung und logische Verknüpfung:\vfill
 	\begin{columns}
-		\column{.45\linewidth}{\includegraphics[width=\linewidth]{includes/line_line}}
-		\column{.05\linewidth}{$\Rightarrow$}
-		\column{.45\linewidth}{\includegraphics[width=\linewidth]{includes/line_free}}
+		\visible<1-2>{\column{.45\linewidth}{\includegraphics[width=\linewidth]{includes/line_line}}}
+		\visible<2>{\column{.05\linewidth}{$\Rightarrow$}}
+		\visible<2>{\column{.45\linewidth}{\includegraphics[width=\linewidth]{includes/line_free}}}
 	\end{columns}
 
 \end{frame}
@@ -195,12 +198,14 @@
 	\frametitlesec
 
 	\hfill
-	\only<1>{\includegraphics[width=0.9\linewidth]{includes/cap.png}}
-	\only<2>{\includegraphics[width=0.9\linewidth]{includes/line.png}}
-	\only<3>{\includegraphics[width=0.9\linewidth]{includes/3d.png}}
-	\only<4>{\includegraphics[width=0.9\linewidth]{includes/3d_2.png}}
-	\only<5>{\includegraphics[width=0.9\linewidth]{includes/3d_3.png}}
-	\only<6>{\includegraphics[width=0.9\linewidth]{includes/3d_4.png}}
+	\begin{overlayarea}{\textwidth}{\textheight}
+		\only<1>{\includegraphics[width=0.9\linewidth]{includes/cap.png}}
+		\only<2>{\includegraphics[width=0.9\linewidth]{includes/line.png}}
+		\only<3>{\includegraphics[width=0.9\linewidth]{includes/3d.png}}
+		\only<4>{\includegraphics[width=0.9\linewidth]{includes/3d_2.png}}
+		\only<5>{\includegraphics[width=0.9\linewidth]{includes/3d_3.png}}
+		\only<6>{\includegraphics[width=0.9\linewidth]{includes/3d_4.png}}
+	\end{overlayarea}
 	\hfill
 
 \end{frame}
@@ -211,13 +216,27 @@
 %\subsection{Organisatorisches}
 \begin{frame}
 	\frametitlesec
-	\framesubtitles{Organsiatorisches}
 
 	\begin{itemize}
 		\item Viel Zeit bei der Planung verloren
 		\begin{itemize}
 			\item Fehlende Erfahrung bei der Strukturierung solcher Anwendungen
 			\item Uneinigkeit bei Schwerpunkten und Verfahren
+		\end{itemize}
+		\item Aufbau der Hardware
+		\begin{itemize}
+			\item Montage von Laser auf Servo
+			\item Montage der Kamera
+		\end{itemize}
+		\item Ursache für Ungenauigkeiten
+		\begin{itemize}
+			\item Kleine Fehler bei der Montage können u.U. zu großen Fehlern führen
+			\item Schwer die Winkel und Entfernungen zwischen Kamera, Servo und Laser genau zu messen 
+		\end{itemize}
+		\item Liniernerkennung
+		\begin{itemize}
+			\item Hintergrundfarbe
+			\item Beleuchtung
 		\end{itemize}
 	\end{itemize}
 
@@ -229,18 +248,6 @@
 	\frametitlesec
 	\framesubtitles{Hardware}
 
-	\begin{itemize}
-		\item Aufbau der Hardware
-		\begin{itemize}
-			\item Montage von Laser auf Servo
-			\item Montage der Kamera
-		\end{itemize}
-		\item Ursache für Ungenauigkeiten
-		\begin{itemize}
-			\item Kleine Fehler bei der Montage können u.U. zu großen Fehlern führen
-			\item Schwer die Winkel und Entfernungen zwischen Kamera, Servo und Laser genau zu messen 
-		\end{itemize}
-	\end{itemize}
 
 \end{frame}
 
@@ -249,26 +256,47 @@
 	\frametitlesec
 	\framesubtitles{Hardware}
 
-	\includegraphics[width=\linewidth]{includes/krumm.png}
-
-\end{frame}
-
-
-%\subsection{Linienerkennung}
-\begin{frame}
-	\frametitlesec
-	\framesubtitles{Linienerkennung}
-
-	\begin{itemize}
-		\item Hintergrundfarbe
-		\item Beleuchtung
-	\end{itemize}
+	\begin{figure}
+	\includegraphics[width=0.9\linewidth]{includes/krumm.png}
+	\caption{Scan einer geraden Wand}	
+	\end{figure}
 
 \end{frame}
 
 % ---------------------------------------------------------------------------- %
 
 \section{Ergebnisse}
+
+\begin{frame}
+	\frametitlesec
+	\framesubtitles{Messungen}
+	
+	\textbf{Messungen}
+	
+	\begin{figure}
+		\begin{minipage}{0.32\linewidth}
+			\includegraphics[width=\linewidth]{includes/test_repeat_1}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.32\linewidth}
+			\includegraphics[width=\linewidth]{includes/test_repeat_2}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.32\linewidth}
+			\includegraphics[width=\linewidth]{includes/test_repeat_3}
+		\end{minipage}
+	\end{figure}
+	
+	\begin{itemize}
+		\item Pro Messung werden 71+1 Bilder aufgenommen
+		\item Laser ist auf ca. 58 Bildern zu sehen
+		\item Je Messung zwischen 10000 und 14000 (diff) \\ bzw. 21000 und 28000 (free) Punkte
+		\item Davon gehören zwischen 750 und 1800 \\ bzw. 210 und 930 zum Würfel
+	\end{itemize}
+
+
+\end{frame}
+
 %\subsection{Wiederholte Messungen}
 \begin{frame}
 	\frametitlesec
@@ -301,7 +329,9 @@
 	\framesubtitles{Wiederholte Messungen}
 		\textbf{Entfernung}\\
 	
-		Linienerkennung mit Differenzbild
+		Linienerkennung mit Differenzbild\\
+		Entfernung: 300mm
+		
 		\begin{tabular}{c|c|c|c|c|c}
 			Messung & Min & Max & Avg & Diff (\%) & Stdabw \\ \hline
 1 & 298.3 & 21629.5 & 348.7 & 16.2 & 909.1 \\
@@ -323,7 +353,9 @@
 	\framesubtitles{Wiederholte Messungen}
 		\textbf{Entfernung}\\
 	
-		Linienerkennung ohne Differenzbild
+		Linienerkennung ohne Differenzbild\\
+		Entfernung: 300mm
+		
 		\begin{tabular}{c|c|c|c|c|c}
 			Messung & Min & Max & Avg & Diff (\%) & Stdabw \\ \hline
 1 & 300.7 & 325.1 & 307.6 & 2.5 & 4.3\\
@@ -345,7 +377,12 @@
 	\framesubtitles{Wiederholte Messungen}
 		\textbf{Höhe}\\
 		
-		Linienerkennung mit Differenzbild
+		Höhe: 56mm
+		
+		\begin{tabular}{c|c}
+		
+		mit Differenzbild & ohne Differenzbild\\
+		
 		\begin{tabular}{c|c|c}
 			Messung & Hoehe & Diff (\%) \\ \hline
 1 & 48.6 & -13.2 \\
@@ -359,6 +396,25 @@
 9 & 34.4 & -38.7 \\
 10 & 48.0 & -14.3\\
 
+		\end{tabular} &
+		
+		
+		\begin{tabular}{c|c}
+			Hoehe & Diff (\%) \\ \hline
+ 54.8 &  -2.2 \\
+ 54.4 &  -2.9 \\
+ 54.7 &  -2.3 \\
+ 54.7 &  -2.3 \\
+ 54.7 &  -2.3 \\
+ 53.2 &  -4.9 \\
+ 53.9 &  -3.8 \\
+ 53.5 &  -4.4 \\
+ 53.5 &  -4.4 \\
+ 53.5 & -4.4 \\
+
+
+		\end{tabular}
+		
 		\end{tabular}
 		
 		
@@ -366,29 +422,78 @@
 
 \begin{frame}
 	\frametitlesec
-	\framesubtitles{Wiederholte Messungen}
-		\textbf{Höhe}\\
+	\framesubtitles{Verschiedene Farben}
+		\textbf{Entfernung}\\
+
+		Entfernung: 300mm
 		
-		Linienerkennung ohne Differenzbild
-		\begin{tabular}{c|c|c|c|c|c}
-			Messung & Hoehe & Diff (\%) \\ \hline
-1 & 54.8 &  -2.2 \\
-2 & 54.4 &  -2.9 \\
-3 & 54.7 &  -2.3 \\
-4 & 54.7 &  -2.3 \\
-5 & 54.7 &  -2.3 \\
-6 & 53.2 &  -4.9 \\
-7 & 53.9 &  -3.8 \\
-8 & 53.5 &  -4.4 \\
-9 & 53.5 &  -4.4 \\
-10 & 53.5 & -4.4 \\
-
-
+		\begin{tabular}{c|c}		
+		mit Differenzbild & ohne Differenzbild\\
+		\begin{tabular}{c|c|c}
+Farbe  & Avg & Stdabw\\ \hline
+Blau   & 309.0 & 10.8\\
+Grün   & 353.8 & 1054.2\\
+Orange & 313.3 & 274.3\\
+Rot    & 331.0 & 789.8\\
+Gelb   & 318.3 & 379.5\\
 		\end{tabular}
+		
+		& 
+		
+		\begin{tabular}{c|c}
+Avg & Stdabw\\ \hline
+310.7 & 18.3\\
+301.2 & 47.8\\
+309.8 & 186.2\\
+306.2 & 21.6\\
+276.5 & 77.8\\
+		\end{tabular}
+		
+		\end{tabular}
+		
 		
 \end{frame}
 
+% ---------------------------------------------------------------------------- %
+
+\section{Zusammenfassung und Ausblick}
+\begin{frame}
+	\frametitlesec
+
+	\begin{itemize}
+		\item Grobe Vermessung funktioniert
+		\item Defizite bei der Genauigkeit durch ungenaue und/oder mangelhaft kalibrierte Hardware
+	\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}
+	\frametitlesec
+
+	\begin{itemize}
+		\item Fehler durch bessere Kalibrierung und/oder besseres Setup minimieren
+		\item Linienerkennung (ohne Referenzbild) robuster gestalten
+		\item Objekt statt Laser bewegen
+	\end{itemize}
+
+\end{frame}
+
+% ---------------------------------------------------------------------------- %
+
+\begin{frame}
+	\frametitle{Live-Demo}
+\end{frame}
+
+\begin{frame}
+	\frametitle{\mbox{}}
+	\center \LARGE Vielen Dank für eure Aufmerksamkeit!
+\end{frame}
+
+
+
 %\subsection{Verschiedene Farben}
+\section*{Anhang}
 \begin{frame}
 	\frametitlesec
 	\framesubtitles{Verschiedene Farben}
@@ -420,7 +525,8 @@
 	\framesubtitles{Verschiedene Farben}
 		\textbf{Entfernung}\\
 		
-		Linienerkennung mit Differenzbild
+		Linienerkennung mit Differenzbild\\
+		Entfernung: 300mm
 		\begin{tabular}{c|c|c|c|c|c}
 			Farbe & Min & Max & Avg & Diff (\%) & Stdabw\\ \hline
 Blau &-1.3 & 351.5 & 309.0 & 3.0 & 10.8\\
@@ -437,7 +543,9 @@ Gelb &-1.3 & 21629.5 & 318.3 & 6.1 & 379.5\\
 	\framesubtitles{Verschiedene Farben}
 		\textbf{Entfernung}\\
 		
-		Linienerkennung ohne Differenzbild
+		Linienerkennung ohne Differenzbild\\
+		Entfernung: 300mm
+		
 		\begin{tabular}{c|c|c|c|c|c}
 			Farbe & Min & Max & Avg & Diff (\%) & Stdabw\\ \hline
 Blau &-1.3 & 325.1 & 310.7 & 3.6 & 18.3\\
@@ -455,7 +563,9 @@ Gelb & -1.3 & 327.1 & 276.5 & -7.8 & 77.8\\
 	\framesubtitles{Verschiedene Farben}
 		\textbf{Höhe}\\
 		
-		Linienerkennung mit Differenzbild
+		Linienerkennung mit Differenzbild\\
+		Höhe: 56mm
+		
 		\begin{tabular}{c|c|c|c|c|c}
 			Farbe & Min & Max & Avg & Diff (\%) & Stdabw\\ \hline
 Blau &   54.3 & 56.4 & 55.5 & -0.8 & 0.8\\
@@ -474,7 +584,9 @@ Gelb &     27.2 & 49.2 & 35.8 & -36.1 & 8.8\\
 	\framesubtitles{Verschiedene Farben}
 		\textbf{Höhe}\\
 		
-		Linienerkennung ohne Differenzbild
+		Linienerkennung ohne Differenzbild\\
+		Höhe: 56mm
+		
 		\begin{tabular}{c|c|c|c|c|c}
 			Farbe & Min & Max & Avg & Diff (\%) & Stdabw\\ \hline
 Blau &    52.1 & 55.1 & 53.8 & -3.9 & 1.0\\
@@ -520,7 +632,9 @@ Gelb &      53.2 & 54.8 & 54.1 & -3.4 & 0.6\\
 	\framesubtitles{Verschiedene Entfernungen}
 		\textbf{Entfernung}\\
 		
-		Linienerkennung mit Differenzbild
+		Linienerkennung mit Differenzbild\\
+		Entfernung: 300mm
+		
 		\begin{tabular}{c|c|c|c|c|c}
 			Entfernung & Min & Max & Avg & Diff (\%) & Stdabw\\ \hline
 150 &      -1.3 & 477.4 & 172.6 & -42.5 & 34.7\\
@@ -538,7 +652,9 @@ Gelb &      53.2 & 54.8 & 54.1 & -3.4 & 0.6\\
 	\framesubtitles{Verschiedene Entfernungen}
 		\textbf{Entfernung}\\
 		
-		Linienerkennung ohne Differenzbild
+		Linienerkennung ohne Differenzbild\\
+		Entfernung: 300mm
+		
 		\begin{tabular}{c|c|c|c|c|c}
 			Entfernung & Min & Max & Avg & Diff (\%) & Stdabw\\ \hline
 150 &      -1.3 & 398.8 & 146.6 & -51.1 & 48.3\\
@@ -556,7 +672,9 @@ Gelb &      53.2 & 54.8 & 54.1 & -3.4 & 0.6\\
 	\framesubtitles{Verschiedene Entfernungen}
 		\textbf{Höhe}\\
 		
-		Linienerkennung mit Differenzbild
+		Linienerkennung mit Differenzbild\\
+		Höhe: 56mm
+		
 		\begin{tabular}{c|c|c|c|c|c}
 			Entfernung & Min & Max & Avg & Diff (\%) & Stdabw\\ \hline
 150 &     39.1 & 56.6 & 50.7 & -9.5 & 4.2\\
@@ -574,7 +692,9 @@ Gelb &      53.2 & 54.8 & 54.1 & -3.4 & 0.6\\
 	\framesubtitles{Verschiedene Entfernungen}
 		\textbf{Höhe}\\
 		
-		Linienerkennung ohne Differenzbild
+		Linienerkennung ohne Differenzbild\\
+		Höhe: 56mm
+		
 		\begin{tabular}{c|c|c|c|c|c}
 			Entfernung & Min & Max & Avg & Diff (\%) & Stdabw\\ \hline
 150 &     21.9 & 56.7 & 36.0 & -35.6 & 12.6\\
@@ -584,37 +704,5 @@ Gelb &      53.2 & 54.8 & 54.1 & -3.4 & 0.6\\
 
 		\end{tabular}
 \end{frame}
-
-% ---------------------------------------------------------------------------- %
-
-\section{Zusammenfassung und Ausblick}
-\begin{frame}
-	\frametitlesec
-
-	\begin{itemize}
-		\item Grobe Vermessung funktioniert
-		\item Defizite bei der Genauigkeit durch ungenaue und/oder mangelhaft kalibrierte Hardware
-	\end{itemize}
-
-\end{frame}
-
-
-\begin{frame}
-	\frametitlesec
-
-	\begin{itemize}
-		\item Fehler durch bessere Kalibrierung und/oder besseres Setup minimieren
-		\item Linienerkennung (ohne Referenzbild) robuster gestalten
-		\item Objekt statt Laser bewegen
-	\end{itemize}
-
-\end{frame}
-
-% ---------------------------------------------------------------------------- %
-
-\begin{frame}
-	\frametitle{Live-Demo}
-\end{frame}
-
 
 \end{document}
