@@ -101,20 +101,31 @@
 
 % ---------------------------------------------------------------------------- %
 
-\section{Umsetzung} 
-%\subsection{Hardware}
+\section{Umsetzung}
 \begin{frame}
 	\frametitlesec
 
-	\vfill\includegraphics[width=0.9\linewidth]{includes/setup}\vfill
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.8\linewidth]{includes/setup}
+		\caption{Unser Setup im Betrieb}
+		\label{fig:setup}
+	\end{figure}
 
 \end{frame}
 
+
+%\subsection{Hardware}
 \begin{frame}
 	\frametitlesec
 	\framesubtitles{Hardware}
 
-	\includegraphics[width=0.9\linewidth]{includes/hardware.jpg}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.8\linewidth]{includes/hardware.jpg}
+		\caption{Unsere Hardware}
+		\label{fig:hardware}
+	\end{figure}
 
 \end{frame}
 
@@ -194,19 +205,61 @@
 \end{frame}
 
 
+%\subsection{Beispiel}
 \begin{frame}
 	\frametitlesec
+	\framesubtitles{Beispiel}
 
-	\hfill
 	\begin{overlayarea}{\textwidth}{\textheight}
-		\only<1>{\includegraphics[width=0.9\linewidth]{includes/cap.png}}
-		\only<2>{\includegraphics[width=0.9\linewidth]{includes/line.png}}
-		\only<3>{\includegraphics[width=0.9\linewidth]{includes/3d.png}}
-		\only<4>{\includegraphics[width=0.9\linewidth]{includes/3d_2.png}}
-		\only<5>{\includegraphics[width=0.9\linewidth]{includes/3d_3.png}}
-		\only<6>{\includegraphics[width=0.9\linewidth]{includes/3d_4.png}}
+		\only<1>{
+			\begin{figure}
+				\centering
+				\includegraphics[width=0.8\linewidth]{includes/cap.png}
+				\caption{Ausgangsbild}
+				\label{fig:example1}
+			\end{figure}
+		}
+		\only<2>{
+			\begin{figure}
+				\centering
+				\includegraphics[width=0.8\linewidth]{includes/line.png}
+				\caption{Erkannte Linie aus dem Ausgangsbild}
+				\label{fig:example2}
+			\end{figure}
+		}
+		\only<3>{
+			\begin{figure}
+				\centering
+				\includegraphics[width=0.8\linewidth]{includes/3d.png}
+				\caption{Rekonstruierte Punkte aus der Perspektive der Kamera}
+				\label{fig:example3}
+			\end{figure}
+		}
+		\only<4>{
+			\begin{figure}
+				\centering
+				\includegraphics[width=0.8\linewidth]{includes/3d_2.png}
+				\caption{Rekonstruierte Punkt (1)}
+				\label{fig:example4}
+			\end{figure}
+		}
+		\only<5>{
+			\begin{figure}
+				\centering
+				\includegraphics[width=0.8\linewidth]{includes/3d_3.png}
+				\caption{Rekonstruierte Punkt (2)}
+				\label{fig:example5}
+			\end{figure}
+		}
+		\only<6>{
+			\begin{figure}
+				\centering
+				\includegraphics[width=0.8\linewidth]{includes/3d_4.png}
+				\caption{Rekonstruierte Punkt (3)}
+				\label{fig:example6}
+			\end{figure}
+		}
 	\end{overlayarea}
-	\hfill
 
 \end{frame}
 
@@ -257,8 +310,10 @@
 	\framesubtitles{Hardware}
 
 	\begin{figure}
-	\includegraphics[width=0.9\linewidth]{includes/krumm.png}
-	\caption{Scan einer geraden Wand}	
+		\centering
+		\includegraphics[width=0.85\linewidth]{includes/krumm.png}
+		\caption{Scan einer geraden Wand bei falscher Kalibrierung}
+		\label{fig:hw_calibration_fault}
 	\end{figure}
 
 \end{frame}
