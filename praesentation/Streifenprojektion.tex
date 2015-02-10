@@ -59,6 +59,8 @@
 \pgfdeclareimage[height=0.75cm]{university-logo}{husiegel_bw_klein}
 \logo{\pgfuseimage{university-logo}}
 
+\setbeamercolor*{block title}{fg=white, bg=HUblue}
+
 
 \begin{document}
 \begin{frame}
@@ -73,31 +75,67 @@
 
 % ---------------------------------------------------------------------------- %
 
-\section{Motivation} 
+\section{Motivation}
 \begin{frame}
 	\frametitlesec
 
+	\textbf{Wie gelangt man an die Ausmaße eines Objektes?}
+	\vfill
 	\begin{itemize}
-		\item Günstige Messmethode
-		\item Messung ohne Kontakt zum Objekt möglich
-		\item Wird in vielen Bereichen verwendet:
-		\begin{itemize}
-			\item Computer Grafik
-			\item Robotik
-			\item Archäologie
-			\item Geographie
-			\item Reverse Engineering
-			\item Computerunterstütze Qualitätskontrolle
-			\item \dots
-		\end{itemize}
+		\item Manuell vermessen zu aufwendig
+		\item Stereo-Vision?\\
+		Benötigt eindeutig wiedererkennbare Muster!
+		\item Structure from Motion? s. Stereo-Vision!
+		\item Time of Flight?\\
+		Geringe Auflösung!\\
+		Für manche Anwendungsgebiete zu ungenau!
+	\end{itemize}
+	\vfill
+	\textbf{Unsere Methode: Streifenlichtprojektion}
+	\vfill
+
+\end{frame}
+
+
+\begin{frame}
+	\frametitlesec
+	\framesubtitles{Anwendungsgebiete}
+
+	\begin{itemize}
+		\item Computer Grafik
+		\item Robotik
+		\item Archäologie
+		\item Geographie
+		\item Reverse Engineering
+		\item Computerunterstütze Qualitätskontrolle
+		\item \dots
 	\end{itemize}
 
 \end{frame}
- 
-%\begin{frame}
-%	\frametitle{Unsere Aufgabe}
 
-%\end{frame}
+
+\begin{frame}
+	\frametitlesec
+	\framesubtitles{Vor- und Nachteile}
+
+	\textbf{Vorteile}
+	\vfill
+	\begin{itemize}
+		\item Relativ günstig
+		\item Messung ohne Kontakt zum Objekt
+		\item Hohe Genauigkeit möglich
+		\item Keine Korrespondenzsuche
+	\end{itemize}
+	\vfill
+	\textbf{Nachteile}
+	\vfill
+	\begin{itemize}
+		\item Langsam (im Vergleich zu \textit{Time of Flight})
+		\item Abschattung des Lasers
+	\end{itemize}
+	\vfill
+
+\end{frame}
 
 % ---------------------------------------------------------------------------- %
 
