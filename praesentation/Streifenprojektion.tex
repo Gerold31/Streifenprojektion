@@ -80,20 +80,22 @@
 	\frametitlesec
 
 	\textbf{Wie gelangt man an die Ausmaße eines Objektes?}
-	\vfill
 	\begin{itemize}
-		\item Manuell vermessen zu aufwendig
+		\item Manuell vermessen?
 		\item Stereo-Vision?\\
-		{\color{HUblue}Benötigt eindeutig wiedererkennbare Muster!}
 		\item Structure from Motion?\\
-		{\color{HUblue}s. Stereo-Vision!}
 		\item Time of Flight?\\
-		{\color{HUblue}Geringe Auflösung!\\
-		Für manche Anwendungsgebiete zu ungenau!}
 	\end{itemize}
 	\vfill
 	\textbf{Unsere Methode: Streifenlichtprojektion}
 	\vfill
+	\textbf{Anwendungsgebiete}
+	\begin{itemize}
+		\item Computer Grafik
+		\item Archäologie
+		\item Reverse Engineering
+		\item \dots
+	\end{itemize}
 
 \end{frame}
 
@@ -118,23 +120,6 @@
 		\item Abschattung des Lasers
 	\end{itemize}
 	\vfill
-
-\end{frame}
-
-
-\begin{frame}
-	\frametitlesec
-	\framesubtitles{Anwendungsgebiete}
-
-	\begin{itemize}
-		\item Computer Grafik
-		\item Robotik
-		\item Archäologie
-		\item Geographie
-		\item Reverse Engineering
-		\item Computerunterstütze Qualitätskontrolle
-		\item \dots
-	\end{itemize}
 
 \end{frame}
 
@@ -184,8 +169,8 @@
 	\frametitlesec
 	\framesubtitles{Linienerkennung}
 
-	\textbf{Variante 1}\\
-	Einfache Linienerkennung durch Differenzbildung (diff):
+	\textbf{Variante 1 (diff)}\\
+	Einfache Linienerkennung durch Differenzbildung:
 	\vfill
 	\begin{columns}
 		\visible<1-4>{\column{.32\linewidth}{\includegraphics[width=\linewidth]{includes/line_line}}}
@@ -207,8 +192,8 @@
 	\frametitlesec
 	\framesubtitles{Linienerkennung}
 
-	\textbf{Variante 2}\\
-	Linienerkennung durch kanalweise Mittelwertbildung und logische Verknüpfung (free):
+	\textbf{Variante 2 (free)}\\
+	Linienerkennung durch kanalweise Mittelwertbildung und logische Verknüpfung:
 	\vfill
 	\begin{columns}
 		\visible<1-2>{\column{.45\linewidth}{\includegraphics[width=\linewidth]{includes/line_line}}}
