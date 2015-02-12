@@ -22,6 +22,8 @@
 %\usepackage{array}
 
 %\usepackage{enumitem}
+\usepackage{xcolor}
+
 
 \def\frametitlesec{\frametitle{\arabic{section}.\hspace{0.5ex}\insertsection}}
 \def\framesubtitles#1{\framesubtitle{\hspace{3.5ex}#1}}
@@ -93,7 +95,7 @@
 	\begin{itemize}
 		\item Computer Grafik
 		\item Archäologie
-		\item Reverse Engineering
+		\item Computergestützte Qualitätskontrolle
 		\item \dots
 	\end{itemize}
 
@@ -470,7 +472,7 @@
 			10
 		\end{tabular} &
 		\begin{tabular}{c|c}
-			Hoehe & Diff (\%) \\ \hline
+			Höhe & Diff (\%) \\ \hline
 			48.6 & -13.2 \\
 			34.4 & -38.7 \\
 			27.8 & -50.3 \\
@@ -484,7 +486,7 @@
 		\end{tabular} &
 
 		\begin{tabular}{c|c}
-			Hoehe & Diff (\%) \\ \hline
+			Höhe & Diff (\%) \\ \hline
 			 54.8 &  -2.2 \\
 			 54.4 &  -2.9 \\
 			 54.7 &  -2.3 \\
@@ -540,7 +542,7 @@
 		& diff & free\\
 		\begin{tabular}{c}
 			Farbe   \\  \hline
-			Blau    \\
+			{\color{ProcessBlue} Blau }    \\
 			Grün    \\
 			Orange  \\
 			Rot     \\
@@ -548,8 +550,8 @@
 		\end{tabular} &
 		\begin{tabular}{c|c}
 			Avg & Stdabw\\ \hline
-			309.0 & 10.8\\
-			353.8 & 1054.2\\
+			{\color{ProcessBlue} 309.0} & {\color{ProcessBlue} 10.8}\\
+			{\color{Gray} 353.8 } & {\color{Gray}1054.2 } \\
 			313.3 & 274.3\\
 			331.0 & 789.8\\
 			318.3 & 379.5
@@ -557,7 +559,7 @@
 
 		\begin{tabular}{c|c}
 			Avg & Stdabw\\ \hline
-			310.7 & 18.3\\
+			{\color{ProcessBlue} 310.7 } & {\color{ProcessBlue} 18.3 }\\
 			301.2 & 47.8\\
 			309.8 & 186.2\\
 			306.2 & 21.6\\
