@@ -1,0 +1,103 @@
+%\documentclass[10pt,oneside,a4paper]{scrartcl}
+\documentclass[ngerman,a4paper]{scrartcl}
+
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+%\usepackage[left=3cm,right=4cm,top=3cm,bottom=6cm,includeheadfoot]{geometry}
+
+\usepackage{helvet}
+\usepackage[T1]{fontenc}
+\usepackage[affil-it]{authblk}
+\usepackage[round]{natbib}
+\usepackage{graphicx}
+\usepackage{xcolor}
+
+\title%[Streifenlichtprojektion]
+{
+	Streifenlichtprojektion und optische Analyse zur Oberflächeninspektion
+}
+
+\author[D. Wagner, J. Spangenberg, L. Kramer]
+{
+	Dennis~Wagner,
+	Johannes~Spangenberg,
+	Leroy~Kramer
+}
+
+\date{\today}
+%\subject{Informatik}
+
+%Kopf- und Fußzeile
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+
+%Kopfzeile links bzw. innen
+\fancyhead[L]{\nouppercase{\leftmark}}
+%Kopfzeile rechts bzw. außen
+\fancyhead[R]{\today}
+%Linie oben
+\renewcommand{\headrulewidth}{0.5pt}
+
+%Fußzeile mittig
+\fancyfoot[C]{\thepage}
+%Linie unten
+\renewcommand{\footrulewidth}{0.5pt}
+
+\begin{document}
+
+\input{Streifenprojektion_Title}
+\tableofcontents
+\newpage
+
+% ---------------------------------------------------------------------------- %
+
+\section{Einleitung}
+
+In verschiedenen Fällen ist es hilfreich oder notwendig ein \emph{komplexes} dreidimensionales Objekt zu vermessen. Aus solchen Vermessungen resultierende Modelle können in der Unterhaltungsindustrie für die Film- und Spielproduktion verwendet werden. Außerdem ermöglichen Verfahren zur Vermessung von Geometrien automatisierte Qualitätskontrollen und neue Methoden zur automatisierten Fertigung oder Verarbeitung.
+
+In unserem Projekt arbeiten wir mit der \emph{Streifenlichtprojektion}. Dabei projektieren wir einen Streifen auf eine Oberfläche und versuchen aus einer Aufzeichnung der projektierten Linie die Form der Struktur zu rekonstruieren.
+
+% ---------------------------------------------------------------------------- %
+
+\section{Theoretische und technische Grundlagen}
+
+Es haben sich in den letzten Jahrzehnten viele verschiedene Methoden entwickelt, mit denen man dreidimensionale Strukturen der realen Welt vermessen kann. So existieren zusätzlich zur Streifenlichtprojektion beispielsweise Verfahren mit \emph{Stereo-Vision}, \emph{Structure from Motion}, \emph{Shape from Shading} und \emph{Time of Flight}.
+
+\subsection{Perspektivische Projektion}
+
+% ---------------------------------------------------------------------------- %
+
+\section{Aufbau und Algorithmen}
+
+\subsection{Hardware}
+
+\subsection{Grundlegende Softwarearchitektur}
+
+\subsection{Klassen und Funktionsüberblick}
+
+\subsection{Ansteuerung der Hardware}
+
+\subsection{Linienerkennung}
+
+\subsubsection{Differenzbildung (Diff)}
+
+\subsubsection{Farbfilter (Free)}
+
+\subsection{Rekonstruktion}
+
+% ---------------------------------------------------------------------------- %
+
+\section{Auswertung}
+
+% ---------------------------------------------------------------------------- %
+
+\section{Zusammenfassung}
+
+% ---------------------------------------------------------------------------- %
+
+\section{Quellenverzeichnis}
+
+% ---------------------------------------------------------------------------- %
+
+\end{document}
