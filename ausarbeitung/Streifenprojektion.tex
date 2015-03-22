@@ -72,11 +72,28 @@ Es haben sich in den letzten Jahrzehnten viele verschiedene Methoden entwickelt,
 
 \subsection{Hardware}
 
+Die Hardware besteht aus einer Webcam und einem Linienlaser, der auf einem Modellbauservo montiert ist. Laser und Servo werden von einem ''Spark Core'' Mikrocontroller gesteuert, welcher wiederum über USB von der Software gesteuert wird.
+
 \subsection{Grundlegende Softwarearchitektur}
 
 \subsection{Klassen und Funktionsüberblick}
 
 \subsection{Ansteuerung der Hardware}
+
+Die Software steuert die Hardware über USB, wobei sich der Mikrocontroller als virtuellen COM-Port ausgibt. Zur Kommunikation wird ein einfaches Protokoll verwendet, das 2 Byte lange Nachrichten an den Mikrocontroller sendet. Das erste Byte gibt den Befehl an, das zweite den Parameter.\\
+
+\begin{tabular}{|c|c|c|}
+\hline
+1. Byte & 2. Byte & Beschreibung \\
+\hline
+'m'\footnotemark & $\alpha \in [0,180]$ & Setzt die Servoposition auf $\alpha ^\circ$.\\
+\hline
+'l' & '0' oder '1' & Schaltet den Laser an ('1') bzw. aus ('0')\\
+\hline
+\end{tabular}
+
+\footnotetext{Zeichen in Anführungszeichen stehen für den ASCII-Wert des Zeichens}
+
 
 \subsection{Linienerkennung}
 
