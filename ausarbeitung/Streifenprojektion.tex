@@ -81,7 +81,93 @@ In unserem Projekt arbeiten wir mit der \emph{Streifenlichtprojektion}. Dabei pr
 
 Es haben sich in den letzten Jahrzehnten viele verschiedene Methoden entwickelt, mit denen man dreidimensionale Strukturen der realen Welt vermessen kann. So existieren zusätzlich zur Streifenlichtprojektion beispielsweise Verfahren mit \emph{Stereo-Vision}, \emph{Structure from Motion}, \emph{Shape from Shading} und \emph{Time of Flight}.
 
+\subsection{Normalisierte Bildkoordinaten}
+
+Ein Bild besteht aus einer zweidimensionalen Matrix, die für jeden Pixel eine Farbe definiert. Bei der Verwendung der Indices der Matrix als Koordinaten für die Pixel stößt man schnell auf das Problem, dass die Lage des Pixels erst im Zusammenhang mit der Auflösung erkannt werden kann. Aus diesem Grund verwenden wir für unser Verfahren \emph{normalisierte Bildkoordinaten}. Das Ziel der normalisierten Koordinaten ist es, ohne Informationen über die Auflösung die Position eines Pixels auf der Bildebene ausdrücken zu können.
+
+Wir verwenden als normalisierte Bildkoordinaten daher ein Tupel aus zwei reellen Zahlen $(u,v)$. $v$ ist dabei aus dem Wertebereich $[-1,1]$, während $u$ den Wertebereich hat, bei dem das Seitenverhältnis beibehalten bleibt. Das bedeutet $u \in [-r,r]$, wenn $r$ das Seitenverhältnis widerspiegelt.
+
+Um aus den Indizes $(i,j)$ eines Pixels die normalisierten Bildkoordinaten $(u,v)$ zu berechnen, kann folgende Gleichung verwendet werden:
+\[ \begin{pmatrix}
+u \\ v
+\end{pmatrix} = 2 \cdot \begin{pmatrix}
+\frac{i r}{s_x - 1} \\
+\frac{j}{s_y - 1}
+\end{pmatrix} - \begin{pmatrix}
+r \\ 1
+\end{pmatrix} \]
+Wobei $(s_x, s_y)$ die Auflösung des Bildes ist und $r = s_x/s_y$ das Seitenverhältnis darstellt. Die erste Dimension ist jeweils horizontal und die zweite vertikal ausgerichtet. Die Indices $(0,0)$ beschreiben den unteren linken Pixel des Bildes.
+
 \subsection{Perspektivische Projektion}
+
+Bei einer \emph{perspektivische Projektion} werden dreidimensionale Punkte auf eine \emph{Bildebene} projektiert. Die Funktionen entsprechen dabei dem Modell der Lochkamera und stellen eine Vereinfachung der Projektion von realen Kameras da. Um ein \emph{Objektpunkt} $x$ mit einer solchen Projektion auf die Bildebene abzubilden, das heißt um $x'$ zu bestimmt, bildet man einen Strahl, der durch $x$ und den \emph{Augpunkt} $O$ verläuft und ermittelt den Schnittpunkt mit der Bildebene. Den projektierten Punkt $x'$ nennt man auch \emph{Bildpunkt}. Im Gegensatz zur Lochkamera wird in schematischen Darstellungen die Bildebene meist zwischen Augpunkt und Objektpunkt dargestellt.
+
+Offensichtlich ist zur Bestimmung einer spezifischen Funktion sowohl die Position als auch die Rotation der Kamera wichtig. In unserem Fall befindet sie sich stets im Koordinatenursprung ($O = (0, 0, 0)$) und schaut in Richtung der negativen $z$-Achse ($\vec{v} = (0, 0, -f)^T$ mit $f \in \R^+$).
+
+Da die Position der Bildpunkte in einem eigenen zweidimensionalen Koordinatensystem angegeben werden, benötigten wir noch Informationen zur Position der Bildebene in der Szene. Außerdem benötigen wir Informationen zur Skalierung der Koordinaten. Die Ausrichtung der Bildebene ist bereits durch die Rotation der Kamera gegeben. Eine Möglichkeit die restlichen benötigten Informationen zu definieren ist die Angabe der \emph{Focal length} $f$ und der Ausmaße der \emph{Bildebene}. Die Focal length ist die Entfernung der Bildebene vom Augpunkt. Wir gehen davon aus, dass die Bildpunkte in einem begrenzten Wertebereich liegen und betrachten die Ausmaße des entsprechenden Wertebereiches auf der Bildebene als die Ausmaße der Bildebene. Außerdem gehen wir davon aus, dass sich der Bildpunkt $(0,0)$ in der Mitte des Wertebereichs befindet und sich der entsprechende Punkt auf der Bildebene am nächsten am Augpunkt befindet.
+
+Da sich die Projektion bei proportionalen Änderungen der drei Werte nicht ändert, kann die Projektion bereits durch zwei der drei Werte beschrieben werden, indem man einen der drei Werte fest definiert. Eine äquivalente Möglichkeit zur Definition der Projektion ist die Angabe des vertikalen und horizontalen \ac{FOV}.
+
+%Des weiteren wird die Funktion durch das vertikale und horizontale \ac{FOV} bestimmt. Statt das \ac{FOV} direkt anzugeben ist es auch möglich das \ac{FOV} indirekt durch die Angabe der \emph{Focal length} $f$ und der Ausmaße der \emph{Bildebene} $(u, v)$ zu bestimmen. Da sich das \ac{FOV} bei proportionalen Änderungen der drei Werte nicht ändert, kann das \ac{FOV} bereits durch zwei der drei Werte beschrieben werden, indem man einen der drei Werte fest definiert.
+
+Um aus $f$ und $v$ das vertikale \ac{FOV} zu bestimmen, kann folgende Gleichung benutzen werden:
+\[ \fov^H = 2 \cdot \arctan \left( \frac{v}{2 f} \right) \]
+Die Berechnung des horizontalen \ac{FOV} erfolgt analog mit $u$ statt $v$.
+
+Umgekehrt ist es auch möglich aus dem \ac{FOV} mögliche Werte für $f$, $u$ und $v$ zu bestimmen. Sei $c:(0,\Pi)^2 \to \R$ eine beliebige Funktion, so erhalten wir mit den folgenden Berechnungsvorschriften gültige Werte für $f$, $u$ und $v$:
+\begin{align*}
+f &:= c(\fov^V,\fov^H)\\
+u &:= c(\fov^V,\fov^H) \cdot 2 \tan\left(\frac{\fov^H}{2}\right)\\
+v &:= c(\fov^V,\fov^H) \cdot 2 \tan\left(\frac{\fov^V}{2}\right)
+\end{align*}
+
+Für ein beliebigen Objektpunkt $x = (x_1, x_2, x_3)$ und dem dazugehörigen Bildpunkt $x'$ gilt bei unseren Annahmen die folgende Gleichung:
+\[ x' = \frac{f}{2 x_3} \cdot \begin{pmatrix}
+u x_1\\v x_2
+\end{pmatrix} \]
+
+\[ x_1 = \frac{2 x_1' x_3}{u f} \]
+\[ x_2 = \frac{2 x_1' x_3}{v f} \]
+
+\subsection{Triangulation}
+
+\subsubsection{Modell und gegebene Werte}
+
+Unser Modell besteht im wesentlichen aus der perspektivischer Projektion eines Objektpunktes $X$ auf eine Bildebene $B$, die parallel zur $x$-$y$-Ebene verläuft. Das Augpunkt liegt dabei im Koordinatenursprung $O$ und der Bildpunkt wird durch $X'$ bezeichnet. Außerdem wird das projektierte Licht durch eine Ebene $L$ dargestellt, welche den Projektionspunkt $P$ und den Objektpunkt $X$ schneidet. Der Projektionspunkt bezeichnet die Position des Projektors und damit den Ausgangspunkt des Lichtes zur Projektion der Linie.
+
+Zur Bestimmung des Objektpunktes $X$ müssen wir zunächst die gegebenen Werte betrachten. Zu unserem Setup sind dabei die folgenden Werten gegeben:
+
+\begin{tabular}{lp{12cm}}
+	$P$       & Position des Linienprojektors.\\
+	$f$       & Focal length (unter der Annahme, dass die Ausmaße der Bildebene zwei Einheiten nach oben betragen)\\
+	$\theta$  & Winkel zur Ausrichtung des Projektors.\\
+	$\delta$  & Zweiter Winkel zur Ausrichtung des Projektors.
+\end{tabular}
+
+Außerdem ist der Bildpunkt durch normalisierte Bildkoordinaten $(u, v)$ gegeben. Da die Focal length $f$ auf eine Bildhöhe von zwei Einheiten angepasst ist, gilt $X'(u, v, -f)$.
+
+\subsubsection{Bestimmung der Entfernung}
+
+Als \emph{Entfernung des Objektpunktes}, bzw. $h$, bezeichnen wir die 3. Koordinate von $X$, auch wenn diese nicht die euklidische Entfernung zum Ursprung, sondern zur $x$-$y$-Ebene darstellt.
+
+Um diese Entfernung zu bestimmen, reduzieren wir das geometrische Modell unseres Setups auf zwei Dimensionen. Dazu führen wir zunächst einen Basiswechsel auf die Orthogonalbasis $\{(\cos(\theta), \sin(\theta), 0), (0, 0, -1), (\sin(\theta), \cos(\theta), 0)\}$ durch und betrachten im folgenden nur die ersten beiden Dimensionen. Der konstruierte zweidimensionale Raum hat die besondere Eigenschaft, dass von der Ebene $L$ und der $x$-$y$-Ebene nur die Geraden $a$ und $c$ übrig bleiben. Eine weitere besondere Eigenschaft ist, dass der Abstand zwischen $X$ und der $x$-$y$-Ebene direkt von einen in den anderen Raum übernommen werden kann. Ein beliebiger Vektor $(v_1, v_2, v_3)^T$ aus unserem dreidimensionalen Model entspricht im zweidimensionalen Modell dem Vektor $(\cos(\theta) \cdot v_1 - \sin(\theta) \cdot v_2, -v_3)^T$.
+
+Die Geraden $a$ und $c$ bilden zusammen mit der Geraden $b$, welche durch die Punkte $O$, $X$ und $X'$ verläuft, ein Dreieck, dessen Eckpunkte $A$, $C = X$ und $B = O$ sind. Angenommen die Koordinaten von $P$ und $X'$ in der zweidimensionalen Darstellung sind $(p_1,p_2)$ und $(x'_1, x'_2)$, so können die Winkel $\alpha$ und $\beta$ und die Länge der Strecke zwischen $A$ und $B$ wie folgt berechnet werden:
+\begin{align*}
+	\alpha &= \frac{\pi}{2} - \arctan\left(\frac{x'_1}{x'_2}\right)\\
+	\beta &= \frac{\pi}{2} + \delta\\
+	\overline{AB} &= p_1 + \tan(\delta) \cdot p_2
+\end{align*}
+
+Mit $\alpha$, $\beta$ und $\overline{AB}$ kann nun die Entfernung $h$ über die folgende Gleichung berechnet werden:
+\[ h = \frac{c \cdot \sin(\alpha) \cdot \sin(\beta)}{\sin(\pi - \beta - \alpha)} \]
+
+\subsubsection{Bestimmung der Koordinaten}
+
+Um die Koordinaten des Objektpunktes $X$ zu bestimmen, verfolgen wir einfach die Gerade, welche $O$, $X'$ und $X$, ausgehend vom Augpunkt $O$, bis die 3. Koordinate der Entfernung $h$ gleicht:
+\[ \vec{x} = \frac{h}{f} \cdot \begin{pmatrix}
+u \\ v \\ -f
+\end{pmatrix} \]
 
 % ---------------------------------------------------------------------------- %
 
