@@ -1,16 +1,31 @@
-%\documentclass[10pt,oneside,a4paper]{scrartcl}
+%\documentclass[ngerman,a4paper,parskip=half]{scrartcl}
 \documentclass[ngerman,a4paper]{scrartcl}
 
 \usepackage[ngerman]{babel}
 \usepackage[utf8]{inputenc}
 %\usepackage[left=3cm,right=4cm,top=3cm,bottom=6cm,includeheadfoot]{geometry}
+\usepackage[onehalfspacing]{setspace}
+\setlength{\parskip}{1em}
 
 \usepackage{helvet}
 \usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amstext}
 \usepackage[affil-it]{authblk}
 \usepackage[round]{natbib}
+\usepackage[nolist,footnote]{acronym}
 \usepackage{graphicx}
 \usepackage{xcolor}
+
+\def \N{\mathbb{N}}
+\def \Z{\mathbb{Z}}
+\def \Q{\mathbb{Q}}
+\def \R{\mathbb{R}}
+\def \C{\mathbb{C}}
+\def \fov{\mathrm{fov}}
+
+\begin{acronym}[FOV]
+	\acro{FOV}{Field of view}
+\end{acronym}
 
 \title%[Streifenlichtprojektion]
 {
@@ -45,6 +60,8 @@
 \renewcommand{\footrulewidth}{0.5pt}
 
 \begin{document}
+
+% ---------------------------------------------------------------------------- %
 
 \input{Streifenprojektion_Title}
 \tableofcontents
