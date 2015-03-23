@@ -1,9 +1,7 @@
-%\documentclass[ngerman,a4paper,parskip=half]{scrartcl}
 \documentclass[ngerman,a4paper]{scrartcl}
 
 \usepackage[ngerman]{babel}
 \usepackage[utf8]{inputenc}
-%\usepackage[left=3cm,right=4cm,top=3cm,bottom=6cm,includeheadfoot]{geometry}
 \usepackage[onehalfspacing]{setspace}
 \setlength{\parskip}{1em}
 
@@ -13,8 +11,12 @@
 \usepackage[affil-it]{authblk}
 \usepackage[round]{natbib}
 \usepackage[nolist,footnote]{acronym}
+\usepackage{fancyref}
 \usepackage{graphicx}
 \usepackage{xcolor}
+
+\usepackage[hidelinks]{hyperref}
+%\usepackage[left=3cm,right=4cm,top=3cm,bottom=6cm,includeheadfoot]{geometry}
 
 \def \N{\mathbb{N}}
 \def \Z{\mathbb{Z}}
@@ -27,20 +29,14 @@
 	\acro{FOV}{Field of view}
 \end{acronym}
 
-\title%[Streifenlichtprojektion]
-{
-	Streifenlichtprojektion und optische Analyse zur Oberflächeninspektion
+\hypersetup{
+	pdftitle    = {Streifenlichtprojektion und optische Analyse zur Oberflächeninspektion},
+	pdfsubject  = {Streifenlichtprojektion},
+	pdfauthor   = {Dennis~Wagner, Johannes~Spangenberg, Leroy~Kramer},
+	pdfkeywords = {Streifenlichtprojektion, Humboldt, HU, Informatik},
+	%	pdfcreator  = {pdflatex},
+	%	pdfproducer = {LaTeX with hyperref},
 }
-
-\author[D. Wagner, J. Spangenberg, L. Kramer]
-{
-	Dennis~Wagner,
-	Johannes~Spangenberg,
-	Leroy~Kramer
-}
-
-\date{\today}
-%\subject{Informatik}
 
 %Kopf- und Fußzeile
 \usepackage{fancyhdr}
