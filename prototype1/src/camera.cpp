@@ -16,7 +16,7 @@ cv::Mat Camera::capture()
 {
 	int id = mImgID;
 	cv::Mat r;
-	while(id != mImgID)
+	while(id == mImgID)
 	{
 		printf(" \b");
 	}
