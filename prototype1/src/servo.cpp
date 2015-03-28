@@ -2,8 +2,7 @@
 
 #include "serial.h"
 
-//#define MID_ANGEL (85)
-#define MID_ANGEL (90)
+#define MID_ANGEL (85)
 
 void Servo::setAngle(int a)
 {
