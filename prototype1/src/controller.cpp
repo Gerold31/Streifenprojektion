@@ -39,7 +39,7 @@ void Controller::processImage(const cv::Mat &img)
 	// save image if required
 	char filename[64];
 	if(Configuration::savePrefix != nullptr) {
-		sprintf(filename, "%s%d.png", Configuration::savePrefix, imageNumber++);
+		sprintf(filename, "%s_%d.png", Configuration::savePrefix, imageNumber);
 		imwrite(filename, img);
 	}
 
@@ -149,7 +149,7 @@ void Controller::processImage(const cv::Mat &img)
 
 	// wait if a debug window is used
 	if (Configuration::debugLightbar || Configuration::debugHeightmap) {
-		waitKey();
+		//waitKey();
 	}
 }
 
@@ -173,8 +173,7 @@ void Controller::updateReference(const cv::Mat &ref)
 	// save image if required
 	char filename[64];
 	if(Configuration::savePrefix != nullptr) {
-		// TODO add counter to name if required
-		sprintf(filename, "%sref.png", Configuration::savePrefix);
+		sprintf(filename, "%s_%d_ref.png", Configuration::savePrefix, imageNumber);
 		imwrite(filename, ref);
 	}
 

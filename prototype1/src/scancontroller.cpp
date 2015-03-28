@@ -31,8 +31,8 @@ void ScanController::main()
 
 	// setup hardware
 	Camera c(Configuration::captureDevice);
-	Servo::getSingleton()->setAngle(MIN_ANGLE-5);
 	Laser::getSingleton()->toggle(false);
+	Servo::getSingleton()->setAngle(MIN_ANGLE-5);
 
 	// create debug window for camera if required
 	if (Configuration::debugCamera) {
@@ -41,26 +41,29 @@ void ScanController::main()
 
 	// create reference image
 	cv::Mat reference;
-	c.capture().copyTo(reference);
-	updateReference(reference);
-
-	if(Configuration::debugCamera)
-	{
-		cv::imshow(WINDOW_DEBUG_CAMERA, reference);
-	}
 
 	//std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 	cv::waitKey(500);
 
-	Laser::getSingleton()->toggle(true);
 	for(int a=MIN_ANGLE; a<=MAX_ANGLE; a++)
 	{
+		imageNumber = a;
 		Configuration::deviceConfiguration.projectorPitch = -a * M_PI/180;
 		updateDevice(Configuration::deviceConfiguration);
 
+		Laser::getSingleton()->toggle(false);
 		Servo::getSingleton()->setAngle(a);
+
+		// wait for servo to be in position
 		//std::this_thread::sleep_for(std::chrono::milliseconds(100));
 		cv::waitKey(300);
+
+		c.capture().copyTo(reference);
+		updateReference(reference);
+
+		Laser::getSingleton()->toggle(true);
+
+		c.capture();
 
 		cv::Mat img = c.capture();
 
@@ -69,7 +72,6 @@ void ScanController::main()
 			cv::imshow(WINDOW_DEBUG_CAMERA, img);
 		}
 
-		imageNumber = a;
 		processImage(img);
 
 		//std::this_thread::sleep_for(std::chrono::milliseconds(400));
