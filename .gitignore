@@ -46,6 +46,7 @@ Makefile
 *.snm
 *.synctex.gz
 *.toc
+*-eps-converted-to.pdf
 
 # Ignore specific files
 /zwischenpraesentation/ShapeFromX.pdf

@@ -11,6 +11,7 @@
 \usepackage[affil-it]{authblk}
 \usepackage[round]{natbib}
 \usepackage[nolist,footnote]{acronym}
+\usepackage{wrapfig}
 \usepackage{fancyref}
 \usepackage{graphicx}
 \usepackage{xcolor}
@@ -148,9 +149,23 @@ Zudem ist der Bildpunkt durch normalisierte Bildkoordinaten $(u, v)$ gegeben. Da
 
 \subsubsection{Bestimmung der Entfernung}
 
+\begin{wrapfigure}{r}{6cm}
+	\centering
+	\includegraphics[width=\linewidth]{includes/triangulation2d}
+	\caption{Zweidimensionales vereinfachtes Modell des Setups}
+\end{wrapfigure}
+
 Als \emph{Entfernung des Objektpunktes}, bzw. $h$, wird die 3. Koordinate von $X$ bezeichnet.
 
-Um diese Entfernung zu bestimmen, wird das geometrische Modell des Setups vereinfacht. Als erstes wird ein Basiswechsel auf die Orthogonalbasis $\{(\cos(\theta), \sin(\theta), 0), (0, 0, -1), (\sin(\theta), \cos(\theta), 0)\}$ vorgenommen und betrachten im folgenden nur die ersten beiden Dimensionen. Der konstruierte zweidimensionale Raum hat die besondere Eigenschaft, dass von der Ebene $L$ und der $x$-$y$-Ebene nur die Geraden $a$ und $c$ übrig bleiben. Eine weitere besondere Eigenschaft ist, dass der Abstand zwischen $X$ und der $x$-$y$-Ebene direkt von einen in den anderen Raum übernommen werden kann. Ein beliebiger Vektor $(v_1, v_2, v_3)^T$ im dreidimensionalen Model entspricht damit im zweidimensionalen Modell dem Vektor $(\cos(\theta) \cdot v_1 - \sin(\theta) \cdot v_2, -v_3)^T$.
+Um diese Entfernung zu bestimmen, wird das geometrische Modell des Setups vereinfacht. Als erstes wird ein Basiswechsel auf die Orthogonalbasis
+\[ \left\lbrace \begin{pmatrix}
+\cos(\theta) \\ \sin(\theta) \\ 0
+\end{pmatrix}, \begin{pmatrix}
+0 \\ 0 \\ -1
+\end{pmatrix}, \begin{pmatrix}
+\sin(\theta) \\ \cos(\theta) \\ 0
+\end{pmatrix} \right\rbrace \]
+vorgenommen, um im folgenden nur die ersten beiden Dimensionen zu betrachten. Der konstruierte zweidimensionale Raum hat die besondere Eigenschaft, dass von der Ebene $L$ und der $x$-$y$-Ebene nur die Geraden $a$ und $c$ übrig bleiben. Eine weitere besondere Eigenschaft ist, dass der Abstand zwischen $X$ und der $x$-$y$-Ebene direkt von einen in den anderen Raum übernommen werden kann. Ein beliebiger Vektor $(v_1, v_2, v_3)^T$ im dreidimensionalen Model entspricht damit im zweidimensionalen Modell dem Vektor $(\cos(\theta) \cdot v_1 - \sin(\theta) \cdot v_2, -v_3)^T$.
 
 Die Geraden $a$ und $c$ bilden zusammen mit der Geraden $b$, welche durch die Punkte $O$, $X$ und $X'$ verläuft, ein Dreieck, dessen Eckpunkte $A$, $C = X$ und $B = O$ sind. Angenommen die Koordinaten von $P$ und $X'$ in der zweidimensionalen Darstellung sind $(p_1,p_2)$ und $(x'_1, x'_2)$, so können die Winkel $\alpha$ und $\beta$ und die Länge der Strecke zwischen $A$ und $B$ wie folgt berechnet werden:
 \begin{align*}
@@ -159,12 +174,12 @@ Die Geraden $a$ und $c$ bilden zusammen mit der Geraden $b$, welche durch die Pu
 	\overline{AB} &= p_1 + \tan(\delta) \cdot p_2
 \end{align*}
 
-Mit $\alpha$, $\beta$ und $\overline{AB}$ kann nun die Entfernung $h$ über die folgende Gleichung berechnet werden:
-\[ h = \frac{c \cdot \sin(\alpha) \cdot \sin(\beta)}{\sin(\pi - \beta - \alpha)} \]
+Die Entfernung $h$ kann nun über die folgende Gleichung berechnet werden:
+\[ h = \frac{\overline{AB} \cdot \sin(\alpha) \cdot \sin(\beta)}{\sin(\pi - \beta - \alpha)} \]
 
 \subsubsection{Bestimmung der Koordinaten}
 
-Die Koordinaten des Objektpunktes X in unserem Modell können durch folgende Gleichung berechnet werden:
+Die Koordinaten des Objektpunktes X in unserem Modell können durch die folgende Gleichung berechnet werden:
 \[ \vec{x} = \frac{h}{f} \cdot \begin{pmatrix}
 u \\ v \\ -f
 \end{pmatrix} \]
