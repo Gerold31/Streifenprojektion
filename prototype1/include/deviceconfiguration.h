@@ -11,6 +11,7 @@ public:
 	cv::Vec3d projectorPos;
 	double projectorPitch;
 	double projectorSkew;
+	cv::Matx44d transformation;
 };
 
 #endif // DEVICECONFIGURATION_H

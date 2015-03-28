@@ -4,8 +4,9 @@
 #include <istream>
 #include <memory>
 
-#include <lightbardetector.h>
-#include <reconstructor.h>
+#include "controller.h"
+#include "lightbardetector.h"
+#include "reconstructor.h"
 
 
 class Configuration
@@ -13,12 +14,13 @@ class Configuration
 public:
 	static void init(int argc, char *argv[]);
 
-	static bool debugCloud;
+	static bool createCommands;
 	static bool debugLightbar;
 	static bool debugCamera;
 	static bool debugHeightmap;
 	static bool verbose;
-	static std::shared_ptr<LightBarDetector> lineDetection;
+	static std::shared_ptr<Controller> controller;
+	static std::shared_ptr<LightBarDetector> lightBarDetector;
 	static std::shared_ptr<Reconstructor> reconstructor;
 	static std::shared_ptr<std::istream> inputStream;
 	static int captureDevice;

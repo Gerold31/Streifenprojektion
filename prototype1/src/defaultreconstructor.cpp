@@ -3,7 +3,8 @@
 #include <cmath>
 #include <iostream>
 
-#include <configuration.h>
+#include "common.h"
+#include "configuration.h"
 
 using std::atan;
 using std::cerr;
@@ -79,6 +80,11 @@ void DefaultReconstructor::processLine(const Line &line, Reconstruction &reconst
 
 		cv::Vec3d pos{rpH, rpV, -fl};
 		pos = pos * (h / fl);
+
+		// Apply transformation from device configuration
+		pos = applyTransformation(dconf.transformation, pos);
+
+		// Add point to reconstruction
 		reconstruction.addPoint(pos, sample.pos);
 	}
 }

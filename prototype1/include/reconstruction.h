@@ -19,11 +19,11 @@ public:
 	~Reconstruction();
 
 	void addPoint(cv::Vec3d pos, cv::Vec2i imgPos);
-	void setSource(const cv::Mat &sourceImg);
+	void setReference(const cv::Mat &ref);
 	const std::vector<Point>& getPoints() const;
 private:
 	std::vector<Point> points;
-	cv::Mat img;
+	cv::Mat reference;
 };
 
 #endif // RECONSTRUCTION_H

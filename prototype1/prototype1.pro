@@ -16,7 +16,7 @@ TEMPLATE = app
 
 INCLUDEPATH += include/
 
-LIBS += -lopencv_core -lopencv_highgui
+LIBS += -lopencv_core -lopencv_highgui -lopencv_imgproc
 
 QMAKE_CXXFLAGS += -std=c++14
 
@@ -24,9 +24,7 @@ SOURCES += \
     src/camera.cpp \
     src/configuration.cpp \
     src/defaultreconstructor.cpp \
-    src/deviceconfiguration.cpp \
     src/laser.cpp \
-    src/line.cpp \
     src/main.cpp \
     src/reconstructor.cpp \
     src/serial.cpp \
@@ -34,7 +32,11 @@ SOURCES += \
     src/lightbardetector.cpp \
     src/difflightbardetector.cpp \
     src/reconstruction.cpp \
-    src/freelightbardetector.cpp
+    src/freelightbardetector.cpp \
+    src/edgelightbardetector.cpp \
+    src/controller.cpp \
+    src/scancontroller.cpp \
+    src/commandcontroller.cpp
 
 HEADERS += \ 
     include/camera.h \
@@ -50,4 +52,9 @@ HEADERS += \
     include/lightbardetector.h \
     include/difflightbardetector.h \
     include/reconstruction.h \
-    include/freelightbardetector.h
+    include/freelightbardetector.h \
+    include/edgelightbardetector.h \
+    include/controller.h \
+    include/scancontroller.h \
+    include/commandcontroller.h \
+    include/common.h

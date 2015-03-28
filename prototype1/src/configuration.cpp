@@ -8,11 +8,15 @@
 #include <memory>
 #include <cerrno>
 
-#include <difflightbardetector.h>
-#include <defaultreconstructor.h>
-#include <freelightbardetector.h>
-#include <lightbardetector.h>
-#include <reconstructor.h>
+#include "commandcontroller.h"
+#include "common.h"
+#include "difflightbardetector.h"
+#include "defaultreconstructor.h"
+#include "edgelightbardetector.h"
+#include "freelightbardetector.h"
+#include "lightbardetector.h"
+#include "reconstructor.h"
+#include "scancontroller.h"
 
 using std::cerr;
 using std::cin;
@@ -31,16 +35,17 @@ static const char* nextParam = nullptr;
 static const char* option = nullptr;
 static char optionPlace[3] = "- ";
 
-bool Configuration::debugCloud = false;
+bool Configuration::createCommands = false;
 bool Configuration::debugLightbar = false;
 bool Configuration::debugCamera = false;
 bool Configuration::debugHeightmap = false;
 bool Configuration::verbose = false;
-shared_ptr<LightBarDetector> Configuration::lineDetection{make_shared<DiffLightBarDetector>()};
+shared_ptr<Controller> Configuration::controller{make_shared<CommandController>()};
+shared_ptr<LightBarDetector> Configuration::lightBarDetector{make_shared<DiffLightBarDetector>()};
 shared_ptr<Reconstructor> Configuration::reconstructor{make_shared<DefaultReconstructor>()};
 shared_ptr<istream> Configuration::inputStream{&cin, [](istream*){}};
 int Configuration::captureDevice = -1;
-DeviceConfiguration Configuration::deviceConfiguration{0.0, {0.0, 0.0, 0.0}, 0.0, 0.0};
+DeviceConfiguration Configuration::deviceConfiguration{0.0, {0.0, 0.0, 0.0}, 0.0, 0.0, IDENTITY44d};
 const char *Configuration::savePrefix = nullptr;
 
 void Configuration::init(int argc, char* argv[])
@@ -95,6 +100,10 @@ void Configuration::init(int argc, char* argv[])
 				option = arg;
 				if (equal(arg, "--help")) {
 					handleOption('h');
+				} else if (equal(arg, "--create-commands")) {
+					createCommands = true;
+					if (savePrefix == nullptr)
+						savePrefix = "";
 				} else {
 					handleOption('-');
 				}
@@ -142,13 +151,15 @@ void Configuration::handleOption(const char op)
 	}
 	case 'L':
 	{
-		const char* linkd = getParam();
-		if (equal(linkd, "default") || equal(linkd, "diff")) {
-			lineDetection = make_shared<DiffLightBarDetector>();
-		} else if (equal(linkd, "free")) {
-			lineDetection = make_shared<FreeLightBarDetector>();
+		const char* lined = getParam();
+		if (equal(lined, "default") || equal(lined, "diff")) {
+			lightBarDetector = make_shared<DiffLightBarDetector>();
+		} else if (equal(lined, "free")) {
+			lightBarDetector = make_shared<FreeLightBarDetector>();
+		} else if (equal(lined, "edge")) {
+			lightBarDetector = make_shared<EdgeLightBarDetector>();
 		} else {
-			cerr << "Unknown line detector: " << linkd << endl << endl;
+			cerr << "Unknown line detector: " << lined << endl << endl;
 			helpAndExit();
 		}
 		break;
@@ -173,6 +184,7 @@ void Configuration::handleOption(const char op)
 	{
 		errno = 0;
 		captureDevice = strtol(getParam(), nullptr, 10);
+		controller = make_shared<ScanController>();
 		if(errno)
 		{
 			cerr << errno << ": " << strerror(errno) << endl;
@@ -196,7 +208,6 @@ void Configuration::handleOption(const char op)
 			cerr << strerror(errno) << endl;
 			helpAndExit();
 		}
-		Configuration::reconstructor->setDeviceConfiguration(deviceConfiguration);
 		break;
 	}
 	case 's':
@@ -246,6 +257,10 @@ bool Configuration::helpAndExit(int exitCode)
 	cerr << endl;
 	cerr << "      -d <fov> <skew> <offset>" << endl;
 	cerr << "          Configure device." << endl;
+	cerr << endl;
+	cerr << "      --create-commands" << endl;
+	cerr << "          Create commands for the future and disable reconstruction." << endl;
+	cerr << "          This option implies '-s ""' if -s is not given as option." << endl;
 	cerr << endl;
 	cerr << "      -h, --help" << endl;
 	cerr << "          Show this information." << endl;
