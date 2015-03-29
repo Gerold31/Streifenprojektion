@@ -69,20 +69,20 @@
 
 In verschiedenen Fällen ist es hilfreich oder notwendig ein \emph{komplexes} dreidimensionales Objekt zu vermessen. Aus solchen Vermessungen resultierende Modelle können in der Unterhaltungsindustrie für die Film- und Spielproduktion verwendet werden. Außerdem ermöglichen Verfahren zur Vermessung von Geometrien automatisierte Qualitätskontrollen und neue Methoden zur automatisierten Fertigung oder Verarbeitung.
 
-In unserem Projekt arbeiten wir mit der \emph{Streifenlichtprojektion}. Dabei projizieren wir einen Streifen auf eine Oberfläche und rekonstruieren aus einer Aufnahme der projizierten Linie die Form der Struktur.
+In diesem Projekt wird mit der \emph{Streifenlichtprojektion} gearbeitet. Dabei wird ein Streifen auf eine Oberfläche projiziert um aus einer Aufnahme der projizierten Linie die Form der Struktur zu rekonstruieren.
 
 % ---------------------------------------------------------------------------- %
 
 \section{Theoretische und technische Grundlagen}
 
-Es haben sich in den letzten Jahrzehnten viele verschiedene Methoden entwickelt, mit denen man dreidimensionale Strukturen der realen Welt vermessen kann. So existieren zusätzlich zur Streifenlichtprojektion beispielsweise Verfahren, die \emph{Stereo-Vision}, \emph{Structure from Motion}, \emph{Shape from Shading} und \emph{Time of Flight} verwenden.
+Zusätzlich zur hier verwendeten Methode haben sich in den letzten Jahrzehnten viele verschiedene Techniken entwickelt, mit denen man dreidimensionale Strukturen der realen Welt vermessen kann. So existieren zusätzlich zur Streifenlichtprojektion beispielsweise Verfahren, die \emph{Stereo-Vision}, \emph{Structure from Motion}, \emph{Shape from Shading} oder \emph{Time of Flight} verwenden. Die benötigten theoretischen Grundlagen überschneiden sich dabei bei einigen der Verfahren. Im folgenden wird auf wichtige Grundlagen des Projektes eingegangen.
 
 \subsection{Normalisierte Bildkoordinaten}
 \label{sec:imagecoordinates}
 
-Ein Bild besteht aus einer zweidimensionalen Matrix, die für jeden Pixel eine Farbe definiert. Bei der Verwendung der Indices der Matrix als Koordinaten für die Pixel stößt man schnell auf das Problem, dass die Lage des Pixels erst im Zusammenhang mit der Auflösung erkannt werden kann. Aus diesem Grund verwenden wir für unser Verfahren \emph{normalisierte Bildkoordinaten}. Das Ziel der normalisierten Koordinaten ist es, ohne Informationen über die Auflösung die Position eines Pixels auf der Bildebene ausdrücken zu können.
+Ein Bild besteht aus einer zweidimensionalen Matrix, die für jeden Pixel eine Farbe definiert. Bei der Übertragung des Bildes auf eine Fläche unter Verwendung der Indices der Matrix als Koordinaten für die \emph{Bildpunkte} auf der Fläche stößt man schnell auf das Problem, dass die Lage des Bildpunktes erst im Zusammenhang mit der Auflösung bestimmt werden kann. Aus diesem Grund werden in verschiedenen Situationen \emph{normalisierte Bildkoordinaten} verwendet. Das Ziel der normalisierten Koordinaten ist es, die Position eines Pixels auf einer Fläche oder Ebene mit nur zwei Skalaren ausdrücken zu können.
 
-Als normalisierte Bildkoordinaten wird hier daher ein Tupel aus zwei reellen Zahlen $(u,v)$ verwendet. $v$ ist dabei aus dem Intervall $[-1,1]$. Der Wertebereich von $u$ ergibt sich entsprechend aus dem Seitenverhältnis $r$: $u \in [-r,r]$.
+Als normalisierte Bildkoordinaten wird hier ein Tupel aus zwei reellen Zahlen $(u,v)$ verwendet. $v$ ist dabei aus dem Intervall $[-1,1]$. Der Wertebereich von $u$ ergibt sich entsprechend aus dem Seitenverhältnis $r$: $u \in [-r,r]$. Dabei sollte erwähnt werden, dass normalisierte Bildkoordinaten oft auch so definiert werden, dass ebenfalls $u \in [-1,1]$ gilt.
 
 Um aus den Indizes $(i,j)$ eines Pixels die normalisierten Bildkoordinaten $(u,v)$ zu berechnen, kann folgende Gleichung verwendet werden:
 \[ \begin{pmatrix}
@@ -97,12 +97,14 @@ Mit der Bildauflösung $(s_x, s_y)$ und dem Seitenverhältnis $r = s_x/s_y$.
 
 \subsection{Perspektivische Projektion}
 
-Bei einer \emph{perspektivische Projektion} werden dreidimensionale Punkte auf eine \emph{Bildebene} projiziert. Die Funktion entsprechen dabei dem Modell der \emph{Lochkamera} und stellt eine Vereinfachung vieler realen Kameras da. Eine perspektivische Projektion wird durch den Augpunkt $O$ und die Bildebene definiert. Um einen Objektpunkt $X$ auf einen Punkt $X'$ in der Bildebene zu projizieren, bestimmt man den Schnittpunkt einer \emph{Projektionsgeraden} durch $X$ und $O$ mit der Bildebene. Den projizierten Punkt $X'$ nennt man auch \emph{Bildpunkt}. Im Gegensatz zur Lochkamera wird in schematischen Darstellungen die Bildebene meist zwischen Augpunkt und Objektpunkt dargestellt.
+Bei einer \emph{perspektivische Projektion} werden dreidimensionale Punkte auf eine \emph{Bildebene} projiziert. Die Funktion entspricht dabei dem Modell der \emph{Lochkamera} und stellt eine Vereinfachung vieler realen Kameras da. Eine perspektivische Projektion wird durch den Augpunkt $O$ und die Bildebene definiert. Um einen Objektpunkt $X$ auf einen Punkt $X'$ in der Bildebene zu projizieren, bestimmt man den Schnittpunkt des \emph{Projektionsstrahls} durch $X$ und $O$ mit der Bildebene. Den projizierten Punkt $X'$ nennt man auch \emph{Bildpunkt}.
 
-Oft verwendet man die perspektivische Projektion in Verbindung mit Bildern, wie sie in \Fref{sec:imagecoordinates} definiert werden, und nicht mit konkreten Bildpunkten. Dabei ist es meistens unwichtig, wo sie die Bildebene genau befindet, solange man jedem Pixel des Bildes genau eine Projektionsgerade zuordnen kann. Diese Zuordnung kann über die \emph{Focal length} $f$, dem Abstand zwischen Bildebene und Augpunkt, definiert werden. Seien $(u,v)$ normalisierte Bildkoordinaten eines beliebigen Pixels, so sieht die zugehörige Projektionsgerade G folgendermaßen aus:
+Oft wird die perspektivische Projektion in Verbindung mit Bildern, wie sie in \Fref{sec:imagecoordinates} definiert werden, und nicht mit konkreten Bildpunkten verwendet. Dabei ist es meistens nicht relevant, wo sich die Bildebene genau befindet, solange man jedem Pixel des Bildes genau einen Projektionsstrahl zuordnen kann. In diesem Fall wird die perspektivische Projektion meist durch den Augpunkt und eine Blickrichtung definiert. Außerdem werden Informationen zur Eingrenzung möglicher Positionen der Bildebene benötigt, um eine eindeutige Zuordnung treffen zu können.
+
+Diese Zuordnung kann beispielsweise über die \emph{Focal length} $f$, dem Abstand zwischen Bildebene und Augpunkt, definiert werden. Angenommen die Kamera schaut in Richtung der negativen $z$-Achse, es gelte $O = (0, 0, 0)$ und $(u,v)$ seien normalisierte Bildkoordinaten des Pixels, so sieht die zugehörige Projektionsgerade G folgendermaßen aus:
 \[ G = \left\lbrace \vec{w} \in \R^3 \middle\vert w = r \cdot \begin{pmatrix}
 u \\ v \\ -f
-\end{pmatrix} \land r \in \R \right\rbrace \]
+\end{pmatrix} \land r \in \R^+ \right\rbrace \]
 
 %Da die Position der Bildpunkte in einem eigenen zweidimensionalen Koordinatensystem angegeben werden, benötigten wir noch Informationen zur Position der Bildebene in der Szene. Außerdem benötigen wir Informationen zur Skalierung der Koordinaten. Die Ausrichtung der Bildebene ist bereits durch die Rotation der Kamera gegeben. Eine Möglichkeit die restlichen benötigten Informationen zu definieren ist die Angabe der \emph{Focal length} $f$ und der Ausmaße der \emph{Bildebene}. Die Focal length ist die Entfernung der Bildebene vom Augpunkt. Wir gehen davon aus, dass die Bildpunkte in einem begrenzten Wertebereich liegen und betrachten die Ausmaße des entsprechenden Wertebereiches auf der Bildebene als die Ausmaße der Bildebene. Außerdem gehen wir davon aus, dass sich der Bildpunkt $(0,0)$ in der Mitte des Wertebereichs befindet und sich der entsprechende Punkt auf der Bildebene am nächsten am Augpunkt befindet.
 
@@ -131,9 +133,11 @@ u \\ v \\ -f
 
 \subsection{Triangulation}
 
+Bei der Triangulation geht es darum, den Objektpunkt eines Bildpunktes, der bei einer bekannten Ausrichtung des Lasers vom Laser getroffen wird, zu rekonstruieren.
+
 \subsubsection{Modell und gegebene Werte}
 
-Das hier verwendete Modell besteht im wesentlichen aus einer perspektivischen Projektion eines Objektpunktes $X$ auf eine Bildebene $B$, die parallel zur $x$-$y$-Ebene verläuft. Das Augpunkt liegt dabei im Koordinatenursprung $O$. Der Bildpunkt wird mit $X'$ bezeichnet. Das projizierte Licht wird durch eine Ebene $L$ dargestellt, die die Position des Projektors, das heißt den Projektionspunkt $P$, und den Objektpunkt $X$ schneidet.
+Das hier verwendete Modell des Setups besteht dabei im wesentlichen aus einer perspektivischen Projektion eines Objektpunktes $X$ auf eine Bildebene $B$, die parallel zur $x$-$y$-Ebene verläuft. Das Augpunkt liegt dabei im Koordinatenursprung $O$. Der Bildpunkt wird mit $X'$ bezeichnet. Das projizierte Licht wird durch eine Ebene $L$ dargestellt, die die Position des Projektors, das heißt den Projektionspunkt $P$, und den Objektpunkt $X$ schneidet.
 
 Die durch das Setup gegebenen Werte:
 
@@ -148,11 +152,11 @@ Zudem ist der Bildpunkt durch normalisierte Bildkoordinaten $(u, v)$ gegeben. Da
 
 \subsubsection{Bestimmung der Entfernung}
 
-\begin{wrapfigure}{r}{6cm}
+\begin{figure}
 	\centering
-	\includegraphics[width=\linewidth]{includes/triangulation2d}
+	\includegraphics[width=6cm]{includes/triangulation2d}
 	\caption{Zweidimensionales vereinfachtes Modell des Setups}
-\end{wrapfigure}
+\end{figure}
 
 Als \emph{Entfernung des Objektpunktes}, bzw. $h$, wird die 3. Koordinate von $X$ bezeichnet.
 
@@ -173,12 +177,12 @@ Die Geraden $a$ und $c$ bilden zusammen mit der Geraden $b$, welche durch die Pu
 	\overline{AB} &= p_1 + \tan(\delta) \cdot p_2
 \end{align*}
 
-Die Entfernung $h$ kann nun über die folgende Gleichung berechnet werden:
+Die Entfernung $h$ kann daraufhin wie folgt berechnet werden:
 \[ h = \frac{\overline{AB} \cdot \sin(\alpha) \cdot \sin(\beta)}{\sin(\pi - \beta - \alpha)} \]
 
 \subsubsection{Bestimmung der Koordinaten}
 
-Die Koordinaten des Objektpunktes X in unserem Modell können durch die folgende Gleichung berechnet werden:
+Nachdem die Entfernung $h$ des Objektpunktes bekannt ist, kann der Objektpunkt $X$ recht einfach aus dem Bildpunkt bestimmt werden:
 \[ \vec{x} = \frac{h}{f} \cdot \begin{pmatrix}
 u \\ v \\ -f
 \end{pmatrix} \]
@@ -193,7 +197,48 @@ Die Hardware besteht aus einer Webcam und einem Linienlaser, der auf einem Model
 
 \subsection{Grundlegende Softwarearchitektur}
 
-\subsection{Klassen und Funktionsüberblick}
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{includes/classdiagram}
+	\caption{Klassendiagramm der Basisklassen}
+	\label{fig:classes_base}
+\end{figure}
+
+Zur Implementierung der Software wurde die Programmiersprache \emph{C++} nach dem \emph{Standard von 2014} verwendet. Als Bibliotheken kamen \emph{OpenCV} und \emph{Qt} zum Einsatz.
+
+In dem Klassendiagramm auf \Fref{fig:classes_base} sind die Basisklassen des Programms zu sehen. Dabei haben die Klassen die folgenden Funktionen:
+
+\begin{tabular}{l|p{10cm}}
+	\bfseries Klasse    & \bfseries Funktion\\
+	\hline
+	Configuration       &
+		Diese Klasse ist eine rein statische Klasse. Sie analysiert nach Programmstart die Argumente, die an das Programm übergeben wurden, und speichert die Einstellungen für die weitere Programmausführung.\\
+	\hline
+	Controller          &
+		Diese abstrakte Klasse bildet die Basis für alle \emph{Steuerungsklassen}. Eine Steuerungsklasse bestimmt den Programmablauf und ist damit für die Beschaffung der Setup-Daten und Bilder verantwortlich.\\
+	\hline
+	DeviceConfiguration &
+		Diese Datenstruktur speichert alle relevanten Daten zum Setup wie die Position und Ausrichtung des Projektors. Außerdem wird eine Transformationsmatrix mitgeführt, auf die später noch eingegangen wird.\\
+	\hline
+	LightBarDetector    &
+		Diese abstrakte Klasse dient als Basis für alle Implementierungen zur Detektion der Laserlinie\\
+	\hline
+	Line                &
+		Diese Datenstruktur repräsentiert das Zwischenergebnis der Linienerkennung. Sie speichert eine Liste der Indizes der Pixel, welche vermeintlich zur Laserlinie gehören.\\
+	\hline
+	Point               &
+		Diese Klasse repräsentiert einen rekonstruierten Objektpunkt und ist eine Komponente der Klasse \texttt{Reconstruktion}.\\
+	\hline
+	Reconstruction      &
+		Diese Klasse speichert das endgültige Ergebnis der Rekonstruktion. Außerdem kümmert sie sich um die Ausgabe der Objektpunkte.\\
+	\hline
+	Reconstructor       &
+		Diese abstrakte Klasse dient als Basis für alle Implementierungen zur Rekonstruktion der Objektpunkte auf Basis der bereits erkannten Laserlinie.\\
+	\hline
+	Sample              &
+		Ein Sample ist ein erkannter Pixel einer Laserlinie und ist folglich eine Komponente der Klasse \texttt{Line}.\\
+	\hline
+\end{tabular}
 
 \subsection{Ansteuerung der Hardware}
 
@@ -225,6 +270,10 @@ Vor der eigentlichen Aufnahme mit dem Laser oder nach jeder einzelnen Aufnahme w
 Für jeden Farbkanal wird einzeln der Mittelwert über das gesamte Bild berechnet, aus dem ein Schwellenwert für jeden Kanal einzeln bestimmt wird. Für jeden Pixel wird der Wert jedes Farbkanals mit dem Schwellenwert verglichen. Ist ein Wert keiner als der entsprechnde Schwellenwert, gehört der Pixel nicht zur Linie.
 
 \subsection{Rekonstruktion}
+
+Nachdem die Laserlinie erkannt wurde, werden die vermeintlichen Pixel der erkannten Linie in Objektpunkte überführt. Dies geschieht durch die Klasse \texttt{DefaultReconstructor}, welche derzeit die einzige Spezialisierung von \texttt{Reconstructor} darstellt.
+
+Dazu werden die Formeln aus den theoretischen Grundlagen angewendet, um für jeden Pixel zunächst die normalisierten Bildkoordinaten, die Entfernung $h$ und darauf den Objektpunkt $X$ zu bestimmen. Danach werden die erhalten Punkte mithilfe der Transformationsmatrix transformiert und an die Klasse \texttt{Reconstruction} weiter gegeben.
 
 % ---------------------------------------------------------------------------- %
 
