@@ -19,6 +19,7 @@ public:
 	static bool debugCamera;
 	static bool debugHeightmap;
 	static bool verbose;
+	static bool waitKey;
 	static std::shared_ptr<Controller> controller;
 	static std::shared_ptr<LightBarDetector> lightBarDetector;
 	static std::shared_ptr<Reconstructor> reconstructor;

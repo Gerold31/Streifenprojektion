@@ -40,6 +40,7 @@ bool Configuration::debugLightbar = false;
 bool Configuration::debugCamera = false;
 bool Configuration::debugHeightmap = false;
 bool Configuration::verbose = false;
+bool Configuration::waitKey = false;
 shared_ptr<Controller> Configuration::controller{make_shared<CommandController>()};
 shared_ptr<LightBarDetector> Configuration::lightBarDetector{make_shared<DiffLightBarDetector>()};
 shared_ptr<Reconstructor> Configuration::reconstructor{make_shared<DefaultReconstructor>()};
@@ -149,6 +150,11 @@ void Configuration::handleOption(const char op)
 		debugLightbar = true;
 		break;
 	}
+	case 'k':
+	{
+		waitKey = true;
+		break;
+	}
 	case 'L':
 	{
 		const char* lined = getParam();
@@ -234,6 +240,9 @@ bool Configuration::helpAndExit(int exitCode)
 	cerr << endl;
 	cerr << "      -H" << endl;
 	cerr << "          Show heightmap of result." << endl;
+	cerr << endl;
+	cerr << "      -k" << endl;
+	cerr << "          Wait for key after showing a debug image." << endl;
 	cerr << endl;
 	cerr << "      -L <line-detector>" << endl;
 	cerr << "          Set the line detector to use." << endl;

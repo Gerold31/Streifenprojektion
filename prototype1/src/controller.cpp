@@ -39,7 +39,10 @@ void Controller::processImage(const cv::Mat &img)
 	// save image if required
 	char filename[64];
 	if(Configuration::savePrefix != nullptr) {
-		sprintf(filename, "%s_%d.png", Configuration::savePrefix, imageNumber);
+		if (Configuration::savePrefix[0] == '\0')
+			sprintf(filename, "%d.png", imageNumber++);
+		else
+			sprintf(filename, "%s_%d.png", Configuration::savePrefix, imageNumber++);
 		imwrite(filename, img);
 	}
 
@@ -147,9 +150,13 @@ void Controller::processImage(const cv::Mat &img)
 		imshow(WINDOW_DEBUG_HEIGHTMAP, hmap);
 	}
 
-	// wait if a debug window is used
+	// give opencv a chance to update debug windows
 	if (Configuration::debugLightbar || Configuration::debugHeightmap) {
-		//waitKey();
+		// wait for key if required
+		if (Configuration::waitKey)
+			waitKey();
+		else
+			waitKey(1);
 	}
 }
 
@@ -173,7 +180,10 @@ void Controller::updateReference(const cv::Mat &ref)
 	// save image if required
 	char filename[64];
 	if(Configuration::savePrefix != nullptr) {
-		sprintf(filename, "%s_%d_ref.png", Configuration::savePrefix, imageNumber);
+		if (Configuration::savePrefix[0] == '\0')
+			sprintf(filename, "%d_ref.png", imageNumber);
+		else
+			sprintf(filename, "%s_%d_ref.png", Configuration::savePrefix, imageNumber);
 		imwrite(filename, ref);
 	}
 
