@@ -35,8 +35,8 @@ using std::thread;
 
 
 const regex input_point{"\\s*(-?[\\d\\.]+)\\s+(-?[\\d\\.]+)\\s+(-?[\\d\\.]+)\\s+(-?[\\d\\.]+)\\s+(-?[\\d\\.]+)\\s+(-?[\\d\\.]+).*"};
-const regex input_cam{"Cam:\\s*(-?[\\d\\.]+)\\s+(-?[\\d\\.]+).*"};
-const regex input_laser{"Laser:\\s*(-?[\\d\\.]+)\\s+(-?[\\d\\.]+).*"};
+const regex input_cam{"cam:\\s*(-?[\\d\\.]+)\\s+(-?[\\d\\.]+).*"};
+const regex input_laser{"laser:\\s*\\[(-?[\\d\\.]+)\\s*,\\s*(-?[\\d\\.]+)\\s*,\\s*(-?[\\d\\.]+)\\]\\s*(-?[\\d\\.]+)\\s+(-?[\\d\\.]+).*"};
 
 int main(int argc, char *argv[])
 {
@@ -81,12 +81,16 @@ int main(int argc, char *argv[])
 						laser = make_shared<LaserFigure>();
 						plot.addDrawable(laser);
 					}
-					float offset = atof(match[1].str().c_str());
-					float angle = atof(match[2].str().c_str());
+					vec3 pos;
+					pos[0] = atof(match[1].str().c_str());
+					pos[1] = atof(match[2].str().c_str());
+					pos[2] = atof(match[3].str().c_str());
+					float skew = atof(match[4].str().c_str());
+					float pitch = atof(match[5].str().c_str());
 					mat4& tr = laser->transformation;
-					vec3 pos = {-offset, 0.0f, 0.0f};
 					tr = translate(mat4{}, pos);
-					tr = rotate(tr, angle, vec3{0.0f, 1.0f, 0.0f});
+					tr = rotate(tr, skew, vec3{0.0f, 0.0f, 1.0f});
+					tr = rotate(tr, pitch, vec3{0.0f, 1.0f, 0.0f});
 					if (Configuration::verbose) {
 						cout << "Update laser position." << endl;
 					}

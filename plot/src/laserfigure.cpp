@@ -29,7 +29,7 @@ const char fragmentSource[] = GLSL(
 			in vec3 Color;
 			out vec4 outColor;
 			void main() {
-				outColor = vec4(Color, 0.3);
+				outColor = vec4(Color, 0.8);
 			}
 );
 

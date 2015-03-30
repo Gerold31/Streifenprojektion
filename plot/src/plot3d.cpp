@@ -56,6 +56,8 @@ void Plot3D::show(int resolutionX, int resolutionY)
 
 	// Initialize OpenGL
 	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	// Create Drawables
 	{
@@ -126,7 +128,8 @@ void Plot3D::show(int resolutionX, int resolutionY)
 			if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {
 				rotation[2] += 1.0f * dt;
 			}
-			if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == GLFW_PRESS) {
+			if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS
+					|| glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == GLFW_PRESS) {
 				double newCursorX, newCursorY;
 				glfwGetCursorPos(window, &newCursorX, &newCursorY);
 				glfwSetCursorPos(window, cursorX, cursorY);
