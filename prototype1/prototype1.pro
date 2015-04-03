@@ -18,7 +18,7 @@ INCLUDEPATH += include/
 
 LIBS += -lopencv_core -lopencv_highgui -lopencv_imgproc
 
-QMAKE_CXXFLAGS += -std=c++14
+QMAKE_CXXFLAGS += -std=c++11
 
 SOURCES += \ 
     src/camera.cpp \
