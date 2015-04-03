@@ -195,18 +195,50 @@ u \\ v \\ -f
 
 Die Hardware besteht aus einer Webcam und einem Linienlaser, der auf einem Modellbauservo montiert ist. Laser und Servo werden von einem ''Spark Core'' Mikrocontroller gesteuert, welcher wiederum über USB von der Software gesteuert wird.
 
-\subsection{Grundlegende Softwarearchitektur}
+\subsection{Softwarearchitektur}
+
+Zur Implementierung der Software wurde die Programmiersprache \emph{C++} nach dem \emph{Standard von 2011} verwendet. Als Bibliotheken kamen \emph{OpenCV} und \emph{Qt} zum Einsatz.
+
+\subsubsection{Grundlegende Datenstrukturen}
+
+Zur Übertragung von Informationen zwischen den verschiedenen Komponenten werden die Datenstrukturen \texttt{Line}, \texttt{Reconstruction} und \texttt{DeviceConfiguration} verwendet. In \Fref{fig:classes_base} sind die entsprechenden Klassen zu sehen und in \Fref{tab:classes_base} werden ihre Funktionen beschrieben.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=\linewidth]{includes/classdiagram}
-	\caption{Klassendiagramm der Basisklassen}
+	\includegraphics[width=\linewidth]{includes/classdiagram_base.png}
+	\caption{Klassendiagramm zu den grundlegenden Datenstrukturen}
 	\label{fig:classes_base}
 \end{figure}
 
-Zur Implementierung der Software wurde die Programmiersprache \emph{C++} nach dem \emph{Standard von 2014} verwendet. Als Bibliotheken kamen \emph{OpenCV} und \emph{Qt} zum Einsatz.
+\begin{table}
+	\begin{tabular}{lp{10cm}}
+		\texttt{DeviceConfiguration} &
+		Die Struktur \texttt{DeviceConfiguration} speichert dabei alle Werte zum Setup, die zur Rekonstruktion benötigt werden. Zusätzlich wird eine Transformationsmatrix mitgeführt, auf die später noch eingegangen wird.\\[1em]
+		\texttt{Line}                &
+		Die Datenstruktur \texttt{Line} entspricht einer Menge von Abtastungen der projizierten Linie. Sie Speichert dabei zusätzlich zu einer Liste von Abtastungen (Instanzen von \texttt{Sample}) die Auflösung des zugrunde liegenden Bildes.\\[1em]
+		Reconstruction               &
+		Die Klasse \texttt{Reconstruction} dient zum Speichern des endgültigen Ergebnises der Rekonstruktion. Sie speichert somit eine Liste von rekonstruierten Punkten (Instanzen von \texttt{Point}). Zusätzlich hat die Klasse die Aufgabe, hinzugefügte rekonstruierte Punkte zur Ausgabe des Programms hinzuzufügen.
+	\end{tabular}
+	\caption{Funktion der grundlegenden Datenstrukturen}
+	\label{tab:classes_base}
+\end{table}
 
-In dem Klassendiagramm auf \Fref{fig:classes_base} sind die Basisklassen des Programms zu sehen. Dabei haben die Klassen die folgenden Funktionen:
+\subsubsection{Programmablauf}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{includes/classdiagram_control.png}
+	\caption{Klassendiagramm zu den Steuereinheiten}
+	\label{fig:classes_control}
+\end{figure}
+
+Nach Programmstart wird als erstes die Funktion \texttt{Configuration::init(int,char**)} aufgerufen. Diese analysiert die Argumente, die dem Programm übergeben wurden, und speichert das Ergebnis in den statischen Feldern der Klasse. Unter anderem wird dabei jeweils eine Instanz einer Spezialisierung der Klassen \texttt{Controller}, \texttt{LightBarDetector} und \texttt{Reconstructor} in den Feldern von \texttt{Configuration} abgelegt. Als nächstes wird die Methode \texttt{main()} des Controllers aufgerufen. Der Rest des Programmablaufes wird von der entsprechenden Methode des Controllers gesteuert.
+
+Der Ablauf, der von den verschiedenen Spezialisierungen von \texttt{Controller} vorgegeben wird, verfolgt dabei immer einen ähnlichen Ablauf. Der Controller durchläuft eine Schleife und beschafft sich in jedem Schleifendurchlauf die aktuelle Gerätekonfiguration (\texttt{DeviceConfiguration}) und ggf. ein aktuelleres Referenzbild. Danach übergibt es die Steuerung an die oben festgelegte Linienerkennung (\texttt{LightBarDetextor}) und dessen Ergebnis wird an den Rekonstruktionsalgorithmus (\texttt{Reconstructor}) übergeben. Siehe zur Veranschaulichung auch {\color{red} Abbildung x}.
+
+\subsubsection{Übersicht}
+
+In dem Klassendiagramm auf \Fref{fig:classes_all} sind nochmal alle Klassen des Programms zu sehen.
 
 \begin{tabular}{l|p{10cm}}
 	\bfseries Klasse    & \bfseries Funktion\\
@@ -215,7 +247,7 @@ In dem Klassendiagramm auf \Fref{fig:classes_base} sind die Basisklassen des Pro
 		Diese Klasse ist eine rein statische Klasse. Sie analysiert nach Programmstart die Argumente, die an das Programm übergeben wurden, und speichert die Einstellungen für die weitere Programmausführung.\\
 	\hline
 	Controller          &
-		Diese abstrakte Klasse bildet die Basis für alle \emph{Steuerungsklassen}. Eine Steuerungsklasse bestimmt den Programmablauf und ist damit für die Beschaffung der Setup-Daten und Bilder verantwortlich.\\
+		Diese abstrakte Klasse bildet die Basis für alle \emph{Steuerungsklassen} und definiert Funktionen mit denen die Steuerungsklasse ihre Arbeit verrichten kann. Eine Steuerungsklasse bestimmt den Programmablauf und ist dabei für die Beschaffung der Setup-Informationen und Bilder verantwortlich.\\
 	\hline
 	DeviceConfiguration &
 		Diese Datenstruktur speichert alle relevanten Daten zum Setup wie die Position und Ausrichtung des Projektors. Außerdem wird eine Transformationsmatrix mitgeführt, auf die später noch eingegangen wird.\\
@@ -239,6 +271,13 @@ In dem Klassendiagramm auf \Fref{fig:classes_base} sind die Basisklassen des Pro
 		Ein Sample ist ein erkannter Pixel einer Laserlinie und ist folglich eine Komponente der Klasse \texttt{Line}.\\
 	\hline
 \end{tabular}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{includes/classdiagram}
+	\caption{Umfassendes Klassendiagramm}
+	\label{fig:classes_all}
+\end{figure}
 
 \subsection{Ansteuerung der Hardware}
 
