@@ -7,6 +7,7 @@
 \usepackage{helvet}
 \usepackage[T1]{fontenc}
 \usepackage{amsmath, amssymb, amstext}
+\usepackage{subcaption}
 \usepackage[affil-it]{authblk}
 \usepackage[round]{natbib}
 \usepackage[nolist,footnote]{acronym}
@@ -33,7 +34,7 @@
 	pdftitle    = {Streifenlichtprojektion und optische Analyse zur Oberflächeninspektion},
 	pdfsubject  = {Streifenlichtprojektion},
 	pdfauthor   = {Dennis~Wagner, Johannes~Spangenberg, Leroy~Kramer},
-	pdfkeywords = {Streifenlichtprojektion, Humboldt, HU, Informatik},
+	pdfkeywords = {Streifenlichtprojektion, Humboldt Universität, Informatik, Semesterprojekt},
 	%	pdfcreator  = {pdflatex},
 	%	pdfproducer = {LaTeX with hyperref},
 }
@@ -67,7 +68,7 @@
 
 \section{Einleitung}
 
-In verschiedenen Fällen ist es hilfreich oder notwendig ein \emph{komplexes} dreidimensionales Objekt zu vermessen. Aus solchen Vermessungen resultierende Modelle können in der Unterhaltungsindustrie für die Film- und Spielproduktion verwendet werden. Außerdem ermöglichen Verfahren zur Vermessung von Geometrien automatisierte Qualitätskontrollen und neue Methoden zur automatisierten Fertigung oder Verarbeitung.
+In verschiedenen Fällen ist es hilfreich oder notwendig ein \emph{komplexes} dreidimensionales Objekt zu vermessen. Aus solchen Vermessungen resultierende Modelle können beispielsweise in der Unterhaltungsindustrie für die Film- und Spielproduktion verwendet werden. So lassen sich heutzutage dank solcher Verfahren vergleichsweise einfach Personen und Objekte in Spiele übernehmen. Außerdem ermöglichen Verfahren zur Vermessung von Geometrien automatisierte Qualitätskontrollen und neue Methoden zur automatisierten Fertigung oder Verarbeitung.
 
 In diesem Projekt wird mit der \emph{Streifenlichtprojektion} gearbeitet. Dabei wird ein Streifen auf eine Oberfläche projiziert um aus einer Aufnahme der projizierten Linie die Form der Struktur zu rekonstruieren.
 
@@ -75,16 +76,16 @@ In diesem Projekt wird mit der \emph{Streifenlichtprojektion} gearbeitet. Dabei 
 
 \section{Theoretische und technische Grundlagen}
 
-Zusätzlich zur hier verwendeten Methode haben sich in den letzten Jahrzehnten viele verschiedene Techniken entwickelt, mit denen man dreidimensionale Strukturen der realen Welt vermessen kann. So existieren zusätzlich zur Streifenlichtprojektion beispielsweise Verfahren, die \emph{Stereo-Vision}, \emph{Structure from Motion}, \emph{Shape from Shading} oder \emph{Time of Flight} verwenden. Die benötigten theoretischen Grundlagen überschneiden sich dabei bei einigen der Verfahren. Im folgenden wird auf wichtige Grundlagen des Projektes eingegangen.
+Zusätzlich zur hier verwendeten Methode haben sich in den letzten Jahrzehnten viele verschiedene Techniken entwickelt, mit denen man dreidimensionale Strukturen der realen Welt vermessen kann. So existieren zusätzlich zur Streifenlichtprojektion beispielsweise Verfahren, die \emph{Stereo-Vision}, \emph{Structure from Motion}, \emph{Shape from Shading} oder \emph{Time of Flight} verwenden. Die benötigten theoretischen Grundlagen überschneiden sich dabei bei einigen der Verfahren, es gibt aber auch einige Unterschiede. Im folgenden wird auf wichtige Grundlagen eingegangen, die für Projekt benötigt werden.
 
 \subsection{Normalisierte Bildkoordinaten}
 \label{sec:imagecoordinates}
 
-Ein Bild besteht aus einer zweidimensionalen Matrix, die für jeden Pixel eine Farbe definiert. Bei der Übertragung des Bildes auf eine Fläche unter Verwendung der Indices der Matrix als Koordinaten für die \emph{Bildpunkte} auf der Fläche stößt man schnell auf das Problem, dass die Lage des Bildpunktes erst im Zusammenhang mit der Auflösung bestimmt werden kann. Aus diesem Grund werden in verschiedenen Situationen \emph{normalisierte Bildkoordinaten} verwendet. Das Ziel der normalisierten Koordinaten ist es, die Position eines Pixels auf einer Fläche oder Ebene mit nur zwei Skalaren ausdrücken zu können.
+Ein \emph{fotografisches Bild} kann als eine zweidimensionalen Matrix, die für jeden Pixel eine Farbe definiert, dargestellt werden. Dabei eignen sich die Indices des Bilder allerdings nur begrenzt zur Beschreibung von Positionen auf dem Bild. Hat man beispielsweise mehrere Inhaltsgleiche Bilder mit unterschiedlicher Abtastrate (Auflösung), so beschreiben die selben Koordinaten auf jedem Bild eine inhaltlich andere Position. Aus diesem Grund werden in vielen Situationen \emph{normalisierte Bildkoordinaten} verwendet. Das Ziel der normalisierten Bildkoordinaten ist es, Positionen auf einem Bild unabhängig von der Auflösung ausdrücken zu können.
 
-Als normalisierte Bildkoordinaten wird hier ein Tupel aus zwei reellen Zahlen $(u,v)$ verwendet. $v$ ist dabei aus dem Intervall $[-1,1]$. Der Wertebereich von $u$ ergibt sich entsprechend aus dem Seitenverhältnis $r$: $u \in [-r,r]$. Dabei sollte erwähnt werden, dass normalisierte Bildkoordinaten oft auch so definiert werden, dass ebenfalls $u \in [-1,1]$ gilt.
+Als normalisierte Bildkoordinaten wird hier ein Tupel aus zwei reellen Zahlen $(u,v)$ verwendet. $v$ ist dabei aus dem Intervall $[-1,1]$. Der Wertebereich von $u$ ergibt sich entsprechend aus dem Seitenverhältnis $r$: $u \in [-r,r]$. Dabei sollte erwähnt werden, dass normalisierte Bildkoordinaten je nach Anwendungsgebiet oft auch anders definiert werden. So gibt es definitionen wo für $u$ ebenfalls $u \in [-1,1]$ gilt oder wo sich $u$ und $v$ im Wertebereich $[0,1]$ befinden.
 
-Um aus den Indizes $(i,j)$ eines Pixels die normalisierten Bildkoordinaten $(u,v)$ zu berechnen, kann folgende Gleichung verwendet werden:
+Um aus den Indizes $(i,j)$ eines Pixels die normalisierten Bildkoordinaten $(u,v)$ zu berechnen, kann hier folgende Gleichung verwendet werden:
 \[ \begin{pmatrix}
 u \\ v
 \end{pmatrix} = 2 \cdot \begin{pmatrix}
@@ -96,59 +97,57 @@ r \\ 1
 Mit der Bildauflösung $(s_x, s_y)$ und dem Seitenverhältnis $r = s_x/s_y$.
 
 \subsection{Perspektivische Projektion}
+\label{sec:perspective}
 
-Bei einer \emph{perspektivische Projektion} werden dreidimensionale Punkte auf eine \emph{Bildebene} projiziert. Die Funktion entspricht dabei dem Modell der \emph{Lochkamera} und stellt eine Vereinfachung vieler realen Kameras da. Eine perspektivische Projektion wird durch den Augpunkt $O$ und die Bildebene definiert. Um einen Objektpunkt $X$ auf einen Punkt $X'$ in der Bildebene zu projizieren, bestimmt man den Schnittpunkt des \emph{Projektionsstrahls} durch $X$ und $O$ mit der Bildebene. Den projizierten Punkt $X'$ nennt man auch \emph{Bildpunkt}.
+Bei einer \emph{perspektivische Projektion} werden dreidimensionale Punkte auf eine \emph{Bildebene} projiziert. Die Funktion entspricht dabei dem Modell der \emph{Lochkamera} und stellt eine Vereinfachung vieler realen Kameras da. Eine perspektivische Projektion wird durch den Augpunkt $O$ und die Bildebene definiert. Um einen Objektpunkt $X$ auf einen Punkt $X'$ in der Bildebene zu projizieren, bestimmt man den Schnittpunkt des \emph{Projektionsstrahls} durch $X$ und $O$ mit der Bildebene. Den projizierten Punkt $X'$ nennt man auch \emph{Bildpunkt}. Die Bildebene wird oft durch eine Blickrichtung der \emph{Kamera} und eine \emph{Focal length} $f$ definiert. Die Blickrichtung der Kamera entspricht dabei der Normalen der Bildebenen und $f$ ist die Entfernung der Bildebene von Augpunkt.
 
-Oft wird die perspektivische Projektion in Verbindung mit Bildern, wie sie in \Fref{sec:imagecoordinates} definiert werden, und nicht mit konkreten Bildpunkten verwendet. Dabei ist es meistens nicht relevant, wo sich die Bildebene genau befindet, solange man jedem Pixel des Bildes genau einen Projektionsstrahl zuordnen kann. In diesem Fall wird die perspektivische Projektion meist durch den Augpunkt und eine Blickrichtung definiert. Außerdem werden Informationen zur Eingrenzung möglicher Positionen der Bildebene benötigt, um eine eindeutige Zuordnung treffen zu können.
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.4\textwidth}
+		\includegraphics[width=\textwidth]{includes/perspective}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.4\textwidth}
+		\includegraphics[width=\textwidth]{includes/perspective2}
+	\end{subfigure}
+	\caption{Perspektivische Projektion}
+	\label{fig:perspective}
+\end{figure}
 
-Diese Zuordnung kann beispielsweise über die \emph{Focal length} $f$, dem Abstand zwischen Bildebene und Augpunkt, definiert werden. Angenommen die Kamera schaut in Richtung der negativen $z$-Achse, es gelte $O = (0, 0, 0)$ und $(u,v)$ seien normalisierte Bildkoordinaten des Pixels, so sieht die zugehörige Projektionsgerade G folgendermaßen aus:
-\[ G = \left\lbrace \vec{w} \in \R^3 \middle\vert w = r \cdot \begin{pmatrix}
+Oft wird die perspektivische Projektion in Verbindung mit Bildern, wie sie in \Fref{sec:imagecoordinates} beschrieben werden, verwendet, und nicht mit konkreten Bildpunkten. Dazu muss definiert werden, wo sich das Bild auf der Bildebene befindet. Eine offensichtliche Möglichkeit ist die Angabe der Höhe und Breite des Bildes auf der Bildebene, unter der Annahme, dass der am nächsten liegende Punkt der Bildebene zum Augpunkt in der Mitte des Bildes liegt. Wenn das Seitenverhältnis des Bildes beibehalten wird, reicht auch die Angabe der Höhe. Da es meistens nicht relevant ist, wo sich die Bildebene genau befindet, sofern jedem Punkt eine Projektionsgerade zugeordnet wird, kann die Focal length nach belieben verändert werden, solange auch die Bildhöhe entsprechend angepasst wird. Aus diesem Grund reicht es oft, nur die Focal length als Parameter für die Projektion zu nutzen, sofern die Bildhöhe zuvor fest definiert wurde.
+
+Angenommen die Bildhöhe ist fest auf $2$ Einheiten, der Augpunkt ist $O(0,0,0)$ und die Kamera schaut in Richtung der negativen $z$-Achse. Dann kann aus den normalisierten Bildkoordinaten $(u,v)$ der entsprechende Bildpunkt $X'$ ganz einfach über die folgende Gleichung bestimmt werden:
+\[ \vec{x'} = \begin{pmatrix}
 u \\ v \\ -f
-\end{pmatrix} \land r \in \R^+ \right\rbrace \]
+\end{pmatrix} \]
 
-%Da die Position der Bildpunkte in einem eigenen zweidimensionalen Koordinatensystem angegeben werden, benötigten wir noch Informationen zur Position der Bildebene in der Szene. Außerdem benötigen wir Informationen zur Skalierung der Koordinaten. Die Ausrichtung der Bildebene ist bereits durch die Rotation der Kamera gegeben. Eine Möglichkeit die restlichen benötigten Informationen zu definieren ist die Angabe der \emph{Focal length} $f$ und der Ausmaße der \emph{Bildebene}. Die Focal length ist die Entfernung der Bildebene vom Augpunkt. Wir gehen davon aus, dass die Bildpunkte in einem begrenzten Wertebereich liegen und betrachten die Ausmaße des entsprechenden Wertebereiches auf der Bildebene als die Ausmaße der Bildebene. Außerdem gehen wir davon aus, dass sich der Bildpunkt $(0,0)$ in der Mitte des Wertebereichs befindet und sich der entsprechende Punkt auf der Bildebene am nächsten am Augpunkt befindet.
-
-%Da sich die Projektion bei proportionalen Änderungen der drei Werte nicht ändert, kann die Projektion bereits durch zwei der drei Werte beschrieben werden, indem man einen der drei Werte fest definiert. Eine äquivalente Möglichkeit zur Definition der Projektion ist die Angabe des vertikalen und horizontalen \ac{FOV}.
-
-%%Des weiteren wird die Funktion durch das vertikale und horizontale \ac{FOV} bestimmt. Statt das \ac{FOV} direkt anzugeben ist es auch möglich das \ac{FOV} indirekt durch die Angabe der \emph{Focal length} $f$ und der Ausmaße der \emph{Bildebene} $(u, v)$ zu bestimmen. Da sich das \ac{FOV} bei proportionalen Änderungen der drei Werte nicht ändert, kann das \ac{FOV} bereits durch zwei der drei Werte beschrieben werden, indem man einen der drei Werte fest definiert.
-
-%Um aus $f$ und $v$ das vertikale \ac{FOV} zu bestimmen, kann folgende Gleichung benutzen werden:
-%\[ \fov^H = 2 \cdot \arctan \left( \frac{v}{2 f} \right) \]
-%Die Berechnung des horizontalen \ac{FOV} erfolgt analog mit $u$ statt $v$.
-
-%Umgekehrt ist es auch möglich aus dem \ac{FOV} mögliche Werte für $f$, $u$ und $v$ zu bestimmen. Sei $c:(0,\Pi)^2 \to \R$ eine beliebige Funktion, so erhalten wir mit den folgenden Berechnungsvorschriften gültige Werte für $f$, $u$ und $v$:
-%\begin{align*}
-%f &:= c(\fov^V,\fov^H)\\
-%u &:= c(\fov^V,\fov^H) \cdot 2 \tan\left(\frac{\fov^H}{2}\right)\\
-%v &:= c(\fov^V,\fov^H) \cdot 2 \tan\left(\frac{\fov^V}{2}\right)
-%\end{align*}
-
-%Für ein beliebigen Objektpunkt $x = (x_1, x_2, x_3)$ und dem dazugehörigen Bildpunkt $x'$ gilt bei unseren Annahmen die folgende Gleichung:
-%\[ x' = \frac{f}{2 x_3} \cdot \begin{pmatrix}
-%u x_1\\v x_2
-%\end{pmatrix} \]
-
-%\[ x_1 = \frac{2 x_1' x_3}{u f} \]
-%\[ x_2 = \frac{2 x_1' x_3}{v f} \]
+Alternativ zu Focal length und Bildhöhe wird auch oft das (vertikale) \ac{FOV} benutzt, um die Projektion zu definieren. Das vertikale \ac{FOV} ist der Winkel zwischen den obersten und untersten Projektionsgeraden des Bildes. Die Focal length $f$, die Bildhöhe $g$ und das vertikalen \ac{FOV} $\fov$ stehen dabei in der folgende Beziehung:
+\begin{align*}
+	\fov = 2 \cdot \arctan \left( \frac{g}{2 f} \right)
+	\Leftrightarrow f = \frac{g}{2 \tan\left(\frac{\fov}{2}\right)}
+\end{align*}
 
 \subsection{Triangulation}
 
-Bei der Triangulation geht es darum, den Objektpunkt eines Bildpunktes, der bei einer bekannten Ausrichtung des Lasers vom Laser getroffen wird, zu rekonstruieren.
+Bei der Triangulation geht es darum, aus zwei Eckpunkten und den Innenwickeln eines Dreiecks den dritten Eckpunkt zu bestimmen. In diesem Projekt geht es darum, den Objektpunkt auf Basis eines Bildpunktes und der Laserausrichtung zu bestimmen.
 
 \subsubsection{Modell und gegebene Werte}
 
-Das hier verwendete Modell des Setups besteht dabei im wesentlichen aus einer perspektivischen Projektion eines Objektpunktes $X$ auf eine Bildebene $B$, die parallel zur $x$-$y$-Ebene verläuft. Das Augpunkt liegt dabei im Koordinatenursprung $O$. Der Bildpunkt wird mit $X'$ bezeichnet. Das projizierte Licht wird durch eine Ebene $L$ dargestellt, die die Position des Projektors, das heißt den Projektionspunkt $P$, und den Objektpunkt $X$ schneidet.
+Der Sachverhalt wird dabei zunächst auf das folgende Modell abstrahiert: Es existiert eine perspektivischen Projektion eines Objektpunktes $X$ auf eine Bildebene $B$, die parallel zur $x$-$y$-Ebene verläuft. Der Augpunkt $O$ liegt dabei im Koordinatenursprung. Der Bildpunkt wird mit $X'$ bezeichnet. Das projizierte Licht wird durch eine Ebene $L$ dargestellt, die die Position des Projektors, das heißt den Projektionspunkt $P$, und den Objektpunkt $X$ schneidet.
 
 Die durch das Setup gegebenen Werte:
 
 \begin{tabular}{lp{12cm}}
-	$P$       & Position des Linienprojektors.\\
-	$f$       & Focal length (unter der Annahme, dass die Ausmaße der Bildebene zwei Einheiten nach oben betragen)\\
-	$\theta$  & Winkel zur Ausrichtung des Projektors.\\
-	$\delta$  & Zweiter Winkel zur Ausrichtung des Projektors.
+	$P$                &
+		Position des Linienprojektors.\\[0.5em]
+	$f$                &
+		Focal length
+		(unter der Annahme, dass das Bild auf der Bildebene $2$ Einheiten hoch ist)\\[0.5em]
+	$\theta$,$\delta$  &
+		Winkel zur Ausrichtung der Ebene $L$. Die Ausgangslage der Ebene ist parallel zur $y$-$z$-Ebene. Die Ebene wird zunächst mit dem Winkel $\theta$ um den Vektor {\color{red} $(0,0,1)^T$} gedreht. Danach mit dem Winkel $\delta$ um den Vektor {\color{red} $(\sin(\theta), \cos(\theta), 0)^T$}.
 \end{tabular}
 
-Zudem ist der Bildpunkt durch normalisierte Bildkoordinaten $(u, v)$ gegeben. Da die Focal length $f$ auf eine Bildhöhe von zwei Einheiten angepasst ist, gilt $X'(u, v, -f)$.
+Zudem ist der Bildpunkt durch normalisierte Bildkoordinaten $(u, v)$ gegeben. Da die Focal length $f$ auf eine Bildhöhe von $2$ Einheiten angepasst ist, gilt wie in \Fref{sec:perspective} beschrieben $X'(u, v, -f)$.
 
 \subsubsection{Bestimmung der Entfernung}
 
@@ -158,7 +157,7 @@ Zudem ist der Bildpunkt durch normalisierte Bildkoordinaten $(u, v)$ gegeben. Da
 	\caption{Zweidimensionales vereinfachtes Modell des Setups}
 \end{figure}
 
-Als \emph{Entfernung des Objektpunktes}, bzw. $h$, wird die 3. Koordinate von $X$ bezeichnet.
+Als \emph{Entfernung des Objektpunktes}, bzw. $h$, wird die negierte 3. Koordinate von $X$ bezeichnet.
 
 Um diese Entfernung zu bestimmen, wird das geometrische Modell des Setups vereinfacht. Als erstes wird ein Basiswechsel auf die Orthogonalbasis
 \[ \left\lbrace \begin{pmatrix}
@@ -194,6 +193,21 @@ u \\ v \\ -f
 \subsection{Hardware}
 
 Die Hardware besteht aus einer Webcam und einem Linienlaser, der auf einem Modellbauservo montiert ist. Laser und Servo werden von einem ''Spark Core'' Mikrocontroller gesteuert, welcher wiederum über USB von der Software gesteuert wird.
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[width=\textwidth]{includes/hardware_schematic}
+		\caption{schematische Darstellung}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[width=\textwidth]{includes/hardware}
+		\caption{reale Hardware}
+	\end{subfigure}
+	\caption{Aufbau der Hardware}
+	\label{fig:hardware}
+\end{figure}
 
 \subsection{Softwarearchitektur}
 
