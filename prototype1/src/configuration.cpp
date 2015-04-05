@@ -16,7 +16,8 @@
 #include "freelightbardetector.h"
 #include "lightbardetector.h"
 #include "reconstructor.h"
-#include "scancontroller.h"
+#include "rotatescancontroller.h"
+#include "translatescancontroller.h"
 
 using std::cerr;
 using std::cin;
@@ -190,7 +191,6 @@ void Configuration::handleOption(const char op)
 	{
 		errno = 0;
 		captureDevice = strtol(getParam(), nullptr, 10);
-		controller = make_shared<ScanController>();
 		if(errno)
 		{
 			cerr << errno << ": " << strerror(errno) << endl;
@@ -219,6 +219,20 @@ void Configuration::handleOption(const char op)
 	case 's':
 	{
 		savePrefix = getParam();
+		break;
+	}
+	case 'r':
+	{
+		controller = make_shared<RotateScanController>();
+		break;
+	}
+	case 't':
+	{
+		double dx = strtod(getParam(), nullptr);
+		double dy = strtod(getParam(), nullptr);
+		double dz = strtod(getParam(), nullptr);
+		int n = strtol(getParam(), nullptr, 10);
+		controller = make_shared<TranslateScanController>(dx, dy, dz, n);
 		break;
 	}
 	default:
@@ -266,6 +280,12 @@ bool Configuration::helpAndExit(int exitCode)
 	cerr << endl;
 	cerr << "      -d <fov> <skew> <offset>" << endl;
 	cerr << "          Configure device." << endl;
+	cerr << endl;
+	cerr << "      -r" << endl;
+	cerr << "          Perform rotation scan." << endl;
+	cerr << endl;
+	cerr << "      -t <dx> <dy> <dz> <n>" << endl;
+	cerr << "          Perform translation scan moving (<dx>,<dy>,<dz>) each step for <n> steps" << endl;
 	cerr << endl;
 	cerr << "      --create-commands" << endl;
 	cerr << "          Create commands for the future and disable reconstruction." << endl;

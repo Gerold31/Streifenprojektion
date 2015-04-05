@@ -1,5 +1,7 @@
 #include "camera.h"
 
+#include <thread>
+
 Camera::Camera(int device)
 {
 	mDevice = new cv::VideoCapture(device);
@@ -18,7 +20,7 @@ cv::Mat Camera::capture()
 	cv::Mat r;
 	while(id == mImgID)
 	{
-		printf(" \b");
+		std::this_thread::yield();
 	}
 
 	mNextAccess.lock();

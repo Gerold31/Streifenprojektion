@@ -35,8 +35,9 @@ SOURCES += \
     src/freelightbardetector.cpp \
     src/edgelightbardetector.cpp \
     src/controller.cpp \
-    src/scancontroller.cpp \
-    src/commandcontroller.cpp
+    src/commandcontroller.cpp \
+    src/rotatescancontroller.cpp \
+    src/translatescancontroller.cpp
 
 HEADERS += \ 
     include/camera.h \
@@ -55,6 +56,7 @@ HEADERS += \
     include/freelightbardetector.h \
     include/edgelightbardetector.h \
     include/controller.h \
-    include/scancontroller.h \
     include/commandcontroller.h \
-    include/common.h
+    include/common.h \
+    include/rotatescancontroller.h \
+    include/translatescancontroller.h
