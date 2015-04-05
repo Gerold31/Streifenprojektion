@@ -183,7 +183,7 @@ Die Entfernung $h$ kann daraufhin wie folgt berechnet werden:
 \subsubsection{Bestimmung der Koordinaten}
 
 Nachdem die Entfernung $h$ des Objektpunktes bekannt ist, kann der Objektpunkt $X$ recht einfach aus dem Bildpunkt bestimmt werden:
-\[ \vec{x} = \frac{h}{f} \cdot \begin{pmatrix}
+\[ \vec{x} = \frac{h}{f} \cdot \vec{x'} = \frac{h}{f} \cdot \begin{pmatrix}
 u \\ v \\ -f
 \end{pmatrix} \]
 
@@ -234,7 +234,7 @@ Zur Übertragung von Informationen zwischen den verschiedenen Komponenten werden
 
 Nach Programmstart wird als erstes die Funktion \texttt{Configuration::init(int,char**)} aufgerufen. Diese analysiert die Argumente, die dem Programm übergeben wurden, und speichert das Ergebnis in den statischen Feldern der Klasse. Unter anderem wird dabei jeweils eine Instanz einer Spezialisierung der Klassen \texttt{Controller}, \texttt{LightBarDetector} und \texttt{Reconstructor} in den Feldern von \texttt{Configuration} abgelegt. Als nächstes wird die Methode \texttt{main()} des Controllers aufgerufen. Der Rest des Programmablaufes wird von der entsprechenden Methode des Controllers gesteuert.
 
-Der Ablauf, der von den verschiedenen Spezialisierungen von \texttt{Controller} vorgegeben wird, verfolgt dabei immer einen ähnlichen Ablauf. Der Controller durchläuft eine Schleife und beschafft sich in jedem Schleifendurchlauf die aktuelle Gerätekonfiguration (\texttt{DeviceConfiguration}) und ggf. ein aktuelleres Referenzbild. Danach übergibt es die Steuerung an die oben festgelegte Linienerkennung (\texttt{LightBarDetextor}) und dessen Ergebnis wird an den Rekonstruktionsalgorithmus (\texttt{Reconstructor}) übergeben. Siehe zur Veranschaulichung auch {\color{red} Abbildung x}.
+Der Ablauf, der von den verschiedenen Spezialisierungen von \texttt{Controller} vorgegeben wird, verfolgt dabei immer einen ähnlichen Ablauf. Der Controller durchläuft eine Schleife und beschafft sich in jedem Schleifendurchlauf die aktuelle Gerätekonfiguration (\texttt{DeviceConfiguration}), eine Aufnahme durch das entsprechende Setup und ggf. ein aktuelles Referenzbild. Danach übergibt es die Steuerung an Linienerkennung (\texttt{LightBarDetextor}) und dessen Ergebnis wird an den Rekonstruktionsalgorithmus (\texttt{Reconstructor}) übergeben. Siehe zur Veranschaulichung auch {\color{red} Abbildung x}.
 
 \subsubsection{Übersicht}
 
