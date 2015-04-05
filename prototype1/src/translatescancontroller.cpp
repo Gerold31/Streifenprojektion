@@ -1,4 +1,4 @@
-#include "scancontroller.h"
+#include "translatescancontroller.h"
 
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
@@ -16,15 +16,19 @@ using cv::namedWindow;
 const char WINDOW_DEBUG_CAMERA[] = "Debug: Camera";
 
 
-ScanController::ScanController()
+TranslateScanController::TranslateScanController(double dx, double dy, double dz, int n)
+{
+	this->dx = dx;
+	this->dy = dy;
+	this->dz = dz;
+	this->n = n;
+}
+
+TranslateScanController::~TranslateScanController()
 {
 }
 
-ScanController::~ScanController()
-{
-}
-
-void ScanController::main()
+void TranslateScanController::main()
 {
 	// get device configuration from arguments
 	updateDevice(Configuration::deviceConfiguration);
@@ -32,7 +36,10 @@ void ScanController::main()
 	// setup hardware
 	Camera c(Configuration::captureDevice);
 	Laser::getSingleton()->toggle(false);
-	Servo::getSingleton()->setAngle(MIN_ANGLE-5);
+
+	//make sure the servo rotates in positive direction to reduce inaccuracies caused by backlash
+	Servo::getSingleton()->setAngle(-5);
+	Servo::getSingleton()->setAngle(0);
 
 	// create debug window for camera if required
 	if (Configuration::debugCamera) {
@@ -45,24 +52,21 @@ void ScanController::main()
 	//std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 	cv::waitKey(500);
 
-	for(int a=MIN_ANGLE; a<=MAX_ANGLE; a++)
+	for(int i=0; i<n; i++)
 	{
-		imageNumber = a;
-		Configuration::deviceConfiguration.projectorPitch = -a * M_PI/180;
-		updateDevice(Configuration::deviceConfiguration);
+		imageNumber = i;
 
 		Laser::getSingleton()->toggle(false);
-		Servo::getSingleton()->setAngle(a);
 
-		// wait for servo to be in position
-		//std::this_thread::sleep_for(std::chrono::milliseconds(100));
-		cv::waitKey(300);
+		// wait 1 frame in case the laser was turned off while this frame was captured
+		c.capture();
 
 		c.capture().copyTo(reference);
 		updateReference(reference);
 
 		Laser::getSingleton()->toggle(true);
 
+		// wait 1 frame in case the laser was turned on while this frame was captured
 		c.capture();
 
 		cv::Mat img = c.capture();
@@ -74,8 +78,11 @@ void ScanController::main()
 
 		processImage(img);
 
-		//std::this_thread::sleep_for(std::chrono::milliseconds(400));
-		cv::waitKey(1);
+		std::cerr << "move the object" << std::endl;
+		std::string s; std::getline(std::cin, s);
+
+		Configuration::deviceConfiguration.transformation = Configuration::deviceConfiguration.transformation * cv::Matx44d(1, 0, 0, dx, 0, 1, 0, dy, 0, 0, 1, dz, 0, 0, 0, 1);
+		updateDevice(Configuration::deviceConfiguration);
 	}
 	Laser::getSingleton()->toggle(false);
 }
