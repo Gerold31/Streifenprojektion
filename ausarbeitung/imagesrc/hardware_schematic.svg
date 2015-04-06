@@ -84,9 +84,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.8"
-     inkscape:cx="271.94232"
-     inkscape:cy="103.01466"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="283.61843"
+     inkscape:cy="58.368074"
      inkscape:document-units="px"
      inkscape:current-layer="layer6"
      showgrid="true"
@@ -250,8 +250,7 @@
      inkscape:groupmode="layer"
      id="layer6"
      inkscape:label="Beschriftung"
-     transform="translate(-34.933071,11.12996)"
-     sodipodi:insensitive="true">
+     transform="translate(-34.933071,11.12996)">
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:25px;line-height:125%;font-family:sans-serif;text-align:start;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -262,7 +261,7 @@
          sodipodi:role="line"
          id="tspan4198"
          x="354.33072"
-         y="166.53542">Kammera</tspan></text>
+         y="166.53542">Kamera</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:25px;line-height:125%;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -319,13 +318,13 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:25px;line-height:125%;font-family:sans-serif;text-align:start;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="332.44153"
-       y="48.058353"
+       x="301.12637"
+       y="51.601658"
        id="text4612"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan4614"
-         x="332.44153"
-         y="48.058353">10 cm</tspan></text>
+         x="301.12637"
+         y="51.601658">100 mm</tspan></text>
   </g>
 </svg>

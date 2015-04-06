@@ -77,7 +77,7 @@ In diesem Projekt geht es um die \emph{Streifenlichtprojektion}. Dabei wird ein 
 
 \section{Theoretische und technische Grundlagen}
 
-Zusätzlich zur hier verwendeten Methode haben sich in den letzten Jahrzehnten viele verschiedene Techniken entwickelt, mit denen man dreidimensionale Strukturen der realen Welt vermessen kann. So existieren zusätzlich zur Streifenlichtprojektion beispielsweise Verfahren, die \emph{Stereo-Vision}, \emph{Structure from Motion}, \emph{Shape from Shading} oder \emph{Time of Flight} verwenden. Die benötigten theoretischen Grundlagen überschneiden sich dabei bei einigen der Verfahren, es gibt aber auch einige Unterschiede. Im folgenden wird auf wichtige Grundlagen eingegangen, die für das Projekt benötigt werden.
+Zusätzlich zur hier verwendeten Methode haben sich in den letzten Jahrzehnten viele verschiedene Techniken entwickelt, mit denen man dreidimensionale Strukturen der realen Welt vermessen kann. So existieren zusätzlich zur Streifenlichtprojektion Verfahren wie \emph{Stereo-Vision}, \emph{Structure from Motion}, \emph{Shape from Shading} und \emph{Time of Flight}. Die benötigten theoretischen Grundlagen überschneiden sich dabei bei einigen der Verfahren, es gibt aber auch einige Unterschiede. Im Folgenden wird auf wichtige Grundlagen eingegangen, die für das Projekt benötigt werden.
 
 \subsection{Normalisierte Bildkoordinaten}
 \label{sec:imagecoordinates}
@@ -100,7 +100,7 @@ Mit der Bildauflösung $(s_x, s_y)$ und dem Seitenverhältnis $r = s_x/s_y$.
 \subsection{Perspektivische Projektion}
 \label{sec:perspective}
 
-Bei einer \emph{perspektivische Projektion} werden dreidimensionale Punkte auf eine \emph{Bildebene} projiziert. Die Funktion entspricht dabei dem Modell der \emph{Lochkamera} und stellt eine Vereinfachung vieler realen Kameras da. Eine perspektivische Projektion wird durch den Augpunkt $O$ und die Bildebene definiert. Um einen Objektpunkt $X$ auf einen Punkt $X'$ in der Bildebene zu projizieren, bestimmt man den Schnittpunkt des \emph{Projektionsstrahls} durch $X$ und $O$ mit der Bildebene. Den projizierten Punkt $X'$ nennt man auch \emph{Bildpunkt}. Die Bildebene wird oft durch eine Blickrichtung der \emph{Kamera} und eine \emph{Focal length} $f$ definiert. Die Blickrichtung der Kamera entspricht dabei der Normalen der Bildebenen und $f$ ist die Entfernung der Bildebene vom Augpunkt in Blickrichtung.
+Bei einer \emph{perspektivischen Projektion} werden dreidimensionale Punkte auf eine \emph{Bildebene} projiziert. Die Funktion entspricht dabei dem Modell der \emph{Lochkamera} und stellt eine Vereinfachung vieler realen Kameras da. Eine perspektivische Projektion wird durch den Augpunkt $O$ und die Bildebene definiert. Um einen Objektpunkt $X$ auf einen Punkt $X'$ in der Bildebene zu projizieren, bestimmt man den Schnittpunkt des \emph{Projektionsstrahls} durch $X$ und $O$ mit der Bildebene. Den projizierten Punkt $X'$ nennt man auch \emph{Bildpunkt}. Die Bildebene wird oft durch eine Blickrichtung der \emph{Kamera} und eine \emph{Focal length} $f$ definiert. Die Blickrichtung der Kamera entspricht dabei der Normalen der Bildebenen und $f$ ist die Entfernung der Bildebene vom Augpunkt in Blickrichtung.
 
 \begin{figure}
 	\centering
@@ -117,7 +117,7 @@ Bei einer \emph{perspektivische Projektion} werden dreidimensionale Punkte auf e
 
 Oft wird die perspektivische Projektion in Verbindung mit Bildern, wie sie in \Fref{sec:imagecoordinates} beschrieben werden, verwendet, und nicht mit konkreten Bildpunkten. Dazu muss definiert werden, wo sich das Bild auf der Bildebene befindet. Eine offensichtliche Möglichkeit ist die Angabe der Höhe und Breite des Bildes auf der Bildebene, unter der Annahme, dass der am nächsten liegende Punkt der Bildebene zum Augpunkt in der Mitte des Bildes liegt. Wenn das Seitenverhältnis des Bildes beibehalten wird, reicht auch die Angabe der Höhe. Da es meistens nicht relevant ist, wo sich die Bildebene genau befindet, sofern jedem Punkt eine Projektionsgerade zugeordnet wird, kann die Focal length nach belieben verändert werden, solange auch die Bildhöhe entsprechend angepasst wird. Aus diesem Grund reicht es oft, nur die Focal length als Parameter für die Projektion zu nutzen, sofern die Bildhöhe zuvor fest definiert wurde.
 
-Angenommen die Bildhöhe ist fest auf $2$ Einheiten, der Augpunkt ist $O(0,0,0)$ und die Kamera schaut in Richtung der negativen $z$-Achse. Dann kann aus den normalisierten Bildkoordinaten $(u,v)$ der entsprechende Bildpunkt $X'$ ganz einfach über die folgende Gleichung bestimmt werden:
+Angenommen das Bild ist $2$ Einheiten hoch, der Augpunkt ist $O(0,0,0)$ und die Kamera schaut in Richtung der negativen $z$-Achse. Dann kann aus den normalisierten Bildkoordinaten $(u,v)$ der entsprechende Bildpunkt $X'$ ganz einfach über die folgende Gleichung bestimmt werden:
 \[ \vec{x'} = \begin{pmatrix}
 u \\ v \\ -f
 \end{pmatrix} \]
@@ -193,7 +193,7 @@ Die Geraden $a$ und $c$ bilden zusammen mit der Geraden $b$, welche durch die Pu
 	\overline{AB} &= p_1 + \tan(\delta) \cdot p_2
 \end{align*}
 
-Die Entfernung $h$ kann daraufhin wie folgt berechnet werden:
+Die Entfernung $h$ ergibt sich daraufhin aus der folgenden Gleichung:
 \[ h = \frac{\overline{AB} \cdot \sin(\alpha) \cdot \sin(\beta)}{\sin(\pi - \beta - \alpha)} \]
 
 \subsubsection{Bestimmung der Koordinaten}
@@ -265,6 +265,8 @@ Zur Übertragung von Informationen zwischen den verschiedenen Komponenten werden
 
 Nach Programmstart wird als erstes die Funktion \texttt{Configuration::init(int,char**)} aufgerufen. Diese analysiert die Argumente, die dem Programm übergeben wurden, und speichert das Ergebnis in den statischen Feldern der Klasse. Unter anderem wird dabei jeweils eine Instanz einer Spezialisierung von \texttt{Controller}, \texttt{LightBarDetector} und \texttt{Reconstructor} in den Feldern von \texttt{Configuration} abgelegt. Als nächstes wird die Methode \texttt{main()} der \emph{Steuerungsklasse}, also der Spezialisierung von \texttt{Controller}, aufgerufen, welche den Rest des Programmablaufes steuert.
 
+\subsection{Steuerungsklassen}
+
 \begin{figure}
 	\centering
 	\includegraphics[width=0.4\linewidth]{includes/software_controller}
@@ -273,8 +275,6 @@ Nach Programmstart wird als erstes die Funktion \texttt{Configuration::init(int,
 \end{figure}
 
 Der Ablauf, der von den verschiedenen Spezialisierungen von \texttt{Controller} vorgegeben wird, verfolgt dabei immer einen ähnlichen Ablauf, wie er auch in \Fref{fig:software_controller} beschrieben wird. Der Controller durchläuft eine Schleife und beschafft sich in jedem Schleifendurchlauf die aktuelle Gerätekonfiguration (\texttt{DeviceConfiguration}), eine Aufnahme durch das entsprechende Setup und ggf. ein aktuelles Referenzbild. Danach übergibt es die Steuerung an die Linienerkennung (\texttt{LightBarDetextor}) und dessen Ergebnis wird an den Rekonstruktionsalgorithmus (\texttt{Reconstructor}) übergeben.
-
-\subsection{Steuerungsklassen}
 
 Es existieren drei Spezialisierungen von \texttt{Controller}. Die einfachste Implementierung ist der \texttt{CommandController}, welcher Standardmäßig verwendet wird. Die Klasse liest die Standarteingabe oder die in den Argumenten definierte Datei Zeilenweise aus. Eine Zeile entspricht dabei einem Befehl, welcher ausgewertet und ausgeführt wird, bevor sich das Programm der nächsten Zeile zuwendet. In der \Fref{tab:commands} können alle Befehle nachgelesen werden.
 
@@ -294,7 +294,7 @@ Es existieren drei Spezialisierungen von \texttt{Controller}. Die einfachste Imp
 		\texttt{po <skew> <pitch>}   &
 			Setzt die Werte $\theta$ und $\delta$ aus dem Modell. Die Winkel müssen dabei in Radiant angegeben werden.\\
 		\hline
-		\texttt{t (<m>)\{16\}}       &
+		\texttt{t <$m_1$> \dots <$m_{16}$>} &
 			Setzt die Transformationsmatrix. Dabei wird die Matrix Zeilenweise aufgefüllt:
 			\[ \begin{pmatrix}
 				m_{1}  & m_{2}  & m_{3}  & m_{4}\\
@@ -314,7 +314,7 @@ Es existieren drei Spezialisierungen von \texttt{Controller}. Die einfachste Imp
 	\label{tab:commands}
 \end{table}
 
-Die Klassen \texttt{RotateScanController} und \texttt{TranslateScanController} beschaffen die Aufnahmen hingehen direkt von der Hardware. Der \texttt{RotateScanController} rotiert dabei den Streifenprojektor um passende Aufnahmen zu erhalten. Der \texttt{TranslateScanController} {\color{red} \dots}
+Die Klassen \texttt{RotateScanController} und \texttt{TranslateScanController} beschaffen die Aufnahmen hingehen direkt von der Hardware. Der \texttt{RotateScanController} rotiert dabei den Streifenprojektor um passende Aufnahmen zu erhalten. Der \texttt{TranslateScanController} macht eine Aufnahme und wartet anschließend auf eine Bestätigung des Benutzers, dass sich das zu scannende Objekt um eine vorher definierte Strecke bewegt hat, bevor er das nächste Bild aufnimmt.
 
 \subsection{Ansteuerung der Hardware}
 
@@ -334,7 +334,7 @@ Die Software steuert den Mikrocontroller über USB, wobei sich dieser als virtue
 
 \footnotetext{Zeichen in Anführungszeichen stehen für den ASCII-Wert des Zeichens}
 
-Die Klasse \texttt{Serial} ermöglicht es an den Mikrocontroller Nachrichten zu senden.
+Die Klasse \texttt{Serial} ermöglicht es Nachrichten an den Mikrocontroller zu senden.
 
 Mit den Klassen \texttt{Servo} und \texttt{Laser} kann man Nachrichten in o.g. Form an den Mikrocontroller senden, um den Servo bzw. Laser zu steuern.
 
@@ -342,26 +342,26 @@ Mit den Klassen \texttt{Servo} und \texttt{Laser} kann man Nachrichten in o.g. F
 
 Für das Auslesen von Bildern der Kamera ist die Klasse \texttt{Camera} zuständig, dabei liest ein extra Thread permanent Bilder von der Kamera.
 
-Wenn ein anderer Thread die \texttt{capture} Methode von \texttt{Camera} aufruft, blockiert er solange bis der extra Thread das nächste Bild gelesen hat und gibt dieses dann zurück. Das wird gemacht um sicherzustellen, dass immer das aktuellste Bild ausgelesen wird und nicht ein älteres Bild, das in einem Buffer der Kamera gespeichert wurde.
+Wenn ein anderer Thread die \texttt{capture}-Methode von \texttt{Camera} aufruft, blockiert er solange, bis der extra Thread das nächste Bild gelesen hat, und gibt dieses dann zurück. Das wird gemacht um sicherzustellen, dass immer das aktuellste Bild ausgelesen wird und nicht ein älteres Bild, das in einem Buffer der Kamera gespeichert wurde.
 
 
 \subsection{Linienerkennung}
 
-Es wird ein Binärbild erzeugt, wobei der Algorithmus entscheidet, welche Pixel zur Linie gehören und welche nicht. Im zweiten Schritt wird das Bild zeilenweise durchgegangen, wobei in eine seperate Datenstruktur die vermeintliche Position der Linie und deren Breite geschrieben wird. Diese Informationen werden dann an die Auswertungssoftware weitergegeben. Die hier implementierten Algorithmen unterscheiden sich lediglich in der Erzeugung des Binärbildes im ersten Schritt.
+Zuerst wird ein Binärbild erzeugt, wobei der Algorithmus entscheidet, welche Pixel zur Linie gehören und welche nicht. Im zweiten Schritt wird jeder Pixel des Bild durchlaufen, wobei in die Datenstruktur \texttt{Line} die vermeintliche Position der Linie und deren Breite geschrieben wird. Die hier implementierten Algorithmen unterscheiden sich lediglich in der Erzeugung des Binärbildes.
 
 \subsubsection{Differenzbildung (Diff)}
 
-Vor der eigentlichen Aufnahme mit dem Laser oder nach jeder einzelnen Aufnahme wird ein Bild ohne eine Linie aufgenommen. Mit jedem weiteren Bild wird die Differenz mit der Aufnahme ohne Linie gebildet und mit Hilfe einer Maske wird das Rauschen entfernt und das Bild in ein Binärbild umgewandelt.
+Bei diesem Verfahren muss für jedes zu analysierende Bild ein Referenzbild ohne die projizierte Linie gegeben sein. Dabei wird die Differenz für jedes Bild mit dem Referenzbild berechnet und mit Hilfe eines einfachen Filters in ein Binärbild umgewandelt.
 
 \subsubsection{Farbfilter (Free)}
 
-Für jeden Farbkanal wird einzeln der Mittelwert über das gesamte Bild berechnet, aus dem ein Schwellenwert für jeden Kanal einzeln bestimmt wird. Für jeden Pixel wird der Wert jedes Farbkanals mit dem Schwellenwert verglichen. Ist ein Wert keiner als der entsprechnde Schwellenwert, gehört der Pixel nicht zur Linie.
+Für jeden Farbkanal wird einzeln der Mittelwert über das gesamte Bild berechnet, aus dem ein Schwellenwert für jeden Kanal einzeln bestimmt wird. Für jeden Pixel wird der Wert aller Farbkanäle mit dem Schwellenwert verglichen. Ist ein Wert keiner als der entsprechende Schwellenwert, gehört der Pixel nicht zur Linie.
 
 \subsection{Rekonstruktion}
 
 Nachdem die Laserlinie erkannt wurde, werden die vermeintlichen Pixel der erkannten Linie in Objektpunkte überführt. Dies geschieht durch die Klasse \texttt{DefaultReconstructor}, welche derzeit die einzige Spezialisierung von \texttt{Reconstructor} darstellt.
 
-Dazu werden die Formeln aus den theoretischen Grundlagen angewendet, um für jeden Pixel zunächst die normalisierten Bildkoordinaten, die Entfernung $h$ und darauf den Objektpunkt $X$ zu bestimmen. Danach werden die erhalten Punkte mithilfe der Transformationsmatrix transformiert und an die Klasse \texttt{Reconstruction} weiter gegeben, welche sie letztendlich ausgibt.
+Dazu werden die Formeln aus den theoretischen Grundlagen angewendet, um für jeden Pixel zunächst die normalisierten Bildkoordinaten, die Entfernung $h$ und danach den Objektpunkt $X$ zu bestimmen. Daraufhin werden die erhalten Punkte mithilfe der Transformationsmatrix transformiert und an die Klasse \texttt{Reconstruction} weiter gegeben, welche sie letztendlich ausgibt.
 
 %\subsection{Übersicht über alle Klassen}
 
@@ -424,7 +424,7 @@ Dazu werden die Formeln aus den theoretischen Grundlagen angewendet, um für jed
 
 \section{Auswertung}
 
-Im Folgenden werden verschiedene Seiten eines ''Rubik's Cube'' auf verschiedene Entfernungen gescannt. Es wurden die Rote, Grüne, Blaue, Gelbe und Orange Seite in 300mm Entfernung, sowie die Blaue Seite in 200mm, 400mm und 500mm Entfernung vermessen. Die Zugehörigkeit eines Messpunktes wird anhand seiner Farbe, die aus dem Referenzbild entnommen wurde, bestimmt. Da die Scans vor weißem Hintergrund durchgefuehrt wurden, wurde die Weiße Seite des ''Rubik's Cube'' nicht gescannt.
+Im Folgenden werden verschiedene Seiten eines ''Rubik's Cube'' auf verschiedene Entfernungen gescannt. Es wurden die rote, grüne, blaue, gelbe und orange Seite in 300mm Entfernung, sowie die blaue Seite in 200mm, 400mm und 500mm Entfernung vermessen. Die Zugehörigkeit eines Messpunktes wird anhand seiner Farbe, die aus dem Referenzbild entnommen wurde, bestimmt. Da die Scans vor weißem Hintergrund durchgeführt wurden, wurde die Weiße Seite des ''Rubik's Cube'' nicht gescannt.
 
 \subsection{''diff'' - Linienerkennung}
 \label{subsec:auswertung.diff}
