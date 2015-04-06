@@ -37,7 +37,7 @@ inline bool readPoint(Point& p)
 		static const std::regex r{"\\s*-?(\\d+|\\d*\\.\\d*)\\s+-?(\\d+|\\d*\\.\\d*)\\s+-?(\\d+|\\d*\\.\\d*)\\s+-?(\\d+|\\d*\\.\\d*)\\s+-?(\\d+|\\d*\\.\\d*)\\s+-?(\\d+|\\d*\\.\\d*)\\s*"};
 		// TODO add "\\s+\\d+\\s+\\d+" to regex
 		if (std::regex_match(line, r)) {
-			std::cin >> p;
+			std::stringstream{line} >> p;
 			return true;
 		}
 	}
