@@ -15,6 +15,7 @@
 \usepackage{fancyref}
 \usepackage{graphicx}
 \usepackage{xcolor}
+\usepackage{pgfplots}
 
 \usepackage[hidelinks]{hyperref}
 %\usepackage[left=3cm,right=4cm,top=3cm,bottom=6cm,includeheadfoot]{geometry}
@@ -397,6 +398,228 @@ Dazu werden die Formeln aus den theoretischen Grundlagen angewendet, um für jed
 % ---------------------------------------------------------------------------- %
 
 \section{Auswertung}
+
+Im Folgenden werden verschiedene Seiten eines ''Rubik's Cube'' auf verschiedene Entfernungen gescannt. Es wurden die Rote, Grüne, Blaue, Gelbe und Orange Seite in 300mm Entfernung, sowie die Blaue Seite in 200mm, 400mm und 500mm Entfernung vermessen. Die Zugehörigkeit eines Messpunktes wird anhand seiner Farbe, die aus dem Referenzbild entnommen wurde, bestimmt. Da die Scans vor weißem Hintergrund durchgefuehrt wurden, wurde die Weiße Seite des ''Rubik's Cube'' nicht gescannt.
+
+\subsection{''diff'' - Linienerkennung}
+\label{subsec:auswertung.diff}
+
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[width=\textwidth]{includes/diff_orange_300_cam.png}
+		\caption{komplette Punktwolke aus Sicht der Kamera}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[width=\textwidth]{includes/diff_only_orange_300_cam.png}
+		\caption{Punktwolke der Punkte, die zum Würfel gehören, aus Sicht der Kamera}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[width=\textwidth]{includes/diff_orange_300_pos1.png}
+		\caption{komplette Punktwolke von der Seite}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[width=\textwidth]{includes/diff_only_orange_300_pos1.png}
+		\caption{Punktwolke der Punkte, die zum Würfel gehören, von der Seite}
+	\end{subfigure}
+	\caption{Punktwolken eines Scans mit diff-Linienerkennung der Orangen Seite des ''Rubic's Cube'' in 300mm Entfernung}
+\end{figure}
+
+\begin{table}
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		Wiederholung & Anzahl & Avg & Stdabw \\
+		\hline
+		1 & 1274 & 335.522 & 104.71 \\
+		\hline
+		2 & 1227 & 335.939 & 100.287 \\
+		\hline
+		3 & 1320 & 335.866 & 113.613 \\
+		\hline
+		4 & 1314 & 335.699 & 93.5961 \\
+		\hline
+		5 & 1275 & 336.151 & 96.484 \\
+		\hline
+		6 & 1332 & 336.996 & 82.5333 \\
+		\hline
+		7 & 1308 & 336.126 & 95.4918 \\
+		\hline
+		8 & 1300 & 335.716 & 96.6604 \\
+		\hline
+		9 & 1262 & 334.981 & 98.4233 \\
+		\hline
+		10 & 1299 & 334.636 & 90.3444 \\
+		\hline
+	\end{tabular}
+	\caption{Scans der blauen Seite in 300mm Entfernung mit diff-Linienerkennung}
+	\label{tab:diff_reps}
+\end{table}
+
+\begin{table}
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		Farbe & Anzahl & Avg & Stdabw \\
+		\hline
+		Rot & 11276 & 339.363 & 82.0992 \\
+		\hline
+		Gruen & 14696 & 336.565 & 161.644 \\
+		\hline
+		Blau & 12911 & 335.714 & 97.4973 \\
+		\hline
+		Gelb & 14013 & 336.297 & 105.483 \\
+		\hline
+		Orange & 16358 & 339.817 & 44.8436 \\
+		\hline
+	\end{tabular}
+	\caption{Scans verschiedener Seiten in 300mm Entfernung mit diff-Linienerkennung}
+	\label{tab:diff_colors}
+\end{table}
+
+\begin{table}
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		Entfernung & Anzahl & Avg & Stdabw \\
+		\hline
+		200 & 26351 & 226.706 & 50.0151 \\
+		\hline
+		300 & 12911 & 335.714 & 97.4973 \\
+		\hline
+		400 & 8353 & 455.418 & 158.489 \\
+		\hline
+		500 & 4810 & 566.892 & 146.983 \\
+		\hline
+	\end{tabular}
+	\caption{Scans der blauen Seite in verschiedenen Entfernung mit diff-Linienerkennung}
+	\label{tab:diff_dists}
+\end{table}
+
+In Tabelle \ref{tab:diff_reps} werden die zehn Scans der blauen Seite in 300mm Entfernung einzeln betrachtet, in Tabelle \ref{tab:diff_colors} werden die Scans der verschiedenen Seiten in 300mm aufgeführt, dabei werden jeweils alle Punkte aus allen zehn Scans zusammen betrachtet und in Tabelle \ref{tab:diff_dists} sind die Ergebnisse der Scans der blauen Seite in verschiedenen Entfernungen.
+
+In den Tabellen stehen die Anzahl der Punkte, die zum Würfel gehören (''Anzahl''), das $20 \%$ gestutzte Mittel (Avg) und die Standardabweichung der gemessenen Entfernungen (Stdabw).
+
+
+\begin{tikzpicture}
+	\begin{axis}[
+    	width=\linewidth,
+    	line width=1pt,
+    	xlabel={Entfernung},
+    	ylabel={Häufigkeit},
+    ]
+		\addplot+[blue] table [x=dist, y=count] 
+			{includes/histogram_diff_rotate_blue_normal_300.csv};
+	\end{axis}
+\end{tikzpicture}
+	
+\subsection{''free'' - Linienerkennung}
+
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[width=\textwidth]{includes/free_orange_300_cam.png}
+		\caption{komplette Punktwolke aus Sicht der Kamera}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[width=\textwidth]{includes/free_only_orange_300_cam.png}
+		\caption{Punktwolke der Punkte, die zum Würfel gehören, aus Sicht der Kamera}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[width=\textwidth]{includes/free_orange_300_pos1.png}
+		\caption{komplette Punktwolke von der Seite}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[width=\textwidth]{includes/free_only_orange_300_pos1.png}
+		\caption{Punktwolke der Punkte, die zum Würfel gehören, von der Seite}
+	\end{subfigure}
+	\caption{Punktwolken eines Scans mit free-Linienerkennung der Orangen Seite des ''Rubic's Cube'' in 300mm Entfernung}
+\end{figure}
+
+\begin{table}
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		Wiederholung & Anzahl & Avg & Stdabw \\
+		\hline
+		1 & 617 & 338.901 & 3.51507 \\
+		\hline
+		2 & 604 & 339.129 & 3.03182 \\
+		\hline
+		3 & 592 & 338.799 & 2.58397 \\
+		\hline
+		4 & 629 & 338.871 & 3.02885 \\
+		\hline
+		5 & 618 & 338.894 & 3.13461 \\
+		\hline
+		6 & 621 & 338.641 & 2.82711 \\
+		\hline
+		7 & 618 & 338.782 & 2.50554 \\
+		\hline
+		8 & 603 & 338.857 & 2.99073 \\
+		\hline
+		9 & 588 & 339.026 & 3.15995 \\
+		\hline
+		10 & 586 & 339.025 & 2.88505 \\
+		\hline
+	\end{tabular}
+	\caption{Scans der blauen Seite in 300mm Entfernung mit free-Linienerkennung}
+	\label{tab:free_reps}
+\end{table}
+
+\begin{table}
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		Farbe & Anzahl & Avg & Stdabw \\
+		\hline
+		Rot & 6314 & 337.704 & 42.0001 \\
+		\hline
+		Gruen & 6957 & 338.864 & 25.3341 \\
+		\hline
+		Blau & 6076 & 338.888 & 2.98687 \\
+		\hline
+		Gelb & 13202 & 338.809 & 81.868 \\
+		\hline
+		Orange & 7649 & 337.439 & 30.9114 \\
+		\hline
+	\end{tabular}
+	\caption{Scans verschiedener Seiten in 300mm Entfernung mit free-Linienerkennung}
+	\label{tab:free_colors}
+\end{table}
+
+\begin{table}
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		Entfernung & Anzahl & Avg & Stdabw \\
+		\hline
+		200 & 10738 & 224.81 & 2.87541 \\
+		\hline
+		300 & 6076 & 338.888 & 2.98687 \\
+		\hline
+		400 & 3259 & 458.838 & 5.33122 \\
+		\hline
+		500 & 2061 & 581.937 & 9.37247 \\
+		\hline
+	\end{tabular}
+	\caption{Scans der blauen Seite in verschiedenen Entfernung mit free-Linienerkennung}
+	\label{tab:free_dists}
+\end{table}
+
+Die Tabellen \ref{tab:free_reps}, \ref{tab:free_colors} und \ref{tab:free_dists} sind analog zu den Tabellen in \ref{subsec:auswertung.diff} für die ''free''-Linienerkennung aufgebaut.
+
+\begin{tikzpicture}
+	\begin{axis}[
+    	width=\linewidth,
+    	line width=1pt,
+    	xlabel={Entfernung},
+    	ylabel={Häufigkeit},
+    ]
+		\addplot+[blue] table [x=dist, y=count] 
+			{includes/histogram_free_rotate_blue_normal_300.csv};
+	\end{axis}
+\end{tikzpicture}
 
 % ---------------------------------------------------------------------------- %
 
