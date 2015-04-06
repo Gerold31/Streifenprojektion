@@ -243,11 +243,11 @@ Zur Übertragung von Informationen zwischen den verschiedenen Komponenten werden
 \begin{table}
 	\begin{tabular}{lp{10cm}}
 		\texttt{DeviceConfiguration} &
-		Die Struktur \texttt{DeviceConfiguration} speichert dabei alle Werte zum Setup, die zur Rekonstruktion benötigt werden. Zusätzlich wird eine Transformationsmatrix mitgeführt, auf die später noch eingegangen wird.\\[1em]
+			Die Struktur \texttt{DeviceConfiguration} speichert dabei alle Werte zum Setup, die zur Rekonstruktion benötigt werden. Zusätzlich wird eine Transformationsmatrix mitgeführt, auf die später noch eingegangen wird.\\[1em]
 		\texttt{Line}                &
-		Die Datenstruktur \texttt{Line} entspricht einer Menge von Abtastungen der projizierten Linie. Sie Speichert dabei zusätzlich zu einer Liste von Abtastungen (Instanzen von \texttt{Sample}) die Auflösung des zugrunde liegenden Bildes.\\[1em]
-		Reconstruction               &
-		Die Klasse \texttt{Reconstruction} dient zum Speichern des endgültigen Ergebnises der Rekonstruktion. Sie speichert somit eine Liste von rekonstruierten Punkten (Instanzen von \texttt{Point}). Zusätzlich hat die Klasse die Aufgabe, hinzugefügte rekonstruierte Punkte zur Ausgabe des Programms hinzuzufügen.
+			Die Datenstruktur \texttt{Line} entspricht einer Menge von Abtastungen der projizierten Linie. Sie Speichert dabei zusätzlich zu einer Liste von Abtastungen (Instanzen von \texttt{Sample}) die Auflösung des zugrunde liegenden Bildes.\\[1em]
+		\texttt{Reconstruction}      &
+			Die Klasse \texttt{Reconstruction} dient zum Speichern des endgültigen Ergebnises der Rekonstruktion. Sie speichert somit eine Liste von rekonstruierten Punkten (Instanzen von \texttt{Point}). Zusätzlich hat die Klasse die Aufgabe, hinzugefügte rekonstruierte Punkte zur Ausgabe des Programms hinzuzufügen.
 	\end{tabular}
 	\caption{Funktion der grundlegenden Datenstrukturen}
 	\label{tab:classes_base}
@@ -262,52 +262,51 @@ Zur Übertragung von Informationen zwischen den verschiedenen Komponenten werden
 	\label{fig:classes_control}
 \end{figure}
 
-Nach Programmstart wird als erstes die Funktion \texttt{Configuration::init(int,char**)} aufgerufen. Diese analysiert die Argumente, die dem Programm übergeben wurden, und speichert das Ergebnis in den statischen Feldern der Klasse. Unter anderem wird dabei jeweils eine Instanz einer Spezialisierung der Klassen \texttt{Controller}, \texttt{LightBarDetector} und \texttt{Reconstructor} in den Feldern von \texttt{Configuration} abgelegt. Als nächstes wird die Methode \texttt{main()} des Controllers aufgerufen. Der Rest des Programmablaufes wird von der entsprechenden Methode des Controllers gesteuert.
+Nach Programmstart wird als erstes die Funktion \texttt{Configuration::init(int,char**)} aufgerufen. Diese analysiert die Argumente, die dem Programm übergeben wurden, und speichert das Ergebnis in den statischen Feldern der Klasse. Unter anderem wird dabei jeweils eine Instanz einer Spezialisierung von \texttt{Controller}, \texttt{LightBarDetector} und \texttt{Reconstructor} in den Feldern von \texttt{Configuration} abgelegt. Als nächstes wird die Methode \texttt{main()} der \emph{Steuerungsklasse}, also der Spezialisierung von \texttt{Controller}, aufgerufen, welche den Rest des Programmablaufes steuert.
 
-Der Ablauf, der von den verschiedenen Spezialisierungen von \texttt{Controller} vorgegeben wird, verfolgt dabei immer einen ähnlichen Ablauf. Der Controller durchläuft eine Schleife und beschafft sich in jedem Schleifendurchlauf die aktuelle Gerätekonfiguration (\texttt{DeviceConfiguration}), eine Aufnahme durch das entsprechende Setup und ggf. ein aktuelles Referenzbild. Danach übergibt es die Steuerung an Linienerkennung (\texttt{LightBarDetextor}) und dessen Ergebnis wird an den Rekonstruktionsalgorithmus (\texttt{Reconstructor}) übergeben. Siehe zur Veranschaulichung auch {\color{red} Abbildung x}.
+Der Ablauf, der von den verschiedenen Spezialisierungen von \texttt{Controller} vorgegeben wird, verfolgt dabei immer einen ähnlichen Ablauf, wie er auch in {\color{red} Abbildung x} beschrieben wird. Der Controller durchläuft eine Schleife und beschafft sich in jedem Schleifendurchlauf die aktuelle Gerätekonfiguration (\texttt{DeviceConfiguration}), eine Aufnahme durch das entsprechende Setup und ggf. ein aktuelles Referenzbild. Danach übergibt es die Steuerung an Linienerkennung (\texttt{LightBarDetextor}) und dessen Ergebnis wird an den Rekonstruktionsalgorithmus (\texttt{Reconstructor}) übergeben.
 
-\subsubsection{Übersicht}
+\subsection{Steuerungsklassen}
 
-In dem Klassendiagramm auf \Fref{fig:classes_all} sind nochmal alle Klassen des Programms zu sehen.
+Es existieren drei Spezialisierungen von \texttt{Controller}. Die einfachste Implementierung ist der \texttt{CommandController}, welcher Standardmäßig aktiviert ist. Die Klasse liest die Standarteingabe oder die in den Argumenten definierte Datei Zeilenweise aus. Eine solche Zeilen entspricht dabei einem Befehl, welcher ausgewertet und ausgeführt wird, bevor sich das Programm der nächsten Zeile zuwendet. In der \Fref{tab:commands} können alle Befehle nachgelesen werden.
 
-\begin{tabular}{l|p{10cm}}
-	\bfseries Klasse    & \bfseries Funktion\\
-	\hline
-	Configuration       &
-		Diese Klasse ist eine rein statische Klasse. Sie analysiert nach Programmstart die Argumente, die an das Programm übergeben wurden, und speichert die Einstellungen für die weitere Programmausführung.\\
-	\hline
-	Controller          &
-		Diese abstrakte Klasse bildet die Basis für alle \emph{Steuerungsklassen} und definiert Funktionen mit denen die Steuerungsklasse ihre Arbeit verrichten kann. Eine Steuerungsklasse bestimmt den Programmablauf und ist dabei für die Beschaffung der Setup-Informationen und Bilder verantwortlich.\\
-	\hline
-	DeviceConfiguration &
-		Diese Datenstruktur speichert alle relevanten Daten zum Setup wie die Position und Ausrichtung des Projektors. Außerdem wird eine Transformationsmatrix mitgeführt, auf die später noch eingegangen wird.\\
-	\hline
-	LightBarDetector    &
-		Diese abstrakte Klasse dient als Basis für alle Implementierungen zur Detektion der Laserlinie\\
-	\hline
-	Line                &
-		Diese Datenstruktur repräsentiert das Zwischenergebnis der Linienerkennung. Sie speichert eine Liste der Indizes der Pixel, welche vermeintlich zur Laserlinie gehören.\\
-	\hline
-	Point               &
-		Diese Klasse repräsentiert einen rekonstruierten Objektpunkt und ist eine Komponente der Klasse \texttt{Reconstruktion}.\\
-	\hline
-	Reconstruction      &
-		Diese Klasse speichert das endgültige Ergebnis der Rekonstruktion. Außerdem kümmert sie sich um die Ausgabe der Objektpunkte.\\
-	\hline
-	Reconstructor       &
-		Diese abstrakte Klasse dient als Basis für alle Implementierungen zur Rekonstruktion der Objektpunkte auf Basis der bereits erkannten Laserlinie.\\
-	\hline
-	Sample              &
-		Ein Sample ist ein erkannter Pixel einer Laserlinie und ist folglich eine Komponente der Klasse \texttt{Line}.\\
-	\hline
-\end{tabular}
+\begin{table}[p]
+	\begin{tabular}{lp{10cm}}
+		\bfseries Befehl             & \bfseries Beschreibung\\
+		\hline\hline
+		\texttt{b <Datei>}           &
+			Diese Zeile definiert die angegebene \emph{Datei} als neues Referenzbild.\\
+		\hline
+		\texttt{fov <Winkel>}        &
+			Hier wird das \ac{FOV} auf den angegebenen \emph{Winkel} gesetzt. Der Winkel muss dabei in Radiant angegeben werden.\\
+		\hline
+		\texttt{pp <x> <y> <z>}      &
+			Der Befehl setzt die Projektorposition $P$ auf den Punkt $(x,y,z)$.\\
+		\hline
+		\texttt{po <skew> <pitch>}   &
+			Setzt die Werte $\theta$ und $\delta$ aus dem Modell. Die Winkel müssen dabei in Radiant angegeben werden.\\
+		\hline
+		\texttt{t (<m>)\{16\}}       &
+			Setzt die Transformationsmatrix. Dabei wird die Matrix Zeilenweise aufgefüllt:
+			\[ \begin{pmatrix}
+				m_{1}  & m_{2}  & m_{3}  & m_{4}\\
+				m_{5}  & m_{6}  & m_{7}  & m_{8}\\
+				m_{9}  & m_{10} & m_{11} & m_{12}\\
+				m_{13} & m_{14} & m_{15} & m_{16}
+			\end{pmatrix} \]\\
+		\hline
+		\texttt{c <x> <fov> <pitch>} &
+			Setzt die Projektorposition $P$ auf $(x,0,0)$, das \ac{FOV} auf den angegeben Winkel $\fov$, $\delta$ auf den angegeben Wert von \emph{pitch} und $\theta = 0$.\\
+		\hline
+		\texttt{<Datei>}             &
+			Lässt die Rekonstruktion auf Basis der angegebenen Aufnahme laufen.\\
+		\hline\hline
+	\end{tabular}
+	\caption{Unterstützte Befehle der Steuerungsklasse \texttt{CommandController}.}
+	\label{tab:commands}
+\end{table}
 
-\begin{figure}
-	\centering
-	\includegraphics[width=\linewidth]{includes/classdiagram}
-	\caption{Umfassendes Klassendiagramm}
-	\label{fig:classes_all}
-\end{figure}
+Die Klassen \texttt{RotateScanController} und \texttt{TranslateScanController} beschaffen die Aufnahmen hingehen direkt von der Hardware. Der \texttt{RotateScanController} rotiert dabei den Streifenprojektor um passende Aufnahmen zu erhalten. Der \texttt{TranslateScanController} {\color{red} \dots}
 
 \subsection{Ansteuerung der Hardware}
 
@@ -354,7 +353,46 @@ Für jeden Farbkanal wird einzeln der Mittelwert über das gesamte Bild berechne
 
 Nachdem die Laserlinie erkannt wurde, werden die vermeintlichen Pixel der erkannten Linie in Objektpunkte überführt. Dies geschieht durch die Klasse \texttt{DefaultReconstructor}, welche derzeit die einzige Spezialisierung von \texttt{Reconstructor} darstellt.
 
-Dazu werden die Formeln aus den theoretischen Grundlagen angewendet, um für jeden Pixel zunächst die normalisierten Bildkoordinaten, die Entfernung $h$ und darauf den Objektpunkt $X$ zu bestimmen. Danach werden die erhalten Punkte mithilfe der Transformationsmatrix transformiert und an die Klasse \texttt{Reconstruction} weiter gegeben.
+Dazu werden die Formeln aus den theoretischen Grundlagen angewendet, um für jeden Pixel zunächst die normalisierten Bildkoordinaten, die Entfernung $h$ und darauf den Objektpunkt $X$ zu bestimmen. Danach werden die erhalten Punkte mithilfe der Transformationsmatrix transformiert und an die Klasse \texttt{Reconstruction} weiter gegeben, welche sie letztendlich ausgibt.
+
+%\subsection{Übersicht über alle Klassen}
+
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=\linewidth]{includes/classdiagram}
+	\caption{Umfassendes Klassendiagramm}
+	\label{fig:classes_all}
+\end{figure}
+	
+\begin{table}[p]
+	\begin{tabular}{lp{10cm}}
+		\bfseries Klasse             & \bfseries Funktion\\
+		\hline\hline
+		\texttt{Configuration}       &
+			Diese Klasse ist eine rein statische Klasse. Sie analysiert nach Programmstart die Argumente, die an das Programm übergeben wurden, und speichert die Einstellungen für die weitere Programmausführung.\\
+		\hline
+		\texttt{Controller}          &
+			Diese abstrakte Klasse bildet die Basis für alle \emph{Steuerungsklassen} und definiert Funktionen mit denen die Steuerungsklasse ihre Arbeit verrichten kann. Eine Steuerungsklasse bestimmt den Programmablauf und ist dabei für die Beschaffung der Setup-Informationen und Bilder verantwortlich.\\
+		\hline
+		\texttt{DeviceConfiguration} &
+			Diese Struktur speichert alle Werte zum Setup, die zur Rekonstruktion benötigt werden. Dazu gehört beispielsweise die Position und Ausrichtung des Projektors. Zusätzlich wird eine Transformationsmatrix mitgeführt, auf dessen Basis Punkte nach der Triangulation transformiert werden.\\
+		\hline
+		\texttt{LightBarDetector}    &
+			Diese abstrakte Klasse dient als Basis für alle Implementierungen zur Detektion der Laserlinie\\
+		\hline
+		\texttt{Line}                &
+			Diese Datenstruktur entspricht einer Menge von Abtastungen der projizierten Linie. Sie Speichert dabei eine Liste von Indices, dessen Pixel zur Laserlinie gehören, und die Auflösung des zugrunde liegenden Bildes. Die Indices werden dabei in Instanzen von \texttt{Sample} abgelegt.\\
+		\hline
+		\texttt{Reconstruction}      &
+			Diese Klasse speichert das endgültige Ergebnis der Rekonstruktion. Außerdem kümmert sie sich um die Ausgabe der rekonstruierten Punkte.\\
+		\hline
+		\texttt{Reconstructor}       &
+			Diese abstrakte Klasse dient als Basis für alle Implementierungen zur Rekonstruktion der Objektpunkte auf Basis der bereits erkannten Laserlinie.\\
+		\hline\hline
+	\end{tabular}
+	\caption{Umfassende Tabelle der Klassen}
+	\label{tab:classes_all}
+\end{table}
 
 % ---------------------------------------------------------------------------- %
 
