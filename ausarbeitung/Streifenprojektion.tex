@@ -70,20 +70,20 @@
 
 In verschiedenen Fällen ist es hilfreich oder notwendig ein \emph{komplexes} dreidimensionales Objekt zu vermessen. Aus solchen Vermessungen resultierende Modelle können beispielsweise in der Unterhaltungsindustrie für die Film- und Spielproduktion verwendet werden. So lassen sich heutzutage dank solcher Verfahren vergleichsweise einfach Personen und Objekte in Spiele übernehmen. Außerdem ermöglichen Verfahren zur Vermessung von Geometrien automatisierte Qualitätskontrollen und neue Methoden zur automatisierten Fertigung oder Verarbeitung.
 
-In diesem Projekt wird mit der \emph{Streifenlichtprojektion} gearbeitet. Dabei wird ein Streifen auf eine Oberfläche projiziert um aus einer Aufnahme der projizierten Linie die Form der Struktur zu rekonstruieren.
+In diesem Projekt geht es um die \emph{Streifenlichtprojektion}. Dabei wird ein Streifen auf eine Oberfläche projiziert um aus einer Aufnahme der projizierten Linie die Form der Struktur zu rekonstruieren.
 
 % ---------------------------------------------------------------------------- %
 
 \section{Theoretische und technische Grundlagen}
 
-Zusätzlich zur hier verwendeten Methode haben sich in den letzten Jahrzehnten viele verschiedene Techniken entwickelt, mit denen man dreidimensionale Strukturen der realen Welt vermessen kann. So existieren zusätzlich zur Streifenlichtprojektion beispielsweise Verfahren, die \emph{Stereo-Vision}, \emph{Structure from Motion}, \emph{Shape from Shading} oder \emph{Time of Flight} verwenden. Die benötigten theoretischen Grundlagen überschneiden sich dabei bei einigen der Verfahren, es gibt aber auch einige Unterschiede. Im folgenden wird auf wichtige Grundlagen eingegangen, die für Projekt benötigt werden.
+Zusätzlich zur hier verwendeten Methode haben sich in den letzten Jahrzehnten viele verschiedene Techniken entwickelt, mit denen man dreidimensionale Strukturen der realen Welt vermessen kann. So existieren zusätzlich zur Streifenlichtprojektion beispielsweise Verfahren, die \emph{Stereo-Vision}, \emph{Structure from Motion}, \emph{Shape from Shading} oder \emph{Time of Flight} verwenden. Die benötigten theoretischen Grundlagen überschneiden sich dabei bei einigen der Verfahren, es gibt aber auch einige Unterschiede. Im folgenden wird auf wichtige Grundlagen eingegangen, die für das Projekt benötigt werden.
 
 \subsection{Normalisierte Bildkoordinaten}
 \label{sec:imagecoordinates}
 
-Ein \emph{fotografisches Bild} kann als eine zweidimensionalen Matrix, die für jeden Pixel eine Farbe definiert, dargestellt werden. Dabei eignen sich die Indices des Bilder allerdings nur begrenzt zur Beschreibung von Positionen auf dem Bild. Hat man beispielsweise mehrere Inhaltsgleiche Bilder mit unterschiedlicher Abtastrate (Auflösung), so beschreiben die selben Koordinaten auf jedem Bild eine inhaltlich andere Position. Aus diesem Grund werden in vielen Situationen \emph{normalisierte Bildkoordinaten} verwendet. Das Ziel der normalisierten Bildkoordinaten ist es, Positionen auf einem Bild unabhängig von der Auflösung ausdrücken zu können.
+Ein \emph{fotografisches Bild} kann als eine zweidimensionalen Matrix, die für jeden Pixel eine Farbe definiert, dargestellt werden. Dabei eignen sich die Indices des Bilder allerdings nur begrenzt zur Beschreibung von Positionen auf dem Bild. Hat man beispielsweise mehrere Inhaltsgleiche Bilder mit unterschiedlicher Abtastrate (Auflösung) aufgenommen, so beschreiben die selben Indices auf jedem Bild eine inhaltlich andere Position. Aus diesem Grund werden in vielen Situationen \emph{normalisierte Bildkoordinaten} verwendet. Das Ziel der normalisierten Bildkoordinaten ist es, Positionen auf einem Bild unabhängig von der Auflösung ausdrücken zu können.
 
-Als normalisierte Bildkoordinaten wird hier ein Tupel aus zwei reellen Zahlen $(u,v)$ verwendet. $v$ ist dabei aus dem Intervall $[-1,1]$. Der Wertebereich von $u$ ergibt sich entsprechend aus dem Seitenverhältnis $r$: $u \in [-r,r]$. Dabei sollte erwähnt werden, dass normalisierte Bildkoordinaten je nach Anwendungsgebiet oft auch anders definiert werden. So gibt es definitionen wo für $u$ ebenfalls $u \in [-1,1]$ gilt oder wo sich $u$ und $v$ im Wertebereich $[0,1]$ befinden.
+Als normalisierte Bildkoordinaten wird hier ein Tupel aus zwei reellen Zahlen $(u,v)$ verwendet. $v$ ist dabei aus dem Intervall $[-1,1]$. Der Wertebereich von $u$ ergibt sich entsprechend aus dem Seitenverhältnis $r$: $u \in [-r,r]$. Dabei sollte erwähnt werden, dass normalisierte Bildkoordinaten je nach Anwendungsgebiet auch anders definiert werden können. So kann es je nach Sachverhalt sinnvoll sein, dass für $u$ ebenfalls $u \in [-1,1]$ gilt oder, dass sich $u$ und $v$ im Wertebereich $[0,1]$ befinden.
 
 Um aus den Indizes $(i,j)$ eines Pixels die normalisierten Bildkoordinaten $(u,v)$ zu berechnen, kann hier folgende Gleichung verwendet werden:
 \[ \begin{pmatrix}
@@ -99,7 +99,7 @@ Mit der Bildauflösung $(s_x, s_y)$ und dem Seitenverhältnis $r = s_x/s_y$.
 \subsection{Perspektivische Projektion}
 \label{sec:perspective}
 
-Bei einer \emph{perspektivische Projektion} werden dreidimensionale Punkte auf eine \emph{Bildebene} projiziert. Die Funktion entspricht dabei dem Modell der \emph{Lochkamera} und stellt eine Vereinfachung vieler realen Kameras da. Eine perspektivische Projektion wird durch den Augpunkt $O$ und die Bildebene definiert. Um einen Objektpunkt $X$ auf einen Punkt $X'$ in der Bildebene zu projizieren, bestimmt man den Schnittpunkt des \emph{Projektionsstrahls} durch $X$ und $O$ mit der Bildebene. Den projizierten Punkt $X'$ nennt man auch \emph{Bildpunkt}. Die Bildebene wird oft durch eine Blickrichtung der \emph{Kamera} und eine \emph{Focal length} $f$ definiert. Die Blickrichtung der Kamera entspricht dabei der Normalen der Bildebenen und $f$ ist die Entfernung der Bildebene von Augpunkt.
+Bei einer \emph{perspektivische Projektion} werden dreidimensionale Punkte auf eine \emph{Bildebene} projiziert. Die Funktion entspricht dabei dem Modell der \emph{Lochkamera} und stellt eine Vereinfachung vieler realen Kameras da. Eine perspektivische Projektion wird durch den Augpunkt $O$ und die Bildebene definiert. Um einen Objektpunkt $X$ auf einen Punkt $X'$ in der Bildebene zu projizieren, bestimmt man den Schnittpunkt des \emph{Projektionsstrahls} durch $X$ und $O$ mit der Bildebene. Den projizierten Punkt $X'$ nennt man auch \emph{Bildpunkt}. Die Bildebene wird oft durch eine Blickrichtung der \emph{Kamera} und eine \emph{Focal length} $f$ definiert. Die Blickrichtung der Kamera entspricht dabei der Normalen der Bildebenen und $f$ ist die Entfernung der Bildebene vom Augpunkt in Blickrichtung.
 
 \begin{figure}
 	\centering
@@ -129,11 +129,27 @@ Alternativ zu Focal length und Bildhöhe wird auch oft das (vertikale) \ac{FOV} 
 
 \subsection{Triangulation}
 
-Bei der Triangulation geht es darum, aus zwei Eckpunkten und den Innenwickeln eines Dreiecks den dritten Eckpunkt zu bestimmen. In diesem Projekt geht es darum, den Objektpunkt auf Basis eines Bildpunktes und der Laserausrichtung zu bestimmen.
+Bei der Triangulation geht es darum, aus zwei Eckpunkten und den Innenwickeln eines Dreiecks den dritten Eckpunkt zu bestimmen. Hier wird der Objektpunkt auf der Laserlinie auf Basis eines Bildpunktes und der Laserausrichtung bestimmt.
 
 \subsubsection{Modell und gegebene Werte}
 
-Der Sachverhalt wird dabei zunächst auf das folgende Modell abstrahiert: Es existiert eine perspektivischen Projektion eines Objektpunktes $X$ auf eine Bildebene $B$, die parallel zur $x$-$y$-Ebene verläuft. Der Augpunkt $O$ liegt dabei im Koordinatenursprung. Der Bildpunkt wird mit $X'$ bezeichnet. Das projizierte Licht wird durch eine Ebene $L$ dargestellt, die die Position des Projektors, das heißt den Projektionspunkt $P$, und den Objektpunkt $X$ schneidet.
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[width=\textwidth]{includes/triangulation3d}
+		\caption{dreidimensionales Modell}
+		\label{fig:triangulation3d}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[width=\textwidth]{includes/triangulation2d}
+		\caption{vereinfachtes zweidimensionales Modell}
+		\label{fig:triangulation2d}
+	\end{subfigure}
+	\caption{Modell des Setups}
+\end{figure}
+
+Der Sachverhalt wird dabei zunächst auf das Modell, wie es auf \Fref{fig:triangulation3d} zu sehen ist, abstrahiert: Es existiert eine perspektivischen Projektion eines Objektpunktes $X$ auf eine Bildebene $B$, wobei die Blickrichtung entlang der negativen $z$-Achse verläuft. Der Augpunkt $O$ liegt dabei im Koordinatenursprung. Der Bildpunkt wird mit $X'$ bezeichnet. Das projizierte Licht wird durch eine Ebene $L$ dargestellt, die die Position des Projektors, das heißt den Projektionspunkt $P$, und den Objektpunkt $X$ schneidet.
 
 Die durch das Setup gegebenen Werte:
 
@@ -151,12 +167,6 @@ Zudem ist der Bildpunkt durch normalisierte Bildkoordinaten $(u, v)$ gegeben. Da
 
 \subsubsection{Bestimmung der Entfernung}
 
-\begin{figure}
-	\centering
-	\includegraphics[width=6cm]{includes/triangulation2d}
-	\caption{Zweidimensionales vereinfachtes Modell des Setups}
-\end{figure}
-
 Als \emph{Entfernung des Objektpunktes}, bzw. $h$, wird die negierte 3. Koordinate von $X$ bezeichnet.
 
 Um diese Entfernung zu bestimmen, wird das geometrische Modell des Setups vereinfacht. Als erstes wird ein Basiswechsel auf die Orthogonalbasis
@@ -167,9 +177,9 @@ Um diese Entfernung zu bestimmen, wird das geometrische Modell des Setups verein
 \end{pmatrix}, \begin{pmatrix}
 \sin(\theta) \\ \cos(\theta) \\ 0
 \end{pmatrix} \right\rbrace \]
-vorgenommen, um im folgenden nur die ersten beiden Dimensionen zu betrachten. Der konstruierte zweidimensionale Raum hat die besondere Eigenschaft, dass von der Ebene $L$ und der $x$-$y$-Ebene nur die Geraden $a$ und $c$ übrig bleiben. Eine weitere besondere Eigenschaft ist, dass der Abstand zwischen $X$ und der $x$-$y$-Ebene direkt von einen in den anderen Raum übernommen werden kann. Ein beliebiger Vektor $(v_1, v_2, v_3)^T$ im dreidimensionalen Model entspricht damit im zweidimensionalen Modell dem Vektor $(\cos(\theta) \cdot v_1 - \sin(\theta) \cdot v_2, -v_3)^T$.
+vorgenommen, um im folgenden nur die ersten beiden Dimensionen zu betrachten. Der konstruierte zweidimensionale Raum hat die besondere Eigenschaft, dass von der Ebene $L$ und der $x$-$y$-Ebene nur die Geraden $a$ und $c$ übrig bleiben. Eine weitere besondere Eigenschaft ist, dass der Abstand zwischen $X$ und der $x$-$y$-Ebene direkt von einen in den anderen Raum übernommen werden kann. So entspricht $h$ im vereinfachten Modell der 2. Koordinate von $X$. Ein beliebiger Vektor $(v_1, v_2, v_3)^T$ im dreidimensionalen Model entspricht im zweidimensionalen Modell dem Vektor $(\cos(\theta) \cdot v_1 - \sin(\theta) \cdot v_2, -v_3)^T$.
 
-Die Geraden $a$ und $c$ bilden zusammen mit der Geraden $b$, welche durch die Punkte $O$, $X$ und $X'$ verläuft, ein Dreieck, dessen Eckpunkte $A$, $C = X$ und $B = O$ sind. Angenommen die Koordinaten von $P$ und $X'$ in der zweidimensionalen Darstellung sind $(p_1,p_2)$ und $(x'_1, x'_2)$, so können die Winkel $\alpha$ und $\beta$ und die Länge der Strecke zwischen $A$ und $B$ wie folgt berechnet werden:
+Die Geraden $a$ und $c$ bilden zusammen mit der Geraden $b$, welche durch die Punkte $O$, $X$ und $X'$ verläuft, ein Dreieck, dessen Eckpunkte $A$, $C = X$ und $B = O$ sind. Dies ist auch nochmal in \Fref{fig:triangulation2d} zu sehen. Angenommen die Koordinaten von $P$ und $X'$ in der zweidimensionalen Darstellung sind $(p_1,p_2)$ und $(x'_1, x'_2)$, so können die Winkel $\alpha$ und $\beta$ und die Länge der Strecke zwischen $A$ und $B$ wie folgt berechnet werden:
 \begin{align*}
 	\alpha &= \frac{\pi}{2} - \arctan\left(\frac{x'_1}{x'_2}\right)\\
 	\beta &= \frac{\pi}{2} + \delta\\
