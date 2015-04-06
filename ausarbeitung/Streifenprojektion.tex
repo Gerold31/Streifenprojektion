@@ -202,7 +202,7 @@ u \\ v \\ -f
 
 \subsection{Hardware}
 
-Die Hardware besteht aus einer Webcam und einem Linienlaser, der auf einem Modellbauservo montiert ist. Laser und Servo werden von einem ''Spark Core'' Mikrocontroller gesteuert, welcher wiederum über USB von der Software gesteuert wird.
+Die Hardware besteht aus einer Webcam und einem Linienlaser, der auf einem Modellbauservo montiert ist. Laser und Servo werden von einem ''Spark Core'' Mikrocontroller gesteuert, welcher wiederum über USB mit Software kommuniziert.
 
 \begin{figure}
 	\centering
@@ -305,7 +305,9 @@ In dem Klassendiagramm auf \Fref{fig:classes_all} sind nochmal alle Klassen des 
 
 \subsection{Ansteuerung der Hardware}
 
-Die Software steuert die Hardware über USB, wobei sich der Mikrocontroller als virtuellen COM-Port ausgibt. Zur Kommunikation wird ein einfaches Protokoll verwendet, das 2 Byte lange Nachrichten an den Mikrocontroller sendet. Das erste Byte gibt den Befehl an, das zweite den Parameter.\\
+\subsubsection{Ansteuerung des Mikrocontrollers}
+
+Die Software steuert den Mikrocontroller über USB, wobei sich dieser als virtuellen COM-Port ausgibt. Zur Kommunikation wird ein einfaches Protokoll verwendet, das 2 Byte lange Nachrichten an den Mikrocontroller sendet. Das erste Byte gibt den Befehl an, das zweite den Parameter.\\
 
 \begin{tabular}{|c|c|c|}
 \hline
@@ -315,9 +317,19 @@ Die Software steuert die Hardware über USB, wobei sich der Mikrocontroller als 
 \hline
 'l' & '0' oder '1' & Schaltet den Laser an ('1') bzw. aus ('0')\\
 \hline
-\end{tabular}
+\end{tabular}\\
 
 \footnotetext{Zeichen in Anführungszeichen stehen für den ASCII-Wert des Zeichens}
+
+Die Klasse \texttt{Serial} ermöglicht es an den Mikrocontroller Nachrichten zu senden.
+
+Mit den Klassen \texttt{Servo} und \texttt{Laser} kann man Nachrichten in o.g. Form an den Mikrocontroller senden, um den Servo bzw. Laser zu steuern.
+
+\subsubsection{Ansteuerung der Kamera}
+
+Für das Auslesen von Bildern der Kamera ist die Klasse \texttt{Camera} zuständig, dabei liest ein extra Thread permanent Bilder von der Kamera.
+
+Wenn ein anderer Thread die \texttt{capture} Methode von \texttt{Camera} aufruft, blockiert er solange bis der extra Thread das nächste Bild gelesen hat und gibt dieses dann zurück. Das wird gemacht um sicherzustellen, dass immer das aktuellste Bild ausgelesen wird und nicht ein älteres Bild, das in einem Buffer der Kamera gespeichert wurde.
 
 
 \subsection{Linienerkennung}
