@@ -135,12 +135,18 @@ Bei der Triangulation geht es darum, aus zwei Eckpunkten und den Innenwickeln ei
 
 \begin{figure}
 	\centering
-	\begin{subfigure}{0.45\textwidth}
+	\begin{subfigure}{0.55\textwidth}
 		\includegraphics[width=\textwidth]{includes/triangulation3d}
 		\caption{dreidimensionales Modell}
 		\label{fig:triangulation3d}
 	\end{subfigure}
 	\hfill
+	\begin{subfigure}{0.35\textwidth}
+		\includegraphics[width=\textwidth]{includes/triangulation_skew_pitch}
+		\caption{Ausrichtung der Laserebene L}
+		\label{fig:triangulation_skew_pitch}
+	\end{subfigure}
+
 	\begin{subfigure}{0.45\textwidth}
 		\includegraphics[width=\textwidth]{includes/triangulation2d}
 		\caption{vereinfachtes zweidimensionales Modell}
@@ -160,7 +166,7 @@ Die durch das Setup gegebenen Werte:
 		Focal length
 		(unter der Annahme, dass das Bild auf der Bildebene $2$ Einheiten hoch ist)\\[0.5em]
 	$\theta$,$\delta$  &
-		Winkel zur Ausrichtung der Ebene $L$. Die Ausgangslage der Ebene ist parallel zur $y$-$z$-Ebene. Die Ebene wird zunächst mit dem Winkel $\theta$ um den Vektor {\color{red} $(0,0,1)^T$} gedreht. Danach mit dem Winkel $\delta$ um den Vektor {\color{red} $(\sin(\theta), \cos(\theta), 0)^T$}.
+		Winkel zur Ausrichtung der Ebene $L$. Die Ausgangslage der Ebene ist parallel zur $y$-$z$-Ebene. Die Ebene wird zunächst mit dem Winkel $\theta$ um den Vektor {\color{red} $(0,0,-1)^T$} gedreht. Danach mit dem Winkel $\delta$ um den Vektor {\color{red} $(-\sin(\theta), -\cos(\theta), 0)^T$}. Siehe auch \Fref{fig:triangulation_skew_pitch}.
 \end{tabular}
 
 Zudem ist der Bildpunkt durch normalisierte Bildkoordinaten $(u, v)$ gegeben. Da die Focal length $f$ auf eine Bildhöhe von $2$ Einheiten angepasst ist, gilt wie in \Fref{sec:perspective} beschrieben $X'(u, v, -f)$.
