@@ -89,8 +89,8 @@ int main(int argc, char *argv[])
 					float pitch = atof(match[5].str().c_str());
 					mat4& tr = laser->transformation;
 					tr = translate(mat4{}, pos);
-					tr = rotate(tr, skew, vec3{0.0f, 0.0f, 1.0f});
-					tr = rotate(tr, pitch, vec3{0.0f, 1.0f, 0.0f});
+					tr = rotate(tr, skew, vec3{0.0f, 0.0f, -1.0f});
+					tr = rotate(tr, pitch, vec3{0.0f, -1.0f, 0.0f});
 					if (Configuration::verbose) {
 						cout << "Update laser position." << endl;
 					}
