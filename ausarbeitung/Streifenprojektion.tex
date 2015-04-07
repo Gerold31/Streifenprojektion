@@ -5,20 +5,23 @@
 \usepackage[onehalfspacing]{setspace}
 
 \usepackage{helvet}
-\usepackage[T1]{fontenc}
+\usepackage[T1]{fontenc} % working hyphenation
+\usepackage{lmodern} % better fonts with T1-fontenc
 \usepackage{amsmath, amssymb, amstext}
 \usepackage{subcaption}
+\usepackage{float}
 \usepackage[affil-it]{authblk}
 \usepackage[round]{natbib}
-\usepackage[nolist,footnote]{acronym}
-\usepackage{wrapfig}
+\usepackage[nolist]{acronym}
+%\usepackage{wrapfig}
 \usepackage{fancyref}
 \usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage{pgfplots}
 
 \usepackage[hidelinks]{hyperref}
-%\usepackage[left=3cm,right=4cm,top=3cm,bottom=6cm,includeheadfoot]{geometry}
+%\usepackage[left=3.2cm,right=3cm,top=1.7cm,bottom=3cm,includeheadfoot]{geometry}
+\usepackage[left=3.2cm,right=3cm,top=2cm,bottom=2.5cm,includeheadfoot]{geometry}
 
 \def \N{\mathbb{N}}
 \def \Z{\mathbb{Z}}
@@ -48,7 +51,7 @@
 %Kopfzeile links bzw. innen
 \fancyhead[L]{\nouppercase{\leftmark}}
 %Kopfzeile rechts bzw. außen
-\fancyhead[R]{\today}
+%\fancyhead[R]{\today}
 %Linie oben
 \renewcommand{\headrulewidth}{0.5pt}
 
@@ -76,13 +79,14 @@ In diesem Projekt geht es um die \emph{Streifenlichtprojektion}. Dabei wird ein 
 % ---------------------------------------------------------------------------- %
 
 \section{Theoretische und technische Grundlagen}
+\label{sec:basics}
 
-Zusätzlich zur hier verwendeten Methode haben sich in den letzten Jahrzehnten viele verschiedene Techniken entwickelt, mit denen man dreidimensionale Strukturen der realen Welt vermessen kann. So existieren zusätzlich zur Streifenlichtprojektion Verfahren wie \emph{Stereo-Vision}, \emph{Structure from Motion}, \emph{Shape from Shading} und \emph{Time of Flight}. Die benötigten theoretischen Grundlagen überschneiden sich dabei bei einigen der Verfahren, es gibt aber auch einige Unterschiede. Im Folgenden wird auf wichtige Grundlagen eingegangen, die für das Projekt benötigt werden.
+Zusätzlich zur hier verwendeten Methode haben sich in den letzten Jahrzehnten viele verschiedene Techniken entwickelt, mit denen dreidimensionale Strukturen der realen Welt vermessen werden können. So existieren zusätzlich zur Streifenlichtprojektion Verfahren wie \emph{Stereo-Vision}, \emph{Structure from Motion}, \emph{Shape from Shading} und \emph{Time of Flight}. Die benötigten theoretischen Grundlagen überschneiden sich dabei bei einigen der Verfahren, es gibt aber auch einige Unterschiede. Im Folgenden wird auf wichtige Grundlagen eingegangen, die für das Projekt benötigt werden.
 
 \subsection{Normalisierte Bildkoordinaten}
 \label{sec:imagecoordinates}
 
-Ein \emph{fotografisches Bild} kann als eine zweidimensionalen Matrix, die für jeden Pixel eine Farbe definiert, dargestellt werden. Dabei eignen sich die Indices des Bilder allerdings nur begrenzt zur Beschreibung von Positionen auf dem Bild. Hat man beispielsweise mehrere Inhaltsgleiche Bilder mit unterschiedlicher Abtastrate (Auflösung) aufgenommen, so beschreiben die selben Indices auf jedem Bild eine inhaltlich andere Position. Aus diesem Grund werden in vielen Situationen \emph{normalisierte Bildkoordinaten} verwendet. Das Ziel der normalisierten Bildkoordinaten ist es, Positionen auf einem Bild unabhängig von der Auflösung ausdrücken zu können.
+Ein \emph{fotografisches Bild} kann als eine zweidimensionalen Matrix, die für jeden Pixel eine Farbe definiert, dargestellt werden. Dabei eignen sich die Indices des Bilder allerdings nur begrenzt zur Beschreibung von Positionen auf dem Bild. Existieren beispielsweise mehrere Inhaltsgleiche Bilder mit unterschiedlicher Abtastrate (Auflösung), so beschreiben die selben Indices auf jedem Bild eine inhaltlich andere Position. Aus diesem Grund werden in vielen Situationen \emph{normalisierte Bildkoordinaten} verwendet. Das Ziel der normalisierten Bildkoordinaten ist es, Positionen auf einem Bild unabhängig von der Auflösung ausdrücken zu können.
 
 Als normalisierte Bildkoordinaten wird hier ein Tupel aus zwei reellen Zahlen $(u,v)$ verwendet. $v$ ist dabei aus dem Intervall $[-1,1]$. Der Wertebereich von $u$ ergibt sich entsprechend aus dem Seitenverhältnis $r$: $u \in [-r,r]$. Dabei sollte erwähnt werden, dass normalisierte Bildkoordinaten je nach Anwendungsgebiet auch anders definiert werden können. So kann es je nach Sachverhalt sinnvoll sein, dass für $u$ ebenfalls $u \in [-1,1]$ gilt oder, dass sich $u$ und $v$ im Wertebereich $[0,1]$ befinden.
 
@@ -100,7 +104,7 @@ Mit der Bildauflösung $(s_x, s_y)$ und dem Seitenverhältnis $r = s_x/s_y$.
 \subsection{Perspektivische Projektion}
 \label{sec:perspective}
 
-Bei einer \emph{perspektivischen Projektion} werden dreidimensionale Punkte auf eine \emph{Bildebene} projiziert. Die Funktion entspricht dabei dem Modell der \emph{Lochkamera} und stellt eine Vereinfachung vieler realen Kameras da. Eine perspektivische Projektion wird durch den Augpunkt $O$ und die Bildebene definiert. Um einen Objektpunkt $X$ auf einen Punkt $X'$ in der Bildebene zu projizieren, bestimmt man den Schnittpunkt des \emph{Projektionsstrahls} durch $X$ und $O$ mit der Bildebene. Den projizierten Punkt $X'$ nennt man auch \emph{Bildpunkt}. Die Bildebene wird oft durch eine Blickrichtung der \emph{Kamera} und eine \emph{Focal length} $f$ definiert. Die Blickrichtung der Kamera entspricht dabei der Normalen der Bildebenen und $f$ ist die Entfernung der Bildebene vom Augpunkt in Blickrichtung.
+Bei einer \emph{perspektivischen Projektion} werden dreidimensionale Punkte auf eine \emph{Bildebene} projiziert. Die Funktion entspricht dabei dem Modell der \emph{Lochkamera} und stellt eine Vereinfachung vieler realen Kameras da. Eine perspektivische Projektion wird durch den Augpunkt $O$ und die Bildebene definiert. Um einen Objektpunkt $X$ auf einen Punkt $X'$ in der Bildebene zu projizieren, wird der Schnittpunkt des \emph{Projektionsstrahls} durch $X$ und $O$ mit der Bildebene bestimmt. Der projizierte Punkt wird auch $X'$ \emph{Bildpunkt} genannt. Die Bildebene wird oft durch eine Blickrichtung der \emph{Kamera} und eine \emph{Brennweite} $f$ definiert. Die Blickrichtung der Kamera entspricht dabei der Normalen der Bildebenen und $f$ ist die Entfernung der Bildebene vom Augpunkt in Blickrichtung.
 
 \begin{figure}
 	\centering
@@ -115,14 +119,14 @@ Bei einer \emph{perspektivischen Projektion} werden dreidimensionale Punkte auf 
 	\label{fig:perspective}
 \end{figure}
 
-Oft wird die perspektivische Projektion in Verbindung mit Bildern, wie sie in \Fref{sec:imagecoordinates} beschrieben werden, verwendet, und nicht mit konkreten Bildpunkten. Dazu muss definiert werden, wo sich das Bild auf der Bildebene befindet. Eine offensichtliche Möglichkeit ist die Angabe der Höhe und Breite des Bildes auf der Bildebene, unter der Annahme, dass der am nächsten liegende Punkt der Bildebene zum Augpunkt in der Mitte des Bildes liegt. Wenn das Seitenverhältnis des Bildes beibehalten wird, reicht auch die Angabe der Höhe. Da es meistens nicht relevant ist, wo sich die Bildebene genau befindet, sofern jedem Punkt eine Projektionsgerade zugeordnet wird, kann die Focal length nach belieben verändert werden, solange auch die Bildhöhe entsprechend angepasst wird. Aus diesem Grund reicht es oft, nur die Focal length als Parameter für die Projektion zu nutzen, sofern die Bildhöhe zuvor fest definiert wurde.
+Oft wird die perspektivische Projektion in Verbindung mit Bildern, wie sie in \Fref{sec:imagecoordinates} beschrieben werden, verwendet, und nicht mit konkreten Bildpunkten. Dazu muss definiert werden, wo sich das Bild auf der Bildebene befindet. Eine offensichtliche Möglichkeit ist die Angabe der Höhe und Breite des Bildes auf der Bildebene, unter der Annahme, dass der am nächsten liegende Punkt der Bildebene zum Augpunkt in der Mitte des Bildes liegt. Wenn das Seitenverhältnis des Bildes beibehalten wird, reicht auch die Angabe der Höhe. Da es meistens nicht relevant ist, wo sich die Bildebene genau befindet, sofern jedem Punkt eine Projektionsgerade zugeordnet wird, kann die Brennweite nach belieben verändert werden, solange auch die Bildhöhe entsprechend angepasst wird. Aus diesem Grund reicht es oft, nur die Brennweite als Parameter für die Projektion zu nutzen, sofern die Bildhöhe zuvor fest definiert wurde.
 
 Angenommen das Bild ist $2$ Einheiten hoch, der Augpunkt ist $O(0,0,0)$ und die Kamera schaut in Richtung der negativen $z$-Achse. Dann kann aus den normalisierten Bildkoordinaten $(u,v)$ der entsprechende Bildpunkt $X'$ ganz einfach über die folgende Gleichung bestimmt werden:
 \[ \vec{x'} = \begin{pmatrix}
 u \\ v \\ -f
 \end{pmatrix} \]
 
-Alternativ zu Focal length und Bildhöhe wird auch oft das (vertikale) \ac{FOV} benutzt, um die Projektion zu definieren. Das vertikale \ac{FOV} ist der Winkel zwischen den obersten und untersten Projektionsgeraden des Bildes. Die Focal length $f$, die Bildhöhe $g$ und das vertikalen \ac{FOV} $\fov$ stehen dabei in der folgende Beziehung:
+Alternativ zur Brennweite und Bildhöhe wird auch oft das vertikale \ac{FOV} benutzt, um die Projektion zu definieren. Das vertikale \ac{FOV} ist der Winkel zwischen den obersten und untersten Projektionsgeraden des Bildes. Die Brennweite $f$, die Bildhöhe $g$ und das vertikalen \ac{FOV} $\fov$ stehen dabei in der folgende Beziehung:
 \begin{align*}
 	\fov = 2 \cdot \arctan \left( \frac{g}{2 f} \right)
 	\Leftrightarrow f = \frac{g}{2 \tan\left(\frac{\fov}{2}\right)}
@@ -156,7 +160,7 @@ Bei der Triangulation geht es darum, aus zwei Eckpunkten und den Innenwickeln ei
 	\caption{Modell des Setups}
 \end{figure}
 
-Der Sachverhalt wird dabei zunächst auf das Modell, wie es auf \Fref{fig:triangulation3d} zu sehen ist, abstrahiert: Es existiert eine perspektivischen Projektion eines Objektpunktes $X$ auf eine Bildebene $B$, wobei die Blickrichtung entlang der negativen $z$-Achse verläuft. Der Augpunkt $O$ liegt dabei im Koordinatenursprung. Der Bildpunkt wird mit $X'$ bezeichnet. Das projizierte Licht wird durch eine Ebene $L$ dargestellt, die die Position des Projektors, das heißt den Projektionspunkt $P$, und den Objektpunkt $X$ schneidet.
+Als Modell für die Triangulation wird die Abstraktion, wie sie auf \Fref{fig:triangulation3d} zu sehen ist, verwendet. Es existiert eine perspektivischen Projektion eines Objektpunktes $X$ auf eine Bildebene $B$, wobei die Blickrichtung entlang der negativen $z$-Achse verläuft. Der Augpunkt $O$ liegt dabei im Koordinatenursprung. Der Bildpunkt wird mit $X'$ bezeichnet. Das projizierte Licht wird durch eine Ebene $L$ dargestellt, die die Position des Projektors, das heißt den Projektionspunkt $P$, und den Objektpunkt $X$ schneidet.
 
 Die durch das Setup gegebenen Werte:
 
@@ -164,17 +168,17 @@ Die durch das Setup gegebenen Werte:
 	$P$                &
 		Position des Linienprojektors.\\[0.5em]
 	$f$                &
-		Focal length
+		Brennweite
 		(unter der Annahme, dass das Bild auf der Bildebene $2$ Einheiten hoch ist)\\[0.5em]
 	$\theta$,$\delta$  &
 		Winkel zur Ausrichtung der Ebene $L$. Die Ausgangslage der Ebene ist parallel zur $y$-$z$-Ebene. Die Ebene wird zunächst mit dem Winkel $\theta$ um den Vektor {\color{red} $(0,0,-1)^T$} gedreht. Danach mit dem Winkel $\delta$ um den Vektor {\color{red} $(-\sin(\theta), -\cos(\theta), 0)^T$}. Siehe auch \Fref{fig:triangulation_skew_pitch}.
 \end{tabular}
 
-Zudem ist der Bildpunkt durch normalisierte Bildkoordinaten $(u, v)$ gegeben. Da die Focal length $f$ auf eine Bildhöhe von $2$ Einheiten angepasst ist, gilt wie in \Fref{sec:perspective} beschrieben $X'(u, v, -f)$.
+Zudem ist der Bildpunkt durch normalisierte Bildkoordinaten $(u, v)$ gegeben. Da die Brennweite $f$ auf eine Bildhöhe von $2$ Einheiten angepasst ist, gilt wie in \Fref{sec:perspective} beschrieben $X'(u, v, -f)$.
 
 \subsubsection{Bestimmung der Entfernung}
 
-Als \emph{Entfernung des Objektpunktes}, bzw. $h$, wird die negierte 3. Koordinate von $X$ bezeichnet.
+Als \emph{Entfernung des Objektpunktes} $h$ wird die negierte 3. Koordinate von $X$ bezeichnet.
 
 Um diese Entfernung zu bestimmen, wird das geometrische Modell des Setups vereinfacht. Als erstes wird ein Basiswechsel auf die Orthogonalbasis
 \[ \left\lbrace \begin{pmatrix}
@@ -198,7 +202,7 @@ Die Entfernung $h$ ergibt sich daraufhin aus der folgenden Gleichung:
 
 \subsubsection{Bestimmung der Koordinaten}
 
-Nachdem die Entfernung $h$ des Objektpunktes bekannt ist, kann der Objektpunkt $X$ recht einfach aus dem Bildpunkt bestimmt werden:
+Nachdem die Entfernung $h$ des Objektpunktes bekannt ist, kann der Objektpunkt $X$ aus dem Bildpunkt bestimmt werden:
 \[ \vec{x} = \frac{h}{f} \cdot \vec{x'} = \frac{h}{f} \cdot \begin{pmatrix}
 u \\ v \\ -f
 \end{pmatrix} \]
@@ -242,6 +246,7 @@ Zur Übertragung von Informationen zwischen den verschiedenen Komponenten werden
 \end{figure}
 
 \begin{table}
+	\centering
 	\begin{tabular}{lp{10cm}}
 		\texttt{DeviceConfiguration} &
 			Die Struktur \texttt{DeviceConfiguration} speichert dabei alle Werte zum Setup, die zur Rekonstruktion benötigt werden. Zusätzlich wird eine Transformationsmatrix mitgeführt, auf die später noch eingegangen wird.\\[1em]
@@ -276,9 +281,10 @@ Nach Programmstart wird als erstes die Funktion \texttt{Configuration::init(int,
 
 Der Ablauf, der von den verschiedenen Spezialisierungen von \texttt{Controller} vorgegeben wird, verfolgt dabei immer einen ähnlichen Ablauf, wie er auch in \Fref{fig:software_controller} beschrieben wird. Der Controller durchläuft eine Schleife und beschafft sich in jedem Schleifendurchlauf die aktuelle Gerätekonfiguration (\texttt{DeviceConfiguration}), eine Aufnahme durch das entsprechende Setup und ggf. ein aktuelles Referenzbild. Danach übergibt es die Steuerung an die Linienerkennung (\texttt{LightBarDetextor}) und dessen Ergebnis wird an den Rekonstruktionsalgorithmus (\texttt{Reconstructor}) übergeben.
 
-Es existieren drei Spezialisierungen von \texttt{Controller}. Die einfachste Implementierung ist der \texttt{CommandController}, welcher Standardmäßig verwendet wird. Die Klasse liest die Standarteingabe oder die in den Argumenten definierte Datei Zeilenweise aus. Eine Zeile entspricht dabei einem Befehl, welcher ausgewertet und ausgeführt wird, bevor sich das Programm der nächsten Zeile zuwendet. In der \Fref{tab:commands} können alle Befehle nachgelesen werden.
+Es existieren drei Spezialisierungen von \texttt{Controller}. Die einfachste Implementierung ist der \texttt{CommandController}, welcher Standardmäßig verwendet wird. Die Klasse liest die Standardeingabe oder die in den Argumenten definierte Datei Zeilenweise aus. Eine Zeile entspricht dabei einem Befehl, welcher ausgewertet und ausgeführt wird, bevor sich das Programm der nächsten Zeile zuwendet. In der \Fref{tab:commands} können alle Befehle nachgelesen werden.
 
 \begin{table}[p]
+	\centering
 	\begin{tabular}{lp{10cm}}
 		\bfseries Befehl             & \bfseries Beschreibung\\
 		\hline\hline
@@ -336,7 +342,7 @@ Die Software steuert den Mikrocontroller über USB, wobei sich dieser als virtue
 
 Die Klasse \texttt{Serial} ermöglicht es Nachrichten an den Mikrocontroller zu senden.
 
-Mit den Klassen \texttt{Servo} und \texttt{Laser} kann man Nachrichten in o.g. Form an den Mikrocontroller senden, um den Servo bzw. Laser zu steuern.
+Die Klassen \texttt{Servo} und \texttt{Laser} der Steuerung von dem Servo bzw. Laser. Dabei werden Nachrichten in o.g. Form an den Mikrocontroller gesendet.
 
 \subsubsection{Ansteuerung der Kamera}
 
@@ -355,13 +361,13 @@ Bei diesem Verfahren muss für jedes zu analysierende Bild ein Referenzbild ohne
 
 \subsubsection{Farbfilter (Free)}
 
-Für jeden Farbkanal wird einzeln der Mittelwert über das gesamte Bild berechnet, aus dem ein Schwellenwert für jeden Kanal einzeln bestimmt wird. Für jeden Pixel wird der Wert aller Farbkanäle mit dem Schwellenwert verglichen. Ist ein Wert keiner als der entsprechende Schwellenwert, gehört der Pixel nicht zur Linie.
+Für jeden Farbkanal wird einzeln der Mittelwert über das gesamte Bild berechnet, aus dem ein Schwellenwert für jeden Kanal einzeln bestimmt wird. Für jeden Pixel wird der Wert aller Farbkanäle mit dem Schwellenwert verglichen. Ist ein Wert kleiner als der entsprechende Schwellenwert, gehört der Pixel nicht zur Linie.
 
 \subsection{Rekonstruktion}
 
 Nachdem die Laserlinie erkannt wurde, werden die vermeintlichen Pixel der erkannten Linie in Objektpunkte überführt. Dies geschieht durch die Klasse \texttt{DefaultReconstructor}, welche derzeit die einzige Spezialisierung von \texttt{Reconstructor} darstellt.
 
-Dazu werden die Formeln aus den theoretischen Grundlagen angewendet, um für jeden Pixel zunächst die normalisierten Bildkoordinaten, die Entfernung $h$ und danach den Objektpunkt $X$ zu bestimmen. Daraufhin werden die erhalten Punkte mithilfe der Transformationsmatrix transformiert und an die Klasse \texttt{Reconstruction} weiter gegeben, welche sie letztendlich ausgibt.
+Dazu werden die Formeln aus \Fref{sec:basics} angewendet, um für jeden Pixel zunächst die normalisierten Bildkoordinaten, die Entfernung $h$ und danach den Objektpunkt $X$ zu bestimmen. Daraufhin werden die erhalten Punkte mithilfe der Transformationsmatrix transformiert und an die Klasse \texttt{Reconstruction} weiter gegeben, welche sie letztendlich ausgibt.
 
 %\subsection{Übersicht über alle Klassen}
 
@@ -373,6 +379,7 @@ Dazu werden die Formeln aus den theoretischen Grundlagen angewendet, um für jed
 \end{figure}
 	
 %\begin{table}[p]
+%	\centering
 %	\begin{tabular}{lp{10cm}}
 %		\bfseries Klasse                & \bfseries Funktion\\
 %		\hline\hline
