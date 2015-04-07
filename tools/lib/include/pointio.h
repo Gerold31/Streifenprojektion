@@ -1,6 +1,7 @@
 #ifndef POINTIO_H
 #define POINTIO_H
 
+#include <cctype>
 #include <iostream>
 #include <istream>
 #include <ostream>
@@ -34,9 +35,9 @@ inline bool readPoint(Point& p)
 		std::string line;
 		std::getline(std::cin, line);
 
-		static const std::regex r{"\\s*-?(\\d+|\\d*\\.\\d*)\\s+-?(\\d+|\\d*\\.\\d*)\\s+-?(\\d+|\\d*\\.\\d*)\\s+-?(\\d+|\\d*\\.\\d*)\\s+-?(\\d+|\\d*\\.\\d*)\\s+-?(\\d+|\\d*\\.\\d*)\\s*"};
-		// TODO add "\\s+\\d+\\s+\\d+" to regex
-		if (std::regex_match(line, r)) {
+		const char *s = line.c_str() - 1;
+		while (std::isspace(*(++s)));
+		if (std::isdigit(*s) || *s == '-' || *s == '.') {
 			std::stringstream{line} >> p;
 			return true;
 		}
@@ -59,22 +60,16 @@ inline std::ostream& operator<< (std::ostream& stream, const Point& val)
 
 inline std::istream& operator>> (std::istream& stream, Point& val)
 {
-	Vec3d vec3d[2];
-	Vec2u vec2u;
-
-	for (int i = 0; i < 2; ++i) {
-		for (int j = 0; j < 3; ++j) {
-			stream >> vec3d[i][j];
-		}
+	for (int i = 0; i < 3; ++i) {
+		stream >> val.pos[i];
+	}
+	for (int i = 0; i < 3; ++i) {
+		stream >> val.color[i];
 	}
 	// TODO uncomment
-	//for (int j = 0; j < 2; ++j) {
-	//	stream >> vec2u[j];
+	//for (int i = 0; i < 2; ++i) {
+	//	stream >> val.pixel[i];
 	//}
-
-	val.pos = vec3d[0];
-	val.color = vec3d[1];
-	val.pixel = vec2u;
 
 	return stream;
 }
