@@ -29,19 +29,27 @@ file(GLOB COLOR_SOURCES
 	RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
 	"color/*.cpp" "color/*.hpp" "color/*.h"
 )
+file(GLOB TRUNCATE_SOURCES
+	RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
+	"truncate/*.cpp" "truncate/*.hpp" "truncate/*.h"
+)
 
 # Create source groups (for Visual Studio)
-source_group("Library" FILES ${LIBRARY_SOURCES})
-source_group("getenv"  FILES ${GETENV_SOURCES})
-source_group("color"   FILES ${COLOR_SOURCES})
+source_group("Library"  FILES ${LIBRARY_SOURCES})
+source_group("getenv"   FILES ${GETENV_SOURCES})
+source_group("color"    FILES ${COLOR_SOURCES})
+source_group("truncate" FILES ${TRUNCATE_SOURCES})
 
 # Add binaries
 add_library("evalib" SHARED ${LIBRARY_SOURCES})
-add_executable("getenv" ${GETENV_SOURCES})
-add_executable("color"  ${COLOR_SOURCES})
+
+add_executable("getenv"   ${GETENV_SOURCES})
+add_executable("color"    ${COLOR_SOURCES})
+add_executable("truncate" ${TRUNCATE_SOURCES})
 
 # Add include directories
 include_directories("lib/include")
 
 # Link executable with libraries
-target_link_libraries("color" "evalib")
+target_link_libraries("color"    "evalib")
+target_link_libraries("truncate" "evalib")
