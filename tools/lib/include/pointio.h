@@ -54,6 +54,7 @@ inline std::ostream& operator<< (std::ostream& stream, const Point& val)
 	stream << val.pos[0] << " " << val.pos[1] << " " << val.pos[2] << " "
 		   << val.color[0] << " " << val.color[1] << " " << val.color[2];
 // TODO		   << val.pixel[0] << " " << val.pixel[1];
+	return stream;
 }
 
 inline std::istream& operator>> (std::istream& stream, Point& val)
@@ -74,6 +75,8 @@ inline std::istream& operator>> (std::istream& stream, Point& val)
 	val.pos = vec3d[0];
 	val.color = vec3d[1];
 	val.pixel = vec2u;
+
+	return stream;
 }
 
 #endif // POINTIO_H
