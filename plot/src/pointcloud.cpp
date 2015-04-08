@@ -15,9 +15,11 @@ const char vertexSource[] = GLSL(
 			out vec3 Color;
 			uniform mat4 view;
 			uniform mat4 proj;
+			uniform float pointSize = 1024;
 			void main() {
 				Color = color;
 				gl_Position = proj * view * vec4(position, 1.0);
+				gl_PointSize = pointSize / gl_Position.z;
 			}
 );
 
@@ -25,7 +27,13 @@ const char fragmentSource[] = GLSL(
 			in vec3 Color;
 			out vec4 outColor;
 			void main() {
-				outColor = vec4(Color, 1.0);
+				gl_FragDepth = gl_FragCoord.z;
+				if (length(gl_PointCoord - vec2(0.5, 0.5)) < 0.5) {
+					outColor = vec4(Color, 1.0);
+				} else {
+					gl_FragDepth = 1;
+					outColor = vec4(0, 0, 0, 0);
+				}
 			}
 );
 
@@ -117,6 +125,8 @@ void PointCloud::draw(const glm::mat4 &view)
 	glUniformMatrix4fv(uniProj, 1, GL_FALSE, glm::value_ptr(glm::mat4{}));
 
 	const size_t vertexCount = points.size();
+	//glPointSize(4);
+	glEnable(GL_PROGRAM_POINT_SIZE);
 	glDrawArrays(GL_POINTS, 0, vertexCount);
 }
 
