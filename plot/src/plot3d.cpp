@@ -58,6 +58,7 @@ void Plot3D::show(int resolutionX, int resolutionY)
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
 	// Create Drawables
 	{
@@ -142,7 +143,53 @@ void Plot3D::show(int resolutionX, int resolutionY)
 			camTr = glm::rotate(camTr, (float) rotation[0], glm::vec3{0.0f, 1.0f, 0.0f});
 			camTr = glm::rotate(camTr, (float) rotation[1], glm::vec3{1.0f, 0.0f, 0.0f});
 			camTr = glm::rotate(camTr, (float) rotation[2], glm::vec3{0.0f, 0.0f, 1.0f});
-			// Other key handles
+			// Update background color
+			static bool backAccept = true;
+			if (glfwGetKey(window, GLFW_KEY_TAB) == GLFW_PRESS) {
+				if (backAccept) {
+					backAccept = false;
+					static int nextBackground = 1;
+					switch (nextBackground++) {
+					case 0:
+						glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+						break;
+					case 1:
+						glClearColor(0.8f, 0.8f, 0.8f, 1.0f);
+						break;
+					case 2:
+						glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+						break;
+					case 3:
+						glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+						break;
+					case 4:
+						glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+						break;
+					case 5:
+						glClearColor(0.7f, 1.0f, 0.7f, 1.0f);
+						break;
+					case 6:
+						glClearColor(0.0f, 0.6f, 0.0f, 1.0f);
+						break;
+					case 7:
+						glClearColor(0.7f, 0.7f, 1.0f, 1.0f);
+						break;
+					case 8:
+						glClearColor(0.9f, 0.9f, 1.0f, 1.0f);
+						break;
+					case 9:
+						glClearColor(1.0f, 0.8f, 0.8f, 1.0f);
+						break;
+					case 10:
+						glClearColor(0.6f, 0.0f, 0.0f, 1.0f);
+						nextBackground = 0;
+						break;
+					}
+				}
+			} else {
+				backAccept = true;
+			}
+			// change speed of movement
 			static bool acceptR = true, acceptF = true, acceptPeriod = true;
 			if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS) {
 				if (acceptR) {
@@ -160,6 +207,7 @@ void Plot3D::show(int resolutionX, int resolutionY)
 			} else {
 				acceptF = true;
 			}
+			// other options
 			if (glfwGetKey(window, GLFW_KEY_PERIOD) == GLFW_PRESS) {
 				if (acceptPeriod) {
 					pointCloud->setOptions(PointCloud::COLOR_DISTANCE);
@@ -189,7 +237,6 @@ void Plot3D::show(int resolutionX, int resolutionY)
 
 		// Render
 		{
-			glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 			mat4 projection = cam.getProjection(resolutionX, resolutionY);
