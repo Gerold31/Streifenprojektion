@@ -5,6 +5,8 @@
 #include <cstdint>
 #include <cstdio>
 #include <initializer_list>
+#include <ios>
+#include <istream>
 #include <ostream>
 #include <stdexcept>
 
@@ -53,6 +55,9 @@ bool operator>= (const Vec<dim, t1_t>& v1, const Vec<dim, t2_t>& v2);
 
 template<int dim, typename type_t>
 std::ostream& operator<< (std::ostream& stream, const Vec<dim, type_t>& val);
+
+template<int dim, typename type_t>
+std::istream& operator>> (std::istream& stream, Vec<dim, type_t>& val);
 
 
 typedef Vec<2, double> Vec2d;
@@ -209,6 +214,40 @@ inline std::ostream& operator<< (std::ostream& stream, const Vec<dim, type_t>& v
 		stream << val[i];
 	}
 	return stream << "]";
+}
+
+template<int dim, typename type_t>
+inline std::istream& operator>> (std::istream& stream, Vec<dim, type_t>& val)
+{
+	bool encapsulated = false;
+	if (stream.peek() == '[') {
+		encapsulated = true;
+		stream.ignore();
+	}
+
+	stream >> val[0];
+	for (int i = 1; i < dim; ++i) {
+		while (std::isspace(stream.peek()))
+			stream.ignore();
+		if (stream.peek() != ',') {
+			stream.setstate(std::ios::failbit);
+			return;
+		}
+		stream.ignore();
+		stream >> val[i];
+	}
+
+	if (encapsulated) {
+		while (std::isspace(stream.peek()))
+			stream.ignore();
+		if (stream.peek() != ']') {
+			stream.setstate(std::ios::failbit);
+			return;
+		}
+		stream.ignore();
+	}
+
+	return stream;
 }
 
 #endif // VEC
