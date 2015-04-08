@@ -74,10 +74,13 @@
 % ---------------------------------------------------------------------------- %
 
 \section{Einleitung}
+\label{sec:introduction}
 
 In verschiedenen Fällen ist es hilfreich oder notwendig ein \emph{komplexes} dreidimensionales Objekt zu vermessen. Aus solchen Vermessungen resultierende Modelle können beispielsweise in der Unterhaltungsindustrie für die Film- und Spielproduktion verwendet werden. So lassen sich heutzutage dank solcher Verfahren vergleichsweise einfach Personen und Objekte in Spiele übernehmen. Außerdem ermöglichen Verfahren zur Vermessung von Geometrien automatisierte Qualitätskontrollen und neue Methoden zur automatisierten Fertigung oder Verarbeitung.
 
 In diesem Projekt geht es um die \emph{Streifenlichtprojektion}. Dabei wird ein Streifen auf eine Oberfläche projiziert um aus einer Aufnahme der projizierten Linie die Form der Struktur zu rekonstruieren.
+
+Die Arbeit behandelt in Kapitel~\ref{sec:basics} zunächst ein paar wichtige Grundlagen für das Projekt. Dazu gehören \emph{normalisierte Bildkoordinaten}, die \emph{perspektivische Projektion} und die mathematischen Prinzipien zur Rekonstruktion der Szene. Danach geht es in Kapitel~\ref{sec:realization} um die Umsetzung des Projektes. Dabei wird zunächst die verwendete Hardware betrachtet und der grobe Aufbau der Software beschrieben. Ab Abschnitt~\ref{sec:controller} wird auf verschiedene Komponenten der Implementierung nochmals genauer eingegangen. In dem Kapitel~\ref{sec:evaluation} geht es um die Auswertung der Ergebnisse worauf in Kapitel~\ref{sec:summary} abschließend noch eine Zusammenfassung folgt.
 
 % ---------------------------------------------------------------------------- %
 
@@ -213,6 +216,7 @@ u \\ v \\ -f
 % ---------------------------------------------------------------------------- %
 
 \section{Aufbau und Algorithmen}
+\label{sec:realization}
 
 \subsection{Hardware}
 
@@ -274,6 +278,7 @@ Zur Übertragung von Informationen zwischen den verschiedenen Komponenten werden
 Nach Programmstart wird als erstes die Funktion \texttt{Configuration::init(int,char**)} aufgerufen. Diese analysiert die Argumente, die dem Programm übergeben wurden, und speichert das Ergebnis in den statischen Feldern der Klasse. Unter anderem wird dabei jeweils eine Instanz einer Spezialisierung von \texttt{Controller}, \texttt{LightBarDetector} und \texttt{Reconstructor} in den Feldern von \texttt{Configuration} abgelegt. Als nächstes wird die Methode \texttt{main()} der \emph{Steuerungsklasse}, also der Spezialisierung von \texttt{Controller}, aufgerufen, welche den Rest des Programmablaufes steuert.
 
 \subsection{Steuerungsklassen}
+\label{sec:controller}
 
 \begin{figure}
 	\centering
@@ -433,6 +438,7 @@ Dazu werden die Formeln aus \Fref{sec:basics} angewendet, um für jeden Pixel zu
 % ---------------------------------------------------------------------------- %
 
 \section{Auswertung}
+\label{sec:evaluation}
 
 Im Folgenden werden verschiedene Seiten eines ''Rubik's Cube'' auf verschiedene Entfernungen gescannt. Es wurden die rote, grüne, blaue, gelbe und orange Seite in 300mm Entfernung, sowie die blaue Seite in 200mm, 400mm und 500mm Entfernung vermessen. Die Zugehörigkeit eines Messpunktes wird anhand seiner Farbe, die aus dem Referenzbild entnommen wurde, bestimmt. Da die Scans vor weißem Hintergrund durchgeführt wurden, wurde die Weiße Seite des ''Rubik's Cube'' nicht gescannt.
 
@@ -659,6 +665,7 @@ Die Tabellen \ref{tab:free_reps}, \ref{tab:free_colors} und \ref{tab:free_dists}
 % ---------------------------------------------------------------------------- %
 
 \section{Zusammenfassung}
+\label{sec:summary}
 
 % ---------------------------------------------------------------------------- %
 
