@@ -440,13 +440,11 @@ Dazu werden die Formeln aus \Fref{sec:basics} angewendet, um für jeden Pixel zu
 \section{Auswertung}
 \label{sec:evaluation}
 
-Im Folgenden werden verschiedene Seiten eines ''Rubik's Cube'' auf verschiedene Entfernungen gescannt. Es wurden die rote, grüne, blaue, gelbe und orange Seite in 300mm Entfernung, sowie die blaue Seite in 200mm, 400mm und 500mm Entfernung vermessen. Die Zugehörigkeit eines Messpunktes wird anhand seiner Farbe, die aus dem Referenzbild entnommen wurde, bestimmt. Da die Scans vor weißem Hintergrund durchgeführt wurden, wurde die Weiße Seite des ''Rubik's Cube'' nicht gescannt.
-
-\subsection{''diff'' - Linienerkennung}
-\label{subsec:auswertung.diff}
+Im Folgenden werden verschiedene Seiten eines ''Rubik's Cube'' auf verschiedene Entfernungen gescannt. Es wurden die rote, grüne, blaue, gelbe und orange Seite in 300mm Entfernung, sowie die blaue Seite in 200mm, 400mm und 500mm Entfernung vermessen. Die Zugehörigkeit eines Messpunktes wird anhand seiner Farbe, die aus dem Referenzbild entnommen wurde, bestimmt. Da die Scans vor weißem Hintergrund durchgeführt wurden, wurde die weiße Seite des ''Rubik's Cube'' nicht gescannt.
 
 
-\begin{figure}
+
+\begin{figure}[H]
 	\centering
 	\begin{subfigure}{0.45\textwidth}
 		\includegraphics[width=\textwidth]{includes/diff_orange_300_cam.png}
@@ -469,95 +467,7 @@ Im Folgenden werden verschiedene Seiten eines ''Rubik's Cube'' auf verschiedene 
 	\caption{Punktwolken eines Scans mit diff-Linienerkennung der Orangen Seite des ''Rubic's Cube'' in 300mm Entfernung}
 \end{figure}
 
-\begin{table}
-	\begin{tabular}{|c|c|c|c|}
-		\hline
-		Wiederholung & Anzahl & Avg & Stdabw \\
-		\hline
-		1 & 1274 & 335.522 & 104.71 \\
-		\hline
-		2 & 1227 & 335.939 & 100.287 \\
-		\hline
-		3 & 1320 & 335.866 & 113.613 \\
-		\hline
-		4 & 1314 & 335.699 & 93.5961 \\
-		\hline
-		5 & 1275 & 336.151 & 96.484 \\
-		\hline
-		6 & 1332 & 336.996 & 82.5333 \\
-		\hline
-		7 & 1308 & 336.126 & 95.4918 \\
-		\hline
-		8 & 1300 & 335.716 & 96.6604 \\
-		\hline
-		9 & 1262 & 334.981 & 98.4233 \\
-		\hline
-		10 & 1299 & 334.636 & 90.3444 \\
-		\hline
-	\end{tabular}
-	\caption{Scans der blauen Seite in 300mm Entfernung mit diff-Linienerkennung}
-	\label{tab:diff_reps}
-\end{table}
-
-\begin{table}
-	\begin{tabular}{|c|c|c|c|}
-		\hline
-		Farbe & Anzahl & Avg & Stdabw \\
-		\hline
-		Rot & 11276 & 339.363 & 82.0992 \\
-		\hline
-		Gruen & 14696 & 336.565 & 161.644 \\
-		\hline
-		Blau & 12911 & 335.714 & 97.4973 \\
-		\hline
-		Gelb & 14013 & 336.297 & 105.483 \\
-		\hline
-		Orange & 16358 & 339.817 & 44.8436 \\
-		\hline
-	\end{tabular}
-	\caption{Scans verschiedener Seiten in 300mm Entfernung mit diff-Linienerkennung}
-	\label{tab:diff_colors}
-\end{table}
-
-\begin{table}
-	\begin{tabular}{|c|c|c|c|}
-		\hline
-		Entfernung & Anzahl & Avg & Stdabw \\
-		\hline
-		200 & 26351 & 226.706 & 50.0151 \\
-		\hline
-		300 & 12911 & 335.714 & 97.4973 \\
-		\hline
-		400 & 8353 & 455.418 & 158.489 \\
-		\hline
-		500 & 4810 & 566.892 & 146.983 \\
-		\hline
-	\end{tabular}
-	\caption{Scans der blauen Seite in verschiedenen Entfernung mit diff-Linienerkennung}
-	\label{tab:diff_dists}
-\end{table}
-
-In Tabelle \ref{tab:diff_reps} werden die zehn Scans der blauen Seite in 300mm Entfernung einzeln betrachtet, in Tabelle \ref{tab:diff_colors} werden die Scans der verschiedenen Seiten in 300mm aufgeführt, dabei werden jeweils alle Punkte aus allen zehn Scans zusammen betrachtet und in Tabelle \ref{tab:diff_dists} sind die Ergebnisse der Scans der blauen Seite in verschiedenen Entfernungen.
-
-In den Tabellen stehen die Anzahl der Punkte, die zum Würfel gehören (''Anzahl''), das $20 \%$ gestutzte Mittel (Avg) und die Standardabweichung der gemessenen Entfernungen (Stdabw).
-
-
-\begin{tikzpicture}
-	\begin{axis}[
-    	width=\linewidth,
-    	line width=1pt,
-    	xlabel={Entfernung},
-    	ylabel={Häufigkeit},
-    ]
-		\addplot+[blue] table [x=dist, y=count] 
-			{includes/histogram_diff_rotate_blue_normal_300.csv};
-	\end{axis}
-\end{tikzpicture}
-	
-\subsection{''free'' - Linienerkennung}
-
-
-\begin{figure}
+\begin{figure}[H]
 	\centering
 	\begin{subfigure}{0.45\textwidth}
 		\includegraphics[width=\textwidth]{includes/free_orange_300_cam.png}
@@ -580,75 +490,270 @@ In den Tabellen stehen die Anzahl der Punkte, die zum Würfel gehören (''Anzahl
 	\caption{Punktwolken eines Scans mit free-Linienerkennung der Orangen Seite des ''Rubic's Cube'' in 300mm Entfernung}
 \end{figure}
 
-\begin{table}
-	\begin{tabular}{|c|c|c|c|}
-		\hline
-		Wiederholung & Anzahl & Avg & Stdabw \\
-		\hline
-		1 & 617 & 338.901 & 3.51507 \\
-		\hline
-		2 & 604 & 339.129 & 3.03182 \\
-		\hline
-		3 & 592 & 338.799 & 2.58397 \\
-		\hline
-		4 & 629 & 338.871 & 3.02885 \\
-		\hline
-		5 & 618 & 338.894 & 3.13461 \\
-		\hline
-		6 & 621 & 338.641 & 2.82711 \\
-		\hline
-		7 & 618 & 338.782 & 2.50554 \\
-		\hline
-		8 & 603 & 338.857 & 2.99073 \\
-		\hline
-		9 & 588 & 339.026 & 3.15995 \\
-		\hline
-		10 & 586 & 339.025 & 2.88505 \\
-		\hline
+
+\subsection{Wiederholte Messungen}
+
+Zunächst wurde die blaue Seite des ''Rubic's Cube'' zehn mal in 300mm Entfernung vermessen, um die Abweichungen zwischen zwei Messungen zu bestimmen. In Tabelle \ref{tab:reps} sind die Ergebnisse aufgeführt, wobei im linken Teil der Tabelle (''diff'') die Resultate nach diff-Linienerkennung und im rechten Teil (''free'') die nach free-Linienerkennung stehen. In der Spalte ''Anzahl'' steht jeweils die Anzahl der Punkte, die zum Würfel gehören, unter ''Avg'' ist das $20 \%$ gestutzte Mittel aller gemessenen Entfernungen und unter ''Stdabw'' die Standardabweichung der gemessenen Entfernungen.
+
+Es fällt auf, dass sich die Werte zwischen verschiedenen Messungen kaum unterscheiden, aber es zwischen den beiden Linienerkennungen z.T. große Unterschiede gibt. So findet diff mehr als doppelt so viele Punkte auf dem Würfel und die Standardabweichung ist ca. fünf mal größer.
+
+Wie man in Abbildung \ref{fig:blue_0_cam} sehen kann, spiegelt sich der Laser in dem Cube. Die diff-Linienerkennung (Abbildung \ref{fig:blue_0_diff}) erkennt, im Gegensatz zur free-Linienerkennung (Abbildung \ref{fig:blue_0_free}), die Spiegelung als Linie. Das erklärt sowohl warum diff mehr Punkte erkennt, als auch warum diese eine höhere Streuung aufweisen. Da die falsch erkannten Punkte überwiegend links von der tatsächlichen Linie liegen, haben sie eine kleinere Entfernung, was den etwas geringeren Durchschnitt von diff gegenüber free erklärt.
+
+Zusätzlich fällt auf, dass die Durchschnittliche Entfernung von sowohl diff als auch free 38mm - 41mm ($12,5\%-13,5\%$) größer ist als erwartet (300mm), siehe dazu Abschnitt \ref{sec:dists}.
+
+\begin{table}[H]
+	\begin{tabular}{c|c|c}
+		& diff & free \\
+		\begin{tabular}{c}
+			Wiederholung \\ \hline
+			1 \\
+			2 \\
+			3 \\
+			4 \\
+			5 \\
+			6 \\
+			7 \\
+			8 \\
+			9 \\
+			10 \\
+		\end{tabular} & 
+		\begin{tabular}{c|c|c}
+			Anzahl & Avg (mm) & Stdabw (mm) \\ \hline
+			825 & 338.851 & 15.1979 \\
+			829 & 338.511 & 14.199 \\
+			807 & 338.858 & 13.7228 \\
+			818 & 338.825 & 15.9249 \\
+			851 & 338.931 & 15.6883 \\
+			857 & 338.927 & 13.3769 \\
+			832 & 338.541 & 14.5219 \\
+			847 & 338.688 & 14.5952 \\
+			825 & 338.494 & 13.6795 \\
+			830 & 338.469 & 16.8786 \\
+		\end{tabular} &
+		\begin{tabular}{c|c|c}
+			Anzahl & Avg (mm) & Stdabw (mm) \\ \hline
+			363 & 340.952 & 2.76884 \\
+			365 & 340.923 & 2.97673 \\
+			344 & 341.142 & 2.75016 \\
+			336 & 341.02 & 2.68906 \\
+			365 & 340.75 & 2.59545 \\
+			350 & 340.738 & 2.71992 \\
+			354 & 340.867 & 2.93117 \\
+			353 & 340.764 & 2.9996 \\
+			351 & 340.737 & 2.80947 \\
+			354 & 341.064 & 2.97436 \\
+		\end{tabular}
 	\end{tabular}
-	\caption{Scans der blauen Seite in 300mm Entfernung mit free-Linienerkennung}
-	\label{tab:free_reps}
+	\caption{Scans der blauen Seite in 300mm Entfernung}
+	\label{tab:reps}
 \end{table}
 
-\begin{table}
-	\begin{tabular}{|c|c|c|c|}
-		\hline
-		Farbe & Anzahl & Avg & Stdabw \\
-		\hline
-		Rot & 6314 & 337.704 & 42.0001 \\
-		\hline
-		Gruen & 6957 & 338.864 & 25.3341 \\
-		\hline
-		Blau & 6076 & 338.888 & 2.98687 \\
-		\hline
-		Gelb & 13202 & 338.809 & 81.868 \\
-		\hline
-		Orange & 7649 & 337.439 & 30.9114 \\
-		\hline
+\subsection{Verschiedene Farben}
+
+\begin{table}[H]
+	\begin{tabular}{c|c|c}
+		& diff & free \\
+		\begin{tabular}{c}
+			Farbe \\ \hline
+			Rot \\
+			Gruen \\
+			Blau \\
+			Gelb \\
+			Orange \\
+		\end{tabular} & 
+		\begin{tabular}{c|c|c}
+			Anzahl & Avg (mm) & Stdabw (mm) \\ \hline
+			6565 & 338.14 & 3.6842 \\
+			8806 & 337.897 & 88.2139 \\
+			8321 & 338.722 & 14.8228 \\
+			7085 & 338.112 & 39.4331 \\
+			6336 & 338.249 & 7.50314 \\
+		\end{tabular} & 
+		\begin{tabular}{c|c|c}
+			Anzahl & Avg (mm) & Stdabw (mm) \\ \hline
+			6439 & 338.035 & 3.4453 \\
+			3534 & 340.808 & 6.28125 \\
+			3535 & 340.892 & 2.82819 \\
+			10824 & 338.69 & 77.4283 \\
+			29063 & 347.896 & 205.929 \\
+		\end{tabular}
 	\end{tabular}
-	\caption{Scans verschiedener Seiten in 300mm Entfernung mit free-Linienerkennung}
-	\label{tab:free_colors}
+	\caption{Scans der verschiedener Seiten in 300mm Entfernung}
 \end{table}
 
-\begin{table}
-	\begin{tabular}{|c|c|c|c|}
-		\hline
-		Entfernung & Anzahl & Avg & Stdabw \\
-		\hline
-		200 & 10738 & 224.81 & 2.87541 \\
-		\hline
-		300 & 6076 & 338.888 & 2.98687 \\
-		\hline
-		400 & 3259 & 458.838 & 5.33122 \\
-		\hline
-		500 & 2061 & 581.937 & 9.37247 \\
-		\hline
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}{0.32\textwidth}
+		\includegraphics[width=\textwidth]{includes/red_0.png}
+		\caption{Bild der Kamera\\}
+		\label{fig:red_0_cam}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.32\textwidth}
+		\includegraphics[width=\textwidth]{includes/red_0_diff.png}
+		\caption{erkannte Linie nach diff-Linienerkennung}
+		\label{fig:red_0_diff}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.32\textwidth}
+		\includegraphics[width=\textwidth]{includes/red_0_free.png}
+		\caption{erkannte Linie nach free-Linienerkennung}
+		\label{fig:red_0_free}
+	\end{subfigure}
+	
+	\begin{subfigure}{0.32\textwidth}
+		\includegraphics[width=\textwidth]{includes/green_0.png}
+		\caption{Bild der Kamera\\}
+		\label{fig:green_0_cam}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.32\textwidth}
+		\includegraphics[width=\textwidth]{includes/green_0_diff.png}
+		\caption{erkannte Linie nach diff-Linienerkennung}
+		\label{fig:green_0_diff}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.32\textwidth}
+		\includegraphics[width=\textwidth]{includes/green_0_free.png}
+		\caption{erkannte Linie nach free-Linienerkennung}
+		\label{fig:green_0_free}
+	\end{subfigure}
+	
+	\begin{subfigure}{0.32\textwidth}
+		\includegraphics[width=\textwidth]{includes/blue_0.png}
+		\caption{Bild der Kamera\\}
+		\label{fig:blue_0_cam}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.32\textwidth}
+		\includegraphics[width=\textwidth]{includes/blue_0_diff.png}
+		\caption{erkannte Linie nach diff-Linienerkennung}
+		\label{fig:blue_0_diff}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.32\textwidth}
+		\includegraphics[width=\textwidth]{includes/blue_0_free.png}
+		\caption{erkannte Linie nach free-Linienerkennung}
+		\label{fig:blue_0_free}
+	\end{subfigure}
+	
+	\begin{subfigure}{0.32\textwidth}
+		\includegraphics[width=\textwidth]{includes/yellow_0.png}
+		\caption{Bild der Kamera\\}
+		\label{fig:yellow_0_cam}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.32\textwidth}
+		\includegraphics[width=\textwidth]{includes/yellow_0_diff.png}
+		\caption{erkannte Linie nach diff-Linienerkennung}
+		\label{fig:yellow_0_diff}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.32\textwidth}
+		\includegraphics[width=\textwidth]{includes/yellow_0_free.png}
+		\caption{erkannte Linie nach free-Linienerkennung}
+		\label{fig:yellow_0_free}
+	\end{subfigure}
+	
+	\begin{subfigure}{0.32\textwidth}
+		\includegraphics[width=\textwidth]{includes/orange_0.png}
+		\caption{Bild der Kamera\\}
+		\label{fig:orange_0_cam}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.32\textwidth}
+		\includegraphics[width=\textwidth]{includes/orange_0_diff.png}
+		\caption{erkannte Linie nach diff-Linienerkennung}
+		\label{fig:orange_0_diff}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.32\textwidth}
+		\includegraphics[width=\textwidth]{includes/orange_0_free.png}
+		\caption{erkannte Linie nach free-Linienerkennung}
+		\label{fig:orange_0_free}
+	\end{subfigure}
+	\caption{Ergebnisse nach diff- und free-Linienerkennung}
+	\label{fig:blue_0}
+\end{figure}
+
+\subsection{Verschiedene Entfernungen}
+\label{sec:dists}
+
+\begin{table}[H]
+	\begin{tabular}{c|c|c}
+		& diff & free \\
+		\begin{tabular}{c}
+			Entfernung (mm) \\ \hline
+			200 \\
+			300 \\
+			400 \\
+			500 \\
+		\end{tabular} & 
+		\begin{tabular}{c|c|c}
+			Anzahl & Avg (mm) & Stdabw (mm) \\ \hline
+			19048 & 224.166 & 8.76011 \\
+			8321 & 338.722 & 14.8228 \\
+			4294 & 460.079 & 14.5428 \\
+			3063 & 587.986 & 11.6962 \\
+		\end{tabular} & 
+		\begin{tabular}{c|c|c}
+			Anzahl & Avg (mm) & Stdabw (mm) \\ \hline
+			5733 & 225.367 & 1.08721 \\
+			3535 & 340.892 & 2.82819 \\
+			1475 & 461.271 & 3.90112 \\
+			1156 & 586.405 & 7.37468 \\
+		\end{tabular}
 	\end{tabular}
-	\caption{Scans der blauen Seite in verschiedenen Entfernung mit free-Linienerkennung}
-	\label{tab:free_dists}
+	\caption{Scans der blauen Seiten in verschiedenen Entfernungen}
 \end{table}
 
-Die Tabellen \ref{tab:free_reps}, \ref{tab:free_colors} und \ref{tab:free_dists} sind analog zu den Tabellen in \ref{subsec:auswertung.diff} für die ''free''-Linienerkennung aufgebaut.
+\subsection{Verschiedene Beleuchtungen}
+
+\begin{table}[H]
+	\begin{tabular}{c|c|c}
+		& diff & free \\
+		\begin{tabular}{c}
+			Beleuchtung \\ \hline
+			Schreibtischlampe \\
+			Deckenlampe \\
+			%Schreibtisch- \\ und \\ Deckenlampe \\
+			beides \\
+		\end{tabular} & 
+		\begin{tabular}{c|c|c}
+			Anzahl & Avg (mm) & Stdabw (mm) \\ \hline
+			9264 & 338.236 & 34.9526 \\
+			12267 & 335.573 & 97.8706 \\
+			8321 & 338.722 & 14.8228 \\
+		\end{tabular} & 
+		\begin{tabular}{c|c|c}
+			Anzahl & Avg (mm) & Stdabw (mm) \\ \hline
+			4451 & 340.415 & 32.2099 \\
+			5890 & 339.616 & 2.99821 \\
+			3535 & 340.892 & 2.82819 \\
+		\end{tabular}
+	\end{tabular}
+	\caption{Scans der blauen Seiten in 300mm Entfernungen mit verschiedenen Beleuchtungen}
+\end{table}
+
+In Tabelle \ref{tab:diff_reps} werden die zehn Scans der blauen Seite in 300mm Entfernung einzeln betrachtet, in Tabelle \ref{tab:diff_colors} werden die Scans der verschiedenen Seiten in 300mm aufgeführt, dabei werden jeweils alle Punkte aus allen zehn Scans zusammen betrachtet und in Tabelle \ref{tab:diff_dists} sind die Ergebnisse der Scans der blauen Seite in verschiedenen Entfernungen.
+
+In den Tabellen stehen die Anzahl der Punkte, die zum Würfel gehören (''Anzahl''), das $20 \%$ gestutzte Mittel (Avg) und die Standardabweichung der gemessenen Entfernungen (Stdabw).
+
+
+\begin{tikzpicture}
+	\begin{axis}[
+    	width=\linewidth,
+    	line width=1pt,
+    	xlabel={Entfernung},
+    	ylabel={Häufigkeit},
+    ]
+		\addplot+[blue] table [x=dist, y=count] 
+			{includes/histogram_diff_rotate_blue_normal_300.csv};
+	\end{axis}
+\end{tikzpicture}
+	
+
 
 \begin{tikzpicture}
 	\begin{axis}[
