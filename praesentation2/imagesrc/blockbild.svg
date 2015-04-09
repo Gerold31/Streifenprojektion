@@ -15,7 +15,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.91pre4 r13712"
-   sodipodi:docname="Blockgrafik2_7.svg"
+   sodipodi:docname="blockbild.svg"
    inkscape:export-filename="C:\Users\JojOatXGME\rect3404.png"
    inkscape:export-xdpi="120"
    inkscape:export-ydpi="120">
@@ -215,9 +215,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4"
-     inkscape:cx="237.18394"
-     inkscape:cy="230.64084"
+     inkscape:zoom="2.8"
+     inkscape:cx="253.75842"
+     inkscape:cy="248.5446"
      inkscape:document-units="px"
      inkscape:current-layer="layer4"
      showgrid="false"
@@ -242,7 +242,9 @@
   <g
      inkscape:groupmode="layer"
      id="layer3"
-     inkscape:label="Groups">
+     inkscape:label="Groups"
+     style="display:inline"
+     sodipodi:insensitive="true">
     <rect
        style="fill:#d7e3f4;stroke:#162d50;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
        id="rect5371"
@@ -259,32 +261,34 @@
        y="7.2665939" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:22.5px;line-height:125%;font-family:sans-serif;text-align:start;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+       style="font-style:normal;font-weight:normal;font-size:22.5px;line-height:125%;font-family:sans-serif;text-align:start;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="66.084045"
        y="31.97554"
        id="text5375"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan5377"
-         x="162.85712"
+         x="66.084045"
          y="31.97554">Aufnahmesystem</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:22.5px;line-height:125%;font-family:sans-serif;text-align:start;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+       style="font-style:normal;font-weight:normal;font-size:22.5px;line-height:125%;font-family:sans-serif;text-align:start;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="402.20987"
        y="31.865677"
        id="text5379"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan5381"
-         x="474.28568"
+         x="402.20987"
          y="31.865677">Verarbeitung</tspan></text>
   </g>
   <g
      inkscape:label="Ebene 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-527.95289)">
+     transform="translate(0,-527.95289)"
+     style="display:inline"
+     sodipodi:insensitive="true">
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -340,12 +344,6 @@
          id="tspan3512"
          x="559.15936"
          y="768.23938">Rekonstruktion</tspan></text>
-    <path
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker4517)"
-       d="m 559.28569,646.64805 0,90"
-       id="path4509"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
     <rect
        style="fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
        id="rect4354"
@@ -375,11 +373,37 @@
        height="35"
        x="459.99997"
        y="742.3623" />
+    <ellipse
+       transform="translate(0,527.95289)"
+       style="display:inline;fill:#d5d5ff;stroke:#000055;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       id="path4796"
+       cx="559.28571"
+       cy="376.55231"
+       rx="91.785713"
+       ry="42.857143" />
+    <text
+       transform="translate(0,527.95289)"
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:22.5px;line-height:125%;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="559.15936"
+       y="370.86688"
+       id="text4952"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4954"
+         x="559.15936"
+         y="370.86688">Punkte im</tspan><tspan
+         sodipodi:role="line"
+         x="559.15936"
+         y="398.99188"
+         id="tspan4956">3D-Raum</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer2"
-     inkscape:label="Connection">
+     inkscape:label="Connection"
+     style="display:inline"
+     sodipodi:insensitive="true">
     <circle
        style="fill:#000000;fill-opacity:1;stroke:#000000"
        id="path3514"
@@ -398,28 +422,6 @@
        id="path3520"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
-    <ellipse
-       style="fill:#d5d5ff;stroke:#000055;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
-       id="path4796"
-       cx="559.28571"
-       cy="376.55231"
-       rx="91.785713"
-       ry="42.857143" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:22.5px;line-height:125%;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="559.15936"
-       y="370.86688"
-       id="text4952"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan4954"
-         x="559.15936"
-         y="370.86688">Punkte im</tspan><tspan
-         sodipodi:role="line"
-         x="559.15936"
-         y="398.99188"
-         id="tspan4956">3D-Raum</tspan></text>
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker4750)"
        d="m 225.71426,206.55231 0,-89.28572"
@@ -438,11 +440,19 @@
        id="path4611"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
+    <path
+       transform="translate(0,-527.95289)"
+       style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker4517)"
+       d="m 559.28569,646.64805 0,90"
+       id="path4509"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer4"
-     inkscape:label="Beschriftungen">
+     inkscape:label="Beschriftungen"
+     style="display:inline">
     <rect
        style="opacity:1;fill:#ffffff;fill-opacity:0.62745098;fill-rule:nonzero;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect4205"
@@ -466,7 +476,7 @@
          y="155.2522"
          id="tspan4278">Linie</tspan></text>
     <rect
-       style="opacity:1;fill:#ffffff;fill-opacity:0.627451;fill-rule:nonzero;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="opacity:1;fill:#ffffff;fill-opacity:0.62745098;fill-rule:nonzero;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect4213"
        width="127.85714"
        height="57.857143"
@@ -487,5 +497,32 @@
          x="575.43774"
          y="184.34903"
          id="tspan4211">der Linie</tspan></text>
+    <rect
+       style="opacity:1;fill:#f2f2f2;fill-opacity:1;fill-rule:nonzero;stroke:#666666;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:3, 3;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4380"
+       width="246.42857"
+       height="82.142807"
+       x="170.71425"
+       y="335.12372" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:20px;line-height:125%;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="294.27521"
+       y="369.27618"
+       id="text4382"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="294.27521"
+         y="369.27618"
+         id="tspan4386">ggf. auch Objekt</tspan><tspan
+         sodipodi:role="line"
+         x="294.27521"
+         y="394.27618"
+         id="tspan4388">oder Kamera bewegen</tspan></text>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#666666;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 171.42854,250.12373 85.35714,85.35715"
+       id="path4404"
+       inkscape:connector-curvature="0" />
   </g>
 </svg>
