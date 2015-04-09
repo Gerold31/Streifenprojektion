@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
 	int opt;
 	while (opt = args.getNextOption()) {
 		switch (opt) {
-		case 'd':
+		case 'D':
 		{
 			string filename;
 			if (!args.getNextParam(filename)) {
@@ -64,9 +64,24 @@ int main(int argc, char *argv[])
 			distribution(filename);
 			break;
 		}
+		case 'S':
+		{
+			string param;
+			if (!args.getNextParam(param)) {
+				cerr << "Missing argument for " << args.getOptionString() << "." << endl;
+				return EXIT_FAILURE;
+			}
+			if (param[2] != ':') {
+				cerr << "Argument has invalid format: " << param << endl;
+				return EXIT_FAILURE;
+			}
+			readPoints();
+			scatterplot(param.substr(3), param[0], param[1]);
+			break;
+		}
 		case 'h':
 		case '?':
-			cerr << "Usage: " << argv[0] << "[options and tools]" << endl;
+			cerr << "Usage: " << argv[0] << " [options and tools]" << endl;
 			cerr << endl;
 			cerr << "Options:" << endl;
 			cerr << "    -h      -?" << endl;
@@ -84,9 +99,13 @@ int main(int argc, char *argv[])
 			cerr << "        The default step-size is 2." << endl;
 			cerr << endl;
 			cerr << "Tools:" << endl;
-			cerr << "    -d" << endl;
+			cerr << "    -D <filename>" << endl;
 			cerr << "        Create sources to show the distribution with a histogram." << endl;
 			cerr << "        This tool uses the setp-size." << endl;
+			cerr << endl;
+			cerr << "    -S <axis1><axis2>:<filename>" << endl;
+			cerr << "        Create sources to show a scatterplot with axis1 and axis2." << endl;
+			cerr << "        Possible axis are x, y, z and h." << endl;
 			cerr << endl;
 			return EXIT_SUCCESS;
 			break;

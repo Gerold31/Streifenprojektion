@@ -26,5 +26,6 @@ extern std::ostringstream latex;
 extern char workingDirectory[L_tmpnam];
 
 void distribution(std::string filename);
+void scatterplot(std::string filename, char axisH, char axisV);
 
 #endif // COMMON
