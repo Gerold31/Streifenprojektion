@@ -1,5 +1,7 @@
 #include <pointcloud.h>
 
+#include <iostream>
+
 #define GLM_FORCE_RADIANS
 
 #include <GL/glew.h>
@@ -15,11 +17,17 @@ const char vertexSource[] = GLSL(
 			out vec3 Color;
 			uniform mat4 view;
 			uniform mat4 proj;
-			uniform float pointSize = 1024;
+			uniform float pointSize;
+			uniform int pointResize;
+
 			void main() {
 				Color = color;
 				gl_Position = proj * view * vec4(position, 1.0);
-				gl_PointSize = pointSize / gl_Position.z;
+				if (pointResize > 0) {
+					gl_PointSize = 1024 * pointSize / gl_Position.z;
+				} else {
+					gl_PointSize = pointSize;
+				}
 			}
 );
 
@@ -41,8 +49,14 @@ const char fragmentSourceEX[] = GLSL(
 			in vec3 Color;
 			out vec4 outColor;
 			void main() {
-				float z = gl_FragCoord[3];
-				outColor = vec4(z, z, z, 1.0);
+				gl_FragDepth = gl_FragCoord.z;
+				if (length(gl_PointCoord - vec2(0.5, 0.5)) < 0.5) {
+					float z = gl_FragCoord[3];
+					outColor = vec4(z, z, z, 1.0);
+				} else {
+					gl_FragDepth = 1;
+					outColor = vec4(0, 0, 0, 0);
+				}
 			}
 );
 
@@ -85,6 +99,8 @@ PointCloud::PointCloud(const std::vector<Point> &points) :
 	// Get uniform locations
 	uniView = shaderProgram.getUniformLocation("view");
 	uniProj = shaderProgram.getUniformLocation("proj");
+	uniPointSize = shaderProgram.getUniformLocation("pointSize");
+	uniPointResize = shaderProgram.getUniformLocation("pointResize");
 }
 
 PointCloud::~PointCloud()
@@ -102,6 +118,16 @@ void PointCloud::addPoint(float x, float y, float z, float r, float g, float b)
 void PointCloud::setOptions(int options)
 {
 	this->options = options;
+}
+
+void PointCloud::setPointPerspectiveSize(bool enable)
+{
+	this->pointPerspectiveSize = enable;
+}
+
+void PointCloud::setPointSize(float size)
+{
+	this->pointSize = size;
 }
 
 void PointCloud::draw(const glm::mat4 &view)
@@ -123,9 +149,10 @@ void PointCloud::draw(const glm::mat4 &view)
 	// Set up uniforms
 	glUniformMatrix4fv(uniView, 1, GL_FALSE, glm::value_ptr(view));
 	glUniformMatrix4fv(uniProj, 1, GL_FALSE, glm::value_ptr(glm::mat4{}));
+	glUniform1f(uniPointSize, pointSize);
+	glUniform1i(uniPointResize, pointPerspectiveSize);
 
 	const size_t vertexCount = points.size();
-	//glPointSize(4);
 	glEnable(GL_PROGRAM_POINT_SIZE);
 	glDrawArrays(GL_POINTS, 0, vertexCount);
 }

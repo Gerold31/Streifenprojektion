@@ -22,6 +22,8 @@ public:
 
 	void addPoint(float x, float y, float z, float r, float g, float b);
 	void setOptions(int options);
+	void setPointPerspectiveSize(bool enable);
+	void setPointSize(float size);
 
 	virtual void draw(const glm::mat4 &view) override;
 private:
@@ -30,12 +32,14 @@ private:
 	std::vector<Point> points;
 	GShader vertexShader, fragmentShader, fragmentShaderEX;
 	GShaderProgram shaderProgram, shaderProgramEX;
-	GLint uniView, uniProj;
+	GLint uniView, uniProj, uniPointSize, uniPointResize;
 	GLuint vao;
 	GLuint vbo;
 	bool shouldUpload;
 
 	int options = 0;
+	float pointSize = 1;
+	bool pointPerspectiveSize = true;
 };
 
 #endif // POINTCLOUD_H

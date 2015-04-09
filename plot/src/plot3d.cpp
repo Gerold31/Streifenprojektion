@@ -190,7 +190,7 @@ void Plot3D::show(int resolutionX, int resolutionY)
 				backAccept = true;
 			}
 			// change speed of movement
-			static bool acceptR = true, acceptF = true, acceptPeriod = true;
+			static bool acceptR = true, acceptF = true;
 			if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS) {
 				if (acceptR) {
 					moveSpeed *= 2;
@@ -207,14 +207,48 @@ void Plot3D::show(int resolutionX, int resolutionY)
 			} else {
 				acceptF = true;
 			}
-			// other options
-			if (glfwGetKey(window, GLFW_KEY_PERIOD) == GLFW_PRESS) {
-				if (acceptPeriod) {
-					pointCloud->setOptions(PointCloud::COLOR_DISTANCE);
-					acceptPeriod = false;
+			// change size of point
+			{
+				static float pointSize = 1.f;
+				static bool acceptP = true;
+				if (glfwGetKey(window, GLFW_KEY_COMMA) == GLFW_PRESS) {
+					if (acceptP) {
+						pointSize *= 3.f/4.f;
+						pointCloud->setPointSize(pointSize);
+					}
+					acceptP = false;
+				} else {
+					acceptP = true;
 				}
+				static bool acceptN = true;
+				if (glfwGetKey(window, GLFW_KEY_SLASH) == GLFW_PRESS) {
+					if (acceptN) {
+						pointSize *= 4.f/3.f;
+						pointCloud->setPointSize(pointSize);
+					}
+					acceptN = false;
+				} else {
+					acceptN = true;
+				}
+			}
+			{
+				static bool resize = true;
+				static bool accept = true;
+				if (glfwGetKey(window, GLFW_KEY_PERIOD) == GLFW_PRESS) {
+					if (accept) {
+						resize = !resize;
+						pointCloud->setPointPerspectiveSize(resize);
+					}
+					accept = false;
+				} else {
+					accept = true;
+				}
+			}
+			// other options
+			if (glfwGetKey(window, GLFW_KEY_LEFT_ALT) == GLFW_PRESS) {
+				pointCloud->setOptions(PointCloud::COLOR_DISTANCE);
 			} else {
-				acceptPeriod = true;
+				pointCloud->setOptions(0);
 			}
 		}
 
