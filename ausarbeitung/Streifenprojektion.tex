@@ -87,7 +87,7 @@ Die Arbeit behandelt in Kapitel~\ref{sec:basics} zunächst ein paar wichtige Gru
 \section{Theoretische und technische Grundlagen}
 \label{sec:basics}
 
-Zusätzlich zur hier verwendeten Methode haben sich in den letzten Jahrzehnten viele verschiedene Techniken entwickelt, mit denen dreidimensionale Strukturen der realen Welt vermessen werden können. So existieren zusätzlich zur Streifenlichtprojektion Verfahren wie \emph{Stereo-Vision}, \emph{Structure from Motion}, \emph{Shape from Shading} und \emph{Time of Flight}. Die benötigten theoretischen Grundlagen überschneiden sich dabei bei einigen der Verfahren, es gibt aber auch einige Unterschiede. Im Folgenden wird auf wichtige Grundlagen eingegangen, die für das Projekt benötigt werden.
+Zusätzlich zur hier verwendeten Methode haben sich in den letzten Jahrzehnten viele verschiedene Techniken entwickelt, mit denen dreidimensionale Strukturen der realen Welt vermessen werden können. So existieren zusätzlich zur Streifenlichtprojektion Verfahren wie \emph{Stereo-Vision}, \emph{Structure from Motion}, \emph{Shape from Shading} und \emph{Time of Flight}. Im Folgenden wird auf wichtige Grundlagen eingegangen, die für das Projekt benötigt werden.
 
 \subsection{Normalisierte Bildkoordinaten}
 \label{sec:imagecoordinates}
@@ -140,7 +140,7 @@ Alternativ zur Brennweite und Bildhöhe wird auch oft das vertikale \ac{FOV} ben
 
 \subsection{Triangulation}
 
-Bei der Triangulation geht es darum, aus zwei Eckpunkten und den Innenwickeln eines Dreiecks den dritten Eckpunkt zu bestimmen. Hier wird der Objektpunkt auf der Laserlinie auf Basis eines Bildpunktes und der Laserausrichtung bestimmt.
+Das Prinzip der Triangulation ist es aus zwei Eckpunkten und den Innenwickeln eines Dreiecks den dritten Eckpunkt zu bestimmen. Hier wird der Objektpunkt auf der Laserlinie auf Basis eines Bildpunktes und der Laserausrichtung bestimmt.
 
 \subsubsection{Modell und gegebene Werte}
 
@@ -361,7 +361,7 @@ Wenn ein anderer Thread die \texttt{capture}-Methode von \texttt{Camera} aufruft
 
 \subsection{Linienerkennung}
 
-Zuerst wird ein Binärbild erzeugt, wobei der Algorithmus entscheidet, welche Pixel zur Linie gehören und welche nicht. Im zweiten Schritt wird jeder Pixel des Bild durchlaufen, wobei in die Datenstruktur \texttt{Line} die vermeintliche Position der Linie und deren Breite geschrieben wird. Die hier implementierten Algorithmen unterscheiden sich lediglich in der Erzeugung des Binärbildes.
+Die Linienerkennung arbeitet in zwei Schritten. Zuerst wird ein Binärbild erzeugt, wobei der Algorithmus entscheidet, welche Pixel zur Linie gehören und welche nicht. Im zweiten Schritt wird jeder Pixel des Bild durchlaufen, wobei in der Datenstruktur \texttt{Line} die vermeintliche Position der Linie und deren Breite gespeichert wird. Die hier implementierten Algorithmen unterscheiden sich lediglich in der Erzeugung des Binärbildes.
 
 \subsubsection{Differenzbildung (Diff)}
 
