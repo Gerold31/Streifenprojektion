@@ -15,6 +15,7 @@
 #include "edgelightbardetector.h"
 #include "freelightbardetector.h"
 #include "lightbardetector.h"
+#include "peaklightbardetector.h"
 #include "reconstructor.h"
 #include "rotatescancontroller.h"
 #include "translatescancontroller.h"
@@ -41,6 +42,7 @@ bool Configuration::debugLightbar = false;
 bool Configuration::debugCamera = false;
 bool Configuration::debugHeightmap = false;
 bool Configuration::verbose = false;
+bool Configuration::verbose2 = false;
 bool Configuration::waitKey = false;
 shared_ptr<Controller> Configuration::controller{make_shared<CommandController>()};
 shared_ptr<LightBarDetector> Configuration::lightBarDetector{make_shared<DiffLightBarDetector>()};
@@ -165,6 +167,8 @@ void Configuration::handleOption(const char op)
 			lightBarDetector = make_shared<FreeLightBarDetector>();
 		} else if (equal(lined, "edge")) {
 			lightBarDetector = make_shared<EdgeLightBarDetector>();
+		} else if (equal(lined, "peak")) {
+			lightBarDetector = make_shared<PeakLightBarDetector>();
 		} else {
 			cerr << "Unknown line detector: " << lined << endl << endl;
 			helpAndExit();
@@ -184,6 +188,8 @@ void Configuration::handleOption(const char op)
 	}
 	case 'v':
 	{
+		if (verbose)
+			verbose2 = true;
 		verbose = true;
 		break;
 	}
@@ -268,6 +274,7 @@ bool Configuration::helpAndExit(int exitCode)
 	cerr << endl;
 	cerr << "      -v" << endl;
 	cerr << "          Print some more messages about current state." << endl;
+	cerr << "          Using -v two times can cause some new debug windows." << endl;
 	cerr << endl;
 	cerr << "      -c <device>" << endl;
 	cerr << "          Capture images using <device>." << endl;

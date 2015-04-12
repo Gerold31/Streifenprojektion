@@ -37,7 +37,8 @@ SOURCES += \
     src/controller.cpp \
     src/commandcontroller.cpp \
     src/rotatescancontroller.cpp \
-    src/translatescancontroller.cpp
+    src/translatescancontroller.cpp \
+    src/peaklightbardetector.cpp
 
 HEADERS += \ 
     include/camera.h \
@@ -59,4 +60,5 @@ HEADERS += \
     include/commandcontroller.h \
     include/common.h \
     include/rotatescancontroller.h \
-    include/translatescancontroller.h
+    include/translatescancontroller.h \
+    include/peaklightbardetector.h
