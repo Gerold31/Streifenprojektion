@@ -233,13 +233,12 @@
 				\item<3-> \textbf{Schritt 2:} Berechne $h$:
 				\[h = \frac{b \cdot \sin(\alpha) \cdot \sin(\beta)}{\sin(180^\circ - \beta - \alpha)}\]
 				\item<4-> \textbf{Schritt 3:} Bestimme Koordinaten innerhalb der Szene:
-				\[\begin{pmatrix}x\\y\\z\end{pmatrix} = \frac{h}{f} \cdot
-				\begin{pmatrix}u\\v\\-f\end{pmatrix}\]
+				\[X = \frac{h}{f} \cdot \begin{pmatrix}u\\v\\-f\end{pmatrix}\]
 			\end{itemize}
 		\end{column}
 		\begin{column}{.39\linewidth}
-			\visible<1->{\hfill\fbox{\includegraphics[width=0.9\linewidth]{includes/reconstruction2}}
-			\vfill\vspace{3ex}\vfill}
+			\visible<1->{\hfill\fbox{\includegraphics[width=0.9\linewidth]{includes/reconstruction2}}}
+			\vfill\vspace{3ex}\vfill
 			\visible<2->{\hfill\fbox{\includegraphics[width=0.9\linewidth]{includes/reconstruction1}}}
 		\end{column}
 	\end{columns}
