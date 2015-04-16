@@ -27,6 +27,12 @@ void Plot3D::addDrawable(std::shared_ptr<Drawable> drawable)
 	newDrawables.push_back(drawable);
 }
 
+void Plot3D::addDrawable(std::shared_ptr<LaserFigure> drawable)
+{
+	laser = drawable;
+	addDrawable((shared_ptr<Drawable>) drawable);
+}
+
 void Plot3D::addPoint(float x, float y, float z, float r, float g, float b)
 {
 	lock_guard<mutex> lock{mutexPoints};
@@ -207,7 +213,7 @@ void Plot3D::show(int resolutionX, int resolutionY)
 			} else {
 				acceptF = true;
 			}
-			// change size of point
+			// change size of points
 			{
 				static float pointSize = 1.f;
 				static bool acceptP = true;
@@ -250,6 +256,28 @@ void Plot3D::show(int resolutionX, int resolutionY)
 			} else {
 				pointCloud->setOptions(0);
 			}
+			{
+				static bool accept = true;
+				if (glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS) {
+					if (accept && laser != nullptr) {
+						laser->hide = !laser->hide;
+					}
+					accept = false;
+				} else {
+					accept = true;
+				}
+			}
+			{
+				static bool accept = true;
+				if (glfwGetKey(window, GLFW_KEY_K) == GLFW_PRESS) {
+					if (accept && laser != nullptr) {
+						cam.getTransformation() = laser->transformation;
+					}
+					accept = false;
+				} else {
+					accept = true;
+				}
+			}
 		}
 
 		// Add new points
@@ -275,7 +303,8 @@ void Plot3D::show(int resolutionX, int resolutionY)
 
 			mat4 projection = cam.getProjection(resolutionX, resolutionY);
 			for (shared_ptr<Drawable> &drawable : drawables) {
-				drawable->draw(projection);
+				if (!drawable->hide)
+					drawable->draw(projection);
 			}
 
 			glfwSwapBuffers(window);
