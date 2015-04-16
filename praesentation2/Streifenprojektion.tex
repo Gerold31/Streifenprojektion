@@ -67,11 +67,13 @@
 \begin{document}
 \begin{frame}
 	\frametitle{\mbox{}}
+	\framesubtitle{\mbox{}}
 	\titlepage
 \end{frame}
 
 \begin{frame}
 	\frametitle{Gliederung}
+	\framesubtitle{\mbox{}}
 	\tableofcontents
 \end{frame} 
 
@@ -80,6 +82,7 @@
 \section{Motivation}
 \begin{frame}
 	\frametitlesec
+	\framesubtitle{\mbox{}}
 
 	\textbf{Vermessungen komplexer Gebilde}
 	\vfill
@@ -113,24 +116,10 @@
 
 \begin{frame}
 	\frametitlesec
-
-	\textbf{Wie gelangt man an die Ausmaße eines Objektes?}
-	\begin{itemize}
-		\item Manuelle Vermessung
-		\item Stereo-Vision
-		\item Structure from Motion
-		\item Time of Flight
-		\item \dots
-	\end{itemize}
-
-\end{frame}
-
-
-\begin{frame}
-	\frametitlesec
+	\framesubtitle{\mbox{}}
 
 	\vfill
-	{\large\textbf{Unsere Methode: Streifenlichtprojektion}}
+	{\large\textbf{Streifenlichtprojektion}}
 	\vfill
 	\begin{itemize}
 		\item Relativ günstig
@@ -150,18 +139,34 @@
 % ---------------------------------------------------------------------------- %
 
 \section{Umsetzung}
+
+
 \begin{frame}
 	\frametitlesec
+	\framesubtitle{\mbox{}}
 
 	\begin{figure}
 		\centering
 		\includegraphics[width=0.8\linewidth]{includes/setup}
-		\caption{Unser Setup im Betrieb}
+		\caption{Setup im Betrieb}
 		\label{fig:setup}
 	\end{figure}
 
 \end{frame}
 
+%\subsection{Hardware}
+\begin{frame}
+	\frametitlesec
+	\framesubtitles{Hardware}
+
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.8\linewidth]{includes/hardware.jpg}
+		\caption{Hardware}
+		\label{fig:hardware}
+	\end{figure}
+
+\end{frame}
 
 %\subsection{Ablauf}
 \begin{frame}
@@ -172,20 +177,6 @@
 
 \end{frame}
 
-
-%\subsection{Hardware}
-\begin{frame}
-	\frametitlesec
-	\framesubtitles{Hardware}
-
-	\begin{figure}
-		\centering
-		\includegraphics[width=0.8\linewidth]{includes/hardware.jpg}
-		\caption{Unsere Hardware}
-		\label{fig:hardware}
-	\end{figure}
-
-\end{frame}
 
 
 %\subsection{Linienerkennung}
@@ -237,19 +228,19 @@
 		\small
 		\begin{column}{.61\linewidth}
 			\begin{itemize}
-				\item \textbf{Eingabe:} Normalisierte Bildkoordinaten $(u,v)$ eines Punktes der Laserlinie
-				\item \textbf{Schritt 1:} Bestimme $\alpha$, $\beta$, $b$ und $f$
-				\item \textbf{Schritt 2:} Berechne $h$:
+				\item<1-> \textbf{Eingabe:} Normalisierte Bildkoordinaten $(u,v)$ eines Punktes der Laserlinie
+				\item<2-> \textbf{Schritt 1:} Bestimme $\alpha$, $\beta$, $b$ und $f$ aus dem Setup
+				\item<3-> \textbf{Schritt 2:} Berechne $h$:
 				\[h = \frac{b \cdot \sin(\alpha) \cdot \sin(\beta)}{\sin(180^\circ - \beta - \alpha)}\]
-				\item \textbf{Schritt 3:} Bestimme Koordinaten innerhalb der Szene:
+				\item<4-> \textbf{Schritt 3:} Bestimme Koordinaten innerhalb der Szene:
 				\[\begin{pmatrix}x\\y\\z\end{pmatrix} = \frac{h}{f} \cdot
 				\begin{pmatrix}u\\v\\-f\end{pmatrix}\]
 			\end{itemize}
 		\end{column}
 		\begin{column}{.39\linewidth}
-			\hfill\fbox{\includegraphics[width=0.9\linewidth]{includes/reconstruction2}}
-			\vfill\vspace{3ex}\vfill
-			\hfill\fbox{\includegraphics[width=0.9\linewidth]{includes/reconstruction1}}
+			\visible<1->{\hfill\fbox{\includegraphics[width=0.9\linewidth]{includes/reconstruction2}}
+			\vfill\vspace{3ex}\vfill}
+			\visible<2->{\hfill\fbox{\includegraphics[width=0.9\linewidth]{includes/reconstruction1}}}
 		\end{column}
 	\end{columns}
 
@@ -281,7 +272,7 @@
 		\only<3>{
 			\begin{figure}
 				\centering
-				\includegraphics[width=0.8\linewidth]{includes/3d.png}
+				\includegraphics[width=0.8\linewidth]{includes/3d_y_cam.png}
 				\caption{Rekonstruierte Punkte aus der Perspektive der Kamera}
 				\label{fig:example3}
 			\end{figure}
@@ -289,25 +280,9 @@
 		\only<4>{
 			\begin{figure}
 				\centering
-				\includegraphics[width=0.8\linewidth]{includes/3d_2.png}
+				\includegraphics[width=0.8\linewidth]{includes/3d_y_1.png}
 				\caption{Rekonstruierte Punkte der Szene (1)}
 				\label{fig:example4}
-			\end{figure}
-		}
-		\only<5>{
-			\begin{figure}
-				\centering
-				\includegraphics[width=0.8\linewidth]{includes/3d_3.png}
-				\caption{Rekonstruierte Punkte der Szene (2)}
-				\label{fig:example5}
-			\end{figure}
-		}
-		\only<6>{
-			\begin{figure}
-				\centering
-				\includegraphics[width=0.8\linewidth]{includes/3d_4.png}
-				\caption{Rekonstruierte Punkte der Szene (3)}
-				\label{fig:example6}
 			\end{figure}
 		}
 	\end{overlayarea}
@@ -320,6 +295,7 @@
 %\subsection{Organisatorisches}
 \begin{frame}
 	\frametitlesec
+	\framesubtitle{\mbox{}}
 
 	\begin{itemize}
 		\item Viel Zeit bei der Planung verloren
@@ -338,7 +314,7 @@
 		\vfill
 		\item Linienerkennung
 		\begin{itemize}
-			\item Hintergrundfarbe
+			\item Farbe
 			\item Beleuchtung
 		\end{itemize}
 	\end{itemize}
@@ -348,6 +324,7 @@
 
 \begin{frame}
 	\frametitlesec
+	\framesubtitle{\mbox{}}
 
 	\begin{figure}
 		\centering
@@ -364,7 +341,7 @@
 
 \begin{frame}
 	\frametitlesec
-%	\framesubtitles{Messungen}
+	\framesubtitles{}
 
 	\textbf{Messungen}
 
@@ -398,6 +375,7 @@
 
 \begin{frame}
 	\frametitlesec
+	\framesubtitles{}
 %	\framesubtitles{Auffälligkeiten}
 
 	\textbf{Auffälligkeiten}
@@ -419,11 +397,12 @@
 	\begin{itemize}
 		\item 12\% bis 17\% größere Entfernung
 		\begin{itemize}
-			\item 300~mm $\rightarrow$ 338~mm - 341~mm
+			\item 300~mm $\rightarrow$ 338~mm bis 341~mm
 		\end{itemize}
-		\item Schwache Beleuchtung beeinträchtigt die Ergebnisse
+		\item Beleuchtung beeinflusst die Ergebnisse
 		\begin{itemize}
-			\item Standartabweichung (diff): 15~mm $\rightarrow$ 98~mm
+			\item diff: 15~mm bis 98~mm Standartabweichung
+			\item free: 2~mm bis 32~mm Standartabweichung
 		\end{itemize}
 		\item Ergebnis stark von Linienerkennung beeinflusst
 	\end{itemize}
@@ -435,14 +414,15 @@
 \section{Zusammenfassung}
 \begin{frame}
 	\frametitlesec
+	\framesubtitles{}
 
 	\begin{columns}
 	\column<1->{.45\linewidth}{\includegraphics[width=\linewidth]{includes/setup}}
 	\column<2->{.45\linewidth}{\includegraphics[width=\linewidth]{includes/blockbild}}
 	\end{columns}
 	\begin{columns}
-	\column{.45\linewidth}{}
-	\column<3->{.45\linewidth}{\includegraphics[width=\linewidth]{includes/3d_3.png}}
+	\column<3->{.45\linewidth}{\includegraphics[width=\linewidth]{includes/3d_y_1.png}}
+	\column<4->{.45\linewidth}{\includegraphics[width=\linewidth]{includes/cap.png}}
 	\end{columns}
 
 \end{frame}
@@ -451,6 +431,7 @@
 
 \begin{frame}
 	\frametitle{\mbox{}}
+	\framesubtitles{}
 	\center \LARGE Vielen Dank für eure Aufmerksamkeit!
 \end{frame}
 
@@ -510,7 +491,7 @@
 			Farbe & Anzahl & Avg (mm) & Stdabw (mm) \\
 			\hline
 			Rot & 6565 & 338.14 & 3.6842 \\
-			Gruen & 8806 & 337.897 & 88.2139 \\
+			Gr\"un & 8806 & 337.897 & 88.2139 \\
 			Blau & 8321 & 338.722 & 14.8228 \\
 			Gelb & 7085 & 338.112 & 39.4331 \\
 			Orange & 6336 & 338.249 & 7.50314 \\
@@ -528,7 +509,7 @@
 			Farbe & Anzahl & Avg (mm) & Stdabw (mm) \\
 			\hline
 			Rot & 6439 & 338.035 & 3.4453 \\
-			Gruen & 3534 & 340.808 & 6.28125 \\
+			Gr\"un & 3534 & 340.808 & 6.28125 \\
 			Blau & 3535 & 340.892 & 2.82819 \\
 			Gelb & 10824 & 338.69 & 77.4283 \\
 			Orange & 29063 & 347.896 & 205.929 \\
