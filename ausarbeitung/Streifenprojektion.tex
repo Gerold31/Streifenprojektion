@@ -239,7 +239,14 @@ Die Hardware besteht aus einer Webcam und einem Linienlaser, der auf einem Model
 
 \subsection{Softwarearchitektur}
 
-Zur Implementierung der Software wurde die Programmiersprache \emph{C++} nach dem \emph{Standard von 2011} verwendet. Als Bibliotheken kamen \emph{OpenCV} und \emph{Qt} zum Einsatz.
+Zur Implementierung der Software wurde die Programmiersprache \emph{C++} nach dem \emph{Standard von 2011} verwendet. Als Bibliotheken kamen \emph{OpenCV} und \emph{Qt} zum Einsatz. Eine Übersicht über alle Klassen ist in der Abbildung~\ref{fig:classes_all} zu finden. Im folgenden werden die einzelnen Komponenten der Software genauer betrachtet.
+
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=\linewidth]{includes/classdiagram}
+	\caption{Umfassendes Klassendiagramm}
+	\label{fig:classes_all}
+\end{figure}
 
 \subsubsection{Grundlegende Datenstrukturen}
 
@@ -376,15 +383,6 @@ Für jeden Farbkanal wird einzeln der Mittelwert über das gesamte Bild berechne
 Nachdem die Laserlinie erkannt wurde, werden die vermeintlichen Pixel der erkannten Linie in Objektpunkte überführt. Dies geschieht durch die Klasse \texttt{DefaultReconstructor}, welche derzeit die einzige Spezialisierung von \texttt{Reconstructor} darstellt.
 
 Dazu werden die Formeln aus \Fref{sec:basics} angewendet, um für jeden Pixel zunächst die normalisierten Bildkoordinaten, die Entfernung $h$ und danach den Objektpunkt $X$ zu bestimmen. Daraufhin werden die erhalten Punkte mithilfe der Transformationsmatrix transformiert und an die Klasse \texttt{Reconstruction} weiter gegeben, welche sie letztendlich ausgibt.
-
-%\subsection{Übersicht über alle Klassen}
-
-\begin{figure}[p]
-	\centering
-	\includegraphics[width=\linewidth]{includes/classdiagram}
-	\caption{Umfassendes Klassendiagramm}
-	\label{fig:classes_all}
-\end{figure}
 	
 %\begin{table}[p]
 %	\centering
