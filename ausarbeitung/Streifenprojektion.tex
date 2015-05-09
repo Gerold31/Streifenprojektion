@@ -498,7 +498,7 @@ Es fällt auf, dass sich die Werte zwischen verschiedenen Messungen kaum untersc
 
 Wie man in Abbildung \ref{fig:blue_0_cam} sehen kann, spiegelt sich der Laser in dem Cube. Die diff-Linienerkennung (Abbildung \ref{fig:blue_0_diff}) erkennt, im Gegensatz zur free-Linienerkennung (Abbildung \ref{fig:blue_0_free}), die Spiegelung als Linie. Das erklärt sowohl warum diff mehr Punkte erkennt, als auch warum diese eine höhere Streuung aufweisen. Da die falsch erkannten Punkte überwiegend links von der tatsächlichen Linie liegen, haben sie eine kleinere Entfernung, was den etwas geringeren Durchschnitt von diff gegenüber free erklärt.
 
-Zusätzlich fällt auf, dass die Durchschnittliche Entfernung von sowohl diff als auch free 38mm - 41mm ($12,5\%-13,5\%$) größer ist als erwartet (300mm), siehe dazu Abschnitt \ref{sec:dists}.
+Zusätzlich fällt auf, dass die durchschnittliche Entfernung von sowohl diff als auch free 38mm - 41mm ($12,5\%-13,5\%$) größer ist als erwartet (300mm), siehe dazu Abschnitt \ref{sec:dists}.
 
 \begin{table}[H]
 	\centering
@@ -549,10 +549,11 @@ Zusätzlich fällt auf, dass die Durchschnittliche Entfernung von sowohl diff al
 \end{table}
 
 \subsection{Verschiedene Farben}
+\label{sec:cols}
 
 Als nächstes wurden die verschiedenen Seiten des ''Rubic'c Cube'' gescannt, um die Farbabhängigkeit der Linienerkennungen zu überprüfen. Die Ergebnisse sind in Tabelle \ref{tab:colors} zu finden. Sie ist analog zur Tabelle \ref{tab:reps} aus Abschnitt \ref{sec:reps} aufgebaut, mit dem Unterschied, dass in pro Zeile nicht die Punkte aus einer Messung, sondern aus zehn Messungen betrachtet werden.
 
-Es fällt auf, dass bei der roten Seite beide Linienerkennungen gute Ergebnisse liefern (niedrige Streuung der Messpunkte) und auch die Anzahl der gefunden Punkte und die Durchschnittsentfernung nahe beieinanderliegen. Zusätzlich liefern beide Linienerkennungen bei Gelb vergleichsweise schlechte Ergebnisse (hohe Streuung). Bei den anderen Farben unterscheiden sich die Linienerkennungen z.T. stark, so liefert diff bei grün die schlechtesten Ergebnisse, wohingegen free mit orange starke Probleme hat. Nicht nur die Standardabweichung ist bei orange und free extrem hoch, auch die Anzahl der gefundenen Punkte ist ungefähr acht mal größer als bei grün oder blau, das heißt, dass ca. $\frac{7}{8}$ der erkannten Punkte nicht zur Linie gehören. {\color{red} warum?}
+Es fällt auf, dass bei der roten Seite beide Linienerkennungen gute Ergebnisse liefern (niedrige Streuung der Messpunkte) und auch die Anzahl der gefunden Punkte und die Durchschnittsentfernung nahe beieinanderliegen. Zusätzlich liefern beide Linienerkennungen bei Gelb vergleichsweise schlechte Ergebnisse (hohe Streuung). Bei den anderen Farben unterscheiden sich die Linienerkennungen z.T. stark, so liefert diff bei grün die schlechtesten Ergebnisse, wohingegen free mit orange starke Probleme hat. Nicht nur die Standardabweichung ist bei orange und free extrem hoch, auch die Anzahl der gefundenen Punkte ist ungefähr acht mal größer als bei grün oder blau, das heißt, dass ca. $\frac{7}{8}$ der erkannten Punkte nicht zur Linie gehören, weil free den Mittelwert über das gesamte Bild bildet und anhand der Abweichung eines Punktes zum Mittelwert bestimmt, ob ein Punkt zur Linie gehört oder nicht. Die orange Seite sorgt verändert den Mittelwert so, dass auch Punkte, die nicht zur Linie gehören erkannt werden.
 
 Insgesamt scheint diff farbunabhängiger zu sein, da die Durchschnittsentfernung ziemlich konstant ist und auch die Anzahl der gefundenen Punkte weniger stark schwankt, als bei free. 
 
@@ -730,7 +731,7 @@ Zuletzt wurden die Einflüsse unterschiedlicher Beleuchtungen untersucht. Bisher
 
 Wie bereits in Abschnitt \ref{sec:reps} angesprochen, spiegelt sich der Laser im Würfel, was, wie man in den Abbildungen \ref{fig:blue_d_diff}, \ref{fig:blue_t_diff} und \ref{fig:blue_dt_diff} sehen kann, von der diff-Linienerkennung fälschlicherweise als Linie erkannt wird. Bei schwächerer Beleuchtung ist der Spiegeleffekt stärker, was dazu führt, dass diff bei der Beleuchtung nur durch die Deckenlampe schlechtere Ergebnisse liefert, als bei einer direkten Beleuchtung durch die Schreibtischlampe. Beide Lampen zusammen liefern die besten Ergebnisse.
 
-Die free-Linienerkennung wird durch diese Spiegeleffekte nicht beeinflusst, allerdings erkennt sie, wie man in Abbildung \ref{fig:blue_d_free} sehen kann, falsche Punkte auf dem Boden. { \color{red}  ... weil ... ?}
+Die free-Linienerkennung wird durch diese Spiegeleffekte nicht beeinflusst, allerdings erkennt sie, wie man in Abbildung \ref{fig:blue_d_free} sehen kann, falsche Punkte auf dem Boden. Die Beleuchtung durch die Schreibtischlampe sorgt dafuer, dass es hellere und dunklere Bereiche in dem Bild gibt. Das führt dazu, dass wie in Abschnitt \ref{sec:cols} der Mittelwert verzerrt wird und auch falsche Punkte erkannt werden
 
 \begin{table}[H]
 	\centering
