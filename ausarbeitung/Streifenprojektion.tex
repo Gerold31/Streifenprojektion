@@ -78,7 +78,7 @@
 
 In verschiedenen Fällen ist es hilfreich oder notwendig ein \emph{komplexes} dreidimensionales Objekt zu vermessen. Aus solchen Vermessungen resultierende Modelle können beispielsweise in der Unterhaltungsindustrie für die Film- und Spielproduktion verwendet werden. So lassen sich heutzutage dank solcher Verfahren vergleichsweise einfach Personen und Objekte in Spiele übernehmen. Außerdem ermöglichen Verfahren zur Vermessung von Geometrien automatisierte Qualitätskontrollen und neue Methoden zur automatisierten Fertigung oder Verarbeitung.
 
-In diesem Projekt geht es um die \emph{Streifenlichtprojektion}. Dabei wird ein Streifen auf eine Oberfläche projiziert um aus einer Aufnahme der projizierten Linie die Form der Struktur zu rekonstruieren.
+In diesem Projekt geht es um die \emph{Streifenlichtprojektion}. Dabei wird ein Streifen auf eine Oberfläche projiziert um aus einer Aufnahme der projizierten Linie die Form der Struktur zu rekonstruieren. In diesem Projekt projiziert ein einfacher und billiger Linienlaser eine Linie auf eine Struktur. Eine einfache Webcam nimmt diese Struktur samt Linie auf, damit von den Bildern 3-D-Koordinaten von Punkten auf der Laserlinie berechnet werden können. Um von einer Struktur mehr Werte zu bekommen, wird dieser Vorgang mit unterschiedlichen Ausrichtungen des Lasers oder mit verschiedenen Positionierungen von dem Aufnahmesetup und der Struktur wiederholt. In dem Projekt werden unterschiedliche Verfahren zur Linienerkennungen verwendet und die Ergebnisse gegenübergestellt.
 
 Die Arbeit behandelt in Kapitel~\ref{sec:basics} zunächst ein paar wichtige Grundlagen für das Projekt. Dazu gehören \emph{normalisierte Bildkoordinaten}, die \emph{perspektivische Projektion} und die mathematischen Prinzipien zur Rekonstruktion der Szene. Danach geht es in Kapitel~\ref{sec:realization} um die Umsetzung des Projektes. Dabei wird zunächst die verwendete Hardware betrachtet und der grobe Aufbau der Software beschrieben. Ab Abschnitt~\ref{sec:controller} wird auf verschiedene Komponenten der Implementierung nochmals genauer eingegangen. In dem Kapitel~\ref{sec:evaluation} geht es um die Auswertung der Ergebnisse worauf in Kapitel~\ref{sec:summary} abschließend noch eine Zusammenfassung folgt.
 
@@ -110,7 +110,7 @@ Mit der Bildauflösung $(s_x, s_y)$ und dem Seitenverhältnis $r = s_x/s_y$.
 \subsection{Perspektivische Projektion}
 \label{sec:perspective}
 
-Bei einer \emph{perspektivischen Projektion} werden dreidimensionale Punkte auf eine \emph{Bildebene} projiziert. Die Funktion entspricht dabei dem Modell der \emph{Lochkamera} und stellt eine Vereinfachung vieler realen Kameras da. Eine perspektivische Projektion wird durch den Augpunkt $O$ und die Bildebene definiert. Um einen Objektpunkt $X$ auf einen Punkt $X'$ in der Bildebene zu projizieren, wird der Schnittpunkt des \emph{Projektionsstrahls} durch $X$ und $O$ mit der Bildebene bestimmt. Der projizierte Punkt wird auch $X'$ \emph{Bildpunkt} genannt. Die Bildebene wird oft durch eine Blickrichtung der \emph{Kamera} und eine \emph{Brennweite} $f$ definiert. Die Blickrichtung der Kamera entspricht dabei der Normalen der Bildebenen und $f$ ist die Entfernung der Bildebene vom Augpunkt in Blickrichtung.
+Bei einer \emph{perspektivischen Projektion} werden dreidimensionale Punkte auf eine \emph{Bildebene} projiziert. Die Funktion entspricht dabei dem Modell der \emph{Lochkamera} und stellt eine Vereinfachung vieler realen Kameras da. Eine perspektivische Projektion wird durch den Augpunkt $O$ und die Bildebene definiert. Um einen Objektpunkt $X$ auf einen Punkt $X'$ in der Bildebene zu projizieren, wird der Schnittpunkt des \emph{Projektionsstrahls} durch $X$ und $O$ mit der Bildebene bestimmt. Der projizierte Punkt $X'$ wird auch \emph{Bildpunkt} genannt. Die Bildebene wird oft durch eine Blickrichtung der \emph{Kamera} und eine \emph{Brennweite} $f$ definiert. Die Blickrichtung der Kamera entspricht dabei der Normalen der Bildebenen und $f$ ist die Entfernung der Bildebene vom Augpunkt in Blickrichtung.
 
 \begin{figure}
 	\centering
@@ -132,7 +132,7 @@ Angenommen das Bild ist $2$ Einheiten hoch, der Augpunkt ist $O(0,0,0)$ und die 
 u \\ v \\ -f
 \end{pmatrix} \]
 
-Alternativ zur Brennweite und Bildhöhe wird auch oft das vertikale \ac{FOV} benutzt, um die Projektion zu definieren. Das vertikale \ac{FOV} ist der Winkel zwischen den obersten und untersten Projektionsgeraden des Bildes. Die Brennweite $f$, die Bildhöhe $g$ und das vertikalen \ac{FOV} $\fov$ stehen dabei in der folgende Beziehung:
+Alternativ zur Brennweite und Bildhöhe wird auch oft das vertikale \ac{FOV} benutzt, um die Projektion zu definieren. Das vertikale \ac{FOV} ist der Winkel zwischen den obersten und untersten Projektionsgeraden des Bildes. Die Brennweite $f$, die Bildhöhe $g$ und das vertikale \ac{FOV} $\fov$ stehen dabei in der folgende Beziehung:
 \begin{align*}
 	\fov = 2 \cdot \arctan \left( \frac{g}{2 f} \right)
 	\Leftrightarrow f = \frac{g}{2 \tan\left(\frac{\fov}{2}\right)}
