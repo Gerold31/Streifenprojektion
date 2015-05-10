@@ -252,7 +252,7 @@ Zur Implementierung der Software wurde die Programmiersprache \emph{C++} nach de
 
 \subsubsection{Grundlegende Datenstrukturen}
 
-Zur Übertragung von Informationen zwischen den verschiedenen Komponenten werden die Datenstrukturen \texttt{Line}, \texttt{Reconstruction} und \texttt{DeviceConfiguration} verwendet. In \Fref{fig:classes_base} sind die entsprechenden Klassen zu sehen und in \Fref{tab:classes_base} werden ihre Funktionen beschrieben.
+Zur Übertragung von Informationen zwischen den verschiedenen Komponenten werden die Datenstrukturen \texttt{Line}, \texttt{Reconstruction} und \texttt{DeviceConfiguration} verwendet. In \Fref{fig:classes_base} sind die entsprechenden Klassen zu sehen. Die Funktion wird im folgenden etwas genauer beschrieben.
 
 \begin{figure}
 	\centering
@@ -261,19 +261,15 @@ Zur Übertragung von Informationen zwischen den verschiedenen Komponenten werden
 	\label{fig:classes_base}
 \end{figure}
 
-\begin{table}
-	\centering
-	\begin{tabular}{lp{10cm}}
-		\texttt{DeviceConfiguration} &
-			Die Struktur \texttt{DeviceConfiguration} speichert dabei alle Werte zum Setup, die zur Rekonstruktion benötigt werden. Zusätzlich wird eine Transformationsmatrix mitgeführt, auf die später noch eingegangen wird.\\[1em]
-		\texttt{Line}                &
-			Die Datenstruktur \texttt{Line} entspricht einer Menge von Abtastungen der projizierten Linie. Sie Speichert dabei zusätzlich zu einer Liste von Abtastungen (Instanzen von \texttt{Sample}) die Auflösung des zugrunde liegenden Bildes.\\[1em]
-		\texttt{Reconstruction}      &
-			Die Klasse \texttt{Reconstruction} dient zum Speichern des endgültigen Ergebnises der Rekonstruktion. Sie speichert somit eine Liste von rekonstruierten Punkten (Instanzen von \texttt{Point}). Zusätzlich hat die Klasse die Aufgabe, hinzugefügte rekonstruierte Punkte zur Ausgabe des Programms hinzuzufügen.
-	\end{tabular}
-	\caption{Funktion der grundlegenden Datenstrukturen}
-	\label{tab:classes_base}
-\end{table}
+\vspace{0.5em}
+\begin{tabular}{lp{10cm}}
+	\texttt{DeviceConfiguration} &
+		Die Struktur \texttt{DeviceConfiguration} speichert alle Werte zum Setup, die zur Rekonstruktion benötigt werden. Zusätzlich wird eine Transformationsmatrix mitgeführt, auf die später noch eingegangen wird.\\[1em]
+	\texttt{Line}                &
+		Die Datenstruktur \texttt{Line} entspricht einer Menge von Abtastungen der projizierten Linie. Sie Speichert dabei zusätzlich zu einer Liste von Abtastungen (Instanzen von \texttt{Sample}) die Auflösung des zugrunde liegenden Bildes.\\[1em]
+	\texttt{Reconstruction}      &
+		Die Klasse \texttt{Reconstruction} dient zum Speichern des endgültigen Ergebnisses der Rekonstruktion. Sie speichert somit eine Liste von rekonstruierten Punkten (Instanzen von \texttt{Point}). Zusätzlich hat die Klasse die Aufgabe, hinzugefügte rekonstruierte Punkte zur Ausgabe des Programms hinzuzufügen. Die entsprechenden Farben werden aus dem Referenzbild entnommen.
+\end{tabular}
 
 \subsubsection{Programmablauf}
 
@@ -296,9 +292,9 @@ Nach Programmstart wird als erstes die Funktion \texttt{Configuration::init(int,
 	\label{fig:software_controller}
 \end{figure}
 
-Der Ablauf, der von den verschiedenen Spezialisierungen von \texttt{Controller} vorgegeben wird, verfolgt dabei immer einen ähnlichen Ablauf, wie er auch in \Fref{fig:software_controller} dargestellt wird. Der Controller durchläuft eine Schleife und beschafft sich in jedem Schleifendurchlauf die aktuelle Gerätekonfiguration (\texttt{DeviceConfiguration}), eine Aufnahme durch das entsprechende Setup und ggf. ein aktuelles Referenzbild. Danach übergibt es die Steuerung an die Linienerkennung (\texttt{LightBarDetextor}) und dessen Ergebnis wird an den Rekonstruktionsalgorithmus (\texttt{Reconstructor}) übergeben.
+Der Ablauf, der von den verschiedenen Spezialisierungen von \texttt{Controller} vorgegeben wird, verfolgt dabei immer einen ähnlichen Ablauf, wie er auch in Abbildung~\ref{fig:software_controller} dargestellt wird. Der Controller durchläuft eine Schleife und beschafft sich in jedem Schleifendurchlauf die aktuelle Gerätekonfiguration (\texttt{DeviceConfiguration}), eine Aufnahme durch das entsprechende Setup und ggf. ein aktuelles Referenzbild. Danach übergibt es die Steuerung an die Linienerkennung (\texttt{LightBarDetextor}) und dessen Ergebnis wird an den Rekonstruktionsalgorithmus (\texttt{Reconstructor}) übergeben.
 
-Es existieren drei Spezialisierungen von \texttt{Controller}. Die einfachste Implementierung ist der \texttt{CommandController}, welcher Standardmäßig verwendet wird. Die Klasse liest die Standardeingabe oder die in den Argumenten definierte Datei Zeilenweise aus. Eine Zeile entspricht dabei einem Befehl, welcher ausgewertet und ausgeführt wird, bevor sich das Programm der nächsten Zeile zuwendet. In der \Fref{tab:commands} können alle Befehle nachgelesen werden.
+Es existieren drei Spezialisierungen von \texttt{Controller}. Die einfachste Implementierung ist der \texttt{CommandController}, welcher Standardmäßig verwendet wird. Die Klasse liest die Standardeingabe oder die in den Argumenten definierte Datei Zeilenweise aus. Eine Zeile entspricht dabei einem Befehl, welcher ausgewertet und ausgeführt wird, bevor sich das Programm der nächsten Zeile zuwendet. In der Tabelle~\ref{tab:commands} können alle Befehle nachgelesen werden.
 
 \begin{table}[p]
 	\centering
