@@ -7,6 +7,7 @@
 \usepackage{helvet}
 \usepackage[T1]{fontenc} % working hyphenation
 \usepackage{lmodern} % better fonts with T1-fontenc
+\usepackage{textcomp} % better support of utf8-symbols (adds support of '€')
 \usepackage{amsmath, amssymb, amstext}
 \usepackage{subcaption}
 \usepackage{float}
@@ -18,6 +19,7 @@
 \usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage{pgfplots}
+\usepackage{eurosym}
 
 \usepackage[hidelinks]{hyperref}
 %\usepackage[left=3.2cm,right=3cm,top=1.7cm,bottom=3cm,includeheadfoot]{geometry}
@@ -220,7 +222,7 @@ u \\ v \\ -f
 
 \subsection{Hardware}
 
-Die Hardware besteht aus einer Webcam und einem Linienlaser, der auf einem Modellbauservo montiert ist. Laser und Servo werden von einem ''Spark Core'' Mikrocontroller gesteuert, welcher wiederum über USB mit Software kommuniziert.
+Die Hardware besteht aus einer Webcam und einem Low Cost Linienlaser, der auf einem Modellbauservo montiert ist. Laser und Servo werden von einem Mikrocontroller gesteuert, welcher wiederum über USB mit der Software kommuniziert. Der Aufbau ist in der Abbildung~\ref{fig:hardware} zu sehen. Alle diese Komponenten sind zusammen für unter 100\,€ erhältlich.
 
 \begin{figure}
 	\centering
