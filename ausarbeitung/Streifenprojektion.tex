@@ -296,7 +296,7 @@ Nach Programmstart wird als erstes die Funktion \texttt{Configuration::init(int,
 	\label{fig:software_controller}
 \end{figure}
 
-Der Ablauf, der von den verschiedenen Spezialisierungen von \texttt{Controller} vorgegeben wird, verfolgt dabei immer einen ähnlichen Ablauf, wie er auch in \Fref{fig:software_controller} beschrieben wird. Der Controller durchläuft eine Schleife und beschafft sich in jedem Schleifendurchlauf die aktuelle Gerätekonfiguration (\texttt{DeviceConfiguration}), eine Aufnahme durch das entsprechende Setup und ggf. ein aktuelles Referenzbild. Danach übergibt es die Steuerung an die Linienerkennung (\texttt{LightBarDetextor}) und dessen Ergebnis wird an den Rekonstruktionsalgorithmus (\texttt{Reconstructor}) übergeben.
+Der Ablauf, der von den verschiedenen Spezialisierungen von \texttt{Controller} vorgegeben wird, verfolgt dabei immer einen ähnlichen Ablauf, wie er auch in \Fref{fig:software_controller} dargestellt wird. Der Controller durchläuft eine Schleife und beschafft sich in jedem Schleifendurchlauf die aktuelle Gerätekonfiguration (\texttt{DeviceConfiguration}), eine Aufnahme durch das entsprechende Setup und ggf. ein aktuelles Referenzbild. Danach übergibt es die Steuerung an die Linienerkennung (\texttt{LightBarDetextor}) und dessen Ergebnis wird an den Rekonstruktionsalgorithmus (\texttt{Reconstructor}) übergeben.
 
 Es existieren drei Spezialisierungen von \texttt{Controller}. Die einfachste Implementierung ist der \texttt{CommandController}, welcher Standardmäßig verwendet wird. Die Klasse liest die Standardeingabe oder die in den Argumenten definierte Datei Zeilenweise aus. Eine Zeile entspricht dabei einem Befehl, welcher ausgewertet und ausgeführt wird, bevor sich das Programm der nächsten Zeile zuwendet. In der \Fref{tab:commands} können alle Befehle nachgelesen werden.
 
@@ -343,23 +343,24 @@ Die Klassen \texttt{RotateScanController} und \texttt{TranslateScanController} b
 
 \subsubsection{Ansteuerung des Mikrocontrollers}
 
-Die Software steuert den Mikrocontroller über USB, wobei sich dieser als virtuellen COM-Port ausgibt. Zur Kommunikation wird ein einfaches Protokoll verwendet, das 2 Byte lange Nachrichten an den Mikrocontroller sendet. Das erste Byte gibt den Befehl an, das zweite den Parameter.\\
+Die Software steuert den Mikrocontroller über USB, wobei sich dieser als virtuellen COM-Port ausgibt. Zur Kommunikation wird ein einfaches Protokoll verwendet, das 2 Byte lange Nachrichten an den Mikrocontroller sendet. Das erste Byte gibt den Befehl an, das zweite den Parameter. Die möglichen Befehle werden in der Tabelle~\ref{tab:protocol} aufgeführt.
 
-\begin{tabular}{|c|c|c|}
-\hline
-1. Byte & 2. Byte & Beschreibung \\
-\hline
-'m'\footnotemark & $\alpha \in [0,180]$ & Setzt die Servoposition auf $\alpha ^\circ$.\\
-\hline
-'l' & '0' oder '1' & Schaltet den Laser an ('1') bzw. aus ('0')\\
-\hline
-\end{tabular}\\
+\begin{table}
+	\centering
+	\begin{tabular}{|c|c|c|}
+		\hline
+		1. Byte & 2. Byte & Beschreibung \\
+		\hline
+		'm' & $\alpha \in [0,180]$ & Setzt die Servoposition auf $\alpha^\circ$\\
+		\hline
+		'l' & '0' oder '1' & Schaltet den Laser an ('1') bzw. aus ('0')\\
+		\hline
+	\end{tabular}
+	\caption{Befehle zur Steuerung des Mikrocontrollers. Zeichen in einfachen Anführungszeichen stehen für den ASCII-Wert des Zeichens.}
+	\label{tab:protocol}
+\end{table}
 
-\footnotetext{Zeichen in Anführungszeichen stehen für den ASCII-Wert des Zeichens}
-
-Die Klasse \texttt{Serial} ermöglicht es Nachrichten an den Mikrocontroller zu senden.
-
-Die Klassen \texttt{Servo} und \texttt{Laser} der Steuerung von dem Servo bzw. Laser. Dabei werden Nachrichten in o.g. Form an den Mikrocontroller gesendet.
+Die Klasse \texttt{Serial} ermöglicht es Nachrichten an den Mikrocontroller zu senden. Die Klassen \texttt{Servo} und \texttt{Laser} implementieren die Steuerung von dem Servo bzw. Laser. Dabei werden Nachrichten in o.g. Form an den Mikrocontroller gesendet.
 
 \subsubsection{Ansteuerung der Kamera}
 
