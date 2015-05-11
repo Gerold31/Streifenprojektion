@@ -445,8 +445,6 @@ Dazu werden die Formeln aus \Fref{sec:basics} angewendet, um für jeden Pixel zu
 
 Im Folgenden werden verschiedene Seiten eines ''Rubik's Cube'' auf verschiedene Entfernungen gescannt. Es wurden die rote, grüne, blaue, gelbe und orange Seite in 300mm Entfernung, sowie die blaue Seite in 200mm, 400mm und 500mm Entfernung vermessen. Die Zugehörigkeit eines Messpunktes wird anhand seiner Farbe, die aus dem Referenzbild entnommen wurde, bestimmt. Da die Scans vor weißem Hintergrund durchgeführt wurden, wurde die weiße Seite des ''Rubik's Cube'' nicht gescannt.
 
-
-
 \begin{figure}[H]
 	\centering
 	\begin{subfigure}{0.45\textwidth}
@@ -501,54 +499,56 @@ Zunächst wurde die blaue Seite des ''Rubic's Cube'' zehn mal in 300mm Entfernun
 
 Es fällt auf, dass sich die Werte zwischen verschiedenen Messungen kaum unterscheiden, aber es zwischen den beiden Linienerkennungen z.T. große Unterschiede gibt. So findet diff mehr als doppelt so viele Punkte auf dem Würfel und die Standardabweichung ist ca. fünf mal größer.
 
-Wie man in Abbildung \ref{fig:blue_0_cam} sehen kann, spiegelt sich der Laser in dem Cube. Die diff-Linienerkennung (Abbildung \ref{fig:blue_0_diff}) erkennt, im Gegensatz zur free-Linienerkennung (Abbildung \ref{fig:blue_0_free}), die Spiegelung als Linie. Das erklärt sowohl warum diff mehr Punkte erkennt, als auch warum diese eine höhere Streuung aufweisen. Da die falsch erkannten Punkte überwiegend links von der tatsächlichen Linie liegen, haben sie eine kleinere Entfernung, was den etwas geringeren Durchschnitt von diff gegenüber free erklärt.
+Wie man in Abbildung \ref{fig:cols} sehen kann, spiegelt sich der Laser in dem Cube. Die diff-Linienerkennung erkennt, im Gegensatz zur free-Linienerkennung, die Spiegelung als Linie. Das erklärt sowohl warum diff mehr Punkte erkennt, als auch warum diese eine höhere Streuung aufweisen. Da die falsch erkannten Punkte überwiegend links von der tatsächlichen Linie liegen, haben sie eine kleinere Entfernung. Das erklärt den etwas geringeren Durchschnitt von diff gegenüber free.
 
 Zusätzlich fällt auf, dass die durchschnittliche Entfernung von sowohl diff als auch free 38mm - 41mm ($12,5\%-13,5\%$) größer ist als erwartet (300mm), siehe dazu Abschnitt \ref{sec:dists}.
 
 \begin{table}[H]
 	\centering
-	\begin{tabular}{c|c|c}
-		& diff & free \\
-		\begin{tabular}{c}
-			Wiederholung \\ \hline
-			1 \\
-			2 \\
-			3 \\
-			4 \\
-			5 \\
-			6 \\
-			7 \\
-			8 \\
-			9 \\
-			10 \\
-		\end{tabular} & 
-		\begin{tabular}{c|c|c}
-			Anzahl & Avg (mm) & Stdabw (mm) \\ \hline
-			825 & 338.851 & 15.1979 \\
-			829 & 338.511 & 14.199 \\
-			807 & 338.858 & 13.7228 \\
-			818 & 338.825 & 15.9249 \\
-			851 & 338.931 & 15.6883 \\
-			857 & 338.927 & 13.3769 \\
-			832 & 338.541 & 14.5219 \\
-			847 & 338.688 & 14.5952 \\
-			825 & 338.494 & 13.6795 \\
-			830 & 338.469 & 16.8786 \\
-		\end{tabular} &
-		\begin{tabular}{c|c|c}
-			Anzahl & Avg (mm) & Stdabw (mm) \\ \hline
-			363 & 340.952 & 2.76884 \\
-			365 & 340.923 & 2.97673 \\
-			344 & 341.142 & 2.75016 \\
-			336 & 341.02 & 2.68906 \\
-			365 & 340.75 & 2.59545 \\
-			350 & 340.738 & 2.71992 \\
-			354 & 340.867 & 2.93117 \\
-			353 & 340.764 & 2.9996 \\
-			351 & 340.737 & 2.80947 \\
-			354 & 341.064 & 2.97436 \\
-		\end{tabular}
-	\end{tabular}
+	diff-Linienerkennung \\
+	\begin{tabular}{c|c|c|c}
+		Wiederholung & Anzahl & Avg (mm) & Stdabw (mm) \\ \hline
+		1 & 825 & 338.851 & 15.1979 \\
+		2 & 829 & 338.511 & 14.199 \\
+		3 & 807 & 338.858 & 13.7228 \\
+		4 & 818 & 338.825 & 15.9249 \\
+		5 & 851 & 338.931 & 15.6883 \\
+		6 & 857 & 338.927 & 13.3769 \\
+		7 & 832 & 338.541 & 14.5219 \\
+		8 & 847 & 338.688 & 14.5952 \\
+		9 & 825 & 338.494 & 13.6795 \\
+		10 & 830 & 338.469 & 16.8786 \\
+	\end{tabular} \\
+	\vspace{1em}
+	free-Linienerkennung \\
+	\begin{tabular}{c|c|c|c}
+		Wiederholung & Anzahl & Avg (mm) & Stdabw (mm) \\ \hline
+		1 & 363 & 340.952 & 2.76884 \\
+		2 & 365 & 340.923 & 2.97673 \\
+		3 & 344 & 341.142 & 2.75016 \\
+		4 & 336 & 341.02 & 2.68906 \\
+		5 & 365 & 340.75 & 2.59545 \\
+		6 & 350 & 340.738 & 2.71992 \\
+		7 & 354 & 340.867 & 2.93117 \\
+		8 & 353 & 340.764 & 2.9996 \\
+		9 & 351 & 340.737 & 2.80947 \\
+		10 & 354 & 341.064 & 2.97436 \\
+	\end{tabular} \\
+	\vspace{1em}
+	peak-Linienerkennung \\
+		\begin{tabular}{c|c|c|c}
+		Wiederholung & Anzahl & Avg (mm) & Stdabw (mm) \\ \hline
+		1 & 647 & 341.039 & 238.143 \\
+		2 & 618 & 341.134 & 225.873 \\
+		3 & 614 & 341.748 & 216.396 \\
+		4 & 662 & 341.748 & 232.574 \\
+		5 & 698 & 341.264 & 235.846 \\
+		6 & 638 & 339.998 & 241.649 \\
+		7 & 681 & 340.775 & 241.377 \\
+		8 & 651 & 340.45 & 249.112 \\
+		9 & 700 & 341.317 & 221.319 \\
+		10 & 634 & 341.085 & 241.876 \\
+		\end{tabular} \
 	\caption{Scans der blauen Seite in 300mm Entfernung}
 	\label{tab:reps}
 \end{table}
@@ -565,33 +565,35 @@ Insgesamt scheint diff farbunabhängiger zu sein, da die Durchschnittsentfernung
 
 \begin{table}[H]
 	\centering
-	\begin{tabular}{c|c|c}
-		& diff & free \\
-		\begin{tabular}{c}
-			Farbe \\ \hline
-			Rot \\
-			Gruen \\
-			Blau \\
-			Gelb \\
-			Orange \\
-		\end{tabular} & 
-		\begin{tabular}{c|c|c}
-			Anzahl & Avg (mm) & Stdabw (mm) \\ \hline
-			6565 & 338.14 & 3.6842 \\
-			8806 & 337.897 & 88.2139 \\
-			8321 & 338.722 & 14.8228 \\
-			7085 & 338.112 & 39.4331 \\
-			6336 & 338.249 & 7.50314 \\
-		\end{tabular} & 
-		\begin{tabular}{c|c|c}
-			Anzahl & Avg (mm) & Stdabw (mm) \\ \hline
-			6439 & 338.035 & 3.4453 \\
-			3534 & 340.808 & 6.28125 \\
-			3535 & 340.892 & 2.82819 \\
-			10824 & 338.69 & 77.4283 \\
-			29063 & 347.896 & 205.929 \\
-		\end{tabular}
-	\end{tabular}
+	diff-Linienerkennung \\
+	\begin{tabular}{c|c|c|c}
+		Farbe & Anzahl & Avg (mm) & Stdabw (mm) \\ \hline
+		Rot & 6565 & 338.14 & 3.6842 \\
+		Gruen & 8806 & 337.897 & 88.2139 \\
+		Blau & 8321 & 338.722 & 14.8228 \\
+		Gelb & 7085 & 338.112 & 39.4331 \\
+		Orange & 6336 & 338.249 & 7.50314 \\
+	\end{tabular} \\
+	\vspace{1em}
+	free-Linienerkennung \\
+		\begin{tabular}{c|c|c|c}
+		Farbe & Anzahl & Avg (mm) & Stdabw (mm) \\ \hline
+		Rot & 6439 & 338.035 & 3.4453 \\
+		Gruen & 3534 & 340.808 & 6.28125 \\
+		Blau & 3535 & 340.892 & 2.82819 \\
+		Gelb & 10824 & 338.69 & 77.4283 \\
+		Orange & 29063 & 347.896 & 205.929 \\
+	\end{tabular} \\
+	\vspace{1em}
+	peak-Linienerkennung \\
+		\begin{tabular}{c|c|c|c}
+		Farbe & Anzahl & Avg (mm) & Stdabw (mm) \\ \hline
+		Rot & 5795 & 339.622 & 55.6553 \\
+		Gruen & 4437 & 341.713 & 152.687 \\
+		Blau & 6543 & 341.249 & 234.736 \\
+		Gelb & 5838 & 340.121 & 106.932 \\
+		Orange & 4317 & 340.104 & 85.2112 \\
+	\end{tabular} \
 	\caption{Scans der verschiedener Seiten in 300mm Entfernung}
 	\label{tab:colors}
 \end{table}
@@ -599,97 +601,35 @@ Insgesamt scheint diff farbunabhängiger zu sein, da die Durchschnittsentfernung
 
 \begin{figure}[H]
 	\centering
-	\begin{subfigure}{0.32\textwidth}
-		\includegraphics[width=\textwidth]{includes/red_0.png}
-		\caption{Bild der Kamera\\}
-		\label{fig:red_0_cam}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}{0.32\textwidth}
-		\includegraphics[width=\textwidth]{includes/red_0_diff.png}
-		\caption{erkannte Linie nach diff-Linienerkennung}
-		\label{fig:red_0_diff}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}{0.32\textwidth}
-		\includegraphics[width=\textwidth]{includes/red_0_free.png}
-		\caption{erkannte Linie nach free-Linienerkennung}
-		\label{fig:red_0_free}
-	\end{subfigure}
-	
-	\begin{subfigure}{0.32\textwidth}
-		\includegraphics[width=\textwidth]{includes/green_0.png}
-		\caption{Bild der Kamera\\}
-		\label{fig:green_0_cam}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}{0.32\textwidth}
-		\includegraphics[width=\textwidth]{includes/green_0_diff.png}
-		\caption{erkannte Linie nach diff-Linienerkennung}
-		\label{fig:green_0_diff}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}{0.32\textwidth}
-		\includegraphics[width=\textwidth]{includes/green_0_free.png}
-		\caption{erkannte Linie nach free-Linienerkennung}
-		\label{fig:green_0_free}
-	\end{subfigure}
-	
-	\begin{subfigure}{0.32\textwidth}
-		\includegraphics[width=\textwidth]{includes/blue_0.png}
-		\caption{Bild der Kamera\\}
-		\label{fig:blue_0_cam}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}{0.32\textwidth}
-		\includegraphics[width=\textwidth]{includes/blue_0_diff.png}
-		\caption{erkannte Linie nach diff-Linienerkennung}
-		\label{fig:blue_0_diff}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}{0.32\textwidth}
-		\includegraphics[width=\textwidth]{includes/blue_0_free.png}
-		\caption{erkannte Linie nach free-Linienerkennung}
-		\label{fig:blue_0_free}
-	\end{subfigure}
-	
-	\begin{subfigure}{0.32\textwidth}
-		\includegraphics[width=\textwidth]{includes/yellow_0.png}
-		\caption{Bild der Kamera\\}
-		\label{fig:yellow_0_cam}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}{0.32\textwidth}
-		\includegraphics[width=\textwidth]{includes/yellow_0_diff.png}
-		\caption{erkannte Linie nach diff-Linienerkennung}
-		\label{fig:yellow_0_diff}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}{0.32\textwidth}
-		\includegraphics[width=\textwidth]{includes/yellow_0_free.png}
-		\caption{erkannte Linie nach free-Linienerkennung}
-		\label{fig:yellow_0_free}
-	\end{subfigure}
-	
-	\begin{subfigure}{0.32\textwidth}
-		\includegraphics[width=\textwidth]{includes/orange_0.png}
-		\caption{Bild der Kamera\\}
-		\label{fig:orange_0_cam}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}{0.32\textwidth}
-		\includegraphics[width=\textwidth]{includes/orange_0_diff.png}
-		\caption{erkannte Linie nach diff-Linienerkennung}
-		\label{fig:orange_0_diff}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}{0.32\textwidth}
-		\includegraphics[width=\textwidth]{includes/orange_0_free.png}
-		\caption{erkannte Linie nach free-Linienerkennung}
-		\label{fig:orange_0_free}
-	\end{subfigure}
+	\begin{tabular}{c|c|c}
+		Bild der Kamera & erkannte Linie nach & erkannte Linie nach \\
+		& diff-Linienerkennung & free-Linienerkennung \\
+		\hline
+		& & \\
+		
+		\includegraphics[width=.32\textwidth]{includes/red_0.png} & 
+		\includegraphics[width=.32\textwidth]{includes/red_0_diff.png} &
+		\includegraphics[width=.32\textwidth]{includes/red_0_free.png} \\
+		
+		\includegraphics[width=.32\textwidth]{includes/green_0.png} &
+		\includegraphics[width=.32\textwidth]{includes/green_0_diff.png} &
+		\includegraphics[width=.32\textwidth]{includes/green_0_free.png} \\
+		
+		\includegraphics[width=.32\textwidth]{includes/blue_0.png} &
+		\includegraphics[width=.32\textwidth]{includes/blue_0_diff.png} &
+		\includegraphics[width=.32\textwidth]{includes/blue_0_free.png} \\
+		
+		\includegraphics[width=.32\textwidth]{includes/yellow_0.png} & 
+		\includegraphics[width=.32\textwidth]{includes/yellow_0_diff.png} &
+		\includegraphics[width=.32\textwidth]{includes/yellow_0_free.png} \\
+		
+		\includegraphics[width=.32\textwidth]{includes/orange_0.png} & 
+		\includegraphics[width=.32\textwidth]{includes/orange_0_diff.png} &
+		\includegraphics[width=.32\textwidth]{includes/orange_0_free.png}
+		
+	\end{tabular}
 	\caption{Ergebnisse nach diff- und free-Linienerkennung bei verschiedenen Farben}
-	\label{fig:blue_0}
+	\label{fig:cols}
 \end{figure}
 
 \subsection{Verschiedene Entfernungen}
@@ -699,33 +639,35 @@ Als drittes wurde die blaue Seite des Würfels in verschiedenen Entfernungen ver
 
 Beide Linienerkennungen haben bei allen Entfernungen eine relativ geringe Streuung und liefern ähnliche Durchschnittliche Entfernungen, wobei die gemessene Entfernung immer größer ist als die tatsächliche. Eine Ursache ist, dass die angegebene Entfernung der Abstand vom Setup zum Würfel ist, aber die Rekonstruktion die Entfernung vom Brennpunkt der Kamera zum Würfel misst. Das allein würde aber nur eine konstante Abweichung von gemessener und erwarteter Entfernung erklären, da die gemessene Entfernung aber in allen fällen 12\%-17\% größer ist und sogar mit steigender Entfernung größer wird, liegt es nahe, dass es eine weitere Fehlerquelle gibt. Ein schlecht Kalibriertes Setup ist dabei der Wahrscheinlichste Kandidat.
 
+
 \begin{table}[H]
 	\centering
-	\begin{tabular}{c|c|c}
-		& diff & free \\
-		\begin{tabular}{c}
-			Entfernung (mm) \\
-			\hline
-			200 \\
-			300 \\
-			400 \\
-			500 \\
-		\end{tabular} & 
+	diff-Linienerkennung \\
+	\begin{tabular}{c|c|c|c}
+		Entfernung & Anzahl & Avg (mm) & Stdabw (mm) \\ \hline
+		200 & 19048 & 224.166 & 8.76011 \\
+		300 & 8321 & 338.722 & 14.8228 \\
+		400 & 4294 & 460.079 & 14.5428 \\
+		500 & 3063 & 587.986 & 11.6962 \\
+	\end{tabular} \\
+	\vspace{1em}
+	free-Linienerkennung \\
 		\begin{tabular}{c|c|c|c}
-			Anzahl & Avg (mm) & Diff ($\%$) & Stdabw (mm) \\ \hline
-			19048 & 224.166 & 12.0 & 8.76011 \\
-			8321 & 338.722 & 12.7 & 14.8228 \\
-			4294 & 460.079 & 15.0 & 14.5428 \\
-			3063 & 587.986 & 17.6 & 11.6962 \\
-		\end{tabular} & 
+		Entfernung & Anzahl & Avg (mm) & Stdabw (mm) \\ \hline
+		200 & 5733 & 225.367 & 1.08721 \\
+		300 & 3535 & 340.892 & 2.82819 \\
+		400 & 1475 & 461.271 & 3.90112 \\
+		500 & 1156 & 586.405 & 7.37468 \\
+	\end{tabular} \\
+	\vspace{1em}
+	peak-Linienerkennung \\
 		\begin{tabular}{c|c|c|c}
-			Anzahl & Avg (mm) & Diff ($\%$) & Stdabw (mm) \\ \hline
-			5733 & 225.367 & 12.5 & 1.08721 \\
-			3535 & 340.892 & 13.6 & 2.82819 \\
-			1475 & 461.271 & 15.3 & 3.90112 \\
-			1156 & 586.405 & 17.3 & 7.37468 \\
-		\end{tabular}
-	\end{tabular}
+		Entfernung & Anzahl & Avg (mm) & Stdabw (mm) \\ \hline
+		200 & 7272 & 226.148 & 21.1726 \\
+		300 & 6543 & 341.249 & 234.736 \\
+		400 & 1849 & 462.031 & 163.782 \\
+		500 & 1200 & 586.895 & 34.1902 \\
+	\end{tabular} \\
 	\caption{Scans der blauen Seiten in verschiedenen Entfernungen}
 	\label{tab:dists}
 \end{table}
@@ -734,107 +676,66 @@ Beide Linienerkennungen haben bei allen Entfernungen eine relativ geringe Streuu
 
 Zuletzt wurden die Einflüsse unterschiedlicher Beleuchtungen untersucht. Bisher wurde der ''Rubic's Cube'' direkt von einer Schreibtischlampe und von einer Deckenlampe beleuchtet. Nun wurde einmal die Schreibtischlampe und einmal die Deckenbeleuchtung ausgeschaltet. Der Versuch konnte nicht bei vollständiger Dunkelheit durchgeführt werden, da dabei das Referenzbild komplett schwarz ist, was es unmöglich macht zu unterscheiden, ob ein Messpunkt zur Würfeloberfläche gehört oder nicht. Die Ergebnisse sind in Tabelle \ref{tab:lights} zu sehen.
 
-Wie bereits in Abschnitt \ref{sec:reps} angesprochen, spiegelt sich der Laser im Würfel, was, wie man in den Abbildungen \ref{fig:blue_d_diff}, \ref{fig:blue_t_diff} und \ref{fig:blue_dt_diff} sehen kann, von der diff-Linienerkennung fälschlicherweise als Linie erkannt wird. Bei schwächerer Beleuchtung ist der Spiegeleffekt stärker, was dazu führt, dass diff bei der Beleuchtung nur durch die Deckenlampe schlechtere Ergebnisse liefert, als bei einer direkten Beleuchtung durch die Schreibtischlampe. Beide Lampen zusammen liefern die besten Ergebnisse.
+Wie bereits in Abschnitt \ref{sec:reps} angesprochen, spiegelt sich der Laser im Würfel, was, wie man in den Abbildung \ref{fig:lights} sehen kann, von der diff-Linienerkennung fälschlicherweise als Linie erkannt wird. Bei schwächerer Beleuchtung ist der Spiegeleffekt stärker, was dazu führt, dass diff bei der Beleuchtung nur durch die Deckenlampe schlechtere Ergebnisse liefert, als bei einer direkten Beleuchtung durch die Schreibtischlampe. Beide Lampen zusammen liefern die besten Ergebnisse.
 
-Die free-Linienerkennung wird durch diese Spiegeleffekte nicht beeinflusst, allerdings erkennt sie, wie man in Abbildung \ref{fig:blue_d_free} sehen kann, falsche Punkte auf dem Boden. Die Beleuchtung durch die Schreibtischlampe sorgt dafuer, dass es hellere und dunklere Bereiche in dem Bild gibt. Das führt dazu, dass wie in Abschnitt \ref{sec:cols} der Mittelwert verzerrt wird und auch falsche Punkte erkannt werden
+Die free-Linienerkennung wird durch diese Spiegeleffekte nicht beeinflusst, allerdings erkennt sie, wie man in Abbildung \ref{fig:lights} sehen kann, falsche Punkte auf dem Boden. Die Beleuchtung durch die Schreibtischlampe sorgt dafuer, dass es hellere und dunklere Bereiche in dem Bild gibt. Das führt dazu, dass wie in Abschnitt \ref{sec:cols} der Mittelwert verzerrt wird und auch falsche Punkte erkannt werden
 
 \begin{table}[H]
 	\centering
-	\begin{tabular}{c|c|c}
-		& diff & free \\
-		\begin{tabular}{c}
-			Beleuchtung \\ \hline
-			Schreibtischlampe \\
-			Deckenlampe \\
-			%Schreibtisch- \\ und \\ Deckenlampe \\
-			beides \\
-		\end{tabular} & 
-		\begin{tabular}{c|c|c}
-			Anzahl & Avg (mm) & Stdabw (mm) \\ \hline
-			9264 & 338.236 & 34.9526 \\
-			12267 & 335.573 & 97.8706 \\
-			8321 & 338.722 & 14.8228 \\
-		\end{tabular} & 
-		\begin{tabular}{c|c|c}
-			Anzahl & Avg (mm) & Stdabw (mm) \\ \hline
-			4451 & 340.415 & 32.2099 \\
-			5890 & 339.616 & 2.99821 \\
-			3535 & 340.892 & 2.82819 \\
-		\end{tabular}
-	\end{tabular}
+	diff-Linienerkennung \\
+	\begin{tabular}{c|c|c|c}
+		Beleuchtung & Anzahl & Avg (mm) & Stdabw (mm) \\ \hline
+		Schreibtischlampe & 9264 & 338.236 & 34.9526 \\
+		Deckenlampe & 12267 & 335.573 & 97.8706 \\
+		Schreibtisch- und Deckenlampe & 8321 & 338.722 & 14.8228 \\
+	\end{tabular} \\
+	\vspace{1em}
+	free-Linienerkennung \\
+		\begin{tabular}{c|c|c|c}
+		Beleuchtung & Anzahl & Avg (mm) & Stdabw (mm) \\ \hline
+		Schreibtischlampe & 4451 & 340.415 & 32.2099 \\
+		Deckenlampe & 5890 & 339.616 & 2.99821 \\
+		Schreibtisch- und Deckenlampe & 3535 & 340.892 & 2.82819 \\
+	\end{tabular} \\
+	\vspace{1em}
+	peak-Linienerkennung \\
+		\begin{tabular}{c|c|c|c}
+		Beleuchtung & Anzahl & Avg (mm) & Stdabw (mm) \\ \hline
+		Schreibtischlampe & 7144 & 340.854 & 159.129 \\
+		Deckenlampe & 6108 & 340.663 & 9.15014 \\
+		Schreibtisch- und Deckenlampe & 6543 & 341.249 & 234.736 \\
+	\end{tabular} \\
 	\caption{Scans der blauen Seiten in 300mm Entfernungen mit verschiedenen Beleuchtungen}
 	\label{tab:lights}
 \end{table}
 
-\begin{figure}[H]
-	\centering
-	\begin{subfigure}{0.32\textwidth}
-		\includegraphics[width=\textwidth]{includes/blue_d.png}
-		\caption{Bild der Kamera\\}
-		\label{fig:blue_d_cam}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}{0.32\textwidth}
-		\includegraphics[width=\textwidth]{includes/blue_d_diff.png}
-		\caption{erkannte Linie nach diff-Linienerkennung}
-		\label{fig:blue_d_diff}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}{0.32\textwidth}
-		\includegraphics[width=\textwidth]{includes/blue_d_free.png}
-		\caption{erkannte Linie nach free-Linienerkennung}
-		\label{fig:blue_d_free}
-	\end{subfigure}
-	\caption{Ergebnisse nach diff- und free-Linienerkennung bei Beleuchtung durch eine Schreibtischlampe}
-	\label{fig:blue_d}
-\end{figure}
 
 \begin{figure}[H]
 	\centering
-	\begin{subfigure}{0.32\textwidth}
-		\includegraphics[width=\textwidth]{includes/blue_t.png}
-		\caption{Bild der Kamera\\}
-		\label{fig:blue_t_cam}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}{0.32\textwidth}
-		\includegraphics[width=\textwidth]{includes/blue_t_diff.png}
-		\caption{erkannte Linie nach diff-Linienerkennung}
-		\label{fig:blue_t_diff}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}{0.32\textwidth}
-		\includegraphics[width=\textwidth]{includes/blue_t_free.png}
-		\caption{erkannte Linie nach free-Linienerkennung}
-		\label{fig:blue_t_free}
-	\end{subfigure}
-	\caption{Ergebnisse nach diff- und free-Linienerkennung bei Beleuchtung durch eine Deckenlampe}
-	\label{fig:blue_t}
+	\begin{tabular}{c|c|c|c}
+		& Bild der Kamera & erkannte Linie nach & erkannte Linie nach \\
+		& & diff-Linienerkennung & free-Linienerkennung \\
+		\hline
+		& & \\
+		\rotatebox{90}{\hspace{1em} Deckenlampe} &
+		\includegraphics[width=.32\textwidth]{includes/blue_d.png} & 
+		\includegraphics[width=.32\textwidth]{includes/blue_d_diff.png} &
+		\includegraphics[width=.32\textwidth]{includes/blue_d_free.png} \\
+		
+		\rotatebox{90}{\hspace{0.5em} Schreibtischlampe} &
+		\includegraphics[width=.32\textwidth]{includes/blue_t.png} & 
+		\includegraphics[width=.32\textwidth]{includes/blue_t_diff.png} &
+		\includegraphics[width=.32\textwidth]{includes/blue_t_free.png} \\
+		
+		\rotatebox{90}{\hspace{1em} beide Lampen} &
+		\includegraphics[width=.32\textwidth]{includes/blue_dt.png} & 
+		\includegraphics[width=.32\textwidth]{includes/blue_dt_diff.png} &
+		\includegraphics[width=.32\textwidth]{includes/blue_dt_free.png} \\
+		
+	\end{tabular}
+	\caption{Ergebnisse nach diff- und free-Linienerkennung bei verschiedenen Beleuchtungen}
+	\label{fig:lights}
 \end{figure}
-
-\begin{figure}[H]
-	\centering
-	\begin{subfigure}{0.32\textwidth}
-		\includegraphics[width=\textwidth]{includes/blue_dt.png}
-		\caption{Bild der Kamera\\}
-		\label{fig:blue_dt_cam}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}{0.32\textwidth}
-		\includegraphics[width=\textwidth]{includes/blue_dt_diff.png}
-		\caption{erkannte Linie nach diff-Linienerkennung}
-		\label{fig:blue_dt_diff}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}{0.32\textwidth}
-		\includegraphics[width=\textwidth]{includes/blue_dt_free.png}
-		\caption{erkannte Linie nach free-Linienerkennung}
-		\label{fig:blue_dt_free}
-	\end{subfigure}
-	\caption{Ergebnisse nach diff- und free-Linienerkennung bei Beleuchtung durch Schreibtisch- und Deckenlampe}
-	\label{fig:blue_dt}
-\end{figure}
-
 
 
 % ---------------------------------------------------------------------------- %
