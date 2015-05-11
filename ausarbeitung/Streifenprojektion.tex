@@ -15,7 +15,7 @@
 \usepackage[round]{natbib}
 \usepackage[nolist]{acronym}
 %\usepackage{wrapfig}
-\usepackage{fancyref}
+\usepackage[german]{fancyref}
 \usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage{pgfplots}
@@ -94,7 +94,7 @@ Zusätzlich zur hier verwendeten Methode haben sich in den letzten Jahrzehnten v
 \subsection{Normalisierte Bildkoordinaten}
 \label{sec:imagecoordinates}
 
-Ein \emph{fotografisches Bild} kann als eine zweidimensionalen Matrix, die für jeden Pixel eine Farbe definiert, dargestellt werden. Dabei eignen sich die Indices des Bilder allerdings nur begrenzt zur Beschreibung von Positionen auf dem Bild. Existieren beispielsweise mehrere Inhaltsgleiche Bilder mit unterschiedlicher Abtastrate (Auflösung), so beschreiben die selben Indices auf jedem Bild eine inhaltlich andere Position. Aus diesem Grund werden in vielen Situationen \emph{normalisierte Bildkoordinaten} verwendet. Das Ziel der normalisierten Bildkoordinaten ist es, Positionen auf einem Bild unabhängig von der Auflösung ausdrücken zu können.
+Ein \emph{fotografisches Bild} kann als eine zweidimensionalen Matrix, die für jeden Pixel eine Farbe definiert, dargestellt werden. Dabei eignen sich die Indizes des Bilder allerdings nur begrenzt zur Beschreibung von Positionen auf dem Bild. Existieren beispielsweise mehrere Inhaltsgleiche Bilder mit unterschiedlicher Abtastrate (Auflösung), so beschreiben die selben Indizes auf jedem Bild eine inhaltlich andere Position. Aus diesem Grund werden in vielen Situationen \emph{normalisierte Bildkoordinaten} verwendet. Das Ziel der normalisierten Bildkoordinaten ist es, Positionen auf einem Bild unabhängig von der Auflösung ausdrücken zu können.
 
 Als normalisierte Bildkoordinaten wird hier ein Tupel aus zwei reellen Zahlen $(u,v)$ verwendet. $v$ ist dabei aus dem Intervall $[-1,1]$. Der Wertebereich von $u$ ergibt sich entsprechend aus dem Seitenverhältnis $r$: $u \in [-r,r]$. Dabei sollte erwähnt werden, dass normalisierte Bildkoordinaten je nach Anwendungsgebiet auch anders definiert werden können. So kann es je nach Sachverhalt sinnvoll sein, dass für $u$ ebenfalls $u \in [-1,1]$ gilt oder, dass sich $u$ und $v$ im Wertebereich $[0,1]$ befinden.
 
@@ -129,7 +129,7 @@ Bei einer \emph{perspektivischen Projektion}, oder auch \emph{Zentralprojektion}
 
 Oft wird die perspektivische Projektion in Verbindung mit Bildern, wie sie in \Fref{sec:imagecoordinates} beschrieben werden, verwendet, und nicht mit konkreten Bildpunkten. Dazu muss definiert werden, wo sich das Bild auf der Bildebene befindet. Eine offensichtliche Möglichkeit ist die Angabe der Höhe und Breite des Bildes auf der Bildebene, unter der Annahme, dass der am nächsten liegende Punkt der Bildebene zum Augpunkt in der Mitte des Bildes liegt. Wenn das Seitenverhältnis des Bildes beibehalten wird, reicht auch die Angabe der Höhe. Meistens ist es nicht relevant, wo sich die Bildebene genau befindet, sofern jedem Punkt eine Projektionsgerade zugeordnet wird, daher kann die Brennweite nach belieben verändert werden, solange auch die Bildhöhe entsprechend angepasst wird. Aus diesem Grund reicht es oft, nur die Brennweite als Parameter für die Projektion zu nutzen, sofern die Bildhöhe zuvor fest definiert wurde.
 
-Angenommen das Bild ist $2$ Einheiten hoch, der Augpunkt ist $O(0,0,0)$ und die Kamera schaut in Richtung der negativen $z$-Achse. Dann kann aus den normalisierten Bildkoordinaten $(u,v)$ der entsprechende Bildpunkt $X'$ ganz einfach über die folgende Gleichung bestimmt werden:
+Angenommen das Bild ist zwei Einheiten hoch, der Augpunkt ist $O(0,0,0)$ und die Kamera schaut in Richtung der negativen $z$-Achse. Dann kann aus den normalisierten Bildkoordinaten $(u,v)$ der entsprechende Bildpunkt $X'$ ganz einfach über die folgende Gleichung bestimmt werden:
 \[ \vec{x'} = \begin{pmatrix}
 u \\ v \\ -f
 \end{pmatrix} \]
@@ -177,12 +177,12 @@ Die durch das Setup gegebenen Werte:
 		Position des Linienprojektors.\\[0.5em]
 	$f$                &
 		Brennweite
-		(unter der Annahme, dass das Bild auf der Bildebene $2$ Einheiten hoch ist)\\[0.5em]
+		(unter der Annahme, dass das Bild auf der Bildebene zwei Einheiten hoch ist)\\[0.5em]
 	$\theta$,$\delta$  &
 		Winkel zur Ausrichtung der Ebene $L$. Die Ausgangslage der Ebene ist parallel zur $y$-$z$-Ebene. Die Ebene wird zunächst mit dem Winkel $\theta$ um den Vektor {\color{red} $(0,0,-1)^T$} gedreht. Danach mit dem Winkel $\delta$ um den Vektor {\color{red} $(-\sin(\theta), -\cos(\theta), 0)^T$}. Siehe auch \Fref{fig:triangulation_skew_pitch}.
 \end{tabular}
 
-Zudem ist der Bildpunkt durch normalisierte Bildkoordinaten $(u, v)$ gegeben. Da die Brennweite $f$ auf eine Bildhöhe von $2$ Einheiten angepasst ist, gilt wie in \Fref{sec:perspective} beschrieben $X'(u, v, -f)$.
+Zudem ist der Bildpunkt durch normalisierte Bildkoordinaten $(u, v)$ gegeben. Da die Brennweite $f$ auf eine Bildhöhe von zwei Einheiten angepasst ist, gilt wie in \Fref{sec:perspective} beschrieben $X'(u, v, -f)$.
 
 \subsubsection{Bestimmung der Entfernung}
 
@@ -339,7 +339,7 @@ Die Klassen \texttt{RotateScanController} und \texttt{TranslateScanController} b
 
 \subsubsection{Ansteuerung des Mikrocontrollers}
 
-Die Software steuert den Mikrocontroller über USB, wobei sich dieser als virtuellen COM-Port ausgibt. Zur Kommunikation wird ein einfaches Protokoll verwendet, das 2 Byte lange Nachrichten an den Mikrocontroller sendet. Das erste Byte gibt den Befehl an, das zweite den Parameter. Die möglichen Befehle werden in der Tabelle~\ref{tab:protocol} aufgeführt.
+Die Software steuert den Mikrocontroller über USB, wobei sich dieser als virtuellen COM-Port ausgibt. Zur Kommunikation wird ein einfaches Protokoll verwendet, das zwei Byte lange Nachrichten an den Mikrocontroller sendet. Das erste Byte gibt den Befehl an, das zweite den Parameter. Die möglichen Befehle werden in der Tabelle~\ref{tab:protocol} aufgeführt.
 
 \begin{table}
 	\centering
@@ -419,7 +419,7 @@ Dazu werden die Formeln aus \Fref{sec:basics} angewendet, um für jeden Pixel zu
 %			Diese abstrakte Klasse dient als Basis für alle Implementierungen zur Detektion der Laserlinie.\\
 %		\hline
 %		\texttt{Line}                   &
-%			Diese Datenstruktur entspricht einer Menge von Abtastungen der projizierten Linie. Sie Speichert dabei eine Liste von Indices, dessen Pixel zur Laserlinie gehören, und die Auflösung des zugrunde liegenden Bildes. Die Indices werden dabei in Instanzen von \texttt{Sample} abgelegt.\\
+%			Diese Datenstruktur entspricht einer Menge von Abtastungen der projizierten Linie. Sie Speichert dabei eine Liste von Indizes, dessen Pixel zur Laserlinie gehören, und die Auflösung des zugrunde liegenden Bildes. Die Indizes werden dabei in Instanzen von \texttt{Sample} abgelegt.\\
 %		\hline
 %		\texttt{Reconstruction}         &
 %			Diese Klasse speichert das endgültige Ergebnis der Rekonstruktion. Außerdem kümmert sie sich um die Ausgabe der rekonstruierten Punkte.\\
@@ -497,7 +497,7 @@ Im Folgenden werden verschiedene Seiten eines ''Rubik's Cube'' auf verschiedene 
 \subsection{Wiederholte Messungen}
 \label{sec:reps}
 
-Zunächst wurde die blaue Seite des ''Rubic's Cube'' zehn mal in 300mm Entfernung vermessen, um die Abweichungen zwischen zwei Messungen zu bestimmen. In Tabelle \ref{tab:reps} sind die Ergebnisse aufgeführt, wobei im linken Teil der Tabelle (''diff'') die Resultate nach diff-Linienerkennung und im rechten Teil (''free'') die nach free-Linienerkennung stehen. In der Spalte ''Anzahl'' steht jeweils die Anzahl der Punkte, die zum Würfel gehören, unter ''Avg'' ist das $20 \%$ gestutzte Mittel aller gemessenen Entfernungen und unter ''Stdabw'' die Standardabweichung der gemessenen Entfernungen.
+Zunächst wurde die blaue Seite des ''Rubic's Cube'' zehn mal in 300mm Entfernung vermessen, um die Abweichungen zwischen zwei Messungen zu bestimmen. In Tabelle \ref{tab:reps} sind die Ergebnisse aufgeführt, wobei im linken Teil der Tabelle (''diff'') die Resultate nach diff-Linienerkennung und im rechten Teil (''free'') die nach free-Linienerkennung stehen. In der Spalte ''Anzahl'' steht jeweils die Anzahl der Punkte, die zum Würfel gehören. Unter ''Avg'' ist das $20 \%$ gestutzte Mittel und unter ''Stdabw'' die Standardabweichung aller gemessenen Entfernungen aufgeführt.
 
 Es fällt auf, dass sich die Werte zwischen verschiedenen Messungen kaum unterscheiden, aber es zwischen den beiden Linienerkennungen z.T. große Unterschiede gibt. So findet diff mehr als doppelt so viele Punkte auf dem Würfel und die Standardabweichung ist ca. fünf mal größer.
 
