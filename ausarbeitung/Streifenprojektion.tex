@@ -743,6 +743,30 @@ Die free-Linienerkennung wird durch diese Spiegeleffekte nicht beeinflusst, alle
 \section{Zusammenfassung}
 \label{sec:summary}
 
+Es gibt viele Möglichkeiten ein Objekt zu vermessen.
+In unserem Semesterprojekt haben wir uns mit der Streifenlichtprojektion beschäftigt, eine Umsetzung entworfen und deren Ergebnisse ausgewertet.
+Wir steuern mit Hilfe eines Mikrocontrollers einen Streifenlaser an, mit dem wir eine Linie in die Szene projizieren.
+Mit einer einfachen Webcam nehmen wir die Szene auf und geben die Aufnahmen an die Verarbeitungssoftware weiter.
+Deren erster Schritt ist es die Linie in der Aufnahme zu finden.
+Für diesem Zweck wurden mehrere Ansätze implementiert.
+
+Ein Ansatz berechnet die Differenz zwischen der Aufnahme und einem Referenzbild (diff), während ein anderer mit Hilfe von Mittelwerten über dem gesamten Bild (free) oder Mittelwerten lediglich in einer kleineren Umgebung eines Pixels (peak) arbeitet.
+Das Ergebnis der Linienerkennung ist ein Binärbild, aus dem die Punkte der Linie direkt bestimmt werden können.
+
+Aus den Positionen im Bild kann als nächstes die Entfernung der Objektpunkte berechnet werden.
+Dazu werden mit Hilfe bekannter Größen aus dem Setup und der Triangulation die 3-D-Koordinaten für jeden Punkt der Linie berechnet.
+
+Um die verschiedenen Ansätze vergleichen zu können und Grenzen dieses Verfahrens und seiner Umsetzung ausloten zu können, wurden verschiedene Testreihen durchgeführt.
+Dazu wurde ein Rubics-Cube von verschiedenen Seiten unter verschiedenen Bedingungen aufgenommen und die Ergebnisse verglichen.
+Die Ergebnisse zeigen, dass die Linienerkennung 'diff' Probleme hat mit spiegelnden Oberflächen hat.
+Diese Effekte können verstärkt/abgeschwächt werden mit verschiedenen Beleuchtungen der Szene.
+Mit der roten Oberfläche kommen beide Ansätze relativ gut zurecht, während beide mit der gelben Oberfläche ähnlich schlechte Ergebnisse liefern.
+Bei Tests mit anderen Farben unterscheiden sich die Ansätze zum Teil sehr stark.
+Alles in allem lässt sich aus den Tests entnehmen, dass die Linienerkennung 'diff' weniger zwischen unterschiedlichen Farben schwankt als die Linienerkennung 'free'.
+
+Zusammenfassend kann man sagen, dass unsere Umsetzung der Messmethode Streifenlichtprojektion für die investierten Resourcen ziemlich gute Ergebnisse liefert und dabei mit herkömmlichem Equipment auskommt.
+Um die Ergebnisse weiter zu verbessern schlagen wir vor ein präziseres Setup zu verwenden, dass genauer vermessen werden kann und resistenter ist gegenüber physische Störungen.
+
 % ---------------------------------------------------------------------------- %
 
 \section{Quellenverzeichnis}
