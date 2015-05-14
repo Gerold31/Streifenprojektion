@@ -1,8 +1,11 @@
 Plot Tool
 =========
-This program shows the reconstucted points in a three-dimensional space.
+This program shows the reconstucted points in three-dimensional space.
 
-Usage: `plot [options]`
+Usage: `plot [options] [file]`
+
+The program reads the points from stdin by default. If *file* is given, the
+program reads the points from the file instead.
 
 Control
 -------
