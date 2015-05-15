@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
 		case 'D':
 		{
 			string filename;
-			if (!args.getNextParam(filename)) {
+			if (!args.getNextArgument(filename)) {
 				cerr << "Missing filename for distribution." << endl;
 				return EXIT_FAILURE;
 			}
@@ -67,7 +67,7 @@ int main(int argc, char *argv[])
 		case 'S':
 		{
 			string param;
-			if (!args.getNextParam(param)) {
+			if (!args.getNextArgument(param)) {
 				cerr << "Missing argument for " << args.getOptionString() << "." << endl;
 				return EXIT_FAILURE;
 			}
@@ -117,7 +117,7 @@ int main(int argc, char *argv[])
 			break;
 		case 'w':
 		{
-			if (!args.getNextParam(step)) {
+			if (!args.getNextArgument(step)) {
 				cerr << "Missing step-size for option "
 					 << args.getOptionString() << "." << endl;
 				return EXIT_FAILURE;
@@ -131,7 +131,7 @@ int main(int argc, char *argv[])
 		}
 	}
 	string arg;
-	if (args.getNextParam(arg)) {
+	if (args.getNextArgument(arg)) {
 		cerr << "Too many arguments: " << arg << endl;
 		return EXIT_FAILURE;
 	}
