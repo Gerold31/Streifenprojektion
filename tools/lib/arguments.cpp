@@ -95,7 +95,8 @@ bool Arguments::getNextArgument(string& param)
 		return true;
 	}
 
-	if (cChar != 0 && argv[index][cChar] == '\0') {
+	if (cChar != 0 && argv[index][cChar] == '\0'
+			&& argv[index][cChar - 1] != '\0') {
 		++index;
 		cChar = 0;
 	}
