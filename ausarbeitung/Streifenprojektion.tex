@@ -82,7 +82,7 @@ In verschiedenen Fällen ist es hilfreich oder notwendig ein \emph{komplexes} dr
 
 In diesem Projekt geht es um die \emph{Streifenlichtprojektion}. Dabei wird ein Streifen auf eine Oberfläche projiziert um aus einer Aufnahme der projizierten Linie die Form der Struktur zu rekonstruieren. In diesem Projekt projiziert ein einfacher und günstiger Linienlaser eine Linie auf eine Struktur. Eine einfache Webcam nimmt diese Struktur samt Linie auf, damit von den Bildern 3-D-Koordinaten von Punkten auf der Laserlinie berechnet werden können. Um von einer Struktur mehr Werte zu bekommen, wird dieser Vorgang mit unterschiedlichen Ausrichtungen des Lasers oder mit verschiedenen Positionierungen von dem Aufnahmesetup und der Struktur wiederholt. In dem Projekt werden unterschiedliche Verfahren zur Linienerkennungen verwendet und die Ergebnisse gegenübergestellt.
 
-Die Arbeit behandelt in Kapitel~\ref{sec:basics} zunächst ein paar wichtige Grundlagen für das Projekt. Dazu gehören \emph{normalisierte Bildkoordinaten}, die \emph{perspektivische Projektion} und die mathematischen Prinzipien zur Rekonstruktion der Szene. Danach geht es in Kapitel~\ref{sec:realization} um die Umsetzung des Projektes. Dabei wird zunächst die verwendete Hardware betrachtet und der grobe Aufbau der Software beschrieben. Ab Abschnitt~\ref{sec:controller} wird auf verschiedene Komponenten der Implementierung nochmals genauer eingegangen. In dem Kapitel~\ref{sec:evaluation} geht es um die Auswertung der Ergebnisse worauf in Kapitel~\ref{sec:summary} abschließend noch eine Zusammenfassung folgt.
+Die Arbeit behandelt in Kapitel~\ref{sec:basics} zunächst ein paar wichtige Grundlagen für das Projekt. Dazu gehören \emph{normalisierte Bildkoordinaten}, die \emph{perspektivische Projektion} und die mathematischen Prinzipien zur Rekonstruktion der Szene. Danach geht es in Kapitel~\ref{sec:realization} um die Umsetzung des Projektes. Dabei wird zunächst die verwendete Hardware betrachtet und der grobe Aufbau der Software beschrieben. Ab Abschnitt~\ref{sec:controller} wird auf verschiedenen Komponenten der Implementierung nochmals genauer eingegangen. In dem Kapitel~\ref{sec:evaluation} geht es um die Auswertung der Ergebnisse worauf in Kapitel~\ref{sec:summary} abschließend noch eine Zusammenfassung folgt.
 
 % ---------------------------------------------------------------------------- %
 
@@ -465,7 +465,7 @@ Im Folgenden werden verschiedene Seiten eines ''Rubik's Cube'' auf verschiedene 
 		\includegraphics[width=\textwidth]{includes/diff_only_red_pos1.png}
 		\caption{Punktwolke der Punkte, die zum Würfel gehören, von der Seite}
 	\end{subfigure}
-	\caption{Punktwolken eines Scans mit diff-Linienerkennung der Orangen Seite des ''Rubic's Cube'' in 300mm Entfernung}
+	\caption{Punktwolken eines Scans mit diff-Linienerkennung der roten Seite des ''Rubik's Cube'' in 300mm Entfernung}
 \end{figure}
 
 \begin{figure}[H]
@@ -488,14 +488,14 @@ Im Folgenden werden verschiedene Seiten eines ''Rubik's Cube'' auf verschiedene 
 		\includegraphics[width=\textwidth]{includes/free_only_red_pos1.png}
 		\caption{Punktwolke der Punkte, die zum Würfel gehören, von der Seite}
 	\end{subfigure}
-	\caption{Punktwolken eines Scans mit free-Linienerkennung der Orangen Seite des ''Rubic's Cube'' in 300mm Entfernung}
+	\caption{Punktwolken eines Scans mit free-Linienerkennung der roten Seite des ''Rubik's Cube'' in 300mm Entfernung}
 \end{figure}
 
 
 \subsection{Wiederholte Messungen}
 \label{sec:reps}
 
-Zunächst wurde die blaue Seite des ''Rubic's Cube'' zehn mal in 300mm Entfernung vermessen, um die Abweichungen zwischen zwei Messungen zu bestimmen. In Tabelle \ref{tab:reps} sind die Ergebnisse aufgeführt, wobei im linken Teil der Tabelle (''diff'') die Resultate nach diff-Linienerkennung und im rechten Teil (''free'') die nach free-Linienerkennung stehen. In der Spalte ''Anzahl'' steht jeweils die Anzahl der Punkte, die zum Würfel gehören. Unter ''Avg'' ist das $20 \%$ gestutzte Mittel und unter ''Stdabw'' die Standardabweichung aller gemessenen Entfernungen aufgeführt.
+Zunächst wurde die blaue Seite des ''Rubik's Cube'' zehn mal in 300mm Entfernung vermessen, um die Abweichungen zwischen zwei Messungen zu bestimmen. In Tabelle \ref{tab:reps} sind die Ergebnisse aufgeführt. In der Spalte ''Anzahl'' steht jeweils die Anzahl der Punkte, die zum Würfel gehören. Unter ''Avg'' ist das $20 \%$ gestutzte Mittel und unter ''Stdabw'' die Standardabweichung aller gemessenen Entfernungen aufgeführt.
 
 Es fällt auf, dass sich die Werte zwischen verschiedenen Messungen kaum unterscheiden, aber es zwischen den beiden Linienerkennungen z.T. große Unterschiede gibt. So findet diff mehr als doppelt so viele Punkte auf dem Würfel und die Standardabweichung ist ca. fünf mal größer.
 
@@ -556,9 +556,9 @@ Zusätzlich fällt auf, dass die durchschnittliche Entfernung von sowohl diff al
 \subsection{Verschiedene Farben}
 \label{sec:cols}
 
-Als nächstes wurden die verschiedenen Seiten des ''Rubic'c Cube'' gescannt, um die Farbabhängigkeit der Linienerkennungen zu überprüfen. Die Ergebnisse sind in Tabelle \ref{tab:colors} zu finden. Sie ist analog zur Tabelle \ref{tab:reps} aus Abschnitt \ref{sec:reps} aufgebaut, mit dem Unterschied, dass in pro Zeile nicht die Punkte aus einer Messung, sondern aus zehn Messungen betrachtet werden.
+Als nächstes wurden die verschiedenen Seiten des ''Rubik's Cube'' gescannt, um die Farbabhängigkeit der Linienerkennungen zu überprüfen. Die Ergebnisse sind in Tabelle \ref{tab:colors} zu finden. Sie ist analog zur Tabelle \ref{tab:reps} aus Abschnitt \ref{sec:reps} aufgebaut, mit dem Unterschied, dass pro Zeile nicht die Punkte aus einer Messung, sondern aus zehn Messungen betrachtet werden.
 
-Es fällt auf, dass bei der roten Seite beide Linienerkennungen gute Ergebnisse liefern (niedrige Streuung der Messpunkte) und auch die Anzahl der gefunden Punkte und die Durchschnittsentfernung nahe beieinanderliegen. Zusätzlich liefern beide Linienerkennungen bei Gelb vergleichsweise schlechte Ergebnisse (hohe Streuung). Bei den anderen Farben unterscheiden sich die Linienerkennungen z.T. stark, so liefert diff bei grün die schlechtesten Ergebnisse, wohingegen free mit orange starke Probleme hat. Nicht nur die Standardabweichung ist bei orange und free extrem hoch, auch die Anzahl der gefundenen Punkte ist ungefähr acht mal größer als bei grün oder blau, das heißt, dass ca. $\frac{7}{8}$ der erkannten Punkte nicht zur Linie gehören, weil free den Mittelwert über das gesamte Bild bildet und anhand der Abweichung eines Punktes zum Mittelwert bestimmt, ob ein Punkt zur Linie gehört oder nicht. Die orange Seite sorgt verändert den Mittelwert so, dass auch Punkte, die nicht zur Linie gehören erkannt werden.
+Es fällt auf, dass bei der roten Seite beide Linienerkennungen gute Ergebnisse liefern (niedrige Streuung der Messpunkte) und auch die Anzahl der gefunden Punkte und die Durchschnittsentfernung nahe beieinanderliegen. Zusätzlich liefern beide Linienerkennungen bei Gelb vergleichsweise schlechte Ergebnisse (hohe Streuung). Bei den anderen Farben unterscheiden sich die Linienerkennungen z.T. stark, so liefert diff bei grün die schlechtesten Ergebnisse, wohingegen free mit orange starke Probleme hat. Nicht nur die Standardabweichung ist bei der orangen Seite mit free extrem hoch, auch die Anzahl der gefundenen Punkte ist ungefähr acht mal größer als bei grün oder blau, das heißt, dass ca. $\frac{7}{8}$ der erkannten Punkte nicht zur Linie gehören. Das liegt daran, dass free den Mittelwert über das gesamte Bild bildet und anhand der Abweichung eines Punktes zum Mittelwert bestimmt, ob ein Punkt zur Linie gehört oder nicht. Die orange Seite verändert den Mittelwert so, dass auch Punkte, die nicht zur Linie gehören erkannt werden, siehe Abbildung \ref{fig:cols}.
 
 Insgesamt scheint diff farbunabhängiger zu sein, da die Durchschnittsentfernung ziemlich konstant ist und auch die Anzahl der gefundenen Punkte weniger stark schwankt, als bei free. 
 
@@ -637,7 +637,7 @@ Insgesamt scheint diff farbunabhängiger zu sein, da die Durchschnittsentfernung
 
 Als drittes wurde die blaue Seite des Würfels in verschiedenen Entfernungen vermessen, um die Entfernungsabhängigkeit der Verfahren zu bestimmen. Die Ergebnisse sind in Tabelle \ref{tab:dists}, die analog zu den vorherigen Tabellen aufgebaut ist, mit dem Unterschied, dass es eine weitere Spalte (''Diff(\%)'') gibt, in der der relative Unterschied zwischen der gemessenen und der erwarteten Entfernung steht.
 
-Beide Linienerkennungen haben bei allen Entfernungen eine relativ geringe Streuung und liefern ähnliche Durchschnittliche Entfernungen, wobei die gemessene Entfernung immer größer ist als die tatsächliche. Eine Ursache ist, dass die angegebene Entfernung der Abstand vom Setup zum Würfel ist, aber die Rekonstruktion die Entfernung vom Brennpunkt der Kamera zum Würfel misst. Das allein würde aber nur eine konstante Abweichung von gemessener und erwarteter Entfernung erklären, da die gemessene Entfernung aber in allen fällen 12\%-17\% größer ist und sogar mit steigender Entfernung größer wird, liegt es nahe, dass es eine weitere Fehlerquelle gibt. Ein schlecht Kalibriertes Setup ist dabei der Wahrscheinlichste Kandidat.
+Beide Linienerkennungen haben bei allen Entfernungen eine relativ geringe Streuung und liefern ähnliche Durchschnittliche Entfernungen, wobei die gemessene Entfernung immer größer ist als die tatsächliche. Eine Ursache ist, dass die angegebene Entfernung der Abstand vom Setup zum Würfel ist, aber die Rekonstruktion die Entfernung vom Brennpunkt der Kamera zum Würfel misst. Das allein würde aber nur eine konstante Abweichung von gemessener und erwarteter Entfernung erklären, da die gemessene Entfernung aber in allen fällen 12\%-17\% größer ist und sogar mit steigender Entfernung größer wird, liegt es nahe, dass es eine weitere Fehlerquelle gibt. Ein schlecht Kalibriertes Setup ist dabei der wahrscheinlichste Kandidat.
 
 
 \begin{table}[H]
@@ -674,11 +674,11 @@ Beide Linienerkennungen haben bei allen Entfernungen eine relativ geringe Streuu
 
 \subsection{Verschiedene Beleuchtungen}
 
-Zuletzt wurden die Einflüsse unterschiedlicher Beleuchtungen untersucht. Bisher wurde der ''Rubic's Cube'' direkt von einer Schreibtischlampe und von einer Deckenlampe beleuchtet. Nun wurde einmal die Schreibtischlampe und einmal die Deckenbeleuchtung ausgeschaltet. Der Versuch konnte nicht bei vollständiger Dunkelheit durchgeführt werden, da dabei das Referenzbild komplett schwarz ist, was es unmöglich macht zu unterscheiden, ob ein Messpunkt zur Würfeloberfläche gehört oder nicht. Die Ergebnisse sind in Tabelle \ref{tab:lights} zu sehen.
+Zuletzt wurden die Einflüsse unterschiedlicher Beleuchtungen untersucht. Bisher wurde der ''Rubik's Cube'' direkt von einer Schreibtischlampe und von einer Deckenlampe beleuchtet. Nun wurde einmal die Schreibtischlampe und einmal die Deckenbeleuchtung ausgeschaltet. Der Versuch konnte nicht bei vollständiger Dunkelheit durchgeführt werden, da dabei das Referenzbild komplett schwarz ist, was es unmöglich macht zu unterscheiden, ob ein Messpunkt zur Würfeloberfläche gehört oder nicht. Die Ergebnisse sind in Tabelle \ref{tab:lights} zu sehen.
 
 Wie bereits in Abschnitt \ref{sec:reps} angesprochen, spiegelt sich der Laser im Würfel, was, wie man in den Abbildung \ref{fig:lights} sehen kann, von der diff-Linienerkennung fälschlicherweise als Linie erkannt wird. Bei schwächerer Beleuchtung ist der Spiegeleffekt stärker, was dazu führt, dass diff bei der Beleuchtung nur durch die Deckenlampe schlechtere Ergebnisse liefert, als bei einer direkten Beleuchtung durch die Schreibtischlampe. Beide Lampen zusammen liefern die besten Ergebnisse.
 
-Die free-Linienerkennung wird durch diese Spiegeleffekte nicht beeinflusst, allerdings erkennt sie, wie man in Abbildung \ref{fig:lights} sehen kann, falsche Punkte auf dem Boden. Die Beleuchtung durch die Schreibtischlampe sorgt dafuer, dass es hellere und dunklere Bereiche in dem Bild gibt. Das führt dazu, dass wie in Abschnitt \ref{sec:cols} der Mittelwert verzerrt wird und auch falsche Punkte erkannt werden
+Die free-Linienerkennung wird durch diese Spiegeleffekte nicht beeinflusst, allerdings erkennt sie, wie man in Abbildung \ref{fig:lights} sehen kann, falsche Punkte auf dem Boden. Die Beleuchtung durch die Schreibtischlampe sorgt dafuer, dass es hellere und dunklere Bereiche in dem Bild gibt. Das führt dazu, dass wie in Abschnitt \ref{sec:cols} der Mittelwert verzerrt wird und auch falsche Punkte erkannt werden.
 
 \begin{table}[H]
 	\centering
@@ -757,15 +757,15 @@ Aus den Positionen im Bild kann als nächstes die Entfernung der Objektpunkte be
 Dazu werden mit Hilfe bekannter Größen aus dem Setup und der Triangulation die 3-D-Koordinaten für jeden Punkt der Linie berechnet.
 
 Um die verschiedenen Ansätze vergleichen zu können und Grenzen dieses Verfahrens und seiner Umsetzung ausloten zu können, wurden verschiedene Testreihen durchgeführt.
-Dazu wurde ein Rubics-Cube von verschiedenen Seiten unter verschiedenen Bedingungen aufgenommen und die Ergebnisse verglichen.
-Die Ergebnisse zeigen, dass die Linienerkennung 'diff' Probleme hat mit spiegelnden Oberflächen hat.
-Diese Effekte können verstärkt/abgeschwächt werden mit verschiedenen Beleuchtungen der Szene.
+Dazu wurde ein Rubiks-Cube von verschiedenen Seiten unter verschiedenen Bedingungen aufgenommen und die Ergebnisse verglichen.
+Die Ergebnisse zeigen, dass die Linienerkennung 'diff' Probleme mit spiegelnden Oberflächen hat.
+Diese Effekte können mit verschiedenen Beleuchtungen der Szene verstärkt/abgeschwächt werden.
 Mit der roten Oberfläche kommen beide Ansätze relativ gut zurecht, während beide mit der gelben Oberfläche ähnlich schlechte Ergebnisse liefern.
 Bei Tests mit anderen Farben unterscheiden sich die Ansätze zum Teil sehr stark.
 Alles in allem lässt sich aus den Tests entnehmen, dass die Linienerkennung 'diff' weniger zwischen unterschiedlichen Farben schwankt als die Linienerkennung 'free'.
 
-Zusammenfassend kann man sagen, dass unsere Umsetzung der Messmethode Streifenlichtprojektion für die investierten Resourcen ziemlich gute Ergebnisse liefert und dabei mit herkömmlichem Equipment auskommt.
-Um die Ergebnisse weiter zu verbessern schlagen wir vor ein präziseres Setup zu verwenden, dass genauer vermessen werden kann und resistenter ist gegenüber physische Störungen. In vielen Fällen würde eine robustere Linienerkennung ebenfalls für deutlich bessere Ergebnisse sorgen.
+Zusammenfassend kann man sagen, dass unsere Umsetzung der Messmethode Streifenlichtprojektion für die investierten Ressourcen ziemlich gute Ergebnisse liefert und dabei mit herkömmlichem Equipment auskommt.
+Um die Ergebnisse weiter zu verbessern schlagen wir vor ein präziseres Setup zu verwenden, das genauer vermessen werden kann und resistenter gegenüber physische Störungen ist. In vielen Fällen würde eine robustere Linienerkennung ebenfalls für deutlich bessere Ergebnisse sorgen.
 
 % ---------------------------------------------------------------------------- %
 
