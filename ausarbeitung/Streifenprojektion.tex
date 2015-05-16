@@ -520,11 +520,12 @@ Im Folgenden werden verschiedene Seiten eines ''Rubik's Cube'' auf verschiedene 
 
 Zunächst wurde die blaue Seite des ''Rubik's Cube'' zehn mal in 300~mm Entfernung vermessen, um die Abweichungen zwischen zwei Messungen zu bestimmen. In Tabelle \ref{tab:reps} sind die Ergebnisse aufgeführt. In der Spalte ''Anzahl'' steht jeweils die Anzahl der Punkte, die zum Würfel gehören. Unter ''Avg'' ist das $20 \%$ gestutzte Mittel und unter ''Stdabw'' die Standardabweichung aller gemessenen Entfernungen aufgeführt.
 
-Es fällt auf, dass sich die Werte zwischen verschiedenen Messungen kaum unterscheiden, aber es zwischen den beiden Linienerkennungen z.T. große Unterschiede gibt. So findet diff mehr als doppelt so viele Punkte auf dem Würfel und die Standardabweichung ist ca. fünf mal größer.
+Es fällt auf, dass sich die Werte zwischen verschiedenen Messungen kaum unterscheiden, aber es zwischen den Linienerkennungen z.T. große Unterschiede gibt. So findet diff die meisten Punkte auf dem Würfel und peak hat mit Abstand die höchste Standardabweichung ( fast 100 mal höher als bei free)
 
-Wie man in Abbildung \ref{fig:cols} sehen kann, spiegelt sich der Laser in dem Cube. Die diff-Linienerkennung erkennt, im Gegensatz zur free-Linienerkennung, die Spiegelung als Linie. Das erklärt sowohl warum diff mehr Punkte erkennt, als auch warum diese eine höhere Streuung aufweisen. Da die falsch erkannten Punkte überwiegend links von der tatsächlichen Linie liegen, haben sie eine kleinere Entfernung. Das erklärt den etwas geringeren Durchschnitt von diff gegenüber free.
+Wie man in Abbildung \ref{fig:cols} sehen kann, spiegelt sich der Laser in dem Cube. Die diff-Linienerkennung erkennt, im Gegensatz zur free-Linienerkennung, die Spiegelung als Linie. Das erklärt sowohl warum diff mehr Punkte erkennt, als auch warum diese eine höhere Streuung aufweisen.
+Peak erkennt viele falsche Punkte an der Kante des Würfels, was zu einer hohen Streuung führt.
 
-Zusätzlich fällt auf, dass die durchschnittliche Entfernung von sowohl diff als auch free 38mm - 41mm ($12,5\%-13,5\%$) größer ist als erwartet (300~mm), siehe dazu Abschnitt \ref{sec:dists}.
+Zusätzlich fällt auf, dass die durchschnittliche Entfernung von allen drei Linienerkennungen 38mm - 42mm ($12,5\%-14\%$) größer ist als erwartet (300~mm), siehe dazu Abschnitt \ref{sec:dists}.
 
 \begin{table}[H]
 	\centering
@@ -581,9 +582,9 @@ Zusätzlich fällt auf, dass die durchschnittliche Entfernung von sowohl diff al
 
 Als nächstes wurden die verschiedenen Seiten des ''Rubik's Cube'' gescannt, um die Farbabhängigkeit der Linienerkennungen zu überprüfen. Die Ergebnisse sind in Tabelle \ref{tab:colors} zu finden. Sie ist analog zur Tabelle \ref{tab:reps} aus Abschnitt \ref{sec:reps} aufgebaut, mit dem Unterschied, dass pro Zeile nicht die Punkte aus einer Messung, sondern aus zehn Messungen betrachtet werden.
 
-Es fällt auf, dass bei der roten Seite beide Linienerkennungen gute Ergebnisse liefern (niedrige Streuung der Messpunkte) und auch die Anzahl der gefunden Punkte und die Durchschnittsentfernung nahe beieinanderliegen. Zusätzlich liefern beide Linienerkennungen bei Gelb vergleichsweise schlechte Ergebnisse (hohe Streuung). Bei den anderen Farben unterscheiden sich die Linienerkennungen z.T. stark, so liefert diff bei grün die schlechtesten Ergebnisse, wohingegen free mit orange starke Probleme hat. Nicht nur die Standardabweichung ist bei der orangen Seite mit free extrem hoch, auch die Anzahl der gefundenen Punkte ist ungefähr acht mal größer als bei grün oder blau, das heißt, dass ca. $\frac{7}{8}$ der erkannten Punkte nicht zur Linie gehören. Das liegt daran, dass free den Mittelwert über das gesamte Bild bildet und anhand der Abweichung eines Punktes zum Mittelwert bestimmt, ob ein Punkt zur Linie gehört oder nicht. Die orange Seite verändert den Mittelwert so, dass auch Punkte, die nicht zur Linie gehören erkannt werden, siehe Abbildung \ref{fig:cols}.
+Es fällt auf, dass bei der roten Seite alle Linienerkennungen gute Ergebnisse liefern (niedrige Streuung der Messpunkte) und auch die Anzahl der gefunden Punkte und die Durchschnittsentfernung nahe beieinanderliegen. Zusätzlich liefern die Linienerkennungen bei Gelb vergleichsweise schlechte Ergebnisse (hohe Streuung). Bei den anderen Farben unterscheiden sich die Linienerkennungen z.T. stark, so liefert diff bei grün die schlechtesten Ergebnisse, wohingegen free mit orange starke Probleme hat und peak hat bei blau die höchste Standardabweichung. Bei free und der orangen Seite ist nicht nur die Standardabweichung extrem hoch, sondern auch die Anzahl der gefundenen Punkte ist ungefähr acht mal größer als bei grün oder blau, das heißt, dass ca. $\frac{7}{8}$ der erkannten Punkte nicht zur Linie gehören. Das liegt daran, dass free den Mittelwert über das gesamte Bild bildet und anhand der Abweichung eines Punktes zum Mittelwert bestimmt, ob ein Punkt zur Linie gehört oder nicht. Die orange Seite verändert den Mittelwert so, dass auch Punkte, die nicht zur Linie gehören erkannt werden, siehe Abbildung \ref{fig:cols}. Ähnlich verhält es sich bei peak, da werden falsche Punkte hauptsächlich am Rand des ''Rubik's Cube'' erkannt.
 
-Insgesamt scheint diff farbunabhängiger zu sein, da die Durchschnittsentfernung ziemlich konstant ist und auch die Anzahl der gefundenen Punkte weniger stark schwankt, als bei free. 
+Insgesamt scheint diff farbunabhängiger zu sein, da die Durchschnittsentfernung ziemlich konstant ist und auch die Anzahl der gefundenen Punkte weniger stark schwankt, als bei free oder peak. 
 
 
 \begin{table}[H]
@@ -665,8 +666,7 @@ Insgesamt scheint diff farbunabhängiger zu sein, da die Durchschnittsentfernung
 
 Als drittes wurde die blaue Seite des Würfels in verschiedenen Entfernungen vermessen, um die Entfernungsabhängigkeit der Verfahren zu bestimmen. Die Ergebnisse sind in Tabelle \ref{tab:dists}, die analog zu den vorherigen Tabellen aufgebaut ist, mit dem Unterschied, dass es eine weitere Spalte (''Diff(\%)'') gibt, in der der relative Unterschied zwischen der gemessenen und der erwarteten Entfernung steht.
 
-Beide Linienerkennungen haben bei allen Entfernungen eine relativ geringe Streuung und liefern ähnliche Durchschnittliche Entfernungen, wobei die gemessene Entfernung immer größer ist als die tatsächliche. Eine Ursache ist, dass die angegebene Entfernung der Abstand vom Setup zum Würfel ist, aber die Rekonstruktion die Entfernung vom Brennpunkt der Kamera zum Würfel misst. Das allein würde aber nur eine konstante Abweichung von gemessener und erwarteter Entfernung erklären, da die gemessene Entfernung aber in allen fällen 12\%-17\% größer ist und sogar mit steigender Entfernung größer wird, liegt es nahe, dass es eine weitere Fehlerquelle gibt. Ein schlecht Kalibriertes Setup ist dabei der wahrscheinlichste Kandidat.
-
+Diff und free haben bei allen Entfernungen eine relativ geringe Streuung, wohingegen peak bei 300~mm und 400~mm Entfernung eine wesentlich hoehere Streuung hat. Alle Linienerkennungen liefern ähnliche Durchschnittliche Entfernungen, wobei die gemessene Entfernung immer größer ist als die tatsächliche. Eine Ursache ist, dass die angegebene Entfernung der Abstand vom Setup zum Würfel ist, aber die Rekonstruktion die Entfernung vom Brennpunkt der Kamera zum Würfel misst. Das allein würde aber nur eine konstante Abweichung von gemessener und erwarteter Entfernung erklären, da die gemessene Entfernung aber in allen fällen 12\%-17\% größer ist und sogar mit steigender Entfernung größer wird, liegt es nahe, dass es eine weitere Fehlerquelle gibt. Ein schlecht Kalibriertes Setup ist dabei der wahrscheinlichste Kandidat.
 
 \begin{table}[H]
 	\centering
@@ -702,11 +702,13 @@ Beide Linienerkennungen haben bei allen Entfernungen eine relativ geringe Streuu
 
 \subsection{Verschiedene Beleuchtungen}
 
-Zuletzt wurden die Einflüsse unterschiedlicher Beleuchtungen untersucht. Bisher wurde der ''Rubik's Cube'' direkt von einer Schreibtischlampe und von einer Deckenlampe beleuchtet. Nun wurde einmal die Schreibtischlampe und einmal die Deckenbeleuchtung ausgeschaltet. Der Versuch konnte nicht bei vollständiger Dunkelheit durchgeführt werden, da dabei das Referenzbild komplett schwarz ist, was es unmöglich macht zu unterscheiden, ob ein Messpunkt zur Würfeloberfläche gehört oder nicht. Die Ergebnisse sind in Tabelle \ref{tab:lights} zu sehen.
+Zuletzt wurden die Einflüsse unterschiedlicher Beleuchtungen untersucht. Bisher wurde der ''Rubik's Cube'' direkt von einer Schreibtischlampe und von einer Deckenlampe beleuchtet. Nun wurde einmal die Schreibtischlampe und einmal die Deckenbeleuchtung ausgeschaltet. Der Versuch konnte nicht bei vollständiger Dunkelheit durchgeführt werden, da dabei das Referenzbild komplett schwarz wäre, was es unmöglich macht zu unterscheiden, ob ein Messpunkt zur Würfeloberfläche gehört oder nicht. Die Ergebnisse sind in Tabelle \ref{tab:lights} zu sehen.
 
 Wie bereits in Abschnitt \ref{sec:reps} angesprochen, spiegelt sich der Laser im Würfel, was, wie man in den Abbildung \ref{fig:lights} sehen kann, von der diff-Linienerkennung fälschlicherweise als Linie erkannt wird. Bei schwächerer Beleuchtung ist der Spiegeleffekt stärker, was dazu führt, dass diff bei der Beleuchtung nur durch die Deckenlampe schlechtere Ergebnisse liefert, als bei einer direkten Beleuchtung durch die Schreibtischlampe. Beide Lampen zusammen liefern die besten Ergebnisse.
 
 Die free-Linienerkennung wird durch diese Spiegeleffekte nicht beeinflusst, allerdings erkennt sie, wie man in Abbildung \ref{fig:lights} sehen kann, falsche Punkte auf dem Boden. Die Beleuchtung durch die Schreibtischlampe sorgt dafuer, dass es hellere und dunklere Bereiche in dem Bild gibt. Das führt dazu, dass wie in Abschnitt \ref{sec:cols} der Mittelwert verzerrt wird und auch falsche Punkte erkannt werden.
+
+{\color{red} peak?}
 
 \begin{table}[H]
 	\centering
@@ -742,7 +744,7 @@ Die free-Linienerkennung wird durch diese Spiegeleffekte nicht beeinflusst, alle
 	\centering
 	
 	\begin{tabular}{c|c|c|c}
-		& Deckenlampe & Schreibtischlampe & beide Lampen \\
+		& Schreibtischlampe & Deckenlampe & beide Lampen \\
 		\hline
 		 & & & \\
 		
