@@ -443,7 +443,7 @@ Dazu werden die Formeln aus \Fref{sec:basics} angewendet, um für jeden Pixel zu
 \section{Auswertung}
 \label{sec:evaluation}
 
-Im Folgenden werden verschiedene Seiten eines ''Rubik's Cube'' auf verschiedene Entfernungen gescannt. Es wurden die rote, grüne, blaue, gelbe und orange Seite in 300mm Entfernung, sowie die blaue Seite in 200mm, 400mm und 500mm Entfernung vermessen. Die Zugehörigkeit eines Messpunktes wird anhand seiner Farbe, die aus dem Referenzbild entnommen wurde, bestimmt. Da die Scans vor weißem Hintergrund durchgeführt wurden, wurde die weiße Seite des ''Rubik's Cube'' nicht gescannt.
+Im Folgenden werden verschiedene Seiten eines ''Rubik's Cube'' auf verschiedene Entfernungen gescannt. Es wurden die rote, grüne, blaue, gelbe und orange Seite in 300~mm Entfernung, sowie die blaue Seite in 200~mm, 400~mm und 500~mm Entfernung vermessen. Die Zugehörigkeit eines Messpunktes wird anhand seiner Farbe, die aus dem Referenzbild entnommen wurde, bestimmt. Da die Scans vor weißem Hintergrund durchgeführt wurden, wurde die weiße Seite des ''Rubik's Cube'' nicht gescannt.
 
 \begin{figure}[H]
 	\centering
@@ -465,7 +465,7 @@ Im Folgenden werden verschiedene Seiten eines ''Rubik's Cube'' auf verschiedene 
 		\includegraphics[width=\textwidth]{includes/diff_only_red_pos1.png}
 		\caption{Punktwolke der Punkte, die zum Würfel gehören, von der Seite}
 	\end{subfigure}
-	\caption{Punktwolken eines Scans mit diff-Linienerkennung der roten Seite des ''Rubik's Cube'' in 300mm Entfernung}
+	\caption{Punktwolken eines Scans mit diff-Linienerkennung der roten Seite des ''Rubik's Cube'' in 300~mm Entfernung}
 \end{figure}
 
 \begin{figure}[H]
@@ -488,20 +488,43 @@ Im Folgenden werden verschiedene Seiten eines ''Rubik's Cube'' auf verschiedene 
 		\includegraphics[width=\textwidth]{includes/free_only_red_pos1.png}
 		\caption{Punktwolke der Punkte, die zum Würfel gehören, von der Seite}
 	\end{subfigure}
-	\caption{Punktwolken eines Scans mit free-Linienerkennung der roten Seite des ''Rubik's Cube'' in 300mm Entfernung}
+	\caption{Punktwolken eines Scans mit free-Linienerkennung der roten Seite des ''Rubik's Cube'' in 300~mm Entfernung}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[width=\textwidth]{includes/peak_red_cam.png}
+		\caption{komplette Punktwolke aus Sicht der Kamera}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[width=\textwidth]{includes/peak_only_red_cam.png}
+		\caption{Punktwolke der Punkte, die zum Würfel gehören, aus Sicht der Kamera}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[width=\textwidth]{includes/peak_red_pos1.png}
+		\caption{komplette Punktwolke von der Seite}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[width=\textwidth]{includes/peak_only_red_pos1.png}
+		\caption{Punktwolke der Punkte, die zum Würfel gehören, von der Seite}
+	\end{subfigure}
+	\caption{Punktwolken eines Scans mit peak-Linienerkennung der roten Seite des ''Rubik's Cube'' in 300~mm Entfernung}
 \end{figure}
 
 
 \subsection{Wiederholte Messungen}
 \label{sec:reps}
 
-Zunächst wurde die blaue Seite des ''Rubik's Cube'' zehn mal in 300mm Entfernung vermessen, um die Abweichungen zwischen zwei Messungen zu bestimmen. In Tabelle \ref{tab:reps} sind die Ergebnisse aufgeführt. In der Spalte ''Anzahl'' steht jeweils die Anzahl der Punkte, die zum Würfel gehören. Unter ''Avg'' ist das $20 \%$ gestutzte Mittel und unter ''Stdabw'' die Standardabweichung aller gemessenen Entfernungen aufgeführt.
+Zunächst wurde die blaue Seite des ''Rubik's Cube'' zehn mal in 300~mm Entfernung vermessen, um die Abweichungen zwischen zwei Messungen zu bestimmen. In Tabelle \ref{tab:reps} sind die Ergebnisse aufgeführt. In der Spalte ''Anzahl'' steht jeweils die Anzahl der Punkte, die zum Würfel gehören. Unter ''Avg'' ist das $20 \%$ gestutzte Mittel und unter ''Stdabw'' die Standardabweichung aller gemessenen Entfernungen aufgeführt.
 
 Es fällt auf, dass sich die Werte zwischen verschiedenen Messungen kaum unterscheiden, aber es zwischen den beiden Linienerkennungen z.T. große Unterschiede gibt. So findet diff mehr als doppelt so viele Punkte auf dem Würfel und die Standardabweichung ist ca. fünf mal größer.
 
 Wie man in Abbildung \ref{fig:cols} sehen kann, spiegelt sich der Laser in dem Cube. Die diff-Linienerkennung erkennt, im Gegensatz zur free-Linienerkennung, die Spiegelung als Linie. Das erklärt sowohl warum diff mehr Punkte erkennt, als auch warum diese eine höhere Streuung aufweisen. Da die falsch erkannten Punkte überwiegend links von der tatsächlichen Linie liegen, haben sie eine kleinere Entfernung. Das erklärt den etwas geringeren Durchschnitt von diff gegenüber free.
 
-Zusätzlich fällt auf, dass die durchschnittliche Entfernung von sowohl diff als auch free 38mm - 41mm ($12,5\%-13,5\%$) größer ist als erwartet (300mm), siehe dazu Abschnitt \ref{sec:dists}.
+Zusätzlich fällt auf, dass die durchschnittliche Entfernung von sowohl diff als auch free 38mm - 41mm ($12,5\%-13,5\%$) größer ist als erwartet (300~mm), siehe dazu Abschnitt \ref{sec:dists}.
 
 \begin{table}[H]
 	\centering
@@ -549,7 +572,7 @@ Zusätzlich fällt auf, dass die durchschnittliche Entfernung von sowohl diff al
 		9 & 700 & 341.317 & 221.319 \\
 		10 & 634 & 341.085 & 241.876 \\
 		\end{tabular} \
-	\caption{Scans der blauen Seite in 300mm Entfernung}
+	\caption{Scans der blauen Seite in 300~mm Entfernung}
 	\label{tab:reps}
 \end{table}
 
@@ -594,38 +617,43 @@ Insgesamt scheint diff farbunabhängiger zu sein, da die Durchschnittsentfernung
 		Gelb & 5838 & 340.121 & 106.932 \\
 		Orange & 4317 & 340.104 & 85.2112 \\
 	\end{tabular} \
-	\caption{Scans der verschiedener Seiten in 300mm Entfernung}
+	\caption{Scans der verschiedener Seiten in 300~mm Entfernung}
 	\label{tab:colors}
 \end{table}
 
 
 \begin{figure}[H]
 	\centering
-	\begin{tabular}{c|c|c}
-		Bild der Kamera & erkannte Linie nach & erkannte Linie nach \\
-		& diff-Linienerkennung & free-Linienerkennung \\
+	\begin{tabular}{c|c|c|c}
+		Bild der Kamera & erkannte Linie nach & erkannte Linie nach  & erkannte Linie nach \\
+		& diff-Linienerkennung & free-Linienerkennung & peak-Linienerkennung \\
 		\hline
 		& & \\
 		
-		\includegraphics[width=.32\textwidth]{includes/red_0.png} & 
-		\includegraphics[width=.32\textwidth]{includes/red_0_diff.png} &
-		\includegraphics[width=.32\textwidth]{includes/red_0_free.png} \\
+		\includegraphics[width=.22\textwidth]{includes/red_0.png} & 
+		\includegraphics[width=.22\textwidth]{includes/red_0_diff.png} &
+		\includegraphics[width=.22\textwidth]{includes/red_0_free.png} &
+		\includegraphics[width=.22\textwidth]{includes/red_0_peak.png} \\
 		
-		\includegraphics[width=.32\textwidth]{includes/green_0.png} &
-		\includegraphics[width=.32\textwidth]{includes/green_0_diff.png} &
-		\includegraphics[width=.32\textwidth]{includes/green_0_free.png} \\
+		\includegraphics[width=.22\textwidth]{includes/green_0.png} &
+		\includegraphics[width=.22\textwidth]{includes/green_0_diff.png} &
+		\includegraphics[width=.22\textwidth]{includes/green_0_free.png} &
+		\includegraphics[width=.22\textwidth]{includes/green_0_peak.png} \\
 		
-		\includegraphics[width=.32\textwidth]{includes/blue_0.png} &
-		\includegraphics[width=.32\textwidth]{includes/blue_0_diff.png} &
-		\includegraphics[width=.32\textwidth]{includes/blue_0_free.png} \\
+		\includegraphics[width=.22\textwidth]{includes/blue_0.png} &
+		\includegraphics[width=.22\textwidth]{includes/blue_0_diff.png} &
+		\includegraphics[width=.22\textwidth]{includes/blue_0_free.png} &
+		\includegraphics[width=.22\textwidth]{includes/blue_0_peak.png} \\
 		
-		\includegraphics[width=.32\textwidth]{includes/yellow_0.png} & 
-		\includegraphics[width=.32\textwidth]{includes/yellow_0_diff.png} &
-		\includegraphics[width=.32\textwidth]{includes/yellow_0_free.png} \\
+		\includegraphics[width=.22\textwidth]{includes/yellow_0.png} & 
+		\includegraphics[width=.22\textwidth]{includes/yellow_0_diff.png} &
+		\includegraphics[width=.22\textwidth]{includes/yellow_0_free.png} &
+		\includegraphics[width=.22\textwidth]{includes/yellow_0_peak.png} \\
 		
-		\includegraphics[width=.32\textwidth]{includes/orange_0.png} & 
-		\includegraphics[width=.32\textwidth]{includes/orange_0_diff.png} &
-		\includegraphics[width=.32\textwidth]{includes/orange_0_free.png}
+		\includegraphics[width=.22\textwidth]{includes/orange_0.png} & 
+		\includegraphics[width=.22\textwidth]{includes/orange_0_diff.png} &
+		\includegraphics[width=.22\textwidth]{includes/orange_0_free.png} &
+		\includegraphics[width=.22\textwidth]{includes/orange_0_peak.png}
 		
 	\end{tabular}
 	\caption{Ergebnisse nach diff- und free-Linienerkennung bei verschiedenen Farben}
@@ -705,32 +733,38 @@ Die free-Linienerkennung wird durch diese Spiegeleffekte nicht beeinflusst, alle
 		Deckenlampe & 6108 & 340.663 & 9.15014 \\
 		Schreibtisch- und Deckenlampe & 6543 & 341.249 & 234.736 \\
 	\end{tabular} \\
-	\caption{Scans der blauen Seiten in 300mm Entfernungen mit verschiedenen Beleuchtungen}
+	\caption{Scans der blauen Seiten in 300~mm Entfernungen mit verschiedenen Beleuchtungen}
 	\label{tab:lights}
 \end{table}
 
 
 \begin{figure}[H]
 	\centering
+	
 	\begin{tabular}{c|c|c|c}
-		& Bild der Kamera & erkannte Linie nach & erkannte Linie nach \\
-		& & diff-Linienerkennung & free-Linienerkennung \\
+		& Deckenlampe & Schreibtischlampe & beide Lampen \\
 		\hline
-		& & \\
-		\rotatebox{90}{\hspace{1em} Deckenlampe} &
-		\includegraphics[width=.32\textwidth]{includes/blue_d.png} & 
-		\includegraphics[width=.32\textwidth]{includes/blue_d_diff.png} &
-		\includegraphics[width=.32\textwidth]{includes/blue_d_free.png} \\
+		 & & & \\
 		
-		\rotatebox{90}{\hspace{0.5em} Schreibtischlampe} &
-		\includegraphics[width=.32\textwidth]{includes/blue_t.png} & 
-		\includegraphics[width=.32\textwidth]{includes/blue_t_diff.png} &
-		\includegraphics[width=.32\textwidth]{includes/blue_t_free.png} \\
+		\rotatebox{90}{\hspace{2em} Kamera} &
+		\includegraphics[width=.3\textwidth]{includes/blue_d.png} & 
+		\includegraphics[width=.3\textwidth]{includes/blue_t.png} &
+		\includegraphics[width=.3\textwidth]{includes/blue_dt.png} \\
 		
-		\rotatebox{90}{\hspace{1em} beide Lampen} &
-		\includegraphics[width=.32\textwidth]{includes/blue_dt.png} & 
-		\includegraphics[width=.32\textwidth]{includes/blue_dt_diff.png} &
-		\includegraphics[width=.32\textwidth]{includes/blue_dt_free.png} \\
+		\rotatebox{90}{\hspace{3em} diff} &
+		\includegraphics[width=.3\textwidth]{includes/blue_d_diff.png} & 
+		\includegraphics[width=.3\textwidth]{includes/blue_t_diff.png} &
+		\includegraphics[width=.3\textwidth]{includes/blue_dt_diff.png} \\
+		
+		\rotatebox{90}{\hspace{3em} free} &
+		\includegraphics[width=.3\textwidth]{includes/blue_d_free.png} & 
+		\includegraphics[width=.3\textwidth]{includes/blue_t_free.png} &
+		\includegraphics[width=.3\textwidth]{includes/blue_dt_free.png} \\
+		
+		\rotatebox{90}{\hspace{3em} peak} &
+		\includegraphics[width=.3\textwidth]{includes/blue_d_peak.png} & 
+		\includegraphics[width=.3\textwidth]{includes/blue_t_peak.png} &
+		\includegraphics[width=.3\textwidth]{includes/blue_dt_peak.png}
 		
 	\end{tabular}
 	\caption{Ergebnisse nach diff- und free-Linienerkennung bei verschiedenen Beleuchtungen}
