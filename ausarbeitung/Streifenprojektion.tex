@@ -664,37 +664,37 @@ Insgesamt scheint diff farbunabhängiger zu sein, da die Durchschnittsentfernung
 \subsection{Verschiedene Entfernungen}
 \label{sec:dists}
 
-Als drittes wurde die blaue Seite des Würfels in verschiedenen Entfernungen vermessen, um die Entfernungsabhängigkeit der Verfahren zu bestimmen. Die Ergebnisse sind in Tabelle \ref{tab:dists}, die analog zu den vorherigen Tabellen aufgebaut ist, mit dem Unterschied, dass es eine weitere Spalte (''Diff(\%)'') gibt, in der der relative Unterschied zwischen der gemessenen und der erwarteten Entfernung steht.
+Als drittes wurde die blaue Seite des Würfels in verschiedenen Entfernungen vermessen, um die Entfernungsabhängigkeit der Verfahren zu bestimmen. Die Ergebnisse sind in Tabelle \ref{tab:dists}, die analog zu den vorherigen Tabellen aufgebaut ist, mit dem Unterschied, dass es eine weitere Spalte (''Diff (\%)'') gibt, in der der relative Unterschied zwischen der gemessenen und der erwarteten Entfernung steht.
 
 Diff und free haben bei allen Entfernungen eine relativ geringe Streuung, wohingegen peak bei 300~mm und 400~mm Entfernung eine wesentlich hoehere Streuung hat. Alle Linienerkennungen liefern ähnliche Durchschnittliche Entfernungen, wobei die gemessene Entfernung immer größer ist als die tatsächliche. Eine Ursache ist, dass die angegebene Entfernung der Abstand vom Setup zum Würfel ist, aber die Rekonstruktion die Entfernung vom Brennpunkt der Kamera zum Würfel misst. Das allein würde aber nur eine konstante Abweichung von gemessener und erwarteter Entfernung erklären, da die gemessene Entfernung aber in allen fällen 12\%-17\% größer ist und sogar mit steigender Entfernung größer wird, liegt es nahe, dass es eine weitere Fehlerquelle gibt. Ein schlecht Kalibriertes Setup ist dabei der wahrscheinlichste Kandidat.
 
 \begin{table}[H]
 	\centering
 	diff-Linienerkennung \\
-	\begin{tabular}{c|c|c|c}
-		Entfernung & Anzahl & Avg (mm) & Stdabw (mm) \\ \hline
-		200 & 19048 & 224.166 & 8.76011 \\
-		300 & 8321 & 338.722 & 14.8228 \\
-		400 & 4294 & 460.079 & 14.5428 \\
-		500 & 3063 & 587.986 & 11.6962 \\
+	\begin{tabular}{c|c|c|c|c}
+		Entfernung & Anzahl & Avg (mm) & Diff (\%) & Stdabw (mm) \\ \hline
+		200 & 19048 & 224.166 & 12.0 & 8.76011 \\
+		300 & 8321 & 338.722 & 12.6 & 14.8228 \\
+		400 & 4294 & 460.079 & 15.0 & 14.5428 \\
+		500 & 3063 & 587.986 & 17.4 & 11.6962 \\
 	\end{tabular} \\
 	\vspace{1em}
 	free-Linienerkennung \\
-		\begin{tabular}{c|c|c|c}
-		Entfernung & Anzahl & Avg (mm) & Stdabw (mm) \\ \hline
-		200 & 5733 & 225.367 & 1.08721 \\
-		300 & 3535 & 340.892 & 2.82819 \\
-		400 & 1475 & 461.271 & 3.90112 \\
-		500 & 1156 & 586.405 & 7.37468 \\
+		\begin{tabular}{c|c|c|c|c}
+		Entfernung & Anzahl & Avg (mm) & Diff (\%) & Stdabw (mm) \\ \hline
+		200 & 5733 & 225.367 & 12.5 & 1.08721 \\
+		300 & 3535 & 340.892 & 13.3 & 2.82819 \\
+		400 & 1475 & 461.271 & 15.3 & 3.90112 \\
+		500 & 1156 & 586.405 & 17.2 & 7.37468 \\
 	\end{tabular} \\
 	\vspace{1em}
 	peak-Linienerkennung \\
-		\begin{tabular}{c|c|c|c}
-		Entfernung & Anzahl & Avg (mm) & Stdabw (mm) \\ \hline
-		200 & 7272 & 226.148 & 21.1726 \\
-		300 & 6543 & 341.249 & 234.736 \\
-		400 & 1849 & 462.031 & 163.782 \\
-		500 & 1200 & 586.895 & 34.1902 \\
+		\begin{tabular}{c|c|c|c|c}
+		Entfernung & Anzahl & Avg (mm) & Diff (\%) & Stdabw (mm) \\ \hline
+		200 & 7272 & 226.148 & 13.0 & 21.1726 \\
+		300 & 6543 & 341.249 & 13.7 & 234.736 \\
+		400 & 1849 & 462.031 & 15.5 & 163.782 \\
+		500 & 1200 & 586.895 & 17.2 & 34.1902 \\
 	\end{tabular} \\
 	\caption{Scans der blauen Seiten in verschiedenen Entfernungen}
 	\label{tab:dists}
