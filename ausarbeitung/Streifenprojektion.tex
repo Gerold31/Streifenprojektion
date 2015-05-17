@@ -396,7 +396,6 @@ Der zweite Schritt des Verfahrens verläuft Analog zu Diff.
 Anstatt einen Mittelwerte über dem gesamten Bild zu berechnen, wird für jeden Pixel ein eigener Mittelwert über einer eigenen rechteckige Umgebung bestimmt.
 Zusammen mit der Farbe des Pixels $c$ wird aus dem Mittelwert $m$ eine Beurteilung $e \in [0, 1]$ des Punktes berechnet. Um so größer $e$ ist, desto wahrscheinlicher soll der Pixel zur Linie gehören. Ist $e$ größer als ein festgelegter Schwellenwert (0.6), wird davon ausgegangen, dass der Punkt zur Linie gehört.
 Zur Berechnung von $e$ werden dabei zunächst die Zwischenergebnisse $r_{r/g/b}$ berechnet, um diese dann gewichtet in $e$ einzubringen:
-
 \begin{align*}
 	r_i &= \begin{cases}
 	0.5                         &\text{, falls } a_i = 255\\
