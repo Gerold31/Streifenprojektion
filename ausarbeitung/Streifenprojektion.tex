@@ -392,7 +392,10 @@ Der zweite Schritt des Verfahrens verläuft Analog zu Diff.
 
 \subsubsection{Erweiterter Farbfilter (Peak)}
 
-\emph{Peak} ist das experimentellste der Verfahren und wurde noch nicht genügend getestet und optimiert. Es basiert auf dem Verfahren Free. Anstatt einen Mittelwerte über dem gesamten Bild zu berechnen, wird für jeden Pixel ein eigener Mittelwert über einer eigenen rechteckige Umgebung bestimmt. Zusammen mit der Farbe des Pixels $c$ wird aus dem Mittelwert $m$ eine Beurteilung $e \in [0, 1]$ des Punktes berechnet. Um so größer $e$ ist, desto wahrscheinlicher soll der Pixel zur Linie gehören. Ist $e$ größer als ein festgelegter Schwellenwert (0.6), wird davon ausgegangen, dass der Punkt zur Linie gehört. Zur Berechnung von $e$ werden dabei zunächst die Zwischenergebnisse $r_{r/g/b}$ berechnet, um diese dann gewichtet in $e$ einzubringen:
+\emph{Peak} ist das experimentellste der Verfahren und wurde noch nicht genügend getestet und optimiert. Es basiert auf dem Verfahren Free.
+Anstatt einen Mittelwerte über dem gesamten Bild zu berechnen, wird für jeden Pixel ein eigener Mittelwert über einer eigenen rechteckige Umgebung bestimmt.
+Zusammen mit der Farbe des Pixels $c$ wird aus dem Mittelwert $m$ eine Beurteilung $e \in [0, 1]$ des Punktes berechnet. Um so größer $e$ ist, desto wahrscheinlicher soll der Pixel zur Linie gehören. Ist $e$ größer als ein festgelegter Schwellenwert (0.6), wird davon ausgegangen, dass der Punkt zur Linie gehört.
+Zur Berechnung von $e$ werden dabei zunächst die Zwischenergebnisse $r_{r/g/b}$ berechnet, um diese dann gewichtet in $e$ einzubringen:
 
 \begin{align*}
 	r_i &= \begin{cases}
@@ -404,7 +407,7 @@ Der zweite Schritt des Verfahrens verläuft Analog zu Diff.
 
 Auch der zweite Schritt des Verfahrens unterscheidet sich von den anderen Linienerkennungen. Dabei wird auf dem gefilterten Bild ein \emph{Gaußscher Weichzeichner} angewendet, um danach nur Pixel als Bestandteil der Linie zu markieren, die ein lokales Maximum in einer Dimension annehmen. Diese Änderung soll es ermöglichen, auch mit horizontalen oder anders rotierten Linien zu arbeiten.
 
-Abschließend werden alle Markierungen entfernt, bei denen der Pixel keine markierten Nachbarpixel besitzt, da Pixel auf der Linie in der Regel auch Nachbarpixel auf der Linie haben sollten.
+Ergänzend wenden wir bei dieser Methode einen weiteren Schritt an. Dabei werden alle Markierungen entfernt, bei denen der Pixel keine markierten Nachbarpixel besitzt, da Pixel auf der Linie in der Regel auch Nachbarpixel haben sollten, die ebenfalls auf der Linie liegen.
 
 \subsection{Rekonstruktion}
 
