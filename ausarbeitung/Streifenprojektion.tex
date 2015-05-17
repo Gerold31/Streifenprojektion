@@ -15,11 +15,11 @@
 \usepackage[round]{natbib}
 \usepackage[nolist]{acronym}
 %\usepackage{wrapfig}
-\usepackage[german]{fancyref}
+%\usepackage[german]{fancyref}
 \usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage{pgfplots}
-\usepackage{eurosym}
+%\usepackage{eurosym}
 
 \usepackage[hidelinks]{hyperref}
 %\usepackage[left=3.2cm,right=3cm,top=1.7cm,bottom=3cm,includeheadfoot]{geometry}
@@ -127,7 +127,7 @@ Bei einer \emph{perspektivischen Projektion}, oder auch \emph{Zentralprojektion}
 	\label{fig:perspective}
 \end{figure}
 
-Oft wird die perspektivische Projektion in Verbindung mit Bildern, wie sie in \Fref{sec:imagecoordinates} beschrieben werden, verwendet, und nicht mit konkreten Bildpunkten. Dazu muss definiert werden, wo sich das Bild auf der Bildebene befindet. Eine offensichtliche Möglichkeit ist die Angabe der Höhe und Breite des Bildes auf der Bildebene, unter der Annahme, dass der am nächsten liegende Punkt der Bildebene zum Augpunkt in der Mitte des Bildes liegt. Wenn das Seitenverhältnis des Bildes beibehalten wird, reicht auch die Angabe der Höhe. Meistens ist es nicht relevant, wo sich die Bildebene genau befindet, sofern jedem Punkt eine Projektionsgerade zugeordnet wird, daher kann die Brennweite nach belieben verändert werden, solange auch die Bildhöhe entsprechend angepasst wird. Aus diesem Grund reicht es oft, nur die Brennweite als Parameter für die Projektion zu nutzen, sofern die Bildhöhe zuvor fest definiert wurde.
+Oft wird die perspektivische Projektion in Verbindung mit Bildern, wie sie in Abschnitt~\ref{sec:imagecoordinates} beschrieben werden, verwendet und nicht mit konkreten Bildpunkten. Dazu muss definiert werden, wo sich das Bild auf der Bildebene befindet. Eine offensichtliche Möglichkeit ist die Angabe der Höhe und Breite des Bildes auf der Bildebene, unter der Annahme, dass der am nächsten liegende Punkt der Bildebene zum Augpunkt in der Mitte des Bildes liegt. Wenn das Seitenverhältnis des Bildes beibehalten wird, reicht auch die Angabe der Höhe. Meistens ist es nicht relevant, wo sich die Bildebene genau befindet, sofern jedem Punkt eine Projektionsgerade zugeordnet wird, daher kann die Brennweite nach belieben verändert werden, solange auch die Bildhöhe entsprechend angepasst wird. Aus diesem Grund reicht es oft, nur die Brennweite als Parameter für die Projektion zu nutzen, sofern die Bildhöhe zuvor fest definiert wurde.
 
 Angenommen das Bild ist zwei Einheiten hoch, der Augpunkt ist $O(0,0,0)$ und die Kamera schaut in Richtung der negativen $z$-Achse. Dann kann aus den normalisierten Bildkoordinaten $(u,v)$ der entsprechende Bildpunkt $X'$ ganz einfach über die folgende Gleichung bestimmt werden:
 \[ \vec{x'} = \begin{pmatrix}
@@ -168,7 +168,7 @@ Das Prinzip der Triangulation ist es aus zwei Eckpunkten und den Innenwickeln ei
 	\caption{Modell des Setups}
 \end{figure}
 
-Als Modell für die Triangulation wird die Abstraktion, wie sie auf \Fref{fig:triangulation3d} zu sehen ist, verwendet. Es existiert eine perspektivischen Projektion eines Objektpunktes $X$ auf eine Bildebene $B$, wobei die Blickrichtung entlang der negativen $z$-Achse verläuft. Der Augpunkt $O$ liegt dabei im Koordinatenursprung. Der Bildpunkt wird mit $X'$ bezeichnet. Das projizierte Licht wird durch eine Ebene $L$ dargestellt, die die Position des Projektors, das heißt den Projektionspunkt $P$, und den Objektpunkt $X$ schneidet.
+Als Modell für die Triangulation wird die Abstraktion, wie sie auf Abbildung~\ref{fig:triangulation3d} zu sehen ist, verwendet. Es existiert eine perspektivischen Projektion eines Objektpunktes $X$ auf eine Bildebene $B$, wobei die Blickrichtung entlang der negativen $z$-Achse verläuft. Der Augpunkt $O$ liegt dabei im Koordinatenursprung. Der Bildpunkt wird mit $X'$ bezeichnet. Das projizierte Licht wird durch eine Ebene $L$ dargestellt, die die Position des Projektors, das heißt den Projektionspunkt $P$, und den Objektpunkt $X$ schneidet.
 
 Die durch das Setup gegebenen Werte:
 
@@ -179,10 +179,10 @@ Die durch das Setup gegebenen Werte:
 		Brennweite
 		(unter der Annahme, dass das Bild auf der Bildebene zwei Einheiten hoch ist)\\[0.5em]
 	$\theta$,$\delta$  &
-		Winkel zur Ausrichtung der Ebene $L$. Die Ausgangslage der Ebene ist parallel zur $y$-$z$-Ebene. Die Ebene wird zunächst mit dem Winkel $\theta$ um den Vektor {\color{red} $(0,0,-1)^T$} gedreht. Danach mit dem Winkel $\delta$ um den Vektor {\color{red} $(-\sin(\theta), -\cos(\theta), 0)^T$}. Siehe auch \Fref{fig:triangulation_skew_pitch}.
+		Winkel zur Ausrichtung der Ebene $L$. Die Ausgangslage der Ebene ist parallel zur $y$-$z$-Ebene. Die Ebene wird zunächst mit dem Winkel $\theta$ um den Vektor {\color{red} $(0,0,-1)^T$} gedreht. Danach mit dem Winkel $\delta$ um den Vektor {\color{red} $(-\sin(\theta), -\cos(\theta), 0)^T$}. Siehe auch Abbildung~\ref{fig:triangulation_skew_pitch}.
 \end{tabular}
 
-Zudem ist der Bildpunkt durch normalisierte Bildkoordinaten $(u, v)$ gegeben. Da die Brennweite $f$ auf eine Bildhöhe von zwei Einheiten angepasst ist, gilt wie in \Fref{sec:perspective} beschrieben $X'(u, v, -f)$.
+Zudem ist der Bildpunkt durch normalisierte Bildkoordinaten $(u, v)$ gegeben. Da die Brennweite $f$ auf eine Bildhöhe von zwei Einheiten angepasst ist, gilt wie in Abschnitt~\ref{sec:perspective} beschrieben $X'(u, v, -f)$.
 
 \subsubsection{Bestimmung der Entfernung}
 
@@ -198,7 +198,7 @@ Um diese Entfernung zu bestimmen, wird das geometrische Modell des Setups verein
 \end{pmatrix} \right\rbrace \]
 vorgenommen, um im folgenden nur die ersten beiden Dimensionen zu betrachten. Der konstruierte zweidimensionale Raum hat die besondere Eigenschaft, dass von der Ebene $L$ und der $x$-$y$-Ebene nur die Geraden $a$ und $c$ übrig bleiben. Eine weitere besondere Eigenschaft ist, dass der Abstand zwischen $X$ und der $x$-$y$-Ebene direkt von einen in den anderen Raum übernommen werden kann. So entspricht $h$ im vereinfachten Modell der 2. Koordinate von $X$. Ein beliebiger Vektor $(v_1, v_2, v_3)^T$ im dreidimensionalen Model entspricht im zweidimensionalen Modell dem Vektor $(\cos(\theta) \cdot v_1 - \sin(\theta) \cdot v_2, -v_3)^T$.
 
-Die Geraden $a$ und $c$ bilden zusammen mit der Geraden $b$, welche durch die Punkte $O$, $X$ und $X'$ verläuft, ein Dreieck, dessen Eckpunkte $A$, $C = X$ und $B = O$ sind. Dies ist auch nochmal in \Fref{fig:triangulation2d} zu sehen. Angenommen die Koordinaten von $P$ und $X'$ in der zweidimensionalen Darstellung sind $(p_1,p_2)$ und $(x'_1, x'_2)$, so können die Winkel $\alpha$ und $\beta$ und die Länge der Strecke zwischen $A$ und $B$ wie folgt berechnet werden:
+Die Geraden $a$ und $c$ bilden zusammen mit der Geraden $b$, welche durch die Punkte $O$, $X$ und $X'$ verläuft, ein Dreieck, dessen Eckpunkte $A$, $C = X$ und $B = O$ sind. Dies ist auch nochmal in Abbildung~\ref{fig:triangulation2d} zu sehen. Angenommen die Koordinaten von $P$ und $X'$ in der zweidimensionalen Darstellung sind $(p_1,p_2)$ und $(x'_1, x'_2)$, so können die Winkel $\alpha$ und $\beta$ und die Länge der Strecke zwischen $A$ und $B$ wie folgt berechnet werden:
 \begin{align*}
 	\alpha &= \frac{\pi}{2} - \arctan\left(\frac{x'_1}{x'_2}\right)\\
 	\beta &= \frac{\pi}{2} + \delta\\
@@ -252,7 +252,7 @@ Zur Implementierung der Software wurde die Programmiersprache \emph{C++} nach de
 
 \subsubsection{Grundlegende Datenstrukturen}
 
-Zur Übertragung von Informationen zwischen den verschiedenen Komponenten werden die Datenstrukturen \texttt{Line}, \texttt{Reconstruction} und \texttt{DeviceConfiguration} verwendet. In \Fref{fig:classes_base} sind die entsprechenden Klassen zu sehen. Die Funktion wird im folgenden etwas genauer beschrieben.
+Zur Übertragung von Informationen zwischen den verschiedenen Komponenten werden die Datenstrukturen \texttt{Line}, \texttt{Reconstruction} und \texttt{DeviceConfiguration} verwendet. In Abbildung~\ref{fig:classes_base} sind die entsprechenden Klassen zu sehen. Die Funktion wird im folgenden etwas genauer beschrieben.
 
 \begin{figure}
 	\centering
@@ -367,27 +367,46 @@ Wenn ein anderer Thread die \texttt{capture}-Methode von \texttt{Camera} aufruft
 
 \subsection{Linienerkennung}
 
-Die Linienerkennung arbeitet in zwei Schritten. Zuerst wird ein Binärbild erzeugt, wobei der Algorithmus entscheidet, welche Pixel zur Linie gehören und welche nicht. Im zweiten Schritt wird jeder Pixel des Bild durchlaufen, wobei in der Datenstruktur \texttt{Line} die vermeintliche Position der Linie und deren Breite gespeichert wird. Die hier implementierten Algorithmen unterscheiden sich lediglich in der Erzeugung des Binärbildes.
+Die Linienerkennung arbeitet in zwei Schritten. Zuerst wird ein Binärbild erzeugt, wobei der Algorithmus entscheidet, welche Pixel zur Linie gehören und welche nicht. Im zweiten Schritt wird auf Basis des Binärbildes die Datenstruktur \texttt{Line} mit den vermeintlichen Abtastungen der Linie undm je nach Verfahren, auch die Breite der Linie gespeichert.
 
 \subsubsection{Differenzbildung (Diff)}
 
-Bei diesem Verfahren muss für jedes zu analysierende Bild ein Referenzbild ohne die projizierte Linie gegeben sein. Dabei wird die Differenz für jedes Bild mit dem Referenzbild berechnet und mit Hilfe eines einfachen Filters in ein Binärbild umgewandelt.
+\emph{Diff} benötigt zu jeder Aufnahme der Linie ein Referenzbild; eine Aufnahme der Szene ohne die projizierte Linie. Das Referenzbild kann zu beginn des Scans gemacht werden oder es wird zwischen jeder Aufnahme der Linie ein neues Referenzbild aufgenommen werden. Die zweite Variante macht das Verfahren toleranter gegenüber Beleuchtungsänderungen während des Scanns.
+Um zu bestimmen, ob ein Pixel zur Linie gehört oder nicht, wird zunächst die Differenz zwischen der Aufnahme und dem Referenzbild angelegt. Liegt die Differenz für einen der Kanäle über einem bestimmten Schwellenwert (75), so wird davon ausgegangen, dass der Pixel Bestandteil der Linie ist.
+
+Nachdem ein Binärbild erstellt wurde, in dem einige Pixel der Linie zugeordnet werden, müssen Abtastungen der Linie in eine Instanz der Datenstruktur \emph{Line} übergeben werden. Dabei wird das Binärbild zeilenweise durchlaufen. Sobald ein Pixel gefunden wurde, der vermutlich zur Linie gehört, werden dieser und alle anschließenden Pixel der Linie in der selben Zeile als eine Abtastung der Linie in die Datenstruktur übernommen. Die Anzahl der hintereinander als Linie markierten Pixel wird dabei als die Breite der Linie aufgefasst.
 
 \subsubsection{Farbfilter (Free)}
 
-Für jeden Farbkanal wird einzeln der Mittelwert über das gesamte Bild berechnet, aus dem ein Schwellenwert für jeden Kanal einzeln bestimmt wird. Für jeden Pixel wird der Wert aller Farbkanäle mit dem Schwellenwert verglichen. Ist ein Wert kleiner als der entsprechende Schwellenwert, gehört der Pixel nicht zur Linie.
+Bei \emph{Free} wird zunächst für jeden Farbkanal der Durchschnitt über das gesamte Bild berechnet. Auf Basis der Mittelwerte $a_{r/g/b}$ wird für jeden Farbkanal ein Schwellenwert $t_{r/g/b}$ bestimmt. Ist ein Kanal eines Pixels kleiner als der entsprechende Schwellenwert, dann gehört der Pixel nicht zur Linie. Unter der Annahme, dass die Werte der Farbkanäle in dem Intervall $[0,255]$ liegen, wird der Schwellenwert dabei wie folgt berechnet:
+\begin{align*}
+	t_r &= a_r + \frac{255 - a_r}{2}\\
+	t_i &= a_i - \frac{255 - a_i}{2}, i \in \{g,b\}
+\end{align*}
+
+Der zweite Schritt des Verfahrens verläuft Analog zu Diff.
 
 \subsubsection{Erweiterter Farbfilter (Peak)}
 
-Das Verfahren \emph{Peak} funktioniert prinzipiell so ähnlich wie Free. Allerdings nutzt diese Linienerkennung keinen Mittelwert aus dem gesamten Bild. Der Mittelwert wird hier aus der Umgebung gebildet. So wird ein Rechteck um den zu analysierenden Pixel gelegt und Kanalweise der Durchschnitt über die so erstellte Umgebung ermittelt. Aus diesem Mittelwert $a$ und der Farbe des Pixels $c$ berechnen wir nun eine Beurteilung $e \in [0, 1]$ des Punktes. Um so größer $e$ ist, desto sicherer soll der Pixel zur Linie gehören. Wenn $e$ mindestens so groß ist, wie einem bestimmter Grenzwert $t$ wird davon ausgegangen, dass der Punkt zur Linie gehört. Das Ergebnis des Filters wird in eine neue Matrix $F$ geschrieben.
+\emph{Peak} ist das experimentellste der drei Verfahren und hat daher vermutlich noch einige Schwächen oder Fehler. Es basiert auf dem Prinzip von Free, auch wenn es im Detail eine ganze Reihe an Unterschieden gibt. So nutzt diese Linienerkennung keinen Mittelwert aus dem gesamten Bild sondern berechnet ihn aus der Umgebung. Dazu wird ein Rechteck um den zu analysierenden Pixel gelegt und Kanalweise der Durchschnitt über die so erstellte Umgebung ermittelt. Anstatt direkt einen Grenzwert für jeden einzelnen Kanal zu bilden, wird aus diesem Mittelwert $a$ und der Farbe des Pixels $c$ eine Beurteilung $e \in [0, 1]$ des Punktes berechnet. Um so größer $e$ ist, desto wahrscheinlicher gehört der Pixel zur Linie. Wenn $e$ mindestens so groß ist, wie ein festgelegter Grenzwert $t=0.6$, wird davon ausgegangen, dass der Punkt zur Linie gehört. Zur Berechnung von $e$ werden dabei zunächst die Zwischenergebnisse $r_{r/g/b}$ berechnet, um diese dann gewichtet in $e$ einzubringen:
 
-Da nur das Zentrum der Linie wirklich als Bestandteil der Linie zu verstehen ist, wird auf $F$ ein \emph{Gaußscher Weichzeichner} angewendet, um danach nur Pixel als Bestandteil der Linie zu markieren, die ein lokalen Maximum in einer Dimension annehmen. Da Pixel auf der Linie in der Regel auch Nachbarpixel auf der Linie haben, werden abschließend alle Markierungen entfernt, bei denen der Pixel keine markierten Nachbarpixel besitzt.
+\begin{align*}
+	r_i &= \begin{cases}
+	0.5                         &\text{, falls } a_i = 255\\
+	\frac{c_i - a_i}{255 - a_i} &\text{, sonst}
+	\end{cases}, i \in \{r,g,b\}\\
+	e &= \max(0,6 \cdot r_r + 0,2 \cdot r_g + 0,2 \cdot r_b, 0)
+\end{align*}
+
+Auch der zweite Schritt des Verfahrens unterscheidet sich von den anderen Linienerkennungen. Dabei wird auf dem gefilterten Bild ein \emph{Gaußscher Weichzeichner} angewendet, um danach nur Pixel als Bestandteil der Linie zu markieren, die ein lokales Maximum in einer Dimension annehmen. Diese Änderung soll es ermöglichen, auch mit horizontalen oder anders rotierten Linien zu arbeiten.
+
+Abschließend werden alle Markierungen entfernt, bei denen der Pixel keine markierten Nachbarpixel besitzt, da Pixel auf der Linie in der Regel auch Nachbarpixel auf der Linie haben sollten.
 
 \subsection{Rekonstruktion}
 
 Nachdem die Laserlinie erkannt wurde, werden die vermeintlichen Pixel der erkannten Linie in Objektpunkte überführt. Dies geschieht durch die Klasse \texttt{DefaultReconstructor}, welche derzeit die einzige Spezialisierung von \texttt{Reconstructor} darstellt.
 
-Dazu werden die Formeln aus \Fref{sec:basics} angewendet, um für jeden Pixel zunächst die normalisierten Bildkoordinaten, die Entfernung $h$ und danach den Objektpunkt $X$ zu bestimmen. Daraufhin werden die erhalten Punkte mithilfe der Transformationsmatrix transformiert und an die Klasse \texttt{Reconstruction} weiter gegeben, welche sie letztendlich ausgibt.
+Dazu werden die Formeln aus Abschnitt~\ref{sec:basics} angewendet, um für jeden Pixel zunächst die normalisierten Bildkoordinaten, die Entfernung $h$ und danach den Objektpunkt $X$ zu bestimmen. Daraufhin werden die erhalten Punkte mithilfe der Transformationsmatrix transformiert und an die Klasse \texttt{Reconstruction} weiter gegeben, welche sie letztendlich ausgibt.
 	
 %\begin{table}[p]
 %	\centering
