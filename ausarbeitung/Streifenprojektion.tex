@@ -372,29 +372,32 @@ Die Linienerkennung arbeitet in zwei Schritten. Zuerst wird ein Binärbild erzeu
 
 \subsubsection{Differenzbildung (Diff)}
 
-\emph{Diff} benötigt zu jeder Aufnahme der Linie ein Referenzbild; eine Aufnahme der Szene ohne die projizierte Linie. Das Referenzbild kann zu beginn des Scans gemacht werden oder es wird zwischen jeder Aufnahme der Linie ein neues Referenzbild aufgenommen. Die zweite Variante macht das Verfahren toleranter gegenüber Beleuchtungsänderungen während des Scanns.
-Um zu bestimmen, ob ein Pixel zur Linie gehört oder nicht, wird zunächst die Differenz zwischen der Aufnahme und dem Referenzbild ausgerechnet. Liegt die Differenz für einen der Kanäle über einem bestimmten Schwellenwert (75), so wird davon ausgegangen, dass der Pixel Bestandteil der Linie ist.
+\emph{Diff} benötigt zu jeder zu analysierenden Aufnahme ein Referenzbild; eine weitere Aufnahme der Szene, auf der die Linie nicht zu sehen ist. Das Referenzbild kann einmal zu Beginn aufgenommen werden, oder zwischen den einzelnen Aufnahmen der Linie. Durch die wiederholte Aufnahme des Referenzbildes wird das Verfahren toleranter gegenüber Beleuchtungsänderungen der Szene.
+Als erstes wird die Differenz zwischen der Aufnahme und dem zugehörigen Referenzbild berechnet.
+Liegt die Differenz für einen der Kanäle über einem bestimmten Schwellenwert (75), so wird davon ausgegangen, dass der Pixel zur Linie gehört.
 
-Nachdem ein Binärbild erstellt wurde, in dem einige Pixel der Linie zugeordnet werden, müssen Abtastungen der Linie in eine Instanz der Datenstruktur \emph{Line} übergeben werden. Dabei wird das Binärbild zeilenweise durchlaufen. Sobald ein Pixel gefunden wurde, der vermutlich zur Linie gehört, werden dieser und alle anschließenden Pixel der Linie in der selben Zeile als eine Abtastung der Linie in die Datenstruktur übernommen. Die Anzahl der hintereinander als Linie markierten Pixel wird dabei als die Breite der Linie aufgefasst.
+Das Ergebnis ist ein Binärbild, mit dessen Hilfe im zweiten Schritt das \texttt{Line}-Objekt gefüllt wird. Dafür werden die Pixel das Binärbildes zeilenweise durchlaufen. Sobald ein Pixel gefunden wurde, der vermeidlich zur Linie gehört, wird dieser mit allen anschließenden markierten Pixel in der selben Zeile als ein Punkt auf Linie betrachtet. Die Position wird als Abtastung der Linie aufgenommen, wobei die Anzahl der hintereinander als Linie markierten Pixel als die Breite der Linie aufgefasst wird.
 
 \subsubsection{Farbfilter (Free)}
 
-Bei \emph{Free} wird zunächst für jeden Farbkanal der Durchschnitt über das gesamte Bild berechnet. Auf Basis der Mittelwerte $a_{r/g/b}$ wird für jeden Farbkanal ein Schwellenwert $t_{r/g/b}$ bestimmt. Ist ein Kanal eines Pixels kleiner als der entsprechende Schwellenwert, dann gehört der Pixel nicht zur Linie. Unter der Annahme, dass die Werte der Farbkanäle in dem Intervall $[0,255]$ liegen, wird der Schwellenwert dabei wie folgt berechnet:
+Bei \emph{Free} wird zunächst für jeden Farbkanal der Durchschnitt über das gesamte Bild berechnet.
+Auf Basis der Mittelwerte $m_{r/g/b}$ wird für jeden Farbkanal ein Schwellenwert $s_{r/g/b}$ bestimmt. Ist ein Kanal eines Pixels kleiner als der entsprechende Schwellenwert, dann gehört der Pixel nicht zur Linie.
+Unter der Annahme, dass die Werte der Farbkanäle in dem Intervall $[0,255]$ liegen, wird der Schwellenwert dabei wie folgt berechnet:
 \begin{align*}
-	t_r &= a_r + \frac{255 - a_r}{2}\\
-	t_i &= a_i - \frac{255 - a_i}{2}, i \in \{g,b\}
+	s_r &= m_r + \frac{255 - m_r}{2}\\
+	s_i &= m_i - \frac{255 - m_i}{2}, i \in \{g,b\}
 \end{align*}
 
 Der zweite Schritt des Verfahrens verläuft Analog zu Diff.
 
 \subsubsection{Erweiterter Farbfilter (Peak)}
 
-\emph{Peak} ist das experimentellste der drei Verfahren und hat daher vermutlich noch einige Schwächen oder Fehler. Es basiert auf dem Prinzip von Free, auch wenn es im Detail eine ganze Reihe an Unterschieden gibt. So nutzt diese Linienerkennung keinen Mittelwert aus dem gesamten Bild sondern berechnet ihn aus der Umgebung. Dazu wird ein Rechteck um den zu analysierenden Pixel gelegt und Kanalweise der Durchschnitt über die so erstellte Umgebung ermittelt. Anstatt direkt einen Grenzwert für jeden einzelnen Kanal zu bilden, wird aus dem Mittelwert $a$ und der Farbe des Pixels $c$ eine Beurteilung $e \in [0, 1]$ des Punktes berechnet. Um so größer $e$ ist, desto wahrscheinlicher gehört der Pixel zur Linie. Wenn $e$ mindestens so groß ist, wie ein festgelegter Grenzwert $t=0.6$, wird davon ausgegangen, dass der Punkt zur Linie gehört. Zur Berechnung von $e$ werden dabei zunächst die Zwischenergebnisse $r_{r/g/b}$ berechnet, um diese dann gewichtet in $e$ einzubringen:
+\emph{Peak} ist das experimentellste der Verfahren und wurde noch nicht genügend getestet und optimiert. Es basiert auf dem Verfahren Free. Anstatt einen Mittelwerte über dem gesamten Bild zu berechnen, wird für jeden Pixel ein eigener Mittelwert über einer eigenen rechteckige Umgebung bestimmt. Zusammen mit der Farbe des Pixels $c$ wird aus dem Mittelwert $m$ eine Beurteilung $e \in [0, 1]$ des Punktes berechnet. Um so größer $e$ ist, desto wahrscheinlicher soll der Pixel zur Linie gehören. Ist $e$ größer als ein festgelegter Schwellenwert (0.6), wird davon ausgegangen, dass der Punkt zur Linie gehört. Zur Berechnung von $e$ werden dabei zunächst die Zwischenergebnisse $r_{r/g/b}$ berechnet, um diese dann gewichtet in $e$ einzubringen:
 
 \begin{align*}
 	r_i &= \begin{cases}
 	0.5                         &\text{, falls } a_i = 255\\
-	\frac{c_i - a_i}{255 - a_i} &\text{, sonst}
+	\frac{c_i - m_i}{255 - m_i} &\text{, sonst}
 	\end{cases}, i \in \{r,g,b\}\\
 	e &= \max(0,6 \cdot r_r + 0,2 \cdot r_g + 0,2 \cdot r_b, 0)
 \end{align*}
