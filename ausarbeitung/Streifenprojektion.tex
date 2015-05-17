@@ -334,6 +334,7 @@ Es existieren drei Spezialisierungen von \texttt{Controller}. Die einfachste Imp
 \end{table}
 
 Die Klassen \texttt{RotateScanController} und \texttt{TranslateScanController} beschaffen die Aufnahmen hingehen direkt von der Hardware. Der \texttt{RotateScanController} rotiert dabei den Streifenprojektor um passende Aufnahmen zu erhalten. Der \texttt{TranslateScanController} macht eine Aufnahme und wartet anschließend auf eine Bestätigung des Benutzers, dass sich das zu scannende Objekt um eine vorher definierte Strecke bewegt hat, bevor er das nächste Bild aufnimmt.
+Die Bewegung der Kamera bei Verwendung vom \texttt{TranslateScanController} wird dabei durch die Transformationsmatrix in der Gerätekonfiguration repräsentiert. Die rekonstruierten Punkte werden zum Abschluss als homogene Koordinaten mit dieser $4 \times 4$-Matrix multipliziert.
 
 \subsection{Ansteuerung der Hardware}
 
@@ -367,12 +368,12 @@ Wenn ein anderer Thread die \texttt{capture}-Methode von \texttt{Camera} aufruft
 
 \subsection{Linienerkennung}
 
-Die Linienerkennung arbeitet in zwei Schritten. Zuerst wird ein Binärbild erzeugt, wobei der Algorithmus entscheidet, welche Pixel zur Linie gehören und welche nicht. Im zweiten Schritt wird auf Basis des Binärbildes die Datenstruktur \texttt{Line} mit den vermeintlichen Abtastungen der Linie undm je nach Verfahren, auch die Breite der Linie gespeichert.
+Die Linienerkennung arbeitet in zwei Schritten. Zuerst wird ein Binärbild erzeugt, wobei der Algorithmus entscheidet, welche Pixel zur Linie gehören und welche nicht. Im zweiten Schritt wird auf Basis des Binärbildes die Datenstruktur \texttt{Line} mit den vermeintlichen Abtastungen der Linie und, je nach Verfahren, auch mit der Breite der Linie gefüllt.
 
 \subsubsection{Differenzbildung (Diff)}
 
-\emph{Diff} benötigt zu jeder Aufnahme der Linie ein Referenzbild; eine Aufnahme der Szene ohne die projizierte Linie. Das Referenzbild kann zu beginn des Scans gemacht werden oder es wird zwischen jeder Aufnahme der Linie ein neues Referenzbild aufgenommen werden. Die zweite Variante macht das Verfahren toleranter gegenüber Beleuchtungsänderungen während des Scanns.
-Um zu bestimmen, ob ein Pixel zur Linie gehört oder nicht, wird zunächst die Differenz zwischen der Aufnahme und dem Referenzbild angelegt. Liegt die Differenz für einen der Kanäle über einem bestimmten Schwellenwert (75), so wird davon ausgegangen, dass der Pixel Bestandteil der Linie ist.
+\emph{Diff} benötigt zu jeder Aufnahme der Linie ein Referenzbild; eine Aufnahme der Szene ohne die projizierte Linie. Das Referenzbild kann zu beginn des Scans gemacht werden oder es wird zwischen jeder Aufnahme der Linie ein neues Referenzbild aufgenommen. Die zweite Variante macht das Verfahren toleranter gegenüber Beleuchtungsänderungen während des Scanns.
+Um zu bestimmen, ob ein Pixel zur Linie gehört oder nicht, wird zunächst die Differenz zwischen der Aufnahme und dem Referenzbild ausgerechnet. Liegt die Differenz für einen der Kanäle über einem bestimmten Schwellenwert (75), so wird davon ausgegangen, dass der Pixel Bestandteil der Linie ist.
 
 Nachdem ein Binärbild erstellt wurde, in dem einige Pixel der Linie zugeordnet werden, müssen Abtastungen der Linie in eine Instanz der Datenstruktur \emph{Line} übergeben werden. Dabei wird das Binärbild zeilenweise durchlaufen. Sobald ein Pixel gefunden wurde, der vermutlich zur Linie gehört, werden dieser und alle anschließenden Pixel der Linie in der selben Zeile als eine Abtastung der Linie in die Datenstruktur übernommen. Die Anzahl der hintereinander als Linie markierten Pixel wird dabei als die Breite der Linie aufgefasst.
 
@@ -388,7 +389,7 @@ Der zweite Schritt des Verfahrens verläuft Analog zu Diff.
 
 \subsubsection{Erweiterter Farbfilter (Peak)}
 
-\emph{Peak} ist das experimentellste der drei Verfahren und hat daher vermutlich noch einige Schwächen oder Fehler. Es basiert auf dem Prinzip von Free, auch wenn es im Detail eine ganze Reihe an Unterschieden gibt. So nutzt diese Linienerkennung keinen Mittelwert aus dem gesamten Bild sondern berechnet ihn aus der Umgebung. Dazu wird ein Rechteck um den zu analysierenden Pixel gelegt und Kanalweise der Durchschnitt über die so erstellte Umgebung ermittelt. Anstatt direkt einen Grenzwert für jeden einzelnen Kanal zu bilden, wird aus diesem Mittelwert $a$ und der Farbe des Pixels $c$ eine Beurteilung $e \in [0, 1]$ des Punktes berechnet. Um so größer $e$ ist, desto wahrscheinlicher gehört der Pixel zur Linie. Wenn $e$ mindestens so groß ist, wie ein festgelegter Grenzwert $t=0.6$, wird davon ausgegangen, dass der Punkt zur Linie gehört. Zur Berechnung von $e$ werden dabei zunächst die Zwischenergebnisse $r_{r/g/b}$ berechnet, um diese dann gewichtet in $e$ einzubringen:
+\emph{Peak} ist das experimentellste der drei Verfahren und hat daher vermutlich noch einige Schwächen oder Fehler. Es basiert auf dem Prinzip von Free, auch wenn es im Detail eine ganze Reihe an Unterschieden gibt. So nutzt diese Linienerkennung keinen Mittelwert aus dem gesamten Bild sondern berechnet ihn aus der Umgebung. Dazu wird ein Rechteck um den zu analysierenden Pixel gelegt und Kanalweise der Durchschnitt über die so erstellte Umgebung ermittelt. Anstatt direkt einen Grenzwert für jeden einzelnen Kanal zu bilden, wird aus dem Mittelwert $a$ und der Farbe des Pixels $c$ eine Beurteilung $e \in [0, 1]$ des Punktes berechnet. Um so größer $e$ ist, desto wahrscheinlicher gehört der Pixel zur Linie. Wenn $e$ mindestens so groß ist, wie ein festgelegter Grenzwert $t=0.6$, wird davon ausgegangen, dass der Punkt zur Linie gehört. Zur Berechnung von $e$ werden dabei zunächst die Zwischenergebnisse $r_{r/g/b}$ berechnet, um diese dann gewichtet in $e$ einzubringen:
 
 \begin{align*}
 	r_i &= \begin{cases}
