@@ -754,9 +754,9 @@ Zuletzt wurden die Einflüsse unterschiedlicher Beleuchtungen untersucht. Bisher
 
 Wie bereits in Abschnitt \ref{sec:reps} angesprochen, spiegelt sich der Laser im Würfel. Diese Spiegelung wird von der Diff-Linienerkennung fälschlicherweise als Linie erkannt, wie man in Abbildung \ref{fig:lights} sehen kann. Bei schwächerer Beleuchtung ist der Spiegeleffekt stärker, was dazu führt, dass Diff bei der Beleuchtung nur durch die Deckenlampe schlechtere Ergebnisse liefert, als bei einer direkten Beleuchtung durch die Schreibtischlampe. Beide Lampen zusammen liefern die besten Ergebnisse.
 
-Die Free-Linienerkennung wird durch diese Spiegeleffekte nicht beeinflusst, allerdings erkennt sie, wie man in Abbildung \ref{fig:lights} sehen kann, falsche Punkte auf dem Boden. Die Beleuchtung durch die Schreibtischlampe sorgt dafür, dass es hellere und dunklere Bereiche in dem Bild gibt. Das führt dazu, dass wie in Abschnitt \ref{sec:cols} der Mittelwert verzerrt wird und auch falsche Punkte erkannt werden.
+Die Free-Linienerkennung wird durch diese Spiegeleffekte nicht beeinflusst, allerdings erkennt sie, wie man in Abbildung \ref{fig:lights} sehen kann, falsche Punkte auf dem Boden. Die Beleuchtung durch die Schreibtischlampe sorgt dafür, dass es hellere und dunklere Bereiche in dem Bild gibt. Das führt dazu, dass wie in Abschnitt \ref{sec:cols} der Mittelwert verzerrt wird und auch falsche Punkte erkannt werden. Die besten Ergebnisse liefert Free bei Beleuchtung durch beide Lampen oder nur die Deckenlampe.
 
-Die Peak-Linienerkennung liefert schlechtere Ergebnisse wenn die Szene heller beleuchtet ist. Das liegt daran, dass bei einem dunkleren Hintergrund der Unterschied zwischen dem blauen Würfel und der Wand kleiner ist und dadurch weniger falsche Punkte an der Kante des Würfels erkannt werden.
+Die Peak-Linienerkennung liefert schlechtere Ergebnisse wenn die Szene heller beleuchtet ist. Das liegt daran, dass bei einem dunkleren Hintergrund der Unterschied zwischen dem blauen Würfel und der Wand kleiner ist und dadurch weniger falsche Punkte an der Kante des Würfels erkannt werden. Damit liefert Peak bei der Beleuchtung nur durch die Deckenlampe die besten Ergebnisse.
 
 \begin{table}[H]
 	\centering
