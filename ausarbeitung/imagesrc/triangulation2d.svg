@@ -9,7 +9,7 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   inkscape:version="0.91 r13725"
+   inkscape:version="0.91pre4 r13712"
    version="1.1"
    id="svg2"
    viewBox="0 0 744.09448819 1052.3622047"
@@ -18,15 +18,15 @@
    sodipodi:docname="triangulation2d.svg">
   <sodipodi:namedview
      inkscape:window-maximized="1"
-     inkscape:window-y="27"
-     inkscape:window-x="0"
-     inkscape:window-height="1014"
+     inkscape:window-y="-8"
+     inkscape:window-x="-8"
+     inkscape:window-height="1018"
      inkscape:window-width="1920"
      showgrid="false"
      inkscape:current-layer="layer1"
      inkscape:document-units="px"
      inkscape:cy="890.58431"
-     inkscape:cx="311.38834"
+     inkscape:cx="231.68585"
      inkscape:zoom="1.4142136"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
@@ -112,7 +112,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -179,7 +179,7 @@
            id="path4561" /></g>    </g>
     <g
        id="g4605"
-       transform="translate(290,38)">
+       transform="translate(207.26851,40.828427)">
       <g
          word-spacing="normal"
          letter-spacing="normal"

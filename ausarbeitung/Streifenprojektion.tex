@@ -21,6 +21,7 @@
 \usepackage{pgfplots}
 %\usepackage{eurosym}
 \usepackage[export]{adjustbox}
+\usepackage{multirow}
 
 \usepackage[hidelinks]{hyperref}
 %\usepackage[left=3.2cm,right=3cm,top=1.7cm,bottom=3cm,includeheadfoot]{geometry}
@@ -149,23 +150,43 @@ Das Prinzip der Triangulation ist es aus zwei Eckpunkten und den Innenwickeln ei
 
 \begin{figure}
 	\centering
-	\begin{subfigure}{0.55\textwidth}
-		\includegraphics[width=\textwidth]{includes/triangulation3d}
-		\caption{dreidimensionales Modell}
-		\label{fig:triangulation3d}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}{0.35\textwidth}
-		\includegraphics[width=\textwidth]{includes/triangulation_skew_pitch}
-		\caption{Ausrichtung der Laserebene L}
-		\label{fig:triangulation_skew_pitch}
-	\end{subfigure}
-
-	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[width=\textwidth]{includes/triangulation2d}
-		\caption{vereinfachtes zweidimensionales Modell}
-		\label{fig:triangulation2d}
-	\end{subfigure}
+	\begin{tabular}{cc}
+		\begin{subfigure}{0.45\textwidth}
+			\includegraphics[width=\textwidth]{includes/triangulation3d}
+			\caption{dreidimensionales Modell}
+			\label{fig:triangulation3d}
+		\end{subfigure}
+		& \multirow{-5}{*}{
+		\begin{subfigure}{0.4\textwidth}
+			\includegraphics[width=\textwidth]{includes/triangulation_skew_pitch}
+			\caption{Ausrichtung der Laserebene L: Die graue Ausgangsebene ist parallel zur $y$-$z$-Ebene. Sie wird mit $\theta$ um die grüne Gerade gedreht. Daraufhin wird sie mit $\delta$ um die blaue Gerade gedreht um schließlich parallel zur Laserebene zu liegen.}
+			\label{fig:triangulation_skew_pitch}
+		\end{subfigure}
+		}\\
+		\begin{subfigure}{0.45\textwidth}
+			\includegraphics[width=\textwidth]{includes/triangulation2d}
+			\caption{vereinfachtes zweidimensionales Modell}
+			\label{fig:triangulation2d}
+		\end{subfigure}
+		&
+	\end{tabular}
+%	\begin{subfigure}{0.55\textwidth}
+%		\includegraphics[width=\textwidth]{includes/triangulation3d}
+%		\caption{dreidimensionales Modell}
+%		\label{fig:triangulation3d}
+%	\end{subfigure}
+%	\hfill
+%	\begin{subfigure}{0.35\textwidth}
+%		\includegraphics[width=\textwidth]{includes/triangulation_skew_pitch}
+%		\caption{Ausrichtung der Laserebene L: Die graue Ausgangsebene ist eine $z$-$z$-Ebene. Diese wird mit $\theta$ um die grüne Gerade gedreht. Das Ergebnis wird mit $\delta$ um die blaue Gerade gedreht um schließlich parallel zur Laserebene zu liegen.}
+%		\label{fig:triangulation_skew_pitch}
+%	\end{subfigure}
+%
+%	\begin{subfigure}{0.45\textwidth}
+%		\includegraphics[width=\textwidth]{includes/triangulation2d}
+%		\caption{vereinfachtes zweidimensionales Modell}
+%		\label{fig:triangulation2d}
+%	\end{subfigure}
 	\caption{Modell des Setups}
 \end{figure}
 
