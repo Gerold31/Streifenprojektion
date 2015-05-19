@@ -618,7 +618,7 @@ Insgesamt scheint Diff farbunabhängiger zu sein, da die Durchschnittsentfernung
 	\begin{tabular}{c|c|c|c}
 		Farbe & Anzahl & Avg (mm) & Stdabw (mm) \\ \hline
 		Rot & 6565 & 338.14 & 3.6842 \\
-		Gruen & 8806 & 337.897 & 88.2139 \\
+		Grün & 8806 & 337.897 & 88.2139 \\
 		Blau & 8321 & 338.722 & 14.8228 \\
 		Gelb & 7085 & 338.112 & 39.4331 \\
 		Orange & 6336 & 338.249 & 7.50314 \\
@@ -628,7 +628,7 @@ Insgesamt scheint Diff farbunabhängiger zu sein, da die Durchschnittsentfernung
 		\begin{tabular}{c|c|c|c}
 		Farbe & Anzahl & Avg (mm) & Stdabw (mm) \\ \hline
 		Rot & 6439 & 338.035 & 3.4453 \\
-		Gruen & 3534 & 340.808 & 6.28125 \\
+		Grün & 3534 & 340.808 & 6.28125 \\
 		Blau & 3535 & 340.892 & 2.82819 \\
 		Gelb & 10824 & 338.69 & 77.4283 \\
 		Orange & 29063 & 347.896 & 205.929 \\
@@ -638,7 +638,7 @@ Insgesamt scheint Diff farbunabhängiger zu sein, da die Durchschnittsentfernung
 		\begin{tabular}{c|c|c|c}
 		Farbe & Anzahl & Avg (mm) & Stdabw (mm) \\ \hline
 		Rot & 5795 & 339.622 & 55.6553 \\
-		Gruen & 4437 & 341.713 & 152.687 \\
+		Grün & 4437 & 341.713 & 152.687 \\
 		Blau & 6543 & 341.249 & 234.736 \\
 		Gelb & 5838 & 340.121 & 106.932 \\
 		Orange & 4317 & 340.104 & 85.2112 \\
@@ -691,7 +691,7 @@ Insgesamt scheint Diff farbunabhängiger zu sein, da die Durchschnittsentfernung
 
 Als drittes wurde die blaue Seite des Würfels in verschiedenen Entfernungen vermessen, um die Entfernungsabhängigkeit der Verfahren zu bestimmen. Die Ergebnisse sind in Tabelle \ref{tab:dists}, die analog zu den vorherigen Tabellen aufgebaut ist, mit dem Unterschied, dass es eine weitere Spalte (''Diff (\%)'') gibt, in der der relative Unterschied zwischen der gemessenen und der erwarteten Entfernung steht.
 
-Diff und Free haben bei allen Entfernungen eine relativ geringe Streuung, wohingegen Peak bei 300~mm und 400~mm Entfernung eine wesentlich hoehere Streuung hat. Alle Linienerkennungen liefern ähnliche Durchschnittliche Entfernungen, wobei die gemessene Entfernung immer größer ist als die tatsächliche. Eine Ursache ist, dass die angegebene Entfernung der Abstand vom Setup zum Würfel ist, aber die Rekonstruktion die Entfernung vom Brennpunkt der Kamera zum Würfel misst. Das allein würde aber nur eine konstante Abweichung von gemessener und erwarteter Entfernung erklären, da die gemessene Entfernung aber in allen fällen 12\%-17\% größer ist und sogar mit steigender Entfernung größer wird, liegt es nahe, dass es eine weitere Fehlerquelle gibt. Ein schlecht Kalibriertes Setup ist dabei der wahrscheinlichste Kandidat.
+Diff und Free haben bei allen Entfernungen eine relativ geringe Streuung, wohingegen Peak bei 300~mm und 400~mm Entfernung eine wesentlich höhere Streuung hat. Alle Linienerkennungen liefern ähnliche Durchschnittliche Entfernungen, wobei die gemessene Entfernung immer größer ist als die tatsächliche. Eine Ursache ist, dass die angegebene Entfernung der Abstand vom Setup zum Würfel ist, aber die Rekonstruktion die Entfernung vom Brennpunkt der Kamera zum Würfel misst. Das allein würde aber nur eine konstante Abweichung von gemessener und erwarteter Entfernung erklären, da die gemessene Entfernung aber in allen fällen 12\%-17\% größer ist und sogar mit steigender Entfernung größer wird, liegt es nahe, dass es eine weitere Fehlerquelle gibt. Ein schlecht Kalibriertes Setup ist dabei der wahrscheinlichste Kandidat.
 
 \begin{table}[H]
 	\centering
@@ -731,7 +731,7 @@ Zuletzt wurden die Einflüsse unterschiedlicher Beleuchtungen untersucht. Bisher
 
 Wie bereits in Abschnitt \ref{sec:reps} angesprochen, spiegelt sich der Laser im Würfel, was, wie man in den Abbildung \ref{fig:lights} sehen kann, von der Diff-Linienerkennung fälschlicherweise als Linie erkannt wird. Bei schwächerer Beleuchtung ist der Spiegeleffekt stärker, was dazu führt, dass Diff bei der Beleuchtung nur durch die Deckenlampe schlechtere Ergebnisse liefert, als bei einer direkten Beleuchtung durch die Schreibtischlampe. Beide Lampen zusammen liefern die besten Ergebnisse.
 
-Die Free-Linienerkennung wird durch diese Spiegeleffekte nicht beeinflusst, allerdings erkennt sie, wie man in Abbildung \ref{fig:lights} sehen kann, falsche Punkte auf dem Boden. Die Beleuchtung durch die Schreibtischlampe sorgt dafuer, dass es hellere und dunklere Bereiche in dem Bild gibt. Das führt dazu, dass wie in Abschnitt \ref{sec:cols} der Mittelwert verzerrt wird und auch falsche Punkte erkannt werden.
+Die Free-Linienerkennung wird durch diese Spiegeleffekte nicht beeinflusst, allerdings erkennt sie, wie man in Abbildung \ref{fig:lights} sehen kann, falsche Punkte auf dem Boden. Die Beleuchtung durch die Schreibtischlampe sorgt dafür, dass es hellere und dunklere Bereiche in dem Bild gibt. Das führt dazu, dass wie in Abschnitt \ref{sec:cols} der Mittelwert verzerrt wird und auch falsche Punkte erkannt werden.
 
 Die Peak-Linienerkennung liefert schlechtere Ergebnisse wenn die Szene heller Beleuchtet ist. Das liegt daran, dass bei einem dunkleren Hintergrund der Unterschied zwischen dem blauen Würfel und der Wand kleiner ist und dadurch weniger falsche Punkte an der Kante des Würfels erkannt werden.
 
