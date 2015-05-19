@@ -20,6 +20,7 @@
 \usepackage{xcolor}
 \usepackage{pgfplots}
 %\usepackage{eurosym}
+\usepackage[export]{adjustbox}
 
 \usepackage[hidelinks]{hyperref}
 %\usepackage[left=3.2cm,right=3cm,top=1.7cm,bottom=3cm,includeheadfoot]{geometry}
@@ -471,21 +472,21 @@ Im Folgenden werden verschiedene Seiten eines ''Rubik's Cube'' auf verschiedene 
 \begin{figure}[H]
 	\centering
 	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[width=\textwidth]{includes/diff_red_cam.png}
+		\includegraphics[width=\textwidth,frame]{includes/diff_red_cam.png}
 		\caption{komplette Punktwolke aus Sicht der Kamera}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[width=\textwidth]{includes/diff_only_red_cam.png}
+		\includegraphics[width=\textwidth,frame]{includes/diff_only_red_cam.png}
 		\caption{Punktwolke der Punkte, die zum Würfel gehören, aus Sicht der Kamera}
 	\end{subfigure}
 	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[width=\textwidth]{includes/diff_red_pos1.png}
-		\caption{komplette Punktwolke von der Seite}
+		\includegraphics[width=\textwidth,frame]{includes/diff_red_pos1.png}
+		\caption{komplette Punktwolke von der Seite \\ \mbox{}}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[width=\textwidth]{includes/diff_only_red_pos1.png}
+		\includegraphics[width=\textwidth,frame]{includes/diff_only_red_pos1.png}
 		\caption{Punktwolke der Punkte, die zum Würfel gehören, von der Seite}
 	\end{subfigure}
 	\caption{Punktwolken eines Scans mit Diff-Linienerkennung der roten Seite des ''Rubik's Cube'' in 300~mm Entfernung}
@@ -494,21 +495,21 @@ Im Folgenden werden verschiedene Seiten eines ''Rubik's Cube'' auf verschiedene 
 \begin{figure}[H]
 	\centering
 	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[width=\textwidth]{includes/free_red_cam.png}
+		\includegraphics[width=\textwidth,frame]{includes/free_red_cam.png}
 		\caption{komplette Punktwolke aus Sicht der Kamera}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[width=\textwidth]{includes/free_only_red_cam.png}
+		\includegraphics[width=\textwidth,frame]{includes/free_only_red_cam.png}
 		\caption{Punktwolke der Punkte, die zum Würfel gehören, aus Sicht der Kamera}
 	\end{subfigure}
 	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[width=\textwidth]{includes/free_red_pos1.png}
-		\caption{komplette Punktwolke von der Seite}
+		\includegraphics[width=\textwidth,frame]{includes/free_red_pos1.png}
+		\caption{komplette Punktwolke von der Seite \\ \mbox{}}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[width=\textwidth]{includes/free_only_red_pos1.png}
+		\includegraphics[width=\textwidth,frame]{includes/free_only_red_pos1.png}
 		\caption{Punktwolke der Punkte, die zum Würfel gehören, von der Seite}
 	\end{subfigure}
 	\caption{Punktwolken eines Scans mit Free-Linienerkennung der roten Seite des ''Rubik's Cube'' in 300~mm Entfernung}
@@ -517,21 +518,21 @@ Im Folgenden werden verschiedene Seiten eines ''Rubik's Cube'' auf verschiedene 
 \begin{figure}[H]
 	\centering
 	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[width=\textwidth]{includes/peak_red_cam.png}
+		\includegraphics[width=\textwidth,frame]{includes/peak_red_cam.png}
 		\caption{komplette Punktwolke aus Sicht der Kamera}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[width=\textwidth]{includes/peak_only_red_cam.png}
+		\includegraphics[width=\textwidth,frame]{includes/peak_only_red_cam.png}
 		\caption{Punktwolke der Punkte, die zum Würfel gehören, aus Sicht der Kamera}
 	\end{subfigure}
 	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[width=\textwidth]{includes/peak_red_pos1.png}
-		\caption{komplette Punktwolke von der Seite}
+		\includegraphics[width=\textwidth,frame]{includes/peak_red_pos1.png}
+		\caption{komplette Punktwolke von der Seite \\ \mbox{}}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[width=\textwidth]{includes/peak_only_red_pos1.png}
+		\includegraphics[width=\textwidth,frame]{includes/peak_only_red_pos1.png}
 		\caption{Punktwolke der Punkte, die zum Würfel gehören, von der Seite}
 	\end{subfigure}
 	\caption{Punktwolken eines Scans mit Peak-Linienerkennung der roten Seite des ''Rubik's Cube'' in 300~mm Entfernung}
@@ -648,36 +649,39 @@ Insgesamt scheint Diff farbunabhängiger zu sein, da die Durchschnittsentfernung
 
 \begin{figure}[H]
 	\centering
-	\begin{tabular}{c|c|c|c}
+	\begin{tabular}{l|l|l|l}
 		Bild der Kamera & erkannte Linie nach & erkannte Linie nach  & erkannte Linie nach \\
 		& Diff-Linienerkennung & Free-Linienerkennung & Peak-Linienerkennung \\
+		\hline 
+		& & \\
+		\raisebox{0.75em}{\includegraphics[height=6em]{includes/red_0.png}} & 
+		\raisebox{0.75em}{\includegraphics[height=6em]{includes/red_0_diff.png}} &
+		\raisebox{0.75em}{\includegraphics[height=6em]{includes/red_0_free.png}} &
+		\raisebox{0.75em}{\includegraphics[height=6em]{includes/red_0_peak.png}} \\
 		\hline
 		& & \\
-		
-		\includegraphics[width=.22\textwidth]{includes/red_0.png} & 
-		\includegraphics[width=.22\textwidth]{includes/red_0_diff.png} &
-		\includegraphics[width=.22\textwidth]{includes/red_0_free.png} &
-		\includegraphics[width=.22\textwidth]{includes/red_0_peak.png} \\
-		
-		\includegraphics[width=.22\textwidth]{includes/green_0.png} &
-		\includegraphics[width=.22\textwidth]{includes/green_0_diff.png} &
-		\includegraphics[width=.22\textwidth]{includes/green_0_free.png} &
-		\includegraphics[width=.22\textwidth]{includes/green_0_peak.png} \\
-		
-		\includegraphics[width=.22\textwidth]{includes/blue_0.png} &
-		\includegraphics[width=.22\textwidth]{includes/blue_0_diff.png} &
-		\includegraphics[width=.22\textwidth]{includes/blue_0_free.png} &
-		\includegraphics[width=.22\textwidth]{includes/blue_0_peak.png} \\
-		
-		\includegraphics[width=.22\textwidth]{includes/yellow_0.png} & 
-		\includegraphics[width=.22\textwidth]{includes/yellow_0_diff.png} &
-		\includegraphics[width=.22\textwidth]{includes/yellow_0_free.png} &
-		\includegraphics[width=.22\textwidth]{includes/yellow_0_peak.png} \\
-		
-		\includegraphics[width=.22\textwidth]{includes/orange_0.png} & 
-		\includegraphics[width=.22\textwidth]{includes/orange_0_diff.png} &
-		\includegraphics[width=.22\textwidth]{includes/orange_0_free.png} &
-		\includegraphics[width=.22\textwidth]{includes/orange_0_peak.png}
+		\raisebox{0.75em}{\includegraphics[width=.22\textwidth]{includes/green_0.png}} &
+		\raisebox{0.75em}{\includegraphics[width=.22\textwidth]{includes/green_0_diff.png}} &
+		\raisebox{0.75em}{\includegraphics[width=.22\textwidth]{includes/green_0_free.png}} &
+		\raisebox{0.75em}{\includegraphics[width=.22\textwidth]{includes/green_0_peak.png}} \\
+		\hline
+		& & \\
+		\raisebox{0.75em}{\includegraphics[width=.22\textwidth]{includes/blue_0.png}} &
+		\raisebox{0.75em}{\includegraphics[width=.22\textwidth]{includes/blue_0_diff.png}} &
+		\raisebox{0.75em}{\includegraphics[width=.22\textwidth]{includes/blue_0_free.png}} &
+		\raisebox{0.75em}{\includegraphics[width=.22\textwidth]{includes/blue_0_peak.png}} \\
+		\hline
+		& & \\
+		\raisebox{0.75em}{\includegraphics[width=.22\textwidth]{includes/yellow_0.png}} & 
+		\raisebox{0.75em}{\includegraphics[width=.22\textwidth]{includes/yellow_0_diff.png}} &
+		\raisebox{0.75em}{\includegraphics[width=.22\textwidth]{includes/yellow_0_free.png}} &
+		\raisebox{0.75em}{\includegraphics[width=.22\textwidth]{includes/yellow_0_peak.png}} \\
+		\hline
+		& & \\
+		\raisebox{0.75em}{\includegraphics[width=.22\textwidth]{includes/orange_0.png}} & 
+		\raisebox{0.75em}{\includegraphics[width=.22\textwidth]{includes/orange_0_diff.png}} &
+		\raisebox{0.75em}{\includegraphics[width=.22\textwidth]{includes/orange_0_free.png}} &
+		\raisebox{0.75em}{\includegraphics[width=.22\textwidth]{includes/orange_0_peak.png}}
 		
 	\end{tabular}
 	\caption{Ergebnisse nach Diff-, Free- und Peak-Linienerkennung bei verschiedenen Farben}
@@ -770,26 +774,28 @@ Die Peak-Linienerkennung liefert schlechtere Ergebnisse wenn die Szene heller Be
 		& Schreibtischlampe & Deckenlampe & beide Lampen \\
 		\hline
 		 & & & \\
-		
-		\rotatebox{90}{\hspace{2em} Kamera} &
-		\includegraphics[width=.3\textwidth]{includes/blue_d.png} & 
-		\includegraphics[width=.3\textwidth]{includes/blue_t.png} &
-		\includegraphics[width=.3\textwidth]{includes/blue_dt.png} \\
-		
-		\rotatebox{90}{\hspace{3em} Diff} &
-		\includegraphics[width=.3\textwidth]{includes/blue_d_diff.png} & 
-		\includegraphics[width=.3\textwidth]{includes/blue_t_diff.png} &
-		\includegraphics[width=.3\textwidth]{includes/blue_dt_diff.png} \\
-		
-		\rotatebox{90}{\hspace{3em} Free} &
-		\includegraphics[width=.3\textwidth]{includes/blue_d_free.png} & 
-		\includegraphics[width=.3\textwidth]{includes/blue_t_free.png} &
-		\includegraphics[width=.3\textwidth]{includes/blue_dt_free.png} \\
-		
-		\rotatebox{90}{\hspace{3em} Peak} &
-		\includegraphics[width=.3\textwidth]{includes/blue_d_peak.png} & 
-		\includegraphics[width=.3\textwidth]{includes/blue_t_peak.png} &
-		\includegraphics[width=.3\textwidth]{includes/blue_dt_peak.png}
+		\rotatebox{90}{\hspace{3em} Kamera} &
+		\raisebox{0.75em}{\includegraphics[width=.3\textwidth]{includes/blue_d.png}} & 
+		\raisebox{0.75em}{\includegraphics[width=.3\textwidth]{includes/blue_t.png}} &
+		\raisebox{0.75em}{\includegraphics[width=.3\textwidth]{includes/blue_dt.png}} \\
+		\hline
+		& & \\
+		\rotatebox{90}{\hspace{4em} Diff} &
+		\raisebox{0.75em}{\includegraphics[width=.3\textwidth]{includes/blue_d_diff.png}} & 
+		\raisebox{0.75em}{\includegraphics[width=.3\textwidth]{includes/blue_t_diff.png}} &
+		\raisebox{0.75em}{\includegraphics[width=.3\textwidth]{includes/blue_dt_diff.png}} \\
+		\hline
+		& & \\
+		\rotatebox{90}{\hspace{4em} Free} &
+		\raisebox{0.75em}{\includegraphics[width=.3\textwidth]{includes/blue_d_free.png}} & 
+		\raisebox{0.75em}{\includegraphics[width=.3\textwidth]{includes/blue_t_free.png}} &
+		\raisebox{0.75em}{\includegraphics[width=.3\textwidth]{includes/blue_dt_free.png}} \\
+		\hline
+		& & \\
+		\rotatebox{90}{\hspace{4em} Peak} &
+		\raisebox{0.75em}{\includegraphics[width=.3\textwidth]{includes/blue_d_peak.png}} & 
+		\raisebox{0.75em}{\includegraphics[width=.3\textwidth]{includes/blue_t_peak.png}} &
+		\raisebox{0.75em}{\includegraphics[width=.3\textwidth]{includes/blue_dt_peak.png}}
 		
 	\end{tabular}
 	\caption{Ergebnisse nach Diff-, Free- und Peak-Linienerkennung bei verschiedenen Beleuchtungen}
