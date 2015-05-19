@@ -675,10 +675,10 @@ Insgesamt scheint Diff farbunabhängiger zu sein, da die Durchschnittsentfernung
 		& Diff-Linienerkennung & Free-Linienerkennung & Peak-Linienerkennung \\
 		\hline 
 		& & \\
-		\raisebox{0.75em}{\includegraphics[height=6em]{includes/red_0.png}} & 
-		\raisebox{0.75em}{\includegraphics[height=6em]{includes/red_0_diff.png}} &
-		\raisebox{0.75em}{\includegraphics[height=6em]{includes/red_0_free.png}} &
-		\raisebox{0.75em}{\includegraphics[height=6em]{includes/red_0_peak.png}} \\
+		\raisebox{0.75em}{\includegraphics[width=.22\textwidth]{includes/red_0.png}} & 
+		\raisebox{0.75em}{\includegraphics[width=.22\textwidth]{includes/red_0_diff.png}} &
+		\raisebox{0.75em}{\includegraphics[width=.22\textwidth]{includes/red_0_free.png}} &
+		\raisebox{0.75em}{\includegraphics[width=.22\textwidth]{includes/red_0_peak.png}} \\
 		\hline
 		& & \\
 		\raisebox{0.75em}{\includegraphics[width=.22\textwidth]{includes/green_0.png}} &
@@ -714,7 +714,7 @@ Insgesamt scheint Diff farbunabhängiger zu sein, da die Durchschnittsentfernung
 
 Als drittes wurde die blaue Seite des Würfels in verschiedenen Entfernungen vermessen, um die Entfernungsabhängigkeit der Verfahren zu bestimmen. Die Ergebnisse sind in Tabelle \ref{tab:dists}, die analog zu den vorherigen Tabellen aufgebaut ist, mit dem Unterschied, dass es eine weitere Spalte (''Diff (\%)'') gibt, in der der relative Unterschied zwischen der gemessenen und der erwarteten Entfernung steht.
 
-Diff und Free haben bei allen Entfernungen eine relativ geringe Streuung, wohingegen Peak bei 300~mm und 400~mm Entfernung eine wesentlich höhere Streuung hat. Alle Linienerkennungen liefern ähnliche Durchschnittliche Entfernungen, wobei die gemessene Entfernung immer größer ist als die tatsächliche. Eine Ursache ist, dass die angegebene Entfernung der Abstand vom Setup zum Würfel ist, aber die Rekonstruktion die Entfernung vom Brennpunkt der Kamera zum Würfel misst. Das allein würde aber nur eine konstante Abweichung von gemessener und erwarteter Entfernung erklären, da die gemessene Entfernung aber in allen fällen 12\%-17\% größer ist und sogar mit steigender Entfernung größer wird, liegt es nahe, dass es eine weitere Fehlerquelle gibt. Ein schlecht Kalibriertes Setup ist dabei der wahrscheinlichste Kandidat.
+Diff und Free haben bei allen Entfernungen eine relativ geringe Streuung, wohingegen Peak bei 300~mm und 400~mm Entfernung eine wesentlich höhere Streuung hat. Alle Linienerkennungen liefern ähnliche Durchschnittliche Entfernungen, wobei die gemessene Entfernung immer größer ist als die tatsächliche. Eine Ursache ist, dass die angegebene Entfernung der Abstand vom Setup zum Würfel ist, aber die Rekonstruktion die Entfernung vom Brennpunkt der Kamera zum Würfel misst. Das allein würde aber nur eine konstante Abweichung von gemessener und erwarteter Entfernung erklären, da die gemessene Entfernung aber in allen fällen 12\%-17\% größer ist und sogar mit steigender Entfernung größer wird, liegt es nahe, dass es eine weitere Fehlerquelle gibt. Ein schlecht kalibriertes Setup ist dabei der wahrscheinlichste Kandidat.
 
 \begin{table}[H]
 	\centering
@@ -750,13 +750,13 @@ Diff und Free haben bei allen Entfernungen eine relativ geringe Streuung, wohing
 
 \subsection{Verschiedene Beleuchtungen}
 
-Zuletzt wurden die Einflüsse unterschiedlicher Beleuchtungen untersucht. Bisher wurde der ''Rubik's Cube'' direkt von einer Schreibtischlampe und von einer Deckenlampe beleuchtet. Nun wurde einmal die Schreibtischlampe und einmal die Deckenbeleuchtung ausgeschaltet. Der Versuch konnte nicht bei vollständiger Dunkelheit durchgeführt werden, da dabei das Referenzbild komplett schwarz wäre, was es unmöglich macht zu unterscheiden, ob ein Messpunkt zur Würfeloberfläche gehört oder nicht. Die Ergebnisse sind in Tabelle \ref{tab:lights} zu sehen.
+Zuletzt wurden die Einflüsse unterschiedlicher Beleuchtungen untersucht. Bisher wurde der ''Rubik's Cube'' direkt von einer Schreibtischlampe und von einer Deckenlampe beleuchtet. Nun wurde einmal die Schreibtischlampe und einmal die Deckenbeleuchtung ausgeschaltet. Der Versuch konnte nicht bei vollständiger Dunkelheit durchgeführt werden, da dabei das Referenzbild komplett schwarz wäre, was es unmöglich machen würde anhand der Farbe eines Messpunktes zu unterscheiden, ob dieser zur Würfeloberfläche gehört oder nicht. Die Ergebnisse sind in Tabelle \ref{tab:lights} zu sehen.
 
-Wie bereits in Abschnitt \ref{sec:reps} angesprochen, spiegelt sich der Laser im Würfel, was, wie man in den Abbildung \ref{fig:lights} sehen kann, von der Diff-Linienerkennung fälschlicherweise als Linie erkannt wird. Bei schwächerer Beleuchtung ist der Spiegeleffekt stärker, was dazu führt, dass Diff bei der Beleuchtung nur durch die Deckenlampe schlechtere Ergebnisse liefert, als bei einer direkten Beleuchtung durch die Schreibtischlampe. Beide Lampen zusammen liefern die besten Ergebnisse.
+Wie bereits in Abschnitt \ref{sec:reps} angesprochen, spiegelt sich der Laser im Würfel. Diese Spiegelung wird von der Diff-Linienerkennung fälschlicherweise als Linie erkannt, wie man in Abbildung \ref{fig:lights} sehen kann. Bei schwächerer Beleuchtung ist der Spiegeleffekt stärker, was dazu führt, dass Diff bei der Beleuchtung nur durch die Deckenlampe schlechtere Ergebnisse liefert, als bei einer direkten Beleuchtung durch die Schreibtischlampe. Beide Lampen zusammen liefern die besten Ergebnisse.
 
 Die Free-Linienerkennung wird durch diese Spiegeleffekte nicht beeinflusst, allerdings erkennt sie, wie man in Abbildung \ref{fig:lights} sehen kann, falsche Punkte auf dem Boden. Die Beleuchtung durch die Schreibtischlampe sorgt dafür, dass es hellere und dunklere Bereiche in dem Bild gibt. Das führt dazu, dass wie in Abschnitt \ref{sec:cols} der Mittelwert verzerrt wird und auch falsche Punkte erkannt werden.
 
-Die Peak-Linienerkennung liefert schlechtere Ergebnisse wenn die Szene heller Beleuchtet ist. Das liegt daran, dass bei einem dunkleren Hintergrund der Unterschied zwischen dem blauen Würfel und der Wand kleiner ist und dadurch weniger falsche Punkte an der Kante des Würfels erkannt werden.
+Die Peak-Linienerkennung liefert schlechtere Ergebnisse wenn die Szene heller beleuchtet ist. Das liegt daran, dass bei einem dunkleren Hintergrund der Unterschied zwischen dem blauen Würfel und der Wand kleiner ist und dadurch weniger falsche Punkte an der Kante des Würfels erkannt werden.
 
 \begin{table}[H]
 	\centering
@@ -831,13 +831,9 @@ Die Peak-Linienerkennung liefert schlechtere Ergebnisse wenn die Szene heller Be
 
 Es gibt viele Möglichkeiten ein Objekt zu vermessen.
 In unserem Semesterprojekt haben wir uns mit der Streifenlichtprojektion beschäftigt, eine Umsetzung entworfen und deren Ergebnisse ausgewertet.
-Wir steuern mit Hilfe eines Mikrocontrollers einen Streifenlaser an, mit dem wir eine Linie in die Szene projizieren.
-Mit einer einfachen Webcam nehmen wir die Szene auf und geben die Aufnahmen an die Verarbeitungssoftware weiter.
-Deren erster Schritt ist es die Linie in der Aufnahme zu finden.
-Für diesem Zweck wurden mehrere Ansätze implementiert.
-
-Ein Ansatz berechnet die Differenz zwischen der Aufnahme und einem Referenzbild (Diff), während ein anderer mit Hilfe von Mittelwerten über dem gesamten Bild (Free) oder Mittelwerten lediglich in einer kleineren Umgebung eines Pixels (Peak) arbeitet.
-Das Ergebnis der Linienerkennung ist ein Binärbild, aus dem die Punkte der Linie direkt bestimmt werden können.
+Wir steuern mit Hilfe eines Mikrocontrollers einen Linienlaser an, mit dem wir eine Linie in die Szene projizieren.
+Mit einer Webcam nehmen wir die Szene auf und geben die Aufnahmen an die Verarbeitungssoftware weiter.
+Für diese wurde drei Verfahren zur Linienerkennung implementiert und deren Leistung ausgewertet.
 
 Aus den Positionen im Bild kann als nächstes die Entfernung der Objektpunkte berechnet werden.
 Dazu werden mit Hilfe bekannter Größen aus dem Setup und der Triangulation die 3-D-Koordinaten für jeden Punkt der Linie berechnet.
@@ -846,12 +842,12 @@ Um die verschiedenen Ansätze vergleichen zu können und Grenzen dieses Verfahre
 Dazu wurde ein Rubiks-Cube von verschiedenen Seiten unter verschiedenen Bedingungen aufgenommen und die Ergebnisse verglichen.
 Die Ergebnisse zeigen, dass die Diff-Linienerkennung Probleme mit spiegelnden Oberflächen hat.
 Diese Effekte können mit verschiedenen Beleuchtungen der Szene verstärkt/abgeschwächt werden.
-Mit der roten Oberfläche kommen beide Ansätze relativ gut zurecht, während beide mit der gelben Oberfläche ähnlich schlechte Ergebnisse liefern.
+Mit der roten Oberfläche kommen alle drei Ansätze relativ gut zurecht, wohingegen sie alle bei der gelben Oberfläche schlechtere Ergebnisse liefern.
 Bei Tests mit anderen Farben unterscheiden sich die Ansätze zum Teil sehr stark.
-Alles in allem lässt sich aus den Tests entnehmen, dass die Diff-Linienerkennung weniger zwischen unterschiedlichen Farben schwankt als die Free-Linienerkennung.
+Alles in allem lässt sich aus den Tests entnehmen, dass die Diff-Linienerkennung robuster gegen Farbvariationen als Free oder Peak.
 
-Zusammenfassend kann man sagen, dass unsere Umsetzung der Messmethode Streifenlichtprojektion für die investierten Ressourcen ziemlich gute Ergebnisse liefert und dabei mit herkömmlichem Equipment auskommt.
-Um die Ergebnisse weiter zu verbessern schlagen wir vor ein präziseres Setup zu verwenden, das genauer vermessen werden kann und resistenter gegenüber physische Störungen ist. In vielen Fällen würde eine robustere Linienerkennung ebenfalls für deutlich bessere Ergebnisse sorgen.
+Zusammenfassend kann man sagen, dass unsere Umsetzung der Messmethode Streifenlichtprojektion für die investierten Ressourcen gute Ergebnisse liefert und dabei mit günstigem Equipment auskommt.
+Um die Ergebnisse weiter zu verbessern sollte ein präziseres Setup verwendet werden, das genauer vermessen werden kann und resistenter gegenüber physischen Störungen ist. Außerdem ist die Linienerkennung noch instabil, das könnte durch eine Kombination der Verfahren verbessert werden.
 
 % ---------------------------------------------------------------------------- %
 
