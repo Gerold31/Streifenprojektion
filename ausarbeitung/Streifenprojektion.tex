@@ -78,7 +78,7 @@
 \section{Einleitung}
 \label{sec:introduction}
 
-In verschiedenen Fällen ist es hilfreich oder notwendig ein \emph{komplexes} dreidimensionales Objekt zu vermessen. Aus solchen Vermessungen resultierende Modelle können beispielsweise in der Unterhaltungsindustrie für die Film- und Spielproduktion verwendet werden. So lassen sich heutzutage dank solcher Verfahren vergleichsweise einfach Personen und Objekte für Spiele zu modellieren. Außerdem ermöglichen Verfahren zur Vermessung von Oberflächen automatisierte Qualitätskontrollen und neue Methoden zur automatisierten Fertigung oder Verarbeitung.
+In verschiedenen Fällen ist es hilfreich oder notwendig ein \emph{komplexes} dreidimensionales Objekt zu vermessen. Aus solchen Vermessungen resultierende Modelle können beispielsweise in der Unterhaltungsindustrie für die Film- und Spielproduktion verwendet werden. So lassen sich heutzutage dank solcher Verfahren vergleichsweise einfach Personen und Objekte für Spiele modellieren. Außerdem ermöglichen Verfahren zur Vermessung von Oberflächen automatisierte Qualitätskontrollen und neue Methoden zur automatisierten Fertigung oder Verarbeitung.
 
 In diesem Projekt geht es um die \emph{Streifenlichtprojektion}. Dabei wird ein Streifen auf eine Oberfläche projiziert um aus einer Aufnahme der projizierten Linie die Form der Struktur zu rekonstruieren. In diesem Projekt projiziert ein einfacher Linienlaser eine Linie auf eine Struktur. Eine Webcam nimmt diese Struktur samt Linie auf. Mit diesen Bildern können 3-D-Koordinaten von Punkten auf der Laserlinie berechnet werden. Um von einer Struktur mehr Werte zu bekommen, wird dieser Vorgang mit unterschiedlichen Ausrichtungen des Lasers oder mit verschiedenen Positionierungen von dem Aufnahmesetup und der Struktur wiederholt. Schwerpunkt dieses Projektes ist der Test und die Auswertung von unterschiedlichen Verfahren zur Linienerkennung.
 
@@ -174,10 +174,9 @@ Die durch das Setup gegebenen Werte:
 
 \begin{tabular}{lp{12cm}}
 	$P$                &
-		Position des Linienprojektors.\\[0.5em]
+		Position des Linienprojektors\\[0.5em]
 	$f$                &
-		Brennweite
-		\\[0.5em]
+		Brennweite\\[0.5em]
 	$\theta$,$\delta$  &
 		Winkel zur Ausrichtung der Ebene $L$. Die Ausgangslage der Ebene ist parallel zur $y$-$z$-Ebene. Die Ebene wird zunächst mit dem Winkel $\theta$ um den Vektor $(0,0,-1)^T$  im mathematisch positiven Drehsinn gedreht. Danach mit dem Winkel $\delta$ um den Vektor $(-\sin(\theta), -\cos(\theta), 0)^T$. Siehe auch Abbildung~\ref{fig:triangulation_skew_pitch}.
 \end{tabular}
@@ -393,18 +392,17 @@ Der zweite Schritt des Verfahrens verläuft Analog zu Diff.
 \subsubsection{Erweiterter Farbfilter (Peak)}
 
 \emph{Peak} ist das experimentellste der Verfahren und wurde noch nicht genügend getestet und optimiert. Es basiert auf dem Verfahren Free.
-Anstatt die Mittelwerte über den gesamten Bild zu berechnen, wird hier ein Mittelwert in einer kleinen rechteckigen Umgebung jedes Pixels bestimmt. Aus diesem Mittelwert $a$ und der Farbe des Pixels $c$ wird eine Wahrscheinlichkeit $e \in [0, 1]$ des Punktes berechnet mit der der Pixel zur Linie gehört. Wenn $e$ größer ist, als ein festgelegter Grenzwert $t=0.6$, wird davon ausgegangen, dass der Punkt zur Linie gehört.
-Zur Berechnung von $e$ werden dabei zunächst die Zwischenergebnisse $r_{r/g/b}$ berechnet, um diese dann gewichtet in $e$ einzubringen:
-
+Anstatt einen Mittelwerte über dem gesamten Bild zu berechnen, wird ein Mittelwert in einer kleinen rechteckigen Umgebung jedes Pixels bestimmt. Aus diesem Mittelwert $m$ und der Farbe des Pixels $c$ wird eine Wahrscheinlichkeit $p \in [0, 1]$ des Punktes berechnet mit der der Pixel zur Linie gehört. Wenn $p$ größer ist, als ein festgelegter Grenzwert, wird davon ausgegangen, dass der Punkt zur Linie gehört.
+Zur Berechnung von $p$ werden dabei zunächst die Zwischenergebnisse $r_{r/g/b}$ berechnet, um diese gewichtet in $p$ einzubringen:
 \begin{align*}
 	r_i &= \begin{cases}
-	0.5                         &\text{, falls } a_i = 255\\
+	0.5                         &\text{, falls } m_i = 255\\
 	\frac{c_i - m_i}{255 - m_i} &\text{, sonst}
 	\end{cases}, i \in \{r,g,b\}\\
-	e &= \max(0,6 \cdot r_r + 0,2 \cdot r_g + 0,2 \cdot r_b, 0)
+	p &= \max(0,6 \cdot r_r + 0,2 \cdot r_g + 0,2 \cdot r_b, 0)
 \end{align*}
 
-Danach wird auf dem gefilterten Bild ein \emph{Gaußfilter} angewendet, um danach nur Pixel als Bestandteil der Linie zu markieren, die ein lokales Maximum in einer Dimension annehmen. Diese Änderung soll es ermöglichen, auch mit horizontalen oder anders rotierten Linien zu arbeiten.
+Im zweiten wird auf dem gefilterten Bild ein \emph{Gaußfilter} angewendet, um danach nur Pixel als Bestandteil der Linie zu markieren, die ein lokales Maximum in einer Dimension annehmen. Diese Änderung soll es ermöglichen, auch mit horizontalen oder anders rotierten Linien zu arbeiten.
 
 Ergänzend wenden wir bei dieser Methode einen weiteren Schritt an. Dabei werden alle Markierungen entfernt, bei denen der Pixel keine markierten Nachbarpixel besitzt, da Pixel auf der Linie in der Regel auch Nachbarpixel haben sollten, die ebenfalls auf der Linie liegen.
 
