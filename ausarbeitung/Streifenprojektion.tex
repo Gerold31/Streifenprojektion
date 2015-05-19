@@ -78,25 +78,25 @@
 \section{Einleitung}
 \label{sec:introduction}
 
-In verschiedenen Fällen ist es hilfreich oder notwendig ein \emph{komplexes} dreidimensionales Objekt zu vermessen. Aus solchen Vermessungen resultierende Modelle können beispielsweise in der Unterhaltungsindustrie für die Film- und Spielproduktion verwendet werden. So lassen sich heutzutage dank solcher Verfahren vergleichsweise einfach Personen und Objekte in Spiele übernehmen. Außerdem ermöglichen Verfahren zur Vermessung von Geometrien automatisierte Qualitätskontrollen und neue Methoden zur automatisierten Fertigung oder Verarbeitung.
+In verschiedenen Fällen ist es hilfreich oder notwendig ein \emph{komplexes} dreidimensionales Objekt zu vermessen. Aus solchen Vermessungen resultierende Modelle können beispielsweise in der Unterhaltungsindustrie für die Film- und Spielproduktion verwendet werden. So lassen sich heutzutage dank solcher Verfahren vergleichsweise einfach Personen und Objekte für Spiele zu modellieren. Außerdem ermöglichen Verfahren zur Vermessung von Oberflächen automatisierte Qualitätskontrollen und neue Methoden zur automatisierten Fertigung oder Verarbeitung.
 
-In diesem Projekt geht es um die \emph{Streifenlichtprojektion}. Dabei wird ein Streifen auf eine Oberfläche projiziert um aus einer Aufnahme der projizierten Linie die Form der Struktur zu rekonstruieren. In diesem Projekt projiziert ein einfacher und günstiger Linienlaser eine Linie auf eine Struktur. Eine einfache Webcam nimmt diese Struktur samt Linie auf, damit von den Bildern 3-D-Koordinaten von Punkten auf der Laserlinie berechnet werden können. Um von einer Struktur mehr Werte zu bekommen, wird dieser Vorgang mit unterschiedlichen Ausrichtungen des Lasers oder mit verschiedenen Positionierungen von dem Aufnahmesetup und der Struktur wiederholt. In dem Projekt werden unterschiedliche Verfahren zur Linienerkennungen verwendet und die Ergebnisse gegenübergestellt.
+In diesem Projekt geht es um die \emph{Streifenlichtprojektion}. Dabei wird ein Streifen auf eine Oberfläche projiziert um aus einer Aufnahme der projizierten Linie die Form der Struktur zu rekonstruieren. In diesem Projekt projiziert ein einfacher Linienlaser eine Linie auf eine Struktur. Eine Webcam nimmt diese Struktur samt Linie auf. Mit diesen Bildern können 3-D-Koordinaten von Punkten auf der Laserlinie berechnet werden. Um von einer Struktur mehr Werte zu bekommen, wird dieser Vorgang mit unterschiedlichen Ausrichtungen des Lasers oder mit verschiedenen Positionierungen von dem Aufnahmesetup und der Struktur wiederholt. Schwerpunkt dieses Projektes ist der Test und die Auswertung von unterschiedlichen Verfahren zur Linienerkennung.
 
-Die Arbeit behandelt in Kapitel~\ref{sec:basics} zunächst ein paar wichtige Grundlagen für das Projekt. Dazu gehören \emph{normalisierte Bildkoordinaten}, die \emph{perspektivische Projektion} und die mathematischen Prinzipien zur Rekonstruktion der Szene. Danach geht es in Kapitel~\ref{sec:realization} um die Umsetzung des Projektes. Dabei wird zunächst die verwendete Hardware betrachtet und der grobe Aufbau der Software beschrieben. Ab Abschnitt~\ref{sec:controller} wird auf verschiedenen Komponenten der Implementierung nochmals genauer eingegangen. In dem Kapitel~\ref{sec:evaluation} geht es um die Auswertung der Ergebnisse worauf in Kapitel~\ref{sec:summary} abschließend noch eine Zusammenfassung folgt.
+Die Arbeit behandelt in Kapitel~\ref{sec:basics} zunächst ein paar wichtige Grundlagen für das Projekt. Dazu gehören \emph{normalisierte Bildkoordinaten}, die \emph{perspektivische Projektion} und die mathematischen Methoden zur Rekonstruktion der Szene. Danach geht es in Kapitel~\ref{sec:realization} um die Umsetzung des Projektes. Dabei wird zunächst die verwendete Hardware betrachtet und der grobe Aufbau der Software beschrieben. Ab Abschnitt~\ref{sec:controller} wird auf verschiedenen Komponenten der Implementierung nochmals genauer eingegangen. In dem Kapitel~\ref{sec:evaluation} geht es um die Auswertung der Ergebnisse worauf in Kapitel~\ref{sec:summary} abschließend noch eine Zusammenfassung folgt.
 
 % ---------------------------------------------------------------------------- %
 
 \section{Theoretische und technische Grundlagen}
 \label{sec:basics}
 
-Zusätzlich zur hier verwendeten Methode haben sich in den letzten Jahrzehnten viele verschiedene Techniken entwickelt, mit denen dreidimensionale Strukturen der realen Welt vermessen werden können. So existieren zusätzlich zur Streifenlichtprojektion Verfahren wie \emph{Stereo-Vision}, \emph{Structure from Motion}, \emph{Shape from Shading} und \emph{Time of Flight}. Im Folgenden wird auf wichtige Grundlagen eingegangen, die für das Projekt benötigt werden.
+In den letzten Jahrzehnten haben sich zusätzlich zu der hier verwendeten Methode viele verschiedene Techniken entwickelt, mit denen dreidimensionale Strukturen der realen Welt vermessen werden können. So existieren zusätzlich zur Streifenlichtprojektion Verfahren wie \emph{Stereo-Vision}, \emph{Structure from Motion}, \emph{Shape from Shading} und \emph{Time of Flight}. Im Folgenden wird auf wichtige Grundlagen eingegangen, die für das Projekt benötigt werden.
 
 \subsection{Normalisierte Bildkoordinaten}
 \label{sec:imagecoordinates}
 
-Ein \emph{fotografisches Bild} kann als eine zweidimensionalen Matrix dargestellt werden, die für jeden Pixel eine Farbe definiert. Dabei eignen sich die Indizes des Bilder allerdings nur begrenzt zur Beschreibung von Positionen auf dem Bild. Existieren beispielsweise mehrere Inhaltsgleiche Bilder mit unterschiedlicher Abtastrate (Auflösung), so beschreiben die selben Indizes auf jedem Bild eine inhaltlich andere Position. Aus diesem Grund werden in vielen Situationen \emph{normalisierte Bildkoordinaten} verwendet. Das Ziel der normalisierten Bildkoordinaten ist es, Positionen auf einem Bild unabhängig von der Auflösung ausdrücken zu können.
+Ein \emph{digitales Bild} kann als eine zweidimensionalen Matrix dargestellt werden, die für jeden Pixel eine Farbe definiert. Dabei eignen sich die Indizes des Bilder allerdings nur begrenzt zur Beschreibung von Positionen auf dem Bild. Existieren beispielsweise mehrere Inhaltsgleiche Bilder mit unterschiedlicher Abtastrate (Auflösung), so beschreiben die selben Indizes auf jedem Bild eine inhaltlich andere Position. Aus diesem Grund werden in vielen Situationen \emph{normalisierte Bildkoordinaten} verwendet. Das Ziel der normalisierten Bildkoordinaten ist es, Positionen auf einem Bild unabhängig von der Auflösung ausdrücken zu können.
 
-Als normalisierte Bildkoordinaten wird hier ein Tupel aus zwei reellen Zahlen $(u,v)$ verwendet. $v$ ist dabei aus dem Intervall $[-1,1]$. Der Wertebereich von $u$ ergibt sich entsprechend aus dem Seitenverhältnis $r$: $u \in [-r,r]$. Dabei sollte erwähnt werden, dass normalisierte Bildkoordinaten je nach Anwendungsgebiet auch anders definiert werden können. So kann es je nach Sachverhalt sinnvoll sein, dass für $u$ ebenfalls $u \in [-1,1]$ gilt oder, dass sich $u$ und $v$ im Wertebereich $[0,1]$ befinden.
+Als normalisierte Bildkoordinaten wird hier ein Tupel aus zwei reellen Zahlen $(u,v)$ verwendet. Dabei ist $v$ aus dem Intervall $[-1,1]$. Der Wertebereich von $u$ ergibt sich entsprechend aus dem Seitenverhältnis $r$: $u \in [-r,r]$. Dabei sollte erwähnt werden, dass normalisierte Bildkoordinaten je nach Anwendungsgebiet auch anders definiert werden können. So kann es je nach Sachverhalt sinnvoll sein, dass für $u$ ebenfalls $u \in [-1,1]$ gilt oder, dass sich $u$ und $v$ im Wertebereich $[0,1]$ befinden.
 
 Um aus den Indizes $(i,j)$ eines Pixels die normalisierten Bildkoordinaten $(u,v)$ zu berechnen, kann hier folgende Gleichung verwendet werden:
 \[ \begin{pmatrix}
@@ -112,7 +112,7 @@ Mit der Bildauflösung $(s_x, s_y)$ und dem Seitenverhältnis $r = s_x/s_y$.
 \subsection{Perspektivische Projektion}
 \label{sec:perspective}
 
-Bei einer \emph{perspektivischen Projektion}, oder auch \emph{Zentralprojektion}, werden dreidimensionale Punkte auf eine \emph{Bildebene} projiziert. Die Funktion entspricht dabei dem Modell der \emph{Lochkamera} und stellt eine Vereinfachung vieler realen Kameras da. Eine perspektivische Projektion wird durch den Augpunkt $O$ und die Bildebene definiert. Um einen Objektpunkt $X$ auf einen Punkt $X'$ in die Bildebene zu projizieren, wird der Schnittpunkt des \emph{Projektionsstrahls} durch $X$ und $O$ mit der Bildebene bestimmt. Der projizierte Punkt $X'$ wird auch \emph{Bildpunkt} genannt. Die Bildebene wird oft durch eine Blickrichtung der \emph{Kamera} und eine \emph{Brennweite} $f$ definiert. Die Blickrichtung der Kamera entspricht dabei der Normalen der Bildebenen und $f$ ist die Entfernung der Bildebene vom Augpunkt in Blickrichtung. In Abbildung~\ref{fig:perspective} wird die perspektivische Projektion veranschaulicht.
+Bei einer \emph{perspektivischen Projektion} (Abbildung~\ref{fig:perspective}), oder auch \emph{Zentralprojektion}, werden dreidimensionale Punkte auf eine \emph{Bildebene} projiziert. Die Funktion entspricht dabei dem Modell der \emph{Lochkamera} und stellt eine Vereinfachung vieler realen Kameras da. Eine perspektivische Projektion wird durch den Augpunkt $O$ und die Bildebene definiert. Um einen Objektpunkt $X$ auf einen Punkt $X'$ in die Bildebene zu projizieren, wird der Schnittpunkt des \emph{Projektionsstrahls} durch $X$ und $O$ mit der Bildebene bestimmt. Der projizierte Punkt $X'$ wird auch \emph{Bildpunkt} genannt. Die Bildebene wird oft durch eine Blickrichtung der \emph{Kamera} und eine \emph{Brennweite} $f$ definiert. Die Blickrichtung der Kamera entspricht dabei der Normalen der Bildebenen und $f$ ist die Entfernung der Bildebene vom Augpunkt in Blickrichtung.
 
 \begin{figure}
 	\centering
@@ -177,12 +177,12 @@ Die durch das Setup gegebenen Werte:
 		Position des Linienprojektors.\\[0.5em]
 	$f$                &
 		Brennweite
-		(unter der Annahme, dass das Bild auf der Bildebene zwei Einheiten hoch ist)\\[0.5em]
+		\\[0.5em]
 	$\theta$,$\delta$  &
 		Winkel zur Ausrichtung der Ebene $L$. Die Ausgangslage der Ebene ist parallel zur $y$-$z$-Ebene. Die Ebene wird zunächst mit dem Winkel $\theta$ um den Vektor $(0,0,-1)^T$  im mathematisch positiven Drehsinn gedreht. Danach mit dem Winkel $\delta$ um den Vektor $(-\sin(\theta), -\cos(\theta), 0)^T$. Siehe auch Abbildung~\ref{fig:triangulation_skew_pitch}.
 \end{tabular}
 
-Zudem ist der Bildpunkt durch normalisierte Bildkoordinaten $(u, v)$ gegeben. Da die Brennweite $f$ auf eine Bildhöhe von zwei Einheiten angepasst ist, gilt wie in Abschnitt~\ref{sec:perspective} beschrieben $X'(u, v, -f)$.
+Zudem ist der Bildpunkt durch normalisierte Bildkoordinaten $(u, v)$ gegeben. Die Brennweite $f$ ist auf eine Bildhöhe von zwei Einheiten angepasst. Damit gilt wie in Abschnitt~\ref{sec:perspective} beschrieben $X'(u, v, -f)$.
 
 \subsubsection{Bestimmung der Entfernung}
 
@@ -198,7 +198,7 @@ Um diese Entfernung zu bestimmen, wird das geometrische Modell des Setups verein
 \end{pmatrix} \right\rbrace \]
 vorgenommen, um im folgenden nur die ersten beiden Dimensionen zu betrachten. Der konstruierte zweidimensionale Raum hat die besondere Eigenschaft, dass von der Ebene $L$ und der $x$-$y$-Ebene nur die Geraden $a$ und $c$ übrig bleiben. Eine weitere besondere Eigenschaft ist, dass der Abstand zwischen $X$ und der $x$-$y$-Ebene direkt von einen in den anderen Raum übernommen werden kann. So entspricht $h$ im vereinfachten Modell der 2. Koordinate von $X$. Ein beliebiger Vektor $(v_1, v_2, v_3)^T$ im dreidimensionalen Model entspricht im zweidimensionalen Modell dem Vektor $(\cos(\theta) \cdot v_1 - \sin(\theta) \cdot v_2, -v_3)^T$.
 
-Die Geraden $a$ und $c$ bilden zusammen mit der Geraden $b$, welche durch die Punkte $O$, $X$ und $X'$ verläuft, ein Dreieck, dessen Eckpunkte $A$, $C = X$ und $B = O$ sind. Dies ist auch nochmal in Abbildung~\ref{fig:triangulation2d} zu sehen. Angenommen die Koordinaten von $P$ und $X'$ in der zweidimensionalen Darstellung sind $(p_1,p_2)$ und $(x'_1, x'_2)$, so können die Winkel $\alpha$ und $\beta$ und die Länge der Strecke zwischen $A$ und $B$ wie folgt berechnet werden:
+Die Geraden $a$ und $c$ bilden zusammen mit der Geraden $b$, welche durch die Punkte $O$, $X$ und $X'$ verläuft, ein Dreieck, dessen Eckpunkte $A=O$, $B$ und $C = X$ sind. Dies ist auch nochmal in Abbildung~\ref{fig:triangulation2d} zu sehen. Angenommen die Koordinaten von $P$ und $X'$ in der zweidimensionalen Darstellung sind $(p_1,p_2)$ und $(x'_1, x'_2)$, so können die Winkel $\alpha$ und $\beta$ und die Länge der Strecke zwischen $A$ und $B$ wie folgt berechnet werden:
 \begin{align*}
 	\alpha &= \frac{\pi}{2} - \arctan\left(\frac{x'_1}{x'_2}\right)\\
 	\beta &= \frac{\pi}{2} + \delta\\
@@ -222,17 +222,17 @@ u \\ v \\ -f
 
 \subsection{Hardware}
 
-Die Hardware besteht aus einer Webcam und einem Low Cost Linienlaser, der auf einem Modellbauservo montiert ist. Laser und Servo werden von einem Mikrocontroller gesteuert, welcher wiederum über USB mit der Software kommuniziert. Der Aufbau ist in der Abbildung~\ref{fig:hardware} zu sehen. Alle diese Komponenten sind zusammen für unter 100\,€ erhältlich.
+Die Hardware besteht aus einer Webcam und einem günstigen Linienlaser, der auf einem Modellbauservo montiert ist. Laser und Servo werden von einem Mikrocontroller gesteuert, welcher wiederum über USB mit der Software kommuniziert. Der Aufbau ist in der Abbildung~\ref{fig:hardware} zu sehen.
 
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[width=\textwidth]{includes/hardware_schematic}
+		\includegraphics[height=4.5cm]{includes/hardware_schematic}
 		\caption{schematische Darstellung}
 	\end{subfigure}
 	\hfill
-	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[width=\textwidth]{includes/hardware}
+	\begin{subfigure}{0.4\textwidth}
+		\includegraphics[height=4.5cm]{includes/hardware}
 		\caption{reale Hardware}
 	\end{subfigure}
 	\caption{Aufbau der Hardware}
@@ -292,7 +292,7 @@ Nach Programmstart wird als erstes die Funktion \texttt{Configuration::init(int,
 	\label{fig:software_controller}
 \end{figure}
 
-Der Ablauf, der von den verschiedenen Spezialisierungen von \texttt{Controller} vorgegeben wird, verfolgt dabei immer einen ähnlichen Ablauf, wie er auch in Abbildung~\ref{fig:software_controller} dargestellt wird. Der Controller durchläuft eine Schleife und beschafft sich in jedem Schleifendurchlauf die aktuelle Gerätekonfiguration (\texttt{DeviceConfiguration}), eine Aufnahme durch das entsprechende Setup und ggf. ein aktuelles Referenzbild. Danach übergibt es die Steuerung an die Linienerkennung (\texttt{LightBarDetextor}) und dessen Ergebnis wird an den Rekonstruktionsalgorithmus (\texttt{Reconstructor}) übergeben.
+Der Ablauf, der von den verschiedenen Spezialisierungen von \texttt{Controller} vorgegeben wird, verfolgt dabei immer einen ähnlichen Ablauf, wie er auch in Abbildung~\ref{fig:software_controller} dargestellt wird. Der Controller durchläuft eine Schleife und beschafft sich in jedem Schleifendurchlauf die aktuelle Gerätekonfiguration (\texttt{DeviceConfiguration}), eine Aufnahme durch das entsprechende Setup und ggf. ein aktuelles Referenzbild. Danach übergibt es die Steuerung an die Linienerkennung (\texttt{LightBarDetector}) und dessen Ergebnis wird an den Rekonstruktionsalgorithmus (\texttt{Reconstructor}) übergeben.
 
 Es existieren drei Spezialisierungen von \texttt{Controller}. Die einfachste Implementierung ist der \texttt{CommandController}, welcher Standardmäßig verwendet wird. Die Klasse liest die Standardeingabe oder die in den Argumenten definierte Datei Zeilenweise aus. Eine Zeile entspricht dabei einem Befehl, welcher ausgewertet und ausgeführt wird, bevor sich das Programm der nächsten Zeile zuwendet. In der Tabelle~\ref{tab:commands} können alle Befehle nachgelesen werden.
 
@@ -340,7 +340,7 @@ Die Bewegung der Kamera bei Verwendung vom \texttt{TranslateScanController} wird
 
 \subsubsection{Ansteuerung des Mikrocontrollers}
 
-Die Software steuert den Mikrocontroller über USB, wobei sich dieser als virtuellen COM-Port ausgibt. Zur Kommunikation wird ein einfaches Protokoll verwendet, das zwei Byte lange Nachrichten an den Mikrocontroller sendet. Das erste Byte gibt den Befehl an, das zweite den Parameter. Die möglichen Befehle werden in der Tabelle~\ref{tab:protocol} aufgeführt.
+Die Software steuert den Mikrocontroller über USB an, wobei sich dieser als virtuellen COM-Port ausgibt. Zur Kommunikation wird ein einfaches Protokoll verwendet, das zwei Byte lange Nachrichten an den Mikrocontroller sendet. Das erste Byte gibt den Befehl an, das zweite den Parameter. Die möglichen Befehle werden in der Tabelle~\ref{tab:protocol} aufgeführt.
 
 \begin{table}
 	\centering
@@ -376,7 +376,7 @@ Die Linienerkennung arbeitet in zwei Schritten. Zuerst wird ein Binärbild erzeu
 Als erstes wird die Differenz zwischen der Aufnahme und dem zugehörigen Referenzbild berechnet.
 Liegt die Differenz für einen der Kanäle über einem bestimmten Schwellenwert (75), so wird davon ausgegangen, dass der Pixel zur Linie gehört.
 
-Das Ergebnis ist ein Binärbild, mit dessen Hilfe im zweiten Schritt das \texttt{Line}-Objekt gefüllt wird. Dafür werden die Pixel das Binärbildes zeilenweise durchlaufen. Sobald ein Pixel gefunden wurde, der vermeidlich zur Linie gehört, wird dieser mit allen anschließenden markierten Pixel in der selben Zeile als ein Punkt auf Linie betrachtet. Die Position wird als Abtastung der Linie aufgenommen, wobei die Anzahl der hintereinander als Linie markierten Pixel als die Breite der Linie aufgefasst wird.
+Das Ergebnis ist ein Binärbild, mit dessen Hilfe im zweiten Schritt das \texttt{Line}-Objekt gefüllt wird. Dafür werden die Pixel das Binärbildes zeilenweise durchlaufen. Sobald ein Pixel gefunden wurde, der vermeintlich zur Linie gehört, wird dieser mit allen anschließenden markierten Pixel in der selben Zeile als ein Punkt auf Linie betrachtet. Die Position wird als Abtastung der Linie aufgenommen, wobei die Anzahl der hintereinander als Linie markierten Pixel als die Breite der Linie aufgefasst wird.
 
 \subsubsection{Farbfilter (Free)}
 
@@ -393,9 +393,9 @@ Der zweite Schritt des Verfahrens verläuft Analog zu Diff.
 \subsubsection{Erweiterter Farbfilter (Peak)}
 
 \emph{Peak} ist das experimentellste der Verfahren und wurde noch nicht genügend getestet und optimiert. Es basiert auf dem Verfahren Free.
-Anstatt einen Mittelwerte über dem gesamten Bild zu berechnen, wird für jeden Pixel ein eigener Mittelwert über einer eigenen rechteckige Umgebung bestimmt.
-Zusammen mit der Farbe des Pixels $c$ wird aus dem Mittelwert $m$ eine Beurteilung $e \in [0, 1]$ des Punktes berechnet. Um so größer $e$ ist, desto wahrscheinlicher soll der Pixel zur Linie gehören. Ist $e$ größer als ein festgelegter Schwellenwert (0.6), wird davon ausgegangen, dass der Punkt zur Linie gehört.
+Anstatt die Mittelwerte über den gesamten Bild zu berechnen, wird hier ein Mittelwert in einer kleinen rechteckigen Umgebung jedes Pixels bestimmt. Aus diesem Mittelwert $a$ und der Farbe des Pixels $c$ wird eine Wahrscheinlichkeit $e \in [0, 1]$ des Punktes berechnet mit der der Pixel zur Linie gehört. Wenn $e$ größer ist, als ein festgelegter Grenzwert $t=0.6$, wird davon ausgegangen, dass der Punkt zur Linie gehört.
 Zur Berechnung von $e$ werden dabei zunächst die Zwischenergebnisse $r_{r/g/b}$ berechnet, um diese dann gewichtet in $e$ einzubringen:
+
 \begin{align*}
 	r_i &= \begin{cases}
 	0.5                         &\text{, falls } a_i = 255\\
@@ -404,7 +404,7 @@ Zur Berechnung von $e$ werden dabei zunächst die Zwischenergebnisse $r_{r/g/b}$
 	e &= \max(0,6 \cdot r_r + 0,2 \cdot r_g + 0,2 \cdot r_b, 0)
 \end{align*}
 
-Auch der zweite Schritt des Verfahrens unterscheidet sich von den anderen Linienerkennungen. Dabei wird auf dem gefilterten Bild ein \emph{Gaußscher Weichzeichner} angewendet, um danach nur Pixel als Bestandteil der Linie zu markieren, die ein lokales Maximum in einer Dimension annehmen. Diese Änderung soll es ermöglichen, auch mit horizontalen oder anders rotierten Linien zu arbeiten.
+Danach wird auf dem gefilterten Bild ein \emph{Gaußfilter} angewendet, um danach nur Pixel als Bestandteil der Linie zu markieren, die ein lokales Maximum in einer Dimension annehmen. Diese Änderung soll es ermöglichen, auch mit horizontalen oder anders rotierten Linien zu arbeiten.
 
 Ergänzend wenden wir bei dieser Methode einen weiteren Schritt an. Dabei werden alle Markierungen entfernt, bei denen der Pixel keine markierten Nachbarpixel besitzt, da Pixel auf der Linie in der Regel auch Nachbarpixel haben sollten, die ebenfalls auf der Linie liegen.
 
