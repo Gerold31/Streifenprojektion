@@ -114,7 +114,7 @@ Mit der Bildauflösung $(s_x, s_y)$ und dem Seitenverhältnis $r = s_x/s_y$.
 \subsection{Perspektivische Projektion}
 \label{sec:perspective}
 
-Bei einer \emph{perspektivischen Projektion} (Abbildung~\ref{fig:perspective}), oder auch \emph{Zentralprojektion}, werden dreidimensionale Punkte auf eine \emph{Bildebene} projiziert. Die Funktion entspricht dabei dem Modell der \emph{Lochkamera} und stellt eine Vereinfachung vieler realen Kameras da. Eine perspektivische Projektion wird durch den Augpunkt $O$ und die Bildebene definiert. Um einen Objektpunkt $X$ auf einen Punkt $X'$ in die Bildebene zu projizieren, wird der Schnittpunkt des \emph{Projektionsstrahls} durch $X$ und $O$ mit der Bildebene bestimmt. Der projizierte Punkt $X'$ wird auch \emph{Bildpunkt} genannt. Die Bildebene wird oft durch eine Blickrichtung der \emph{Kamera} und eine \emph{Brennweite} $f$ definiert. Die Blickrichtung der Kamera entspricht dabei der Normalen der Bildebenen und $f$ ist die Entfernung der Bildebene vom Augpunkt in Blickrichtung.
+Bei einer \emph{perspektivischen Projektion} (Abbildung~\ref{fig:perspective}), oder auch \emph{Zentralprojektion}, werden dreidimensionale Punkte auf eine \emph{Bildebene} projiziert. Die Funktion entspricht dabei dem Modell der \emph{Lochkamera} und stellt eine Vereinfachung vieler realen Kameras da. Eine perspektivische Projektion wird durch den Brennpunkt $O$ und die Bildebene definiert. Um einen Objektpunkt $X$ auf einen Punkt $X'$ in die Bildebene zu projizieren, wird der Schnittpunkt des \emph{Projektionsstrahls} durch $X$ und $O$ mit der Bildebene bestimmt. Der projizierte Punkt $X'$ wird auch \emph{Bildpunkt} genannt. Die Bildebene wird oft durch eine Blickrichtung der \emph{Kamera} und eine \emph{Brennweite} $f$ definiert. Die Blickrichtung der Kamera entspricht dabei der Normalen der Bildebenen und $f$ ist die Entfernung der Bildebene vom Brennpunkt in Blickrichtung.
 
 \begin{figure}
 	\centering
@@ -129,9 +129,9 @@ Bei einer \emph{perspektivischen Projektion} (Abbildung~\ref{fig:perspective}), 
 	\label{fig:perspective}
 \end{figure}
 
-Oft wird die perspektivische Projektion in Verbindung mit Bildern, wie sie in Abschnitt~\ref{sec:imagecoordinates} beschrieben werden, verwendet und nicht mit konkreten Bildpunkten. Dazu muss definiert werden, wo sich das Bild auf der Bildebene befindet. Eine offensichtliche Möglichkeit ist die Angabe der Höhe und Breite des Bildes auf der Bildebene, unter der Annahme, dass der am nächsten liegende Punkt der Bildebene zum Augpunkt in der Mitte des Bildes liegt. Wenn das Seitenverhältnis des Bildes beibehalten wird, reicht auch die Angabe der Höhe. Meistens ist es nicht relevant, wo sich die Bildebene genau befindet, sofern jedem Punkt eine Projektionsgerade zugeordnet wird, daher kann die Brennweite nach belieben verändert werden, solange auch die Bildhöhe entsprechend angepasst wird. Aus diesem Grund reicht es oft, nur die Brennweite als Parameter für die Projektion zu nutzen, sofern die Bildhöhe zuvor fest definiert wurde.
+Oft wird die perspektivische Projektion in Verbindung mit Bildern, wie sie in Abschnitt~\ref{sec:imagecoordinates} beschrieben werden, verwendet und nicht mit konkreten Bildpunkten. Dazu muss definiert werden, wo sich das Bild auf der Bildebene befindet. Eine offensichtliche Möglichkeit ist die Angabe der Höhe und Breite des Bildes auf der Bildebene, unter der Annahme, dass der am nächsten liegende Punkt der Bildebene zum Brennpunkt in der Mitte des Bildes liegt. Wenn das Seitenverhältnis des Bildes beibehalten wird, reicht auch die Angabe der Höhe. Meistens ist es nicht relevant, wo sich die Bildebene genau befindet, sofern jedem Punkt eine Projektionsgerade zugeordnet wird, daher kann die Brennweite nach belieben verändert werden, solange auch die Bildhöhe entsprechend angepasst wird. Aus diesem Grund reicht es oft, nur die Brennweite als Parameter für die Projektion zu nutzen, sofern die Bildhöhe zuvor fest definiert wurde.
 
-Angenommen das Bild ist zwei Einheiten hoch, der Augpunkt ist $O(0,0,0)$ und die Kamera schaut in Richtung der negativen $z$-Achse. Dann kann aus den normalisierten Bildkoordinaten $(u,v)$ der entsprechende Bildpunkt $X'$ ganz einfach über die folgende Gleichung bestimmt werden:
+Angenommen das Bild ist zwei Einheiten hoch, der Brennpunkt ist $O(0,0,0)$ und die Kamera schaut in Richtung der negativen $z$-Achse. Dann kann aus den normalisierten Bildkoordinaten $(u,v)$ der entsprechende Bildpunkt $X'$ ganz einfach über die folgende Gleichung bestimmt werden:
 \[ \vec{x'} = \begin{pmatrix}
 u \\ v \\ -f
 \end{pmatrix} \]
@@ -190,7 +190,7 @@ Das Prinzip der Triangulation ist es aus zwei Eckpunkten und den Innenwickeln ei
 	\caption{Modell des Setups}
 \end{figure}
 
-Als Modell für die Triangulation wird die Abstraktion, wie sie auf Abbildung~\ref{fig:triangulation3d} zu sehen ist, verwendet. Es existiert eine perspektivischen Projektion eines Objektpunktes $X$ auf eine Bildebene $B$, wobei die Blickrichtung entlang der negativen $z$-Achse verläuft. Der Augpunkt $O$ liegt dabei im Koordinatenursprung. Der Bildpunkt wird mit $X'$ bezeichnet. Das projizierte Licht wird durch eine Ebene $L$ dargestellt, die die Position des Projektors, das heißt den Projektionspunkt $P$, und den Objektpunkt $X$ schneidet.
+Als Modell für die Triangulation wird die Abstraktion, wie sie auf Abbildung~\ref{fig:triangulation3d} zu sehen ist, verwendet. Es existiert eine perspektivischen Projektion eines Objektpunktes $X$ auf eine Bildebene $B$, wobei die Blickrichtung entlang der negativen $z$-Achse verläuft. Der Brennpunkt $O$ liegt dabei im Koordinatenursprung. Der Bildpunkt wird mit $X'$ bezeichnet. Das projizierte Licht wird durch eine Ebene $L$ dargestellt, die die Position des Projektors, das heißt den Projektionspunkt $P$, und den Objektpunkt $X$ schneidet.
 
 Die durch das Setup gegebenen Werte:
 
