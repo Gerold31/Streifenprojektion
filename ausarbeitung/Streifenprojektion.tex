@@ -498,7 +498,7 @@ Zur Berechnung von $p$ werden dabei zunächst die Zwischenergebnisse $r_{r/g/b}$
 
 Im zweiten wird auf dem gefilterten Bild ein \emph{Gaußfilter} angewendet, um danach nur Pixel als Bestandteil der Linie zu markieren, die ein lokales Maximum in einer Dimension annehmen. Diese Änderung soll es ermöglichen, auch mit horizontalen oder anders rotierten Linien zu arbeiten.
 
-Ergänzend wenden wir bei dieser Methode einen weiteren Schritt an. Dabei werden alle Markierungen entfernt, bei denen der Pixel keine markierten Nachbarpixel besitzt, da Pixel auf der Linie in der Regel auch Nachbarpixel haben sollten, die ebenfalls auf der Linie liegen.
+Ergänzend wird bei dieser Methode ein weiterer Schritt angewendet. Dabei werden alle Markierungen entfernt, bei denen der Pixel keine markierten Nachbarpixel besitzt, da Pixel auf der Linie in der Regel auch Nachbarpixel haben sollten, die ebenfalls auf der Linie liegen.
 
 \subsection{Rekonstruktion}
 
@@ -902,10 +902,10 @@ Die Peak-Linienerkennung liefert schlechtere Ergebnisse wenn die Szene heller be
 \label{sec:summary}
 
 Es gibt viele Möglichkeiten ein Objekt zu vermessen.
-In unserem Semesterprojekt haben wir uns mit der Streifenlichtprojektion beschäftigt, eine Umsetzung entworfen und deren Ergebnisse ausgewertet.
-Wir steuern mit Hilfe eines Mikrocontrollers einen Linienlaser an, mit dem wir eine Linie in die Szene projizieren.
-Mit einer Webcam nehmen wir die Szene auf und geben die Aufnahmen an die Verarbeitungssoftware weiter.
-Für diese wurde drei Verfahren zur Linienerkennung implementiert und deren Leistung ausgewertet.
+In diesem Semesterprojekt ging es um die Streifenlichtprojektion. Es wurde eine Umsetzung entworfen und deren Ergebnisse ausgewertet.
+Mit Hilfe eines Mikrocontrollers wurde ein Linienlaser angesteuert, der eine Linie in eine Szene projiziert.
+Eine Webcam nimmt die Szene auf und gibt die Aufnahmen an die Verarbeitungssoftware weiter.
+Für diese wurden drei Verfahren zur Linienerkennung implementiert und deren Leistung ausgewertet.
 
 Aus den Positionen im Bild kann als nächstes die Entfernung der Objektpunkte berechnet werden.
 Dazu werden mit Hilfe bekannter Größen aus dem Setup und der Triangulation die 3-D-Koordinaten für jeden Punkt der Linie berechnet.
@@ -916,9 +916,9 @@ Die Ergebnisse zeigen, dass die Diff-Linienerkennung Probleme mit spiegelnden Ob
 Diese Effekte können mit verschiedenen Beleuchtungen der Szene verstärkt/abgeschwächt werden.
 Mit der roten Oberfläche kommen alle drei Ansätze relativ gut zurecht, wohingegen sie alle bei der gelben Oberfläche schlechtere Ergebnisse liefern.
 Bei Tests mit anderen Farben unterscheiden sich die Ansätze zum Teil sehr stark.
-Alles in allem lässt sich aus den Tests entnehmen, dass die Diff-Linienerkennung robuster gegen Farbvariationen als Free oder Peak.
+Alles in allem lässt sich aus den Tests entnehmen, dass die Diff-Linienerkennung robuster gegen Farbvariationen als Free oder Peak ist.
 
-Zusammenfassend kann man sagen, dass unsere Umsetzung der Messmethode Streifenlichtprojektion für die investierten Ressourcen gute Ergebnisse liefert und dabei mit günstigem Equipment auskommt.
+Zusammenfassend kann man sagen, dass die Umsetzung der Messmethode Streifenlichtprojektion für die investierten Ressourcen gute Ergebnisse liefert und dabei mit günstigem Equipment auskommt.
 Um die Ergebnisse weiter zu verbessern sollte ein präziseres Setup verwendet werden, das genauer vermessen werden kann und resistenter gegenüber physischen Störungen ist. Außerdem ist die Linienerkennung noch instabil, das könnte durch eine Kombination der Verfahren verbessert werden.
 
 % ---------------------------------------------------------------------------- %
