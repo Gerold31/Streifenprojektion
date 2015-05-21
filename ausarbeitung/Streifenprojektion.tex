@@ -393,16 +393,60 @@ Die Linienerkennung arbeitet in zwei Schritten. Zuerst wird ein Binärbild erzeu
 
 \subsubsection{Differenzbildung (Diff)}
 
+\begin{figure}
+	\centering
+
+	\begin{subfigure}{0.23\textwidth}
+		\includegraphics[width=\textwidth]{includes/line_line.png}
+		\caption{Ausgangsbild}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.23\textwidth}
+		\includegraphics[width=\textwidth]{includes/line_ref.png}
+		\caption{Referenzbild}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.23\textwidth}
+		\includegraphics[width=\textwidth]{includes/line_diff.png}
+		\caption{Differenz}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.23\textwidth}
+		\includegraphics[width=\textwidth]{includes/line_diff_filtered.png}
+		\caption{Gefiltert}
+	\end{subfigure}
+
+	\caption{Zwischenergebnisse der Linienerkennung Diff}
+	\label{fig:diff}
+\end{figure}
+
 \emph{Diff} benötigt zu jeder zu analysierenden Aufnahme ein Referenzbild; eine weitere Aufnahme der Szene, auf der die Linie nicht zu sehen ist. Das Referenzbild kann einmal zu Beginn aufgenommen werden, oder zwischen den einzelnen Aufnahmen der Linie. Durch die wiederholte Aufnahme des Referenzbildes wird das Verfahren toleranter gegenüber Beleuchtungsänderungen der Szene.
-Als erstes wird die Differenz zwischen der Aufnahme und dem zugehörigen Referenzbild berechnet.
+Die Zwischenergebnisse des Verfahrens können in Abbildung~\ref{fig:diff} betrachtet werden. Als erstes wird die Differenz zwischen der Aufnahme und dem zugehörigen Referenzbild berechnet.
 Liegt die Differenz für einen der Kanäle über einem bestimmten Schwellenwert (75), so wird davon ausgegangen, dass der Pixel zur Linie gehört.
 
 Das Ergebnis ist ein Binärbild, mit dessen Hilfe im zweiten Schritt das \texttt{Line}-Objekt gefüllt wird. Dafür werden die Pixel das Binärbildes zeilenweise durchlaufen. Sobald ein Pixel gefunden wurde, der vermeintlich zur Linie gehört, wird dieser mit allen anschließenden markierten Pixel in der selben Zeile als ein Punkt auf Linie betrachtet. Die Position wird als Abtastung der Linie aufgenommen, wobei die Anzahl der hintereinander als Linie markierten Pixel als die Breite der Linie aufgefasst wird.
 
 \subsubsection{Farbfilter (Free)}
 
+\begin{figure}
+	\centering
+
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[width=\textwidth]{includes/line_line.png}
+		\caption{Ausgangsbild}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[width=\textwidth]{includes/line_free.png}
+		\caption{Gefiltert}
+	\end{subfigure}
+
+	\caption{Zwischenergebnisse der Linienerkennung Free}
+	\label{fig:free}
+\end{figure}
+
 Bei \emph{Free} wird zunächst für jeden Farbkanal der Durchschnitt über das gesamte Bild berechnet.
-Auf Basis der Mittelwerte $m_{r/g/b}$ wird für jeden Farbkanal ein Schwellenwert $s_{r/g/b}$ bestimmt. Ist ein Kanal eines Pixels kleiner als der entsprechende Schwellenwert, dann gehört der Pixel nicht zur Linie.
+Auf Basis der Mittelwerte $m_{r/g/b}$ wird für jeden Farbkanal ein Schwellenwert $s_{r/g/b}$ bestimmt. Ist ein Kanal eines Pixels kleiner als der entsprechende Schwellenwert, dann gehört der Pixel nicht zur Linie. Das Ergebnis ist in Abbildung~\ref{fig:free} zu sehen.
 Unter der Annahme, dass die Werte der Farbkanäle in dem Intervall $[0,255]$ liegen, wird der Schwellenwert dabei wie folgt berechnet:
 \begin{align*}
 	s_r &= m_r + \frac{255 - m_r}{2}\\
@@ -413,8 +457,35 @@ Der zweite Schritt des Verfahrens verläuft Analog zu Diff.
 
 \subsubsection{Erweiterter Farbfilter (Peak)}
 
+\begin{figure}
+	\centering
+
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[width=\textwidth]{includes/line_line.png}
+		\caption{Ausgangsbild}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[width=\textwidth]{includes/line_peak_avg.png}
+		\caption{Mittelwerte}
+	\end{subfigure}
+
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[width=\textwidth]{includes/line_peak_eval.png}
+		\caption{Wahrscheinlichkeit}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[width=\textwidth]{includes/line_peak_filtered.png}
+		\caption{Gefiltert}
+	\end{subfigure}
+
+	\caption{Zwischenergebnisse der Linienerkennung Peak}
+	\label{fig:peak}
+\end{figure}
+
 \emph{Peak} ist das experimentellste der Verfahren und wurde noch nicht genügend getestet und optimiert. Es basiert auf dem Verfahren Free.
-Anstatt einen Mittelwerte über dem gesamten Bild zu berechnen, wird ein Mittelwert in einer kleinen rechteckigen Umgebung jedes Pixels bestimmt. Aus diesem Mittelwert $m$ und der Farbe des Pixels $c$ wird eine Wahrscheinlichkeit $p \in [0, 1]$ des Punktes berechnet mit der der Pixel zur Linie gehört. Wenn $p$ größer ist, als ein festgelegter Grenzwert, wird davon ausgegangen, dass der Punkt zur Linie gehört.
+Anstatt einen Mittelwerte über dem gesamten Bild zu berechnen, wird ein Mittelwert in einer kleinen rechteckigen Umgebung jedes Pixels bestimmt. Aus diesem Mittelwert $m$ und der Farbe des Pixels $c$ wird eine Wahrscheinlichkeit $p \in [0, 1]$ des Punktes berechnet mit der der Pixel zur Linie gehört. Wenn $p$ größer ist, als ein festgelegter Grenzwert, wird davon ausgegangen, dass der Punkt zur Linie gehört. In Abbildung~\ref{fig:peak} sind die Ergebnisse anhand eines Beispiels veranschaulicht.
 Zur Berechnung von $p$ werden dabei zunächst die Zwischenergebnisse $r_{r/g/b}$ berechnet, um diese gewichtet in $p$ einzubringen:
 \begin{align*}
 	r_i &= \begin{cases}
