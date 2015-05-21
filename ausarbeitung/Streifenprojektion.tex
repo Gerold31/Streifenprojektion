@@ -210,7 +210,7 @@ Zudem ist der Bildpunkt durch normalisierte Bildkoordinaten $(u, v)$ gegeben. Di
 
 \subsubsection{Bestimmung der Entfernung}
 
-Als \emph{Entfernung des Objektpunktes} $h$ wird die negierte 3. Koordinate von $X$ bezeichnet.
+Als \emph{Entfernung des Objektpunktes} $h$ wird die negierte dritte Koordinate von $X$ bezeichnet.
 
 Um diese Entfernung zu bestimmen, wird das geometrische Modell des Setups vereinfacht. Als erstes wird ein Basiswechsel auf die Orthogonalbasis
 \[ \left\lbrace \begin{pmatrix}
@@ -220,7 +220,7 @@ Um diese Entfernung zu bestimmen, wird das geometrische Modell des Setups verein
 \end{pmatrix}, \begin{pmatrix}
 \sin(\theta) \\ \cos(\theta) \\ 0
 \end{pmatrix} \right\rbrace \]
-vorgenommen, um im folgenden nur die ersten beiden Dimensionen zu betrachten. Der konstruierte zweidimensionale Raum hat die besondere Eigenschaft, dass von der Ebene $L$ und der $x$-$y$-Ebene nur die Geraden $a$ und $c$ übrig bleiben. Eine weitere besondere Eigenschaft ist, dass der Abstand zwischen $X$ und der $x$-$y$-Ebene direkt von einen in den anderen Raum übernommen werden kann. So entspricht $h$ im vereinfachten Modell der 2. Koordinate von $X$. Ein beliebiger Vektor $(v_1, v_2, v_3)^T$ im dreidimensionalen Model entspricht im zweidimensionalen Modell dem Vektor $(\cos(\theta) \cdot v_1 - \sin(\theta) \cdot v_2, -v_3)^T$.
+vorgenommen, um im folgenden nur die ersten beiden Dimensionen zu betrachten. Der konstruierte zweidimensionale Raum hat die besondere Eigenschaft, dass von der Ebene $L$ und der $x$-$y$-Ebene nur die Geraden $a$ und $c$ übrig bleiben. Eine weitere besondere Eigenschaft ist, dass der Abstand zwischen $X$ und der $x$-$y$-Ebene direkt von einen in den anderen Raum übernommen werden kann. So entspricht $h$ im vereinfachten Modell der zweiten Koordinate von $X$. Ein beliebiger Vektor $(v_1, v_2, v_3)^T$ im dreidimensionalen Model entspricht im zweidimensionalen Modell dem Vektor $(\cos(\theta) \cdot v_1 - \sin(\theta) \cdot v_2, -v_3)^T$.
 
 Die Geraden $a$ und $c$ bilden zusammen mit der Geraden $b$, welche durch die Punkte $O$, $X$ und $X'$ verläuft, ein Dreieck, dessen Eckpunkte $A=O$, $B$ und $C = X$ sind. Dies ist auch nochmal in Abbildung~\ref{fig:triangulation2d} zu sehen. Angenommen die Koordinaten von $P$ und $X'$ in der zweidimensionalen Darstellung sind $(p_1,p_2)$ und $(x'_1, x'_2)$, so können die Winkel $\alpha$ und $\beta$ und die Länge der Strecke zwischen $A$ und $B$ wie folgt berechnet werden:
 \begin{align*}
@@ -645,7 +645,7 @@ Es fällt auf, dass sich die Werte zwischen verschiedenen Messungen kaum untersc
 Wie man in Abbildung \ref{fig:cols} sehen kann, spiegelt sich der Laser in dem Cube. Die Diff-Linienerkennung erkennt, im Gegensatz zur Free-Linienerkennung, die Spiegelung als Linie. Das erklärt sowohl warum Diff mehr Punkte erkennt, als auch warum diese eine höhere Streuung aufweisen.
 Peak erkennt viele falsche Punkte an der Kante des Würfels, was zu einer hohen Streuung führt.
 
-Zusätzlich fällt auf, dass die durchschnittliche Entfernung von allen drei Linienerkennungen 38mm - 42mm ($12,5\%-14\%$) größer ist als erwartet (300~mm), siehe dazu Abschnitt \ref{sec:dists}.
+Zusätzlich fällt auf, dass die durchschnittliche Entfernung von allen drei Linienerkennungen 38\,mm - 42\,mm ($12,5\,\%-14\,\%$) größer ist als erwartet (300\,mm), siehe dazu Abschnitt \ref{sec:dists}.
 
 \begin{table}[H]
 	\centering
