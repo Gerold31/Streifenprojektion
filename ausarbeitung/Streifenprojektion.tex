@@ -272,6 +272,7 @@ Zur Implementierung der Software wurde die Programmiersprache \emph{C++} nach de
 \end{figure}
 
 \subsubsection{Grundlegende Datenstrukturen}
+\label{sec:datastructures}
 
 Zur Übertragung von Informationen zwischen den verschiedenen Komponenten werden die Datenstrukturen \texttt{Line}, \texttt{Reconstruction} und \texttt{DeviceConfiguration} verwendet. In Abbildung~\ref{fig:classes_base} sind die entsprechenden Klassen zu sehen. Die Funktion wird im folgenden etwas genauer beschrieben.
 
@@ -285,7 +286,7 @@ Zur Übertragung von Informationen zwischen den verschiedenen Komponenten werden
 \vspace{0.5em}
 \begin{tabular}{lp{10cm}}
 	\texttt{DeviceConfiguration} &
-		Die Struktur \texttt{DeviceConfiguration} speichert alle Werte zum Setup, die zur Rekonstruktion benötigt werden. Zusätzlich wird eine Transformationsmatrix mitgeführt, auf die später noch eingegangen wird.\\[1em]
+		Die Struktur \texttt{DeviceConfiguration} speichert alle Werte zum Setup, die zur Rekonstruktion benötigt werden. Zusätzlich wird eine Transformationsmatrix mitgeführt, auf die später noch eingegangen wird. In den meisten Fällen entspricht diese der Einheitsmatrix.\\[1em]
 	\texttt{Line}                &
 		Die Datenstruktur \texttt{Line} entspricht einer Menge von Abtastungen der projizierten Linie. Sie Speichert dabei zusätzlich zu einer Liste von Abtastungen (Instanzen von \texttt{Sample}) die Auflösung des zugrunde liegenden Bildes.\\[1em]
 	\texttt{Reconstruction}      &
@@ -355,7 +356,7 @@ Es existieren drei Spezialisierungen von \texttt{Controller}. Die einfachste Imp
 \end{table}
 
 Die Klassen \texttt{RotateScanController} und \texttt{TranslateScanController} beschaffen die Aufnahmen hingehen direkt von der Hardware. Der \texttt{RotateScanController} rotiert dabei den Streifenprojektor um passende Aufnahmen zu erhalten. Der \texttt{TranslateScanController} macht eine Aufnahme und wartet anschließend auf eine Bestätigung des Benutzers, dass sich das zu scannende Objekt um eine vorher definierte Strecke bewegt hat, bevor er das nächste Bild aufnimmt.
-Die Bewegung der Kamera bei Verwendung vom \texttt{TranslateScanController} wird dabei durch die Transformationsmatrix in der Gerätekonfiguration repräsentiert. Die rekonstruierten Punkte werden zum Abschluss als homogene Koordinaten mit dieser $4 \times 4$-Matrix multipliziert.
+Die Bewegung der Kamera bei Verwendung vom \texttt{TranslateScanController} wird dabei durch die in Abschnitt~\ref{sec:datastructures} erwähnte Transformationsmatrix in der Gerätekonfiguration repräsentiert. Die rekonstruierten Punkte werden zum Abschluss als homogene Koordinaten mit dieser $4 \times 4$-Matrix multipliziert.
 
 \subsection{Ansteuerung der Hardware}
 
