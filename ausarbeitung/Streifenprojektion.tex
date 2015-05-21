@@ -22,10 +22,13 @@
 %\usepackage{eurosym}
 \usepackage[export]{adjustbox}
 \usepackage{multirow}
+\usepackage{natbib}
 
 \usepackage[hidelinks]{hyperref}
 %\usepackage[left=3.2cm,right=3cm,top=1.7cm,bottom=3cm,includeheadfoot]{geometry}
 \usepackage[left=3.2cm,right=3cm,top=2cm,bottom=2.5cm,includeheadfoot]{geometry}
+
+\include{natbib.cfg}
 
 \def \N{\mathbb{N}}
 \def \Z{\mathbb{Z}}
@@ -930,6 +933,21 @@ Manfred Leppig (Hrsg.): Lernstufen Mathematik. 1. Auflage, 4. Druck. Girardet, E
 OpenCV Dokumentation: \href{http://docs.opencv.org/}{http://docs.opencv.org/} (Stand 21.05.2015)
 
 Particle, Particle Core Dokumentation: \href{http://docs.particle.io/core/}{http://docs.particle.io/core/} (Stand 21.05.2015)
+
+
+\nocite{Haeming10sfm}
+\nocite{Tomasi98stereomatching}
+\nocite{manfred81math}
+\nocite{opencv}
+\nocite{particle}
+
+\bibliographystyle{natdin}
+\renewcommand{\section}[2]{}
+\bibliography{Streifenprojektion}
+
+%\begin{enumerate}[\lbrack1\rbrack]
+%	\item \href{http://dml.cz/dmlcz/141400}{Häming,~Klaus; Peters,~Gabriele: The structure-from-motion reconstruction pipeline – a survey with focus on short image sequences. 2010}
+%\end{enumerate}q
 
 % ---------------------------------------------------------------------------- %
 

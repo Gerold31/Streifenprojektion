@@ -41,6 +41,8 @@ Makefile
 
 # LaTeX Results
 *.aux
+*.bbl
+*.blg
 *.log
 *.nav
 *.snm
