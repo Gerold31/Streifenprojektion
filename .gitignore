@@ -42,9 +42,11 @@ Makefile
 # LaTeX Results
 *.aux
 *.bbl
+*.bcf
 *.blg
 *.log
 *.nav
+*.run.xml
 *.snm
 *.synctex.gz
 *.toc
