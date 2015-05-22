@@ -568,21 +568,21 @@ Im Folgenden werden verschiedene Seiten eines ''Rubik's Cube'' auf verschiedene 
 \begin{figure}[H]
 	\centering
 	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[width=\textwidth,frame]{includes/diff_red_cam.png}
+		\includegraphics[width=\textwidth,frame,trim=0 120 0 20,clip]{includes/diff_red_cam.png}
 		\caption{komplette Punktwolke aus Sicht der Kamera}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[width=\textwidth,frame]{includes/diff_only_red_cam.png}
+		\includegraphics[width=\textwidth,frame,trim=0 120 0 20,clip]{includes/diff_only_red_cam.png}
 		\caption{Punktwolke der Punkte, die zum Würfel gehören, aus Sicht der Kamera}
 	\end{subfigure}
 	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[width=\textwidth,frame]{includes/diff_red_pos1.png}
+		\includegraphics[width=\textwidth,frame,trim=0 120 0 20,clip]{includes/diff_red_pos1.png}
 		\caption{komplette Punktwolke von der Seite \\ \mbox{}}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[width=\textwidth,frame]{includes/diff_only_red_pos1.png}
+		\includegraphics[width=\textwidth,frame,trim=0 120 0 20,clip]{includes/diff_only_red_pos1.png}
 		\caption{Punktwolke der Punkte, die zum Würfel gehören, von der Seite}
 	\end{subfigure}
 	\caption{Punktwolken eines Scans mit Diff-Linienerkennung der roten Seite des ''Rubik's Cube'' in 300~mm Entfernung}
@@ -591,21 +591,21 @@ Im Folgenden werden verschiedene Seiten eines ''Rubik's Cube'' auf verschiedene 
 \begin{figure}[H]
 	\centering
 	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[width=\textwidth,frame]{includes/free_red_cam.png}
+		\includegraphics[width=\textwidth,frame,trim=0 120 0 20,clip]{includes/free_red_cam.png}
 		\caption{komplette Punktwolke aus Sicht der Kamera}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[width=\textwidth,frame]{includes/free_only_red_cam.png}
+		\includegraphics[width=\textwidth,frame,trim=0 120 0 20,clip]{includes/free_only_red_cam.png}
 		\caption{Punktwolke der Punkte, die zum Würfel gehören, aus Sicht der Kamera}
 	\end{subfigure}
 	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[width=\textwidth,frame]{includes/free_red_pos1.png}
+		\includegraphics[width=\textwidth,frame,trim=0 120 0 20,clip]{includes/free_red_pos1.png}
 		\caption{komplette Punktwolke von der Seite \\ \mbox{}}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[width=\textwidth,frame]{includes/free_only_red_pos1.png}
+		\includegraphics[width=\textwidth,frame,trim=0 120 0 20,clip]{includes/free_only_red_pos1.png}
 		\caption{Punktwolke der Punkte, die zum Würfel gehören, von der Seite}
 	\end{subfigure}
 	\caption{Punktwolken eines Scans mit Free-Linienerkennung der roten Seite des ''Rubik's Cube'' in 300~mm Entfernung}
@@ -614,21 +614,21 @@ Im Folgenden werden verschiedene Seiten eines ''Rubik's Cube'' auf verschiedene 
 \begin{figure}[H]
 	\centering
 	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[width=\textwidth,frame]{includes/peak_red_cam.png}
+		\includegraphics[width=\textwidth,frame,trim=0 120 0 20,clip]{includes/peak_red_cam.png}
 		\caption{komplette Punktwolke aus Sicht der Kamera}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[width=\textwidth,frame]{includes/peak_only_red_cam.png}
+		\includegraphics[width=\textwidth,frame,trim=0 120 0 20,clip]{includes/peak_only_red_cam.png}
 		\caption{Punktwolke der Punkte, die zum Würfel gehören, aus Sicht der Kamera}
 	\end{subfigure}
 	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[width=\textwidth,frame]{includes/peak_red_pos1.png}
+		\includegraphics[width=\textwidth,frame,trim=0 120 0 20,clip]{includes/peak_red_pos1.png}
 		\caption{komplette Punktwolke von der Seite \\ \mbox{}}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[width=\textwidth,frame]{includes/peak_only_red_pos1.png}
+		\includegraphics[width=\textwidth,frame,trim=0 120 0 20,clip]{includes/peak_only_red_pos1.png}
 		\caption{Punktwolke der Punkte, die zum Würfel gehören, von der Seite}
 	\end{subfigure}
 	\caption{Punktwolken eines Scans mit Peak-Linienerkennung der roten Seite des ''Rubik's Cube'' in 300~mm Entfernung}
@@ -640,12 +640,7 @@ Im Folgenden werden verschiedene Seiten eines ''Rubik's Cube'' auf verschiedene 
 
 Zunächst wurde die blaue Seite des ''Rubik's Cube'' zehn mal in 300~mm Entfernung vermessen, um die Abweichungen zwischen zwei Messungen zu bestimmen. In Tabelle \ref{tab:reps} sind die Ergebnisse aufgeführt. In der Spalte ''Anzahl'' steht jeweils die Anzahl der Punkte, die zum Würfel gehören. Unter ''Avg'' ist das $20 \%$ gestutzte Mittel\footnote{d.h. die kleinsten und größten $20 \%$ der Daten werden bei der Durchschnittsbildung nicht berücksichtigt.} und unter ''Stdabw'' die Standardabweichung aller gemessenen Entfernungen aufgeführt.
 
-Es fällt auf, dass sich die Werte zwischen verschiedenen Messungen kaum unterscheiden, aber es zwischen den Linienerkennungen z.T. große Unterschiede gibt. So findet Diff die meisten Punkte auf dem Würfel und Peak hat mit Abstand die höchste Standardabweichung ( fast 100 mal höher als bei Free)
-
-Wie man in Abbildung \ref{fig:cols} sehen kann, spiegelt sich der Laser in dem Cube. Die Diff-Linienerkennung erkennt, im Gegensatz zur Free-Linienerkennung, die Spiegelung als Linie. Das erklärt sowohl warum Diff mehr Punkte erkennt, als auch warum diese eine höhere Streuung aufweisen.
-Peak erkennt viele falsche Punkte an der Kante des Würfels, was zu einer hohen Streuung führt.
-
-Zusätzlich fällt auf, dass die durchschnittliche Entfernung von allen drei Linienerkennungen 38\,mm - 42\,mm ($12,5\,\%-14\,\%$) größer ist als erwartet (300\,mm), siehe dazu Abschnitt \ref{sec:dists}.
+Es fällt auf, dass sich die Werte zwischen verschiedenen Messungen kaum unterscheiden, aber es zwischen den Linienerkennungen z.T. große Unterschiede gibt. So findet Diff die meisten Punkte auf dem Würfel und Peak hat mit Abstand die höchste Standardabweichung (fast 100 mal höher als bei Free).
 
 \begin{table}[H]
 	\centering
@@ -697,6 +692,11 @@ Zusätzlich fällt auf, dass die durchschnittliche Entfernung von allen drei Lin
 	\label{tab:reps}
 \end{table}
 
+Wie man in Abbildung \ref{fig:cols} sehen kann, spiegelt sich der Laser in dem Cube. Die Diff-Linienerkennung erkennt, im Gegensatz zur Free-Linienerkennung, die Spiegelung als Linie. Das erklärt sowohl warum Diff mehr Punkte erkennt, als auch warum diese eine höhere Streuung aufweisen.
+Peak erkennt viele falsche Punkte an der Kante des Würfels, was zu einer hohen Streuung führt.
+
+Zusätzlich fällt auf, dass die durchschnittliche Entfernung von allen drei Linienerkennungen 38\,mm - 42\,mm ($12,5\,\%-14\,\%$) größer ist als erwartet (300\,mm), siehe dazu Abschnitt \ref{sec:dists}.
+
 \subsection{Verschiedene Farben}
 \label{sec:cols}
 
@@ -705,42 +705,6 @@ Als nächstes wurden die verschiedenen Seiten des ''Rubik's Cube'' gescannt, um 
 Es fällt auf, dass bei der roten Seite alle Linienerkennungen gute Ergebnisse liefern (niedrige Streuung der Messpunkte) und auch die Anzahl der gefunden Punkte und die Durchschnittsentfernung nahe beieinanderliegen. Zusätzlich liefern die Linienerkennungen bei Gelb vergleichsweise schlechte Ergebnisse (hohe Streuung). Bei den anderen Farben unterscheiden sich die Linienerkennungen z.T. stark, so liefert Diff bei grün die schlechtesten Ergebnisse, wohingegen Free mit orange starke Probleme hat und Peak hat bei blau die höchste Standardabweichung. Bei Free und der orangen Seite ist nicht nur die Standardabweichung extrem hoch, sondern auch die Anzahl der gefundenen Punkte ist ungefähr acht mal größer als bei grün oder blau, das heißt, dass ca. $\frac{7}{8}$ der erkannten Punkte nicht zur Linie gehören. Das liegt daran, dass Free den Mittelwert über das gesamte Bild bildet und anhand der Abweichung eines Punktes zum Mittelwert bestimmt, ob ein Punkt zur Linie gehört oder nicht. Die orange Seite verändert den Mittelwert so, dass auch Punkte, die nicht zur Linie gehören erkannt werden, siehe Abbildung \ref{fig:cols}. Ähnlich verhält es sich bei Peak, da werden falsche Punkte hauptsächlich am Rand des ''Rubik's Cube'' erkannt.
 
 Insgesamt scheint Diff farbunabhängiger zu sein, da die Durchschnittsentfernung ziemlich konstant ist und auch die Anzahl der gefundenen Punkte weniger stark schwankt, als bei Free oder Peak. 
-
-
-\begin{table}[H]
-	\centering
-	Diff-Linienerkennung \\
-	\begin{tabular}{c|c|c|c}
-		Farbe & Anzahl & Avg (mm) & Stdabw (mm) \\ \hline
-		Rot & 6565 & 338.14 & 3.6842 \\
-		Grün & 8806 & 337.897 & 88.2139 \\
-		Blau & 8321 & 338.722 & 14.8228 \\
-		Gelb & 7085 & 338.112 & 39.4331 \\
-		Orange & 6336 & 338.249 & 7.50314 \\
-	\end{tabular} \\
-	\vspace{1em}
-	Free-Linienerkennung \\
-		\begin{tabular}{c|c|c|c}
-		Farbe & Anzahl & Avg (mm) & Stdabw (mm) \\ \hline
-		Rot & 6439 & 338.035 & 3.4453 \\
-		Grün & 3534 & 340.808 & 6.28125 \\
-		Blau & 3535 & 340.892 & 2.82819 \\
-		Gelb & 10824 & 338.69 & 77.4283 \\
-		Orange & 29063 & 347.896 & 205.929 \\
-	\end{tabular} \\
-	\vspace{1em}
-	Peak-Linienerkennung \\
-		\begin{tabular}{c|c|c|c}
-		Farbe & Anzahl & Avg (mm) & Stdabw (mm) \\ \hline
-		Rot & 5795 & 339.622 & 55.6553 \\
-		Grün & 4437 & 341.713 & 152.687 \\
-		Blau & 6543 & 341.249 & 234.736 \\
-		Gelb & 5838 & 340.121 & 106.932 \\
-		Orange & 4317 & 340.104 & 85.2112 \\
-	\end{tabular} \
-	\caption{Scans der verschiedener Seiten in 300~mm Entfernung}
-	\label{tab:colors}
-\end{table}
 
 
 \begin{figure}[H]
@@ -783,6 +747,42 @@ Insgesamt scheint Diff farbunabhängiger zu sein, da die Durchschnittsentfernung
 	\caption{Ergebnisse nach Diff-, Free- und Peak-Linienerkennung bei verschiedenen Farben}
 	\label{fig:cols}
 \end{figure}
+
+
+\begin{table}[H]
+	\centering
+	Diff-Linienerkennung \\
+	\begin{tabular}{c|c|c|c}
+		Farbe & Anzahl & Avg (mm) & Stdabw (mm) \\ \hline
+		Rot & 6565 & 338.14 & 3.6842 \\
+		Grün & 8806 & 337.897 & 88.2139 \\
+		Blau & 8321 & 338.722 & 14.8228 \\
+		Gelb & 7085 & 338.112 & 39.4331 \\
+		Orange & 6336 & 338.249 & 7.50314 \\
+	\end{tabular} \\
+	\vspace{1em}
+	Free-Linienerkennung \\
+		\begin{tabular}{c|c|c|c}
+		Farbe & Anzahl & Avg (mm) & Stdabw (mm) \\ \hline
+		Rot & 6439 & 338.035 & 3.4453 \\
+		Grün & 3534 & 340.808 & 6.28125 \\
+		Blau & 3535 & 340.892 & 2.82819 \\
+		Gelb & 10824 & 338.69 & 77.4283 \\
+		Orange & 29063 & 347.896 & 205.929 \\
+	\end{tabular} \\
+	\vspace{1em}
+	Peak-Linienerkennung \\
+		\begin{tabular}{c|c|c|c}
+		Farbe & Anzahl & Avg (mm) & Stdabw (mm) \\ \hline
+		Rot & 5795 & 339.622 & 55.6553 \\
+		Grün & 4437 & 341.713 & 152.687 \\
+		Blau & 6543 & 341.249 & 234.736 \\
+		Gelb & 5838 & 340.121 & 106.932 \\
+		Orange & 4317 & 340.104 & 85.2112 \\
+	\end{tabular} \
+	\caption{Scans der verschiedener Seiten in 300~mm Entfernung}
+	\label{tab:colors}
+\end{table}
 
 \subsection{Verschiedene Entfernungen}
 \label{sec:dists}
@@ -925,6 +925,8 @@ Zusammenfassend kann man sagen, dass die Umsetzung der Messmethode Streifenlicht
 Um die Ergebnisse weiter zu verbessern sollte ein präziseres Setup verwendet werden, das genauer vermessen werden kann und resistenter gegenüber physischen Störungen ist. Außerdem ist die Linienerkennung noch instabil. Das könnte durch eine Kombination der Verfahren oder durch neue komplexere Ansätze verbessert werden.
 
 % ---------------------------------------------------------------------------- %
+
+\newpage
 
 \section{Quellenverzeichnis}
 
