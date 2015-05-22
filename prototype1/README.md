@@ -3,7 +3,7 @@ Prototype 1
 This program reconstructs three-dimensional points from some images or
 a special device. It uses a projected line to do that.
 
-Usage: `prototype1 [options] [file]
+Usage: `prototype1 [options] [file]`
 
 `file`: File with commands to execute. Program uses stdin by default
 
@@ -43,5 +43,5 @@ Options
 * `-k`  
   Waits for pressing some key after processing an image.
 * `-v`  
-  Prints some more to stdout. If you use it twise, there could be
-  some more debug windows.
+  Prints some more information to stdout. If you use it twice, there
+  could be some more debug windows but it is only used by Peak yet.
