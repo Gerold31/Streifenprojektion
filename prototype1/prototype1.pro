@@ -33,7 +33,6 @@ SOURCES += \
     src/difflightbardetector.cpp \
     src/reconstruction.cpp \
     src/freelightbardetector.cpp \
-    src/edgelightbardetector.cpp \
     src/controller.cpp \
     src/commandcontroller.cpp \
     src/rotatescancontroller.cpp \
@@ -55,7 +54,6 @@ HEADERS += \
     include/difflightbardetector.h \
     include/reconstruction.h \
     include/freelightbardetector.h \
-    include/edgelightbardetector.h \
     include/controller.h \
     include/commandcontroller.h \
     include/common.h \

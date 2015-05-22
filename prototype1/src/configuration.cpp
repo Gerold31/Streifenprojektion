@@ -12,7 +12,6 @@
 #include "common.h"
 #include "difflightbardetector.h"
 #include "defaultreconstructor.h"
-#include "edgelightbardetector.h"
 #include "freelightbardetector.h"
 #include "lightbardetector.h"
 #include "peaklightbardetector.h"
@@ -165,8 +164,6 @@ void Configuration::handleOption(const char op)
 			lightBarDetector = make_shared<DiffLightBarDetector>();
 		} else if (equal(lined, "free")) {
 			lightBarDetector = make_shared<FreeLightBarDetector>();
-		} else if (equal(lined, "edge")) {
-			lightBarDetector = make_shared<EdgeLightBarDetector>();
 		} else if (equal(lined, "peak")) {
 			lightBarDetector = make_shared<PeakLightBarDetector>();
 		} else {
@@ -266,7 +263,7 @@ bool Configuration::helpAndExit(int exitCode)
 	cerr << endl;
 	cerr << "      -L <line-detector>" << endl;
 	cerr << "          Set the line detector to use." << endl;
-	cerr << "          Possible values: default, diff, free" << endl;
+	cerr << "          Possible values: default, diff, free, peak" << endl;
 	cerr << endl;
 	cerr << "      -R <reconstructor>" << endl;
 	cerr << "          Set the reconstructor to use." << endl;
