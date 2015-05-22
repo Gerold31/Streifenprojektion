@@ -298,17 +298,19 @@ Zur Übertragung von Informationen zwischen den verschiedenen Komponenten werden
 
 \subsubsection{Programmablauf}
 
-\begin{figure}
+Nach Programmstart wird als erstes die Funktion \texttt{Configuration::init(int,char**)} aufgerufen. Diese analysiert die Argumente, die dem Programm übergeben wurden, und speichert das Ergebnis in den statischen Feldern der Klasse. Unter anderem wird dabei jeweils eine Instanz einer Spezialisierung von \texttt{Controller}, \texttt{LightBarDetector} und \texttt{Reconstructor} in den Feldern von \texttt{Configuration} abgelegt. Als nächstes wird die Methode \texttt{main()} der \emph{Steuerungsklasse}, also der Spezialisierung von \texttt{Controller}, aufgerufen, welche den Rest des Programmablaufes steuert.
+
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{includes/classdiagram_control.png}
 	\caption{Klassendiagramm zu den Steuereinheiten}
 	\label{fig:classes_control}
 \end{figure}
 
-Nach Programmstart wird als erstes die Funktion \texttt{Configuration::init(int,char**)} aufgerufen. Diese analysiert die Argumente, die dem Programm übergeben wurden, und speichert das Ergebnis in den statischen Feldern der Klasse. Unter anderem wird dabei jeweils eine Instanz einer Spezialisierung von \texttt{Controller}, \texttt{LightBarDetector} und \texttt{Reconstructor} in den Feldern von \texttt{Configuration} abgelegt. Als nächstes wird die Methode \texttt{main()} der \emph{Steuerungsklasse}, also der Spezialisierung von \texttt{Controller}, aufgerufen, welche den Rest des Programmablaufes steuert.
-
 \subsection{Steuerungsklassen}
 \label{sec:controller}
+
+Der Ablauf, der von den verschiedenen Spezialisierungen von \texttt{Controller} vorgegeben wird, verfolgt dabei immer einen ähnlichen Ablauf, wie er auch in Abbildung~\ref{fig:software_controller} dargestellt wird. Der Controller durchläuft eine Schleife und beschafft sich in jedem Schleifendurchlauf die aktuelle Gerätekonfiguration (\texttt{DeviceConfiguration}), eine Aufnahme durch das entsprechende Setup und ggf. ein aktuelles Referenzbild. Danach übergibt es die Steuerung an die Linienerkennung (\texttt{LightBarDetector}) und dessen Ergebnis wird an den Rekonstruktionsalgorithmus (\texttt{Reconstructor}) übergeben.
 
 \begin{figure}
 	\centering
@@ -317,11 +319,12 @@ Nach Programmstart wird als erstes die Funktion \texttt{Configuration::init(int,
 	\label{fig:software_controller}
 \end{figure}
 
-Der Ablauf, der von den verschiedenen Spezialisierungen von \texttt{Controller} vorgegeben wird, verfolgt dabei immer einen ähnlichen Ablauf, wie er auch in Abbildung~\ref{fig:software_controller} dargestellt wird. Der Controller durchläuft eine Schleife und beschafft sich in jedem Schleifendurchlauf die aktuelle Gerätekonfiguration (\texttt{DeviceConfiguration}), eine Aufnahme durch das entsprechende Setup und ggf. ein aktuelles Referenzbild. Danach übergibt es die Steuerung an die Linienerkennung (\texttt{LightBarDetector}) und dessen Ergebnis wird an den Rekonstruktionsalgorithmus (\texttt{Reconstructor}) übergeben.
-
 Es existieren drei Spezialisierungen von \texttt{Controller}. Die einfachste Implementierung ist der \texttt{CommandController}, welcher Standardmäßig verwendet wird. Die Klasse liest die Standardeingabe oder die in den Argumenten definierte Datei Zeilenweise aus. Eine Zeile entspricht dabei einem Befehl, welcher ausgewertet und ausgeführt wird, bevor sich das Programm der nächsten Zeile zuwendet. In der Tabelle~\ref{tab:commands} können alle Befehle nachgelesen werden.
 
-\begin{table}[p]
+Die Klassen \texttt{RotateScanController} und \texttt{TranslateScanController} beschaffen die Aufnahmen hingehen direkt von der Hardware. Der \texttt{RotateScanController} rotiert dabei den Streifenprojektor um passende Aufnahmen zu erhalten. Der \texttt{TranslateScanController} macht eine Aufnahme und wartet anschließend auf eine Bestätigung des Benutzers, dass sich das zu scannende Objekt um eine vorher definierte Strecke bewegt hat, bevor er das nächste Bild aufnimmt.
+Die Bewegung der Kamera bei Verwendung vom \texttt{TranslateScanController} wird dabei durch die in Abschnitt~\ref{sec:datastructures} erwähnte Transformationsmatrix in der Gerätekonfiguration repräsentiert. Die rekonstruierten Punkte werden zum Abschluss als homogene Koordinaten mit dieser $4 \times 4$-Matrix multipliziert.
+
+\begin{table}
 	\centering
 	\begin{tabular}{lp{10cm}}
 		\bfseries Befehl             & \bfseries Beschreibung\\
@@ -357,9 +360,6 @@ Es existieren drei Spezialisierungen von \texttt{Controller}. Die einfachste Imp
 	\caption{Unterstützte Befehle der Steuerungsklasse \texttt{CommandController}.}
 	\label{tab:commands}
 \end{table}
-
-Die Klassen \texttt{RotateScanController} und \texttt{TranslateScanController} beschaffen die Aufnahmen hingehen direkt von der Hardware. Der \texttt{RotateScanController} rotiert dabei den Streifenprojektor um passende Aufnahmen zu erhalten. Der \texttt{TranslateScanController} macht eine Aufnahme und wartet anschließend auf eine Bestätigung des Benutzers, dass sich das zu scannende Objekt um eine vorher definierte Strecke bewegt hat, bevor er das nächste Bild aufnimmt.
-Die Bewegung der Kamera bei Verwendung vom \texttt{TranslateScanController} wird dabei durch die in Abschnitt~\ref{sec:datastructures} erwähnte Transformationsmatrix in der Gerätekonfiguration repräsentiert. Die rekonstruierten Punkte werden zum Abschluss als homogene Koordinaten mit dieser $4 \times 4$-Matrix multipliziert.
 
 \subsection{Ansteuerung der Hardware}
 
@@ -397,7 +397,7 @@ Bei der Linienerkennung wurden vor allem einfache und damit schnelle Verfahren b
 
 \subsubsection{Differenzbildung (Diff)}
 
-\begin{figure}
+\begin{figure}[H]
 	\centering
 
 	\begin{subfigure}{0.23\textwidth}
@@ -432,7 +432,7 @@ Das Ergebnis ist ein Binärbild, mit dessen Hilfe im zweiten Schritt das \texttt
 
 \subsubsection{Farbfilter (Free)}
 
-\begin{figure}
+\begin{figure}[H]
 	\centering
 
 	\begin{subfigure}{0.45\textwidth}
@@ -461,7 +461,7 @@ Der zweite Schritt des Verfahrens verläuft Analog zu Diff.
 
 \subsubsection{Erweiterter Farbfilter (Peak)}
 
-\begin{figure}
+\begin{figure}[H]
 	\centering
 
 	\begin{subfigure}{0.45\textwidth}
@@ -922,7 +922,7 @@ Bei Tests mit anderen Farben unterscheiden sich die Ansätze zum Teil sehr stark
 Alles in allem lässt sich aus den Tests entnehmen, dass die Diff-Linienerkennung robuster gegen Farbvariationen als Free oder Peak ist.
 
 Zusammenfassend kann man sagen, dass die Umsetzung der Messmethode Streifenlichtprojektion für die investierten Ressourcen gute Ergebnisse liefert und dabei mit günstigem Equipment auskommt.
-Um die Ergebnisse weiter zu verbessern sollte ein präziseres Setup verwendet werden, das genauer vermessen werden kann und resistenter gegenüber physischen Störungen ist. Außerdem ist die Linienerkennung noch instabil, das könnte durch eine Kombination der Verfahren oder durch neue komplexere Ansätze verbessert werden.
+Um die Ergebnisse weiter zu verbessern sollte ein präziseres Setup verwendet werden, das genauer vermessen werden kann und resistenter gegenüber physischen Störungen ist. Außerdem ist die Linienerkennung noch instabil. Das könnte durch eine Kombination der Verfahren oder durch neue komplexere Ansätze verbessert werden.
 
 % ---------------------------------------------------------------------------- %
 
