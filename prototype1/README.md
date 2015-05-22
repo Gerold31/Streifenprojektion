@@ -5,7 +5,7 @@ a special device. It uses a projected line to do that.
 
 Usage: `prototype1 [options] [file]`
 
-`file`: File with commands to execute. Program uses stdin by default
+`file`: File with commands to execute. Program uses stdin by default.
 
 Options
 -------
@@ -43,5 +43,5 @@ Options
 * `-k`  
   Waits for pressing some key after processing an image.
 * `-v`  
-  Prints some more information to stdout. If you use it twice, there
-  could be some more debug windows but it is only used by Peak yet.
+  Prints some more information to stdout. If you use it twice in
+  combination with `-Lpeak`, there are some more debug windows.
