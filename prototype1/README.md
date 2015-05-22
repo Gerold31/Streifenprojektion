@@ -18,24 +18,24 @@ Options
 * `-c <device>`  
   Chooses `<device>` as capture device.
 * `-s <prefix>`  
-  Save captured images.
+  Saves captured images.
 * `-d <fov> <skew> <offset>`  
-  Set device configuration.
+  Sets device configuration.
 * `-r`  
-  Perform rotation scan.
+  Performs rotation scan.
 * `-t <dx> <dy> <dz> <n>`  
-  Perform  translation scan. Move (`<dx>`, `<dy>`, `<dz>`) each step
+  Performs  translation scan. Move (`<dx>`, `<dy>`, `<dz>`) each step
   for `<n>` steps.
 * `--create-commands`  
   Creates commands for future reconstrutions and disable
   reconstruction. This option implies `-s` if it is not given.
 * `-h` or `--help`  
-  Show this information.
+  Shows some help.
 
 ### Debug
 
 * `-C`  
-  Show captured images.
+  Shows captured images.
 * `-l`  
   Shows reconstructed lines
 * `-H`  
