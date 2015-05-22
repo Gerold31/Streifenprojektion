@@ -393,7 +393,7 @@ Wenn ein anderer Thread die \texttt{capture}-Methode von \texttt{Camera} aufruft
 
 \subsection{Linienerkennung}
 
-Die Linienerkennung arbeitet in zwei Schritten. Zuerst wird ein Binärbild erzeugt, wobei der Algorithmus entscheidet, welche Pixel zur Linie gehören und welche nicht. Im zweiten Schritt wird auf Basis des Binärbildes die Datenstruktur \texttt{Line} mit den vermeintlichen Abtastungen der Linie und, je nach Verfahren, auch mit der Breite der Linie gefüllt.
+Bei der Linienerkennung wurden vor allem einfache und damit schnelle Verfahren betrachtet. Sie arbeitet in zwei Schritten. Zuerst wird ein Binärbild erzeugt, wobei der Algorithmus entscheidet, welche Pixel zur Linie gehören und welche nicht. Im zweiten Schritt wird auf Basis des Binärbildes die Datenstruktur \texttt{Line} mit den vermeintlichen Abtastungen der Linie und, je nach Verfahren, auch mit der Breite der Linie gefüllt.
 
 \subsubsection{Differenzbildung (Diff)}
 
@@ -922,7 +922,7 @@ Bei Tests mit anderen Farben unterscheiden sich die Ansätze zum Teil sehr stark
 Alles in allem lässt sich aus den Tests entnehmen, dass die Diff-Linienerkennung robuster gegen Farbvariationen als Free oder Peak ist.
 
 Zusammenfassend kann man sagen, dass die Umsetzung der Messmethode Streifenlichtprojektion für die investierten Ressourcen gute Ergebnisse liefert und dabei mit günstigem Equipment auskommt.
-Um die Ergebnisse weiter zu verbessern sollte ein präziseres Setup verwendet werden, das genauer vermessen werden kann und resistenter gegenüber physischen Störungen ist. Außerdem ist die Linienerkennung noch instabil, das könnte durch eine Kombination der Verfahren verbessert werden.
+Um die Ergebnisse weiter zu verbessern sollte ein präziseres Setup verwendet werden, das genauer vermessen werden kann und resistenter gegenüber physischen Störungen ist. Außerdem ist die Linienerkennung noch instabil, das könnte durch eine Kombination der Verfahren oder durch neue komplexere Ansätze verbessert werden.
 
 % ---------------------------------------------------------------------------- %
 
