@@ -1,0 +1,81 @@
+b testdata/rotate_blue_500_dt_0_-20_ref.png
+fov 0.845699
+po 0 0.349066
+pp -100 3 0
+t 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1
+testdata/rotate_blue_500_dt_0_-20.png
+b testdata/rotate_blue_500_dt_0_-19_ref.png
+po 0 0.331613
+testdata/rotate_blue_500_dt_0_-19.png
+b testdata/rotate_blue_500_dt_0_-18_ref.png
+po 0 0.314159
+testdata/rotate_blue_500_dt_0_-18.png
+b testdata/rotate_blue_500_dt_0_-17_ref.png
+po 0 0.296706
+testdata/rotate_blue_500_dt_0_-17.png
+b testdata/rotate_blue_500_dt_0_-16_ref.png
+po 0 0.279253
+testdata/rotate_blue_500_dt_0_-16.png
+b testdata/rotate_blue_500_dt_0_-15_ref.png
+po 0 0.261799
+testdata/rotate_blue_500_dt_0_-15.png
+b testdata/rotate_blue_500_dt_0_-14_ref.png
+po 0 0.244346
+testdata/rotate_blue_500_dt_0_-14.png
+b testdata/rotate_blue_500_dt_0_-13_ref.png
+po 0 0.226893
+testdata/rotate_blue_500_dt_0_-13.png
+b testdata/rotate_blue_500_dt_0_-12_ref.png
+po 0 0.20944
+testdata/rotate_blue_500_dt_0_-12.png
+b testdata/rotate_blue_500_dt_0_-11_ref.png
+po 0 0.191986
+testdata/rotate_blue_500_dt_0_-11.png
+b testdata/rotate_blue_500_dt_0_-10_ref.png
+po 0 0.174533
+testdata/rotate_blue_500_dt_0_-10.png
+b testdata/rotate_blue_500_dt_0_-9_ref.png
+po 0 0.15708
+testdata/rotate_blue_500_dt_0_-9.png
+b testdata/rotate_blue_500_dt_0_-8_ref.png
+po 0 0.139626
+testdata/rotate_blue_500_dt_0_-8.png
+b testdata/rotate_blue_500_dt_0_-7_ref.png
+po 0 0.122173
+testdata/rotate_blue_500_dt_0_-7.png
+b testdata/rotate_blue_500_dt_0_-6_ref.png
+po 0 0.10472
+testdata/rotate_blue_500_dt_0_-6.png
+b testdata/rotate_blue_500_dt_0_-5_ref.png
+po 0 0.0872665
+testdata/rotate_blue_500_dt_0_-5.png
+b testdata/rotate_blue_500_dt_0_-4_ref.png
+po 0 0.0698132
+testdata/rotate_blue_500_dt_0_-4.png
+b testdata/rotate_blue_500_dt_0_-3_ref.png
+po 0 0.0523599
+testdata/rotate_blue_500_dt_0_-3.png
+b testdata/rotate_blue_500_dt_0_-2_ref.png
+po 0 0.0349066
+testdata/rotate_blue_500_dt_0_-2.png
+b testdata/rotate_blue_500_dt_0_-1_ref.png
+po 0 0.0174533
+testdata/rotate_blue_500_dt_0_-1.png
+b testdata/rotate_blue_500_dt_0_0_ref.png
+po 0 0
+testdata/rotate_blue_500_dt_0_0.png
+b testdata/rotate_blue_500_dt_0_1_ref.png
+po 0 -0.0174533
+testdata/rotate_blue_500_dt_0_1.png
+b testdata/rotate_blue_500_dt_0_2_ref.png
+po 0 -0.0349066
+testdata/rotate_blue_500_dt_0_2.png
+b testdata/rotate_blue_500_dt_0_3_ref.png
+po 0 -0.0523599
+testdata/rotate_blue_500_dt_0_3.png
+b testdata/rotate_blue_500_dt_0_4_ref.png
+po 0 -0.0698132
+testdata/rotate_blue_500_dt_0_4.png
+b testdata/rotate_blue_500_dt_0_5_ref.png
+po 0 -0.0872665
+testdata/rotate_blue_500_dt_0_5.png
