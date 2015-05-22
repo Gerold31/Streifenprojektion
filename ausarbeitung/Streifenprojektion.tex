@@ -928,7 +928,7 @@ Um die Ergebnisse weiter zu verbessern sollte ein präziseres Setup verwendet we
 
 \newpage
 
-\section{Quellenverzeichnis}
+%\section{Quellenverzeichnis}
 
 %Manfred Leppig (Hrsg.): Lernstufen Mathematik. 1. Auflage, 4. Druck. Girardet, Essen 1981, ISBN 3-7736-2005-5, S. 189–190.
 
@@ -943,7 +943,10 @@ Um die Ergebnisse weiter zu verbessern sollte ein präziseres Setup verwendet we
 \nocite{particle}
 
 \bibliographystyle{natdin}
-\renewcommand{\section}[2]{}
+\renewcommand*{\refname}{Quellenverzeichnis}
+%\renewcommand{\bibname}{\section{Quellenverzeichnis}}
+\let\Oldsection\section
+\renewcommand*{\section}[2]{\Oldsection{#2}}
 \bibliography{Streifenprojektion}
 
 %\begin{enumerate}[\lbrack1\rbrack]
