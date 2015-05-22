@@ -21,9 +21,9 @@ This program is used cut the nearst and and farest points.
 
 Usage: `truncate <amount>`
 
-You can specifiy the amount of points to cut on both ends with some
-value between 0 and 1, by writing some percentage terms like `20%` or
-with an absolute number of points.
+You can specify the amount of points to cut on both ends. `<amount>` can either
+be a floating point between 0 and 1, a percentage term like `20%` or an
+absolute number of points.
 
 stats
 -----
